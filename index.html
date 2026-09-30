@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>우리 마크 서버 모드</title>
+<meta name="description" content="우리 마크 서버 접속에 필요한 모드 0개를 한 번에 받으세요.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  color-scheme: light;
+  --bg-canvas:#F6F7F5; --bg-surface:#FFFFFF; --bg-raised:#FAFBF9; --bg-sunken:#EEF0EC;
+  --text-primary:#161A16; --text-secondary:#4B524B; --text-tertiary:#727A72; --text-disabled:#A8AEA8;
+  --border-subtle:#E3E6E1; --border-standard:#D0D5CE; --border-strong:#A7ADA6;
+  --accent:#2E7D3C; --accent-hover:#256A32; --accent-pressed:#1F5A2A; --accent-soft:#E6F1E7; --on-accent:#FFFFFF;
+  --success:#237A45; --success-soft:#E3F2E8;
+  --warning:#94580A; --warning-soft:#FAF0DE;
+  --danger:#BC3A2F; --danger-soft:#FAE8E5;
+  --shadow-raised:0 1px 2px rgba(22,26,22,.05), 0 4px 16px rgba(22,26,22,.05);
+  --shadow-floating:0 8px 28px rgba(22,26,22,.14), 0 1px 3px rgba(22,26,22,.08);
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s12:48px; --s16:64px;
+  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-full:999px;
+  --m-fast:100ms; --m-std:180ms;
+  --font:"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", sans-serif;
+  --mono:ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg-canvas:#111311; --bg-surface:#181B18; --bg-raised:#1E221E; --bg-sunken:#0D0F0D;
+    --text-primary:#E7EAE6; --text-secondary:#A8AFA7; --text-tertiary:#7E867D; --text-disabled:#4F564F;
+    --border-subtle:#242824; --border-standard:#313631; --border-strong:#4C534B;
+    --accent:#5FBF6E; --accent-hover:#74CC82; --accent-pressed:#4EA75C; --accent-soft:#1A2A1C; --on-accent:#0B170D;
+    --success:#5CC784; --success-soft:#15281B;
+    --warning:#E0A64E; --warning-soft:#2A2215;
+    --danger:#EE7B70; --danger-soft:#2E1917;
+    --shadow-raised:0 0 0 1px rgba(255,255,255,.02);
+    --shadow-floating:0 10px 32px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg-canvas:#111311; --bg-surface:#181B18; --bg-raised:#1E221E; --bg-sunken:#0D0F0D;
+  --text-primary:#E7EAE6; --text-secondary:#A8AFA7; --text-tertiary:#7E867D; --text-disabled:#4F564F;
+  --border-subtle:#242824; --border-standard:#313631; --border-strong:#4C534B;
+  --accent:#5FBF6E; --accent-hover:#74CC82; --accent-pressed:#4EA75C; --accent-soft:#1A2A1C; --on-accent:#0B170D;
+  --success:#5CC784; --success-soft:#15281B;
+  --warning:#E0A64E; --warning-soft:#2A2215;
+  --danger:#EE7B70; --danger-soft:#2E1917;
+  --shadow-raised:0 0 0 1px rgba(255,255,255,.02);
+  --shadow-floating:0 10px 32px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg-canvas); color:var(--text-primary);
+  font:400 15px/1.55 var(--font); -webkit-font-smoothing:antialiased; font-feature-settings:"ss06";
+  padding-inline:var(--s4);
+  padding-block:calc(var(--s12) + env(safe-area-inset-top,0px)) calc(var(--s16) + env(safe-area-inset-bottom,0px));
+}
+.wrap{max-width:760px; margin-inline:auto; display:flex; flex-direction:column; gap:var(--s12)}
+.num{font-variant-numeric:tabular-nums}
+svg.i{width:16px; height:16px; flex:none; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:var(--r-sm)}
+h1,h2{margin:0; text-wrap:balance}
+h2{font-size:17px; font-weight:600; line-height:1.3; letter-spacing:-.005em}
+.section{display:flex; flex-direction:column; gap:var(--s4)}
+.sec-head{display:flex; align-items:baseline; gap:var(--s3); flex-wrap:wrap}
+.sec-sub{font-size:13px; color:var(--text-tertiary)}
+
+/* ---------- header ---------- */
+.head{display:flex; flex-direction:column; gap:var(--s3)}
+.eyebrow{font-size:13px; font-weight:500; color:var(--text-tertiary); margin:0}
+h1{font-size:32px; font-weight:700; line-height:1.15; letter-spacing:-.02em}
+.meta{display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center}
+.chip{display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font-size:13px; font-weight:500}
+.addr{display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 6px 0 10px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font:500 12.5px var(--mono); border:0; cursor:pointer; transition:color var(--m-fast), background var(--m-fast)}
+.addr:hover{color:var(--text-primary); background:var(--border-subtle)}
+.addr svg{width:14px; height:14px}
+.notice{margin:0; display:flex; gap:var(--s3); padding:var(--s3) var(--s4); border-radius:var(--r-md); background:var(--warning-soft); color:var(--text-primary); font-size:14px}
+.notice svg{color:var(--warning); margin-top:3px}
+
+/* ---------- download ---------- */
+.dl-card{background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); box-shadow:var(--shadow-raised); padding:var(--s6); display:grid; grid-template-columns:1fr auto; gap:var(--s4) var(--s6); align-items:center}
+.dl-title{font-size:20px; font-weight:600; letter-spacing:-.01em; line-height:1.3}
+.dl-facts{display:flex; flex-wrap:wrap; gap:var(--s1) var(--s3); margin-top:var(--s1); font-size:13px; color:var(--text-tertiary)}
+.dl-facts .file{font-family:var(--mono); font-size:12.5px; color:var(--text-secondary)}
+.dl-facts .dot{color:var(--border-strong)}
+.btn-dl{display:inline-flex; align-items:center; justify-content:center; gap:var(--s2); height:48px; padding:0 var(--s6); border-radius:var(--r-md); background:var(--accent); color:var(--on-accent); font:600 16px/1 var(--font); text-decoration:none; transition:background var(--m-fast), transform var(--m-fast); white-space:nowrap}
+.btn-dl:hover{background:var(--accent-hover)}
+.btn-dl:active{background:var(--accent-pressed); transform:translateY(1px)}
+.btn-dl svg{width:18px; height:18px; stroke-width:1.8}
+.btn-dl[aria-disabled="true"]{background:var(--bg-sunken); color:var(--text-disabled); pointer-events:none}
+.dl-state{grid-column:1 / -1; display:flex; align-items:center; gap:var(--s2); font-size:13px; color:var(--text-secondary); padding-top:var(--s4); border-top:1px solid var(--border-subtle)}
+.dl-state svg{width:15px; height:15px}
+.dl-state.ok svg{color:var(--success)}
+.dl-state.stale{color:var(--text-primary)}
+.dl-state.stale svg{color:var(--warning)}
+
+/* ---------- changes ---------- */
+.changes{list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+.ch{display:grid; grid-template-columns:88px minmax(0,1fr) auto; gap:var(--s3); align-items:baseline; padding:var(--s2) 0; font-size:14px}
+.ch + .ch{border-top:1px solid var(--border-subtle)}
+.ck{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600}
+.ck span{display:inline-grid; place-items:center; width:16px; height:16px; border-radius:var(--r-sm); font-size:12px; line-height:1}
+.ch-add .ck{color:var(--success)} .ch-add .ck span{background:var(--success-soft)}
+.ch-up .ck{color:var(--text-secondary)} .ch-up .ck span{background:var(--bg-sunken)}
+.ch-del .ck{color:var(--danger)} .ch-del .ck span{background:var(--danger-soft)}
+.cn{font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.cv{font:12.5px var(--mono); color:var(--text-tertiary); display:inline-flex; gap:6px; white-space:nowrap}
+.cv .arrow{color:var(--border-strong)}
+.ch-del .cn{color:var(--text-secondary); text-decoration:line-through; text-decoration-color:var(--border-strong)}
+
+/* ---------- install ---------- */
+.seg{display:inline-flex; background:var(--bg-sunken); border-radius:var(--r-md); padding:2px; margin-left:auto}
+.seg button{height:28px; padding:0 12px; border:0; background:none; color:var(--text-secondary); font:500 13px/1 var(--font); border-radius:6px; cursor:pointer; transition:color var(--m-fast)}
+.seg button:hover{color:var(--text-primary)}
+.seg button[aria-selected="true"]{background:var(--bg-surface); color:var(--text-primary); box-shadow:0 1px 2px rgba(0,0,0,.08), 0 0 0 1px var(--border-subtle)}
+.steps{list-style:none; margin:0; padding:0; counter-reset:step; display:flex; flex-direction:column; gap:var(--s5)}
+.steps > li{counter-increment:step; display:grid; grid-template-columns:24px minmax(0,1fr); gap:var(--s3)}
+.steps > li::before{content:counter(step); display:grid; place-items:center; width:24px; height:24px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font-size:12px; font-weight:600; font-variant-numeric:tabular-nums}
+.step-t{font-weight:500; line-height:24px}
+.step-d{font-size:14px; color:var(--text-secondary); margin-top:2px}
+.path{display:flex; align-items:center; gap:var(--s2); margin-top:var(--s2); max-width:100%}
+.path code{flex:1; min-width:0; font:13px var(--mono); padding:8px 10px; border-radius:var(--r-md); background:var(--bg-sunken); color:var(--text-primary); overflow-x:auto; white-space:nowrap}
+.btn-ghost{display:inline-flex; align-items:center; gap:6px; height:34px; padding:0 10px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:500 13px/1 var(--font); cursor:pointer; white-space:nowrap; transition:background var(--m-fast), border-color var(--m-fast)}
+.btn-ghost:hover{background:var(--bg-raised); border-color:var(--border-strong)}
+.btn-ghost svg{width:14px; height:14px}
+kbd{font:12px var(--mono); padding:1px 5px; border-radius:var(--r-sm); border:1px solid var(--border-standard); border-bottom-width:2px; color:var(--text-secondary); background:var(--bg-surface)}
+
+/* ---------- mod list ---------- */
+.list-tools{display:flex; gap:var(--s3); align-items:center}
+.search{position:relative; flex:1; min-width:0}
+.search svg{position:absolute; left:11px; top:50%; transform:translateY(-50%); color:var(--text-tertiary)}
+.search input{width:100%; height:38px; padding:0 12px 0 34px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:400 14px var(--font); transition:border-color var(--m-fast), box-shadow var(--m-fast)}
+.search input::placeholder{color:var(--text-tertiary)}
+.search input:hover{border-color:var(--border-strong)}
+.search input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.search input::-webkit-search-cancel-button{cursor:pointer}
+.mods{list-style:none; margin:0; padding:0; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); overflow:hidden}
+.mod{display:grid; grid-template-columns:32px minmax(0,1fr) auto 64px; gap:var(--s3); align-items:center; padding:10px var(--s4); transition:background var(--m-fast)}
+.mod + .mod{border-top:1px solid var(--border-subtle)}
+.mod:hover{background:var(--bg-raised)}
+.ic img,.ph{width:32px; height:32px; border-radius:6px; display:block}
+.ic img{image-rendering:pixelated; background:var(--bg-sunken)}
+.ph{display:grid; place-items:center; background:var(--bg-sunken); color:var(--text-tertiary); font-weight:600; font-size:14px}
+.mi{display:flex; flex-direction:column; min-width:0}
+.mn{font-weight:500; font-size:14.5px; display:flex; align-items:center; gap:var(--s2); min-width:0}
+.md{font-size:13px; color:var(--text-tertiary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.mv{font:12.5px var(--mono); color:var(--text-secondary); max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.ms{font-size:13px; color:var(--text-tertiary); text-align:right}
+.tag{flex:none; display:inline-flex; align-items:center; height:18px; padding:0 6px; border-radius:var(--r-sm); font-size:11px; font-weight:500; letter-spacing:.01em; color:var(--text-secondary); background:var(--bg-sunken)}
+.tag-muted{color:var(--text-tertiary); background:none; border:1px dashed var(--border-standard)}
+.mod.is-server .mn,.mod.is-server .ic{opacity:.6}
+.empty{padding:var(--s8) var(--s4); text-align:center; font-size:14px; color:var(--text-secondary); background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg)}
+.empty b{display:block; color:var(--text-primary); font-weight:500; margin-bottom:var(--s1)}
+mark{background:var(--accent-soft); color:inherit; border-radius:2px}
+
+footer{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s1) var(--s3); font-size:13px; color:var(--text-tertiary); padding-top:var(--s4); border-top:1px solid var(--border-subtle)}
+footer .btn-ghost{margin-left:auto; height:30px}
+
+/* toast */
+.toast{position:fixed; left:50%; bottom:calc(var(--s6) + env(safe-area-inset-bottom,0px)); transform:translate(-50%,8px); opacity:0; pointer-events:none; display:flex; align-items:center; gap:var(--s2); padding:10px 14px; border-radius:var(--r-md); background:var(--text-primary); color:var(--bg-canvas); font-size:14px; font-weight:500; box-shadow:var(--shadow-floating); transition:opacity var(--m-std), transform var(--m-std); max-width:calc(100% - 32px)}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+.toast svg{width:15px; height:15px}
+
+@media (max-width:600px){
+  body{padding-block:calc(var(--s8) + env(safe-area-inset-top,0px)) calc(var(--s12) + env(safe-area-inset-bottom,0px))}
+  .wrap{gap:var(--s8)}
+  h1{font-size:26px}
+  .dl-card{grid-template-columns:1fr; padding:var(--s5)}
+  .btn-dl{width:100%}
+  .mod{grid-template-columns:32px minmax(0,1fr) auto}
+  .ms{display:none}
+  .ch{grid-template-columns:76px minmax(0,1fr)}
+  .cv{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-dl" viewBox="0 0 16 16"><path d="M8 2.5v8"/><path d="M4.5 7 8 10.5 11.5 7"/><path d="M2.5 11v1.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V11"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5v-2a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="m5.5 8.2 1.7 1.7 3.3-3.4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5"/><path d="M8 10.9v.1"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 7.5V11"/><path d="M8 5.1v.1"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 16 16"><path d="M8 10.5v-8"/><path d="M4.5 6 8 2.5 11.5 6"/><path d="M2.5 11v1.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V11"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M13.5 13.5 10.2 10.2"/></symbol>
+</svg>
+
+<main class="wrap">
+  <header class="head">
+    <p class="eyebrow">서버 모드</p>
+    <h1>우리 마크 서버</h1>
+    <div class="meta">
+      
+      <button class="addr" type="button" data-copy="" data-toast="서버 주소를 복사했어요" hidden aria-label="서버 주소  복사"><svg class="i"><use href="#i-copy"/></svg></button>
+    </div>
+    <p class="notice" hidden><svg class="i"><use href="#i-info"/></svg><span></span></p>
+  </header>
+
+  <section class="dl-card" aria-labelledby="dlTitle">
+    <div>
+      <div class="dl-title" id="dlTitle">모드 0개 한 번에 받기</div>
+      <div class="dl-facts">
+        <span class="file">mods.zip</span><span class="dot">·</span>
+        <span class="num">22 B</span><span class="dot">·</span>
+        <span>2026년 9월 30일 15:29 업데이트</span>
+      </div>
+    </div>
+    <a class="btn-dl" id="dlBtn" href="https://github.com/see0627-lang/mod-site/releases/latest/download/mods.zip" download aria-disabled="true" tabindex="-1"><svg class="i"><use href="#i-dl"/></svg>모드 받기</a>
+    <div class="dl-state" id="dlState" role="status"><svg class="i"><use href="#i-info"/></svg><span>처음이라면 받은 뒤 아래 설치 방법을 따라 하세요.</span></div>
+  </section>
+
+  <section class="section" aria-labelledby="chTitle" hidden>
+    <div class="sec-head"><h2 id="chTitle">이번 업데이트에서 바뀐 모드</h2></div>
+    <ul class="changes"></ul>
+  </section>
+
+  <section class="section" aria-labelledby="inTitle">
+    <div class="sec-head">
+      <h2 id="inTitle">설치 방법</h2>
+      <div class="seg" role="tablist" aria-label="운영체제">
+        <button type="button" role="tab" id="tab-win" data-os="win" aria-selected="true">Windows</button>
+        <button type="button" role="tab" id="tab-mac" data-os="mac" aria-selected="false">macOS</button>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><div><div class="step-t">위에서 mods.zip을 받습니다</div></div></li>
+      <li><div>
+        <div class="step-t">mods 폴더를 엽니다</div>
+        <div class="step-d" data-os-show="win"><kbd>Win</kbd> + <kbd>R</kbd>을 누르고 아래 경로를 붙여넣은 뒤 Enter. 폴더가 없으면 새로 만드세요.</div>
+        <div class="step-d" data-os-show="mac" hidden>Finder에서 <kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>G</kbd>를 누르고 아래 경로를 붙여넣으세요. 폴더가 없으면 새로 만드세요.</div>
+        <div class="path" data-os-show="win"><code>%appdata%\.minecraft\mods</code><button class="btn-ghost" type="button" data-copy="%appdata%\.minecraft\mods" data-toast="경로를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
+        <div class="path" data-os-show="mac" hidden><code>~/Library/Application Support/minecraft/mods</code><button class="btn-ghost" type="button" data-copy="~/Library/Application Support/minecraft/mods" data-toast="경로를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
+      </div></li>
+      <li><div>
+        <div class="step-t">기존 모드를 지우고 새 모드를 넣습니다</div>
+        <div class="step-d">mods 폴더를 비운 뒤, 받은 zip의 압축을 풀어 나온 .jar 파일을 전부 넣으세요. 이전 버전이 남아 있으면 게임이 켜지지 않을 수 있어요.</div>
+      </div></li>
+      <li><div>
+        <div class="step-t">모드 로더 프로필로 게임을 실행합니다</div>
+        <div class="step-d">런처에서 서버와 같은 버전의 프로필을 고른 뒤 접속하세요.</div>
+      </div></li>
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="mlTitle">
+    <div class="sec-head"><h2 id="mlTitle">포함된 모드</h2><span class="sec-sub num" id="mlCount">0개</span></div>
+    <div class="list-tools" hidden>
+      <label class="search"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="모드 이름으로 찾기" aria-label="모드 검색" autocomplete="off"></label>
+    </div>
+    <ul class="mods" id="mods" hidden></ul>
+    <div class="empty" id="noMatch" hidden></div>
+    <div class="empty" ><b>아직 올라온 모드가 없어요</b>서버 관리자가 모드를 올리면 여기에 표시돼요.</div>
+  </section>
+
+  <footer><span>2026년 9월 30일 15:29 업데이트</span><span>모드 0개</span><button class="btn-ghost" type="button" id="adminBtn" hidden><svg class="i"><use href="#i-upload"/></svg>모드 관리</button></footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-check"/></svg><span id="toastMsg"></span></div>
+
+<script>
+(() => {
+  const BUILD = "da39a3ee5e", UPDATED = "2026년 9월 30일 15:29", KEY = "mods-downloaded";
+  const $ = s => document.querySelector(s);
+  const store = {
+    get(){ try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; } },
+    set(v){ try { localStorage.setItem(KEY, JSON.stringify(v)); } catch {} },
+  };
+
+  let toastT;
+  function toast(msg){
+    $("#toastMsg").textContent = msg;
+    $("#toast").classList.add("show");
+    clearTimeout(toastT);
+    toastT = setTimeout(() => $("#toast").classList.remove("show"), 2000);
+  }
+
+  // 복사 버튼
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); toast(b.dataset.toast || "복사했어요"); }
+    catch {
+      const code = b.parentElement.querySelector("code");
+      if (code) { const r = document.createRange(); r.selectNodeContents(code); getSelection().removeAllRanges(); getSelection().addRange(r); }
+      toast("선택된 글자를 직접 복사해 주세요");
+    }
+  }));
+
+  // 받은 기록: 이 브라우저에서 마지막으로 받은 버전과 비교
+  const state = $("#dlState");
+  function renderState(){
+    const got = store.get();
+    if (!got) return;
+    const icon = n => `<svg class="i"><use href="#i-${n}"/></svg>`;
+    if (got.build === BUILD) {
+      state.className = "dl-state ok";
+      state.innerHTML = `${icon("check")}<span>최신 모드를 받았어요 (${got.at}). 다시 받을 필요 없어요.</span>`;
+    } else {
+      state.className = "dl-state stale";
+      state.innerHTML = `${icon("alert")}<span>${got.at}에 받은 뒤로 모드가 바뀌었어요. 다시 받아서 교체하세요.</span>`;
+    }
+  }
+  renderState();
+  $("#dlBtn").addEventListener("click", () => {
+    const d = new Date();
+    store.set({ build: BUILD, at: `${d.getMonth()+1}월 ${d.getDate()}일` });
+    renderState();
+    toast("다운로드를 시작했어요");
+  });
+
+  // 설치 방법 OS 탭
+  const tabs = document.querySelectorAll("[data-os]");
+  function setOS(os){
+    tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.os === os)));
+    document.querySelectorAll("[data-os-show]").forEach(el => el.hidden = el.dataset.osShow !== os);
+  }
+  tabs.forEach(t => t.addEventListener("click", () => setOS(t.dataset.os)));
+  if (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) setOS("mac");
+
+  // 모드 관리 화면 버튼: 이 컴퓨터에서 파일로 열었을 때만 보임 (배포된 사이트에서는 숨김)
+  const adminBtn = $("#adminBtn");
+  if (location.protocol === "file:" || /^(127\.0\.0\.1|localhost)$/.test(location.hostname)) {
+    adminBtn.hidden = false;
+    adminBtn.addEventListener("click", async () => {
+      for (let p = 8765; p < 8785; p++) {  // admin.py가 쓰는 포트 범위
+        try {
+          await fetch(`http://127.0.0.1:${p}/api/state`, { mode: "no-cors", signal: AbortSignal.timeout(400) });
+          location.href = `http://127.0.0.1:${p}/`;
+          return;
+        } catch {}
+      }
+      toast("관리 화면이 꺼져 있어요. mod-site 폴더의 '모드 관리'를 먼저 실행하세요");
+    });
+  }
+
+  // 모드 검색
+  const q = $("#q"), rows = [...document.querySelectorAll("#mods .mod")], noMatch = $("#noMatch");
+  const names = rows.map(r => r.querySelector(".mn").firstChild);
+  const originals = names.map(n => n && n.textContent);
+  const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  q && q.addEventListener("input", () => {
+    const v = q.value.trim().toLowerCase();
+    let shown = 0;
+    rows.forEach((r, i) => {
+      const hit = !v || r.dataset.q.includes(v);
+      r.hidden = !hit; if (hit) shown++;
+      const span = r.querySelector(".mn");
+      const text = originals[i] || "";
+      const at = v ? text.toLowerCase().indexOf(v) : -1;
+      const html = at < 0 ? esc(text) : esc(text.slice(0, at)) + "<mark>" + esc(text.slice(at, at + v.length)) + "</mark>" + esc(text.slice(at + v.length));
+      const tag = span.querySelector(".tag");
+      span.innerHTML = html; if (tag) span.appendChild(tag);
+    });
+    $("#mods").hidden = shown === 0;
+    noMatch.hidden = shown > 0;
+    if (!shown) noMatch.innerHTML = `<b>"${esc(q.value.trim())}"에 맞는 모드가 없어요</b>철자를 확인하거나 영어 이름으로 찾아보세요.`;
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "/" && q && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+    if (e.key === "Escape" && document.activeElement === q) { q.value = ""; q.dispatchEvent(new Event("input")); q.blur(); }
+  });
+})();
+</script>
+</body>
+</html>
