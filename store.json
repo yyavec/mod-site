@@ -1153,6 +1153,15 @@
       "size": 1389600
     },
     {
+      "file": "MouseTweaks-forge-mc1.20.1-2.25.1.jar",
+      "id": "mousetweaks",
+      "name": "Mouse Tweaks",
+      "version": "",
+      "desc": "A mod that enhances the inventory management by adding various additional functions to the usual mouse buttons.",
+      "env": "",
+      "size": 76237
+    },
+    {
       "file": "mowziesmobs-1.8.2.jar",
       "id": "mowziesmobs",
       "name": "Mowzie's Mobs",
