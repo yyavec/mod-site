@@ -559,6 +559,15 @@
       "size": 20276434
     },
     {
+      "file": "DungeonsArise-1.20.x-2.1.58-release.jar",
+      "id": "dungeons_arise",
+      "name": "When Dungeons Arise",
+      "version": "2.1.58-1.20.x",
+      "desc": "Elegant - and likely dangerous - structures and roguelike dungeons to lose yourself in...",
+      "env": "",
+      "size": 8762342
+    },
+    {
       "file": "wraithon-forge1.20.1-1.1.11.jar",
       "id": "wraithon",
       "name": "wraithon",
