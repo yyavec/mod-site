@@ -1009,6 +1009,15 @@
       "size": 282474
     },
     {
+      "file": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
+      "id": "playeranimator",
+      "name": "Player Animator",
+      "version": "1.0.2-rc1+1.20",
+      "desc": "Look for FabricMC (or QuiltMC) builds...",
+      "env": "",
+      "size": 181437
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
