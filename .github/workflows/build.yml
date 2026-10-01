@@ -32,7 +32,13 @@ jobs:
               print(m["file"])
           PY
           while IFS= read -r f; do
-            [ -n "$f" ] && gh release download store -p "$f" -D mods --clobber
+            [ -z "$f" ] && continue
+            # GitHub가 가끔 잠깐 오류를 내서, 실패하면 몇 번 다시 받는다
+            for try in 1 2 3 4 5; do
+              gh release download store -p "$f" -D mods --clobber && break
+              echo "다시 시도 ($try): $f"; sleep $((try * 5))
+              [ $try = 5 ] && exit 1
+            done
           done < files.txt
           ls -la mods
 

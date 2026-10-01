@@ -86,16 +86,12 @@
     "desc": "모드에만 치중하지 않고, 우리끼리 편한 마음으로 놀 수 있는 공간이 필요하다고 생각해서 필수 모드만 넣은 바닐라 서버를 서브로 함께 열었어요. 처음에 한 번만 등록해 두면 메인 서버와 왔다 갔다 하면서 편하게 쓸 수 있어요.",
     "mods": [
       {
-        "name": "Simple Voice Chat",
-        "desc": "근처 플레이어와 음성 대화"
+        "name": "Waystones",
+        "desc": "거점 간 빠른 이동"
       },
       {
-        "name": "Furniture",
-        "desc": "다양한 가구와 인테리어"
-      },
-      {
-        "name": "Farmer's Delight",
-        "desc": "농사와 요리 확장"
+        "name": "JourneyMap",
+        "desc": "월드 지도와 웨이포인트"
       }
     ]
   }
