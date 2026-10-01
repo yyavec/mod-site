@@ -1144,6 +1144,15 @@
       "size": 246413
     },
     {
+      "file": "summoningrituals-forge-1.20.1-2.0.8.jar",
+      "id": "summoningrituals",
+      "name": "Summoning Rituals",
+      "version": "1.20.1-2.0.8",
+      "desc": "Create custom summoning rituals for items and mobs.",
+      "env": "",
+      "size": 218380
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
