@@ -347,6 +347,32 @@ footer .btn-ghost{margin-left:auto; height:30px}
 @keyframes aura{50%{opacity:.5; transform:scaleX(.9)}}
 
 
+
+/* ===== 현재 진행 중 + 공허의 균열 ===== */
+.now-row{display:flex}
+.now-wrap{position:relative; display:inline-flex}
+.meta{position:relative; z-index:2}
+.now{position:relative; z-index:1}
+.rift{display:none; position:absolute; left:50%; top:50%; width:560px; height:140px; transform:translate(-50%,-50%); pointer-events:none; overflow:visible}
+[data-mood="nightfall"] .rift{display:block; animation:riftpulse 2.8s infinite}
+.rift path{fill:none; stroke-linecap:square; stroke-linejoin:miter; stroke-dasharray:1; stroke-dashoffset:0}
+.rift-glow path{stroke:#9B6BFF; stroke-width:4; opacity:.55; filter:blur(2px)}
+.rift-core path{stroke:#E9DDFF; stroke-width:1.5}
+.rift-shards rect{fill:#1B1424; stroke:#B68CFF; stroke-width:.8; animation:shard 3.6s ease-in-out infinite}
+.rift-shards rect:nth-child(2n){animation-delay:-1.4s}
+@keyframes shard{50%{transform:translateY(-4px)}}
+@keyframes riftpulse{0%,100%{opacity:1} 40%{opacity:.85} 46%{opacity:.2} 50%{opacity:.95} 54%{opacity:.25} 60%{opacity:1}}
+[data-intro]:not([data-intro="slam"]) .now{opacity:0}
+[data-intro]:not([data-intro="slam"]) .rift{display:none}
+[data-intro="slam"] .now{animation:slam .5s cubic-bezier(.55,0,.9,.45) both}
+@keyframes slam{0%{transform:translateY(-240px) scale(1.5) rotate(-6deg); opacity:0} 15%{opacity:1} 78%{transform:translateY(4px) scale(1.08,.86)} 90%{transform:translateY(-3px) scale(.98,1.04)} 100%{transform:none}}
+[data-intro="slam"] .rift{animation:none}
+[data-intro="slam"] .rift path{stroke-dashoffset:1; animation:riftdraw .45s .42s ease-out forwards}
+[data-intro="slam"] .rift-shards rect{opacity:0; animation:shardpop .5s .45s ease-out forwards}
+@keyframes riftdraw{to{stroke-dashoffset:0}}
+@keyframes shardpop{from{opacity:0; transform:scale(0)} to{opacity:1; transform:none}}
+@media (max-width:600px){ .rift{width:420px} }
+
 /* ===== 첫 입장 변신 장면 ===== */
 :root{--spire-far:rgba(70,66,58,.5); --spire-near:rgba(40,38,34,.85); --fog:transparent}
 .rocks .rock{position:absolute; bottom:6px; left:var(--x); width:var(--w); height:var(--w); background:#3B3842; box-shadow:inset -4px -4px 0 rgba(0,0,0,.35), inset 4px 4px 0 rgba(255,255,255,.08); transform:rotate(var(--r)); image-rendering:pixelated}
@@ -449,8 +475,8 @@ footer .btn-ghost{margin-left:auto; height:30px}
     <div class="head">
     <p class="eyebrow">{{COMMUNITY}}</p>
     <h1>{{SITE_TITLE}}</h1>
+    <div class="now-row" {{NOW_HIDDEN}}><span class="now-wrap"><svg class="rift" viewBox="0 0 560 140" aria-hidden="true"><g class="rift-glow"><path d="M170.0,72.0 L162.1,66.6 L152.0,69.1 L143.3,63.7 L134.1,67.3" pathLength="1"/><path d="M390.0,68.0 L406.3,71.4 L428.1,66.3 L448.5,65.5 L467.7,72.5 L483.4,65.8 L508.1,64.4 L525.0,62.0 L543.6,68.4 L560.6,64.5" pathLength="1"/><path d="M448.5,65.5 L464.6,76.4 L483.1,72.9 L496.4,81.0" pathLength="1"/><path d="M508.1,64.4 L522.3,70.0 L544.9,73.7 L561.0,80.8" pathLength="1"/><path d="M152.0,69.1 L138.7,63.0 L125.9,57.4" pathLength="1"/><path d="M210.0,55.0 L208.0,48.7 L209.8,42.1 L215.3,33.7" pathLength="1"/><path d="M310.0,85.0 L313.5,94.0 L309.6,100.2 L310.1,107.7" pathLength="1"/><path d="M365.0,85.0 L361.3,90.4 L362.5,99.1 L357.7,106.8" pathLength="1"/></g><g class="rift-core"><path d="M170.0,72.0 L162.1,66.6 L152.0,69.1 L143.3,63.7 L134.1,67.3" pathLength="1"/><path d="M390.0,68.0 L406.3,71.4 L428.1,66.3 L448.5,65.5 L467.7,72.5 L483.4,65.8 L508.1,64.4 L525.0,62.0 L543.6,68.4 L560.6,64.5" pathLength="1"/><path d="M448.5,65.5 L464.6,76.4 L483.1,72.9 L496.4,81.0" pathLength="1"/><path d="M508.1,64.4 L522.3,70.0 L544.9,73.7 L561.0,80.8" pathLength="1"/><path d="M152.0,69.1 L138.7,63.0 L125.9,57.4" pathLength="1"/><path d="M210.0,55.0 L208.0,48.7 L209.8,42.1 L215.3,33.7" pathLength="1"/><path d="M310.0,85.0 L313.5,94.0 L309.6,100.2 L310.1,107.7" pathLength="1"/><path d="M365.0,85.0 L361.3,90.4 L362.5,99.1 L357.7,106.8" pathLength="1"/></g><g class="rift-shards"><rect x="140" y="50" width="3" height="3" /><rect x="130" y="86" width="2" height="2" /><rect x="450" y="46" width="4" height="4" /><rect x="500" y="88" width="3" height="3" /><rect x="540" y="60" width="3" height="3" /><rect x="580" y="82" width="2" height="2" /><rect x="410" y="98" width="3" height="3" /><rect x="480" y="36" width="2" height="2" /></g></svg><a class="now" href="#svTitle"><span class="now-dot" aria-hidden="true"></span><span class="now-k">현재 진행 중!!</span><span class="now-v">{{NOW_PLAYING}}</span></a></span></div>
     <div class="meta">
-      <a class="now" href="#svTitle" {{NOW_HIDDEN}}><span class="now-dot" aria-hidden="true"></span><span class="now-k">현재 진행 중!!</span><span class="now-v">{{NOW_PLAYING}}</span></a>
       {{CHIPS}}
       <button class="addr" type="button" data-copy="{{SERVER_ADDRESS}}" data-toast="서버 주소를 복사했어요" {{ADDRESS_HIDDEN}} aria-label="서버 주소 {{SERVER_ADDRESS}} 복사">{{SERVER_ADDRESS}}<svg class="i"><use href="#i-copy"/></svg></button>
       <a class="pill-link" href="{{NOTION_URL}}" target="_blank" rel="noopener" {{NOTION_HIDDEN}}>공지 · 업데이트 소식<svg class="i"><use href="#i-ext"/></svg></a>
@@ -601,6 +627,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
       timers.forEach(clearTimeout);
       html.dataset.mood = "nightfall";
       delete html.dataset.intro;
+      document.querySelectorAll(".flashbang").forEach(f => f.remove());
       try { sessionStorage.setItem("intro-seen", "1"); } catch {}
       removeEventListener("pointerdown", finish); removeEventListener("keydown", finish);
     };
@@ -612,9 +639,12 @@ footer .btn-ghost{margin-left:auto; height:30px}
       html.dataset.intro = "flash";
       const f = document.createElement("div"); f.className = "flashbang"; document.body.appendChild(f);
       f.animate([{opacity: 0}, {opacity: 1, offset: .15}, {opacity: 0}], {duration: 900, easing: "ease-out"}).onfinish = () => f.remove();
+      setTimeout(() => f.remove(), 1200);
       at(130, () => { html.dataset.mood = "nightfall"; quake(); });
     });
-    at(3600, finish);
+    at(3200, () => { html.dataset.intro = "slam"; });
+    at(3620, quake);
+    at(4500, finish);
     setTimeout(() => { addEventListener("pointerdown", finish, {once: true}); addEventListener("keydown", finish, {once: true}); }, 300);
   }
 
