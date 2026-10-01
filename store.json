@@ -82,6 +82,15 @@
       "size": 3149756
     },
     {
+      "file": "AttributeFix-Forge-1.20.1-21.0.5.jar",
+      "id": "attributefix",
+      "name": "AttributeFix",
+      "version": "21.0.5",
+      "desc": "Extends the maximum attribute ranges to allow for higher values.",
+      "env": "",
+      "size": 19499
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
