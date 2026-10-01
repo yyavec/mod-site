@@ -109,6 +109,15 @@
       "size": 591397
     },
     {
+      "file": "BEB-Forge-1.20.1-6.0.0.jar",
+      "id": "beb",
+      "name": "Beautiful Enchanted Books",
+      "version": "6.0.0",
+      "desc": "This mod aims to improve the appearance of enchanted books, now each one will be different!",
+      "env": "",
+      "size": 1884205
+    },
+    {
       "file": "ba_bt-1.20.1-3.0.0-beta3.2.1.jar",
       "id": "ba_bt",
       "name": "Brass-Amber BattleTowers",
