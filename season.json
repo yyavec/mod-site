@@ -1,10 +1,10 @@
 {
   "show": true,
-  "title": "시즌 2 모드 투표",
-  "badge": "투표 중",
-  "period": "2026년 10월 1일부터",
-  "intro": "같이 하고 싶은 모드에 투표해 주세요. 투표는 노션 페이지에서 받아요.",
-  "button": "노션에서 투표하기",
+  "title": "시즌 2 · RPG",
+  "badge": "오늘 오픈",
+  "period": "2026년 10월 1일 오픈",
+  "intro": "투표 결과 5번 RPG 모드팩 Nightfallcraft로 정해졌어요. 오늘 서버를 열어요!",
+  "button": "노션에서 자세히 보기",
   "candidates": [
     {
       "name": "포켓몬 (RE)",
@@ -66,7 +66,8 @@
       "videos": [
         "https://www.youtube.com/watch?v=9wKugA7QeQI",
         "https://www.youtube.com/shorts/_aY2a97-Shk"
-      ]
+      ],
+      "winner": true
     }
   ]
 }

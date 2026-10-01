@@ -275,8 +275,11 @@ async function saveContent(data, gh) {
       name, pack: one(c.pack, 80), stars: Math.max(0, Math.min(5, parseInt(c.stars) || 0)), weeks: one(c.weeks, 20),
       tags: (c.tags || []).map(t => one(t, 30)).filter(Boolean).slice(0, 4),
       videos: (c.videos || []).filter(v => one(v)).map(v => checkUrl(v, `${i}번 후보의 영상 주소`)).slice(0, 5),
+      ...(c.winner ? { winner: true } : {}),
     };
   });
+  // 당선은 한 명만
+  candidates.forEach((c, n) => { if (c.winner && candidates.findIndex(x => x.winner) !== n) delete c.winner; });
   const season = { show: sin.show !== false, title: one(sin.title, 60), badge: one(sin.badge, 20), period: one(sin.period, 60),
                    intro: one(sin.intro, 300), button: one(sin.button, 30), candidates };
 

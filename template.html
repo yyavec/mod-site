@@ -183,6 +183,33 @@ h1{font:400 33px/1.15 var(--pixel); letter-spacing:0; color:var(--text-primary);
 .vlink{display:inline-flex; align-items:center; gap:5px; height:28px; padding:0 10px; border-radius:var(--r-sm); background:var(--bg-sunken); color:var(--text-secondary); font-size:12px; font-weight:600; text-decoration:none; white-space:nowrap; transition:color var(--m-fast), background var(--m-fast)}
 .vlink::before{content:""; width:0; height:0; border-left:6px solid currentColor; border-top:4px solid transparent; border-bottom:4px solid transparent}
 .vlink:hover{color:#fff; background:#E0413A}
+.win-card{display:grid; grid-template-columns:auto minmax(0,1fr); gap:var(--s5); align-items:center; padding:var(--s5) var(--s6); background:linear-gradient(135deg, var(--accent-soft), var(--bg-surface) 70%); border:2px solid var(--accent); border-radius:var(--r-lg); box-shadow:0 3px 0 var(--accent-edge), var(--shadow-raised)}
+.win-art svg{width:64px; height:auto; animation:shine 2.4s ease-in-out infinite}
+@keyframes shine{50%{transform:translateY(-3px)}}
+.win-main{display:flex; flex-direction:column; gap:var(--s2); min-width:0}
+.win-badge{display:inline-flex; align-items:center; height:24px; padding:0 9px; border-radius:var(--r-sm); background:#F2B636; color:#4A3200; font-size:12px; font-weight:700; box-shadow:inset 0 -2px 0 rgba(0,0,0,.15)}
+.win-n{font:400 26px/1.2 var(--pixel)}
+.win-main .cand-p{margin-top:-4px}
+.history{border-top:1px dashed var(--border-standard); padding-top:var(--s3)}
+.history summary{cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:var(--s2); font-size:13px; font-weight:600; color:var(--text-tertiary)}
+.history summary::-webkit-details-marker{display:none}
+.history summary::before{content:"▸"; font-size:11px; transition:transform var(--m-fast)}
+.history[open] summary::before{transform:rotate(90deg)}
+.history summary .num{font-weight:400}
+.hist-list{list-style:none; margin:var(--s2) 0 0; padding:0; display:flex; flex-direction:column}
+.hist{display:grid; grid-template-columns:20px minmax(0,1fr) auto auto auto; gap:var(--s3); align-items:center; padding:6px 0; font-size:13px; color:var(--text-tertiary); opacity:.7; transition:opacity var(--m-fast)}
+.hist:hover{opacity:1}
+.hist + .hist{border-top:1px dashed var(--border-subtle)}
+.hist-no{font:400 11px/1 var(--pixel); text-align:center}
+.hist-n{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--text-secondary); font-weight:500}
+.hist-n small{margin-left:var(--s2); font-size:12px; font-weight:400; color:var(--text-tertiary)}
+.hist .stars svg{width:11px; height:11px}
+.hist-v{font-size:12px; color:var(--text-tertiary); text-decoration:underline; text-underline-offset:2px}
+.hist-v:hover{color:var(--text-primary)}
+.hist-tag{grid-column:3; font-size:11px; font-weight:700; color:#8A6200; background:#FCEBC0; padding:2px 6px; border-radius:var(--r-sm)}
+.hist.is-win{opacity:1}
+.hist.is-win .hist-n{color:var(--text-primary); font-weight:600}
+.hist:not(.is-win) .stars{grid-column:4}
 .vote-cta{display:flex; align-items:center; justify-content:space-between; gap:var(--s4); flex-wrap:wrap}
 .vote-cta span{font-size:13px; color:var(--text-tertiary)}
 
@@ -266,6 +293,12 @@ footer .btn-ghost{margin-left:auto; height:30px}
   .dl-block svg{width:40px}
   .btn-dl{grid-column:1 / -1; width:100%}
   .install{padding:var(--s4)}
+  .win-card{grid-template-columns:1fr; padding:var(--s5)}
+  .win-art svg{width:48px}
+  .win-n{font-size:22px}
+  .hist{grid-template-columns:20px minmax(0,1fr) auto}
+  .hist .stars,.hist-v{display:none}
+  .hist-n small{display:block; margin:0}
   .mod{grid-template-columns:36px minmax(0,1fr) auto}
   .ms{display:none}
   .ch{grid-template-columns:76px minmax(0,1fr)}
@@ -330,8 +363,8 @@ footer .btn-ghost{margin-left:auto; height:30px}
   <section class="section" aria-labelledby="svTitle" {{SEASON_HIDDEN}}>
     <div class="sec-head"><h2 id="svTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="2" height="1" fill="#F2B636"/><rect x="3" y="1" width="2" height="1" fill="#F2B636"/><rect x="0" y="2" width="8" height="1" fill="#F2B636"/><rect x="1" y="3" width="6" height="1" fill="#F2B636"/><rect x="2" y="4" width="4" height="1" fill="#F2B636"/><rect x="1" y="5" width="2" height="1" fill="#F2B636"/><rect x="5" y="5" width="2" height="1" fill="#F2B636"/><rect x="0" y="6" width="2" height="1" fill="#F2B636"/><rect x="6" y="6" width="2" height="1" fill="#F2B636"/></svg>{{SEASON_TITLE}}</h2><span class="badge-live" {{SEASON_BADGE_HIDDEN}}>{{SEASON_BADGE}}</span><span class="sec-sub">{{SEASON_PERIOD}}</span></div>
     <p class="season-intro" {{SEASON_INTRO_HIDDEN}}>{{SEASON_INTRO}}</p>
-    <ol class="cands">{{SEASON_CARDS}}</ol>
-    <div class="vote-cta" {{NOTION_HIDDEN}}><span>별점은 운영자 추천도, 기간은 예정이에요.</span><a class="btn-ghost" href="{{NOTION_URL}}" target="_blank" rel="noopener">{{SEASON_BUTTON}}<svg class="i"><use href="#i-ext"/></svg></a></div>
+    {{SEASON_BODY}}
+    <div class="vote-cta" {{NOTION_HIDDEN}}><span>{{SEASON_NOTE}}</span><a class="btn-ghost" href="{{NOTION_URL}}" target="_blank" rel="noopener">{{SEASON_BUTTON}}<svg class="i"><use href="#i-ext"/></svg></a></div>
   </section>
 
   <section class="section" aria-labelledby="inTitle">

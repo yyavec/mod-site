@@ -158,29 +158,63 @@ def load_season():
 
 
 def season_html(e):
-    """season.json(투표 후보)을 카드 목록으로 만든다. 숨김이거나 후보가 없으면 None."""
+    """season.json(투표 후보)을 HTML로 만든다. 숨김이거나 후보가 없으면 None.
+
+    당선(winner) 후보가 있으면 그 카드를 크게 보여 주고, 나머지는 '투표 기록'으로 작고 흐리게 남긴다.
+    """
     d = load_season()
     if not d or d.get("show") is False:
         return None
+    cands = d.get("candidates", [])
     star = '<svg class="i st{on}"><use href="#i-star"/></svg>'
-    cards = []
-    for c in d.get("candidates", []):
+
+    def stars_of(c):
         n = max(0, min(5, int(c.get("stars", 0))))
-        stars = "".join(star.format(on=" on" if i < n else "") for i in range(5))
-        tags = "".join(f'<span class="tag">{e(t)}</span>' for t in c.get("tags", []))
-        vids = "".join(
-            f'<a class="vlink" href="{e(v)}" target="_blank" rel="noopener">영상 {i}</a>'
-            for i, v in enumerate(c.get("videos", []), 1))
-        cards.append(
-            f'<li class="cand"><div class="cand-main"><div class="cand-n">{e(c.get("name", ""))}</div>'
-            f'<div class="cand-p">{e(c.get("pack", ""))}</div></div>'
-            f'<div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 {n}점">{stars}</span>'
-            f'<span class="weeks num">{e(c.get("weeks", ""))}</span>{tags}</div>'
-            f'<div class="cand-v">{vids}</div></li>')
+        return n, "".join(star.format(on=" on" if i < n else "") for i in range(5))
+
+    def vids_of(c):
+        return "".join(f'<a class="vlink" href="{e(v)}" target="_blank" rel="noopener">영상 {i}</a>'
+                       for i, v in enumerate(c.get("videos", []), 1))
+
+    def tags_of(c):
+        return "".join(f'<span class="tag">{e(t)}</span>' for t in c.get("tags", []))
+
+    win = next((c for c in cands if c.get("winner")), None)
+    if win:
+        n, st = stars_of(win)
+        no = cands.index(win) + 1
+        body = (f'<div class="win-card"><div class="win-art"><svg class="px trophy" viewBox="0 0 10 9" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="6" height="1" fill="#F2B636"/><rect x="0" y="1" width="3" height="1" fill="#F2B636"/><rect x="3" y="1" width="1" height="1" fill="#FFE58A"/><rect x="4" y="1" width="6" height="1" fill="#F2B636"/><rect x="0" y="2" width="1" height="1" fill="#F2B636"/><rect x="2" y="2" width="1" height="1" fill="#F2B636"/><rect x="3" y="2" width="1" height="1" fill="#FFE58A"/><rect x="4" y="2" width="4" height="1" fill="#F2B636"/><rect x="9" y="2" width="1" height="1" fill="#F2B636"/><rect x="1" y="3" width="8" height="1" fill="#F2B636"/><rect x="2" y="4" width="6" height="1" fill="#F2B636"/><rect x="3" y="5" width="4" height="1" fill="#F2B636"/><rect x="4" y="6" width="2" height="1" fill="#F2B636"/><rect x="3" y="7" width="4" height="1" fill="#F2B636"/><rect x="2" y="8" width="6" height="1" fill="#8B5A2B"/></svg></div><div class="win-main">'
+                f'<div class="win-top"><span class="win-badge">투표 1위 · {no}번 후보</span></div>'
+                f'<div class="win-n">{e(win.get("name", ""))}</div><div class="cand-p">{e(win.get("pack", ""))}</div>'
+                f'<div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 {n}점">{st}</span>'
+                f'<span class="weeks num">{e(win.get("weeks", ""))}</span>{tags_of(win)}</div>'
+                f'<div class="cand-v">{vids_of(win)}</div></div></div>')
+        rows = []
+        for i, c in enumerate(cands, 1):
+            n, st = stars_of(c)
+            w = c is win
+            first = (c.get("videos") or [None])[0]
+            link = f'<a class="hist-v" href="{e(first)}" target="_blank" rel="noopener" aria-label="{e(c.get("name", ""))} 영상">영상</a>' if first else ""
+            rows.append(f'<li class="hist{" is-win" if w else ""}"><span class="hist-no num">{i}</span>'
+                        f'<span class="hist-n">{e(c.get("name", ""))}<small>{e(c.get("pack", ""))}</small></span>'
+                        f'{"<span class=hist-tag>당선</span>" if w else ""}'
+                        f'<span class="stars" role="img" aria-label="추천도 5점 중 {n}점">{st}</span>{link}</li>')
+        body += (f'<details class="history" open><summary>투표 기록 <span class="num">후보 {len(cands)}개</span></summary>'
+                 f'<ol class="hist-list">{"".join(rows)}</ol></details>')
+    else:
+        cards = []
+        for c in cands:
+            n, st = stars_of(c)
+            cards.append(
+                f'<li class="cand"><div class="cand-main"><div class="cand-n">{e(c.get("name", ""))}</div>'
+                f'<div class="cand-p">{e(c.get("pack", ""))}</div></div>'
+                f'<div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 {n}점">{st}</span>'
+                f'<span class="weeks num">{e(c.get("weeks", ""))}</span>{tags_of(c)}</div>'
+                f'<div class="cand-v">{vids_of(c)}</div></li>')
+        body = f'<ol class="cands">{"".join(cards)}</ol>'
     return {"title": d.get("title", ""), "period": d.get("period", ""), "intro": d.get("intro", ""),
             "badge": d.get("badge", ""), "button": d.get("button") or "노션에서 자세히 보기",
-            "cards": "".join(cards)}
-
+            "body": body, "voting": not win}
 
 def main():
     conf = load_conf()
@@ -297,11 +331,12 @@ def main():
         "SEASON_PERIOD": e(season["period"]) if season else "",
         "SEASON_INTRO": e(season["intro"]) if season else "",
         "SEASON_INTRO_HIDDEN": "" if season and season["intro"] else "hidden",
-        "SEASON_CARDS": season["cards"] if season else "",
+        "SEASON_BODY": season["body"] if season else "",
+        "SEASON_NOTE": "별점은 운영자 추천도, 기간은 예정이에요." if season and season["voting"] else "",
         "SEASON_BADGE": e(season["badge"]) if season else "",
         "SEASON_BADGE_HIDDEN": "" if season and season["badge"] else "hidden",
         "SEASON_BUTTON": e(season["button"]) if season else "",
-        "SEASON_HIDDEN": "" if season and season["cards"] else "hidden",
+        "SEASON_HIDDEN": "" if season and season["body"] else "hidden",
     })
     page = re.sub(r"\{\{(\w+)\}\}", lambda mt: rep.get(mt.group(1), mt.group(0)), tpl)
     (OUT / "index.html").write_text(page, encoding="utf-8")
