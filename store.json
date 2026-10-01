@@ -514,6 +514,15 @@
       "size": 177437
     },
     {
+      "file": "EnchantmentDescriptions-Forge-1.20.1-17.1.21.jar",
+      "id": "enchdesc",
+      "name": "EnchantmentDescriptions",
+      "version": "17.1.21",
+      "desc": "Adds descriptions of enchantments to their tooltip.",
+      "env": "",
+      "size": 66883
+    },
+    {
       "file": "entityrespawner-1.1.0.jar",
       "id": "entityrespawner",
       "name": "Entity Respawner",
