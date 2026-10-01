@@ -35,6 +35,15 @@
       "desc": "Many functional and useful Vanilla+ blocks",
       "env": "",
       "size": 13667742
+    },
+    {
+      "file": "Tab-Stats-1.20-1.0.5.jar",
+      "id": "tabstats",
+      "name": "Tab Stats",
+      "version": "1.0.5",
+      "desc": "",
+      "env": "",
+      "size": 107129
     }
   ]
 }
