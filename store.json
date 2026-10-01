@@ -152,6 +152,15 @@
       "desc": "Adds unique accessories obtainable from defeating mobs or from chests in structures",
       "env": "",
       "size": 521352
+    },
+    {
+      "file": "VIX-1.1.0-all.jar",
+      "id": "vix",
+      "name": "VIX",
+      "version": "1.1.0",
+      "desc": "Very Cool Lib Mod.",
+      "env": "",
+      "size": 506870
     }
   ]
 }
