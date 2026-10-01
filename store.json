@@ -982,6 +982,15 @@
       "size": 188661
     },
     {
+      "file": "Patchouli-1.20.1-85-FORGE.jar",
+      "id": "patchouli",
+      "name": "Patchouli",
+      "version": "",
+      "desc": "Accessible, Data-Driven, Dependency-Free Documentation for Minecraft Modders and Pack Makers",
+      "env": "",
+      "size": 642732
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
