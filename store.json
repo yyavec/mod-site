@@ -721,6 +721,15 @@
       "size": 91771
     },
     {
+      "file": "jei-1.20.1-forge-15.20.0.130.jar",
+      "id": "jei",
+      "name": "Just Enough Items",
+      "version": "15.20.0.130",
+      "desc": "JEI is an item and recipe viewing mod for Minecraft, built from the ground up for stability and performance.",
+      "env": "",
+      "size": 1409705
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
