@@ -375,6 +375,19 @@ def main():
         "G_PROFILE": e(profile if loader and ver else f"{loader or '모드 로더'} {ver}".strip() or "모드 로더"),
         "G_ADDR_ROW": addr_row,
     })
+
+    # 지난 시즌 (취소선 + 완결 도장)
+    past = (load_season() or {}).get("past") or []
+    ball = '<svg class="px" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="4" height="1" fill="#E3403A"/><rect x="1" y="1" width="6" height="1" fill="#E3403A"/><rect x="0" y="2" width="8" height="1" fill="#E3403A"/><rect x="0" y="3" width="3" height="1" fill="#222"/><rect x="3" y="3" width="2" height="1" fill="#fff"/><rect x="5" y="3" width="3" height="1" fill="#222"/><rect x="0" y="4" width="3" height="1" fill="#222"/><rect x="3" y="4" width="2" height="1" fill="#fff"/><rect x="5" y="4" width="3" height="1" fill="#222"/><rect x="0" y="5" width="8" height="1" fill="#F2F2F2"/><rect x="1" y="6" width="6" height="1" fill="#F2F2F2"/><rect x="2" y="7" width="4" height="1" fill="#DADADA"/></svg>'
+    rep.update({
+        "PAST_ROWS": "".join(
+            f'<div class="past-row">{ball}<span class="past-k">{e(p.get("title", ""))}</span>'
+            f'<span class="past-t">{e(p.get("name", ""))}<small>{e(p.get("pack", ""))}</small></span>'
+            f'<span class="past-stamp">완</span></div>' for p in past),
+        "PAST_HIDDEN": "" if past else "hidden",
+        "OWNER": e(conf.get("OWNER", "")),
+        "OWNER_HIDDEN": "" if conf.get("OWNER") else "hidden",
+    })
     page = re.sub(r"\{\{(\w+)\}\}", lambda mt: rep.get(mt.group(1), mt.group(0)), tpl)
     (OUT / "index.html").write_text(page, encoding="utf-8")
     if (ROOT / "assets").is_dir():  # 사이트에 쓰는 그림

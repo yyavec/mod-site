@@ -2,7 +2,7 @@
 // 구글 로그인(ID 토큰)으로 관리자인지 확인한 뒤, GitHub 저장소에 대신 저장한다.
 // 모드 파일은 store 릴리스에, 목록은 store.json에, 사이트 내용은 site.conf / season.json에 둔다.
 
-const CONF_KEYS = ["SITE_TITLE", "MOOD", "COMMUNITY", "SERVER_NAME", "SERVER_ADDRESS", "MC_VERSION", "LOADER",
+const CONF_KEYS = ["SITE_TITLE", "MOOD", "OWNER", "COMMUNITY", "SERVER_NAME", "SERVER_ADDRESS", "MC_VERSION", "LOADER",
   "NOTICE", "NOTION_URL", "DISCORD_URL"];
 const URL_KEYS = new Set(["NOTION_URL", "DISCORD_URL"]);
 const MAX_UPLOAD = 100 * 1024 * 1024;
@@ -283,7 +283,8 @@ async function saveContent(data, gh) {
   // 당선은 한 명만
   candidates.forEach((c, n) => { if (c.winner && candidates.findIndex(x => x.winner) !== n) delete c.winner; });
   const season = { show: sin.show !== false, title: one(sin.title, 60), badge: one(sin.badge, 20), period: one(sin.period, 60),
-                   intro: one(sin.intro, 300), button: one(sin.button, 30), candidates };
+                   intro: one(sin.intro, 300), button: one(sin.button, 30), candidates,
+                   past: (sin.past || []).slice(0, 20).map(p => ({ title: one(p.title, 30), name: one(p.name, 60), pack: one(p.pack, 60) })).filter(p => p.name) };
 
   const [conf, seasonFile] = await Promise.all([gh.file("site.conf"), gh.file("season.json")]);
   const lines = conf.text.replace(/\n$/, "").split("\n"), seen = new Set();

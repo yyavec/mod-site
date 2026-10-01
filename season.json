@@ -70,5 +70,12 @@
       "winner": true,
       "image": "assets/nightfallcraft.jpg"
     }
+  ],
+  "past": [
+    {
+      "title": "시즌 1",
+      "name": "포켓몬 모드",
+      "pack": "Cobblemon"
+    }
   ]
 }
