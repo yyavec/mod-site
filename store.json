@@ -631,6 +631,15 @@
       "size": 129725
     },
     {
+      "file": "fullstackwatchdog-1.0.1+1.19.2-forge.jar",
+      "id": "fullstackwatchdog",
+      "name": "FullStack Watchdog",
+      "version": "1.0.1+1.19.2-forge",
+      "desc": "Makes watchdog print the entire stacktrace of every thread because truncating stacktraces is stupid.",
+      "env": "",
+      "size": 14539
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
