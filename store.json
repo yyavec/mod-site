@@ -1108,6 +1108,15 @@
       "size": 463485
     },
     {
+      "file": "melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
+      "id": "melody",
+      "name": "Melody",
+      "version": "1.0.2",
+      "desc": "OpenAL-based library mod for playing background music. COPYRIGHT: > Melody © Copyright 2023 Keksuccino. Melody is licensed under MIT.",
+      "env": "",
+      "size": 37178
+    },
+    {
       "file": "mixin-booster-0.1.3+1.20.1.jar",
       "id": "mixin-booster",
       "name": "mixin-booster-0.1.3+1.20.1",
