@@ -793,6 +793,15 @@
       "size": 2639494
     },
     {
+      "file": "limitedchunks-1.20.1-4.1.jar",
+      "id": "limitedchunks",
+      "name": "Limited Chunkloading",
+      "version": "1.8",
+      "desc": "Limited chunks mod which unloads chunks a give time after the last visiting player logs off",
+      "env": "",
+      "size": 16405
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
