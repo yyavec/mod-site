@@ -1,3 +1,13 @@
 {
-  "mods": []
+  "mods": [
+    {
+      "file": "super_golem-20.12.2.jar",
+      "id": "super_golem",
+      "name": "Epic fight - Super golem",
+      "version": "20.12.2",
+      "desc": "",
+      "env": "",
+      "size": 2168184
+    }
+  ]
 }
