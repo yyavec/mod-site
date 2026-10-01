@@ -233,6 +233,15 @@
       "desc": "A complete redesign of the End island, making the Ender Dragon fight much more fun and interesting!",
       "env": "",
       "size": 387111
+    },
+    {
+      "file": "YungsBetterNetherFortresses-1.20-Forge-2.0.6.jar",
+      "id": "betterfortresses",
+      "name": "YUNG's Better Nether Fortresses",
+      "version": "1.20-Forge-2.0.6",
+      "desc": "A complete redesign of Minecraft's Nether Fortresses!",
+      "env": "",
+      "size": 619255
     }
   ]
 }
