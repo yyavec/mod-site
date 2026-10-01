@@ -703,6 +703,15 @@
       "size": 1600220
     },
     {
+      "file": "Jade-1.20.1-Forge-11.13.2.jar",
+      "id": "jade",
+      "name": "Jade",
+      "version": "",
+      "desc": "Minecraft mod shows what you are looking at. (Hwyla fork)",
+      "env": "",
+      "size": 552486
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
