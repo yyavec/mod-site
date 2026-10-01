@@ -188,6 +188,15 @@
       "desc": "",
       "env": "",
       "size": 31054582
+    },
+    {
+      "file": "xaerominimap-forge-1.20.1-26.4.2.jar",
+      "id": "xaerominimap",
+      "name": "Xaero's Minimap",
+      "version": "26.4.2",
+      "desc": "The most vanilla-looking minimap for Minecraft.",
+      "env": "",
+      "size": 2195245
     }
   ]
 }
