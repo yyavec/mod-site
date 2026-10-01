@@ -946,6 +946,15 @@
       "size": 168345
     },
     {
+      "file": "pbf1-1.1.2.jar",
+      "id": "pbf1",
+      "name": "P1nero's Battle Field1",
+      "version": "1.1.2",
+      "desc": "Add a new dimension for boss fight.",
+      "env": "",
+      "size": 5297745
+    },
+    {
       "file": "p1neros-dialogue-lib-2.3.0-mc1.20.1-forge.jar",
       "id": "p1nero_dl",
       "name": "P1nero's Dialogue Lib",
