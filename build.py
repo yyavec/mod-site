@@ -344,6 +344,37 @@ def main():
         "SEASON_BUTTON": e(season["button"]) if season else "",
         "SEASON_HIDDEN": "" if season and season["body"] else "hidden",
     })
+
+    # 처음 왔어요 안내: 로더·버전·서버 주소에 맞춰 문장을 만든다
+    loader = conf.get("LOADER", "")
+    ver = conf.get("MC_VERSION", "")
+    links = {
+        "Fabric": ("Fabric 설치 파일 받기", "https://fabricmc.net/use/installer/"),
+        "NeoForge": ("NeoForge 설치 파일 받기", "https://neoforged.net/"),
+        "Forge": ("Forge 설치 파일 받기", "https://files.minecraftforge.net/"),
+        "Quilt": ("Quilt 설치 파일 받기", "https://quiltmc.org/en/install/"),
+    }
+    ext = '<svg class="i"><use href="#i-ext"/></svg>'
+    chosen = [links[loader]] if loader in links else [links[k] for k in ("Fabric", "NeoForge", "Forge")]
+    loader_links = "".join(f'<a class="btn-ghost" href="{u}" target="_blank" rel="noopener">{e(t)}{ext}</a>' for t, u in chosen)
+    profile = {"Fabric": f"fabric-loader-{ver}", "Quilt": f"quilt-loader-{ver}", "NeoForge": "neoforge", "Forge": f"forge ({ver})"}.get(loader, "")
+    notes = []
+    if not loader:
+        notes.append("어떤 로더를 쓰는지는 서버가 열리면 공지할게요. 공지된 것 하나만 설치하면 돼요.")
+    if not ver:
+        notes.append("마인크래프트 버전도 서버가 열리면 공지할게요.")
+    addr = conf.get("SERVER_ADDRESS", "")
+    addr_row = (f'<div class="path"><code>{e(addr)}</code><button class="btn-ghost" type="button" data-copy="{e(addr)}" '
+                f'data-toast="서버 주소를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>'
+                if addr else '<p class="gnote">서버 주소는 서버가 열리면 여기에 나와요.</p>')
+    rep.update({
+        "G_LOADER": e(loader or "모드 로더"),
+        "G_VERSION": e(ver or "공지된 버전"),
+        "G_LOADER_LINKS": loader_links,
+        "G_VERSION_NOTE": "".join(f'<p class="gnote">{e(n)}</p>' for n in notes),
+        "G_PROFILE": e(profile if loader and ver else f"{loader or '모드 로더'} {ver}".strip() or "모드 로더"),
+        "G_ADDR_ROW": addr_row,
+    })
     page = re.sub(r"\{\{(\w+)\}\}", lambda mt: rep.get(mt.group(1), mt.group(0)), tpl)
     (OUT / "index.html").write_text(page, encoding="utf-8")
     if (ROOT / "assets").is_dir():  # 사이트에 쓰는 그림
