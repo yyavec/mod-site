@@ -964,6 +964,15 @@
       "size": 91771
     },
     {
+      "file": "jecharacters-1.20.1-forge-4.6.3.jar",
+      "id": "jecharacters",
+      "name": "Just Enough Characters",
+      "version": "4.6.3",
+      "desc": "Pinyin search for JEI and more.",
+      "env": "",
+      "size": 267125
+    },
+    {
       "file": "jei-1.20.1-forge-15.20.0.130.jar",
       "id": "jei",
       "name": "Just Enough Items",
