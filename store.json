@@ -361,6 +361,15 @@
       "size": 853614
     },
     {
+      "file": "EnchantingInfuser-v8.0.3-1.20.1-Forge.jar",
+      "id": "enchantinginfuser",
+      "name": "Enchanting Infuser",
+      "version": "8.0.3",
+      "desc": "An all new enchanting table: Choose your enchantments for fair prices! Plus no more randomness!",
+      "env": "",
+      "size": 177437
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
