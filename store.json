@@ -1045,6 +1045,15 @@
       "size": 14935230
     },
     {
+      "file": "quick-pack-forge-1.3.2+1.20.1-all.jar",
+      "id": "quick_pack",
+      "name": "quick-pack",
+      "version": "1.3.2",
+      "desc": "Improve datapack / resourcepack zip file loading times",
+      "env": "",
+      "size": 639057
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
