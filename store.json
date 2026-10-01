@@ -1072,6 +1072,15 @@
       "size": 136923
     },
     {
+      "file": "Ribbits-1.20.1-Forge-3.0.5.jar",
+      "id": "ribbits",
+      "name": "Ribbits",
+      "version": "1.20.1-Forge-3.0.5",
+      "desc": "Adds cute little frogs to swamps!",
+      "env": "",
+      "size": 2223589
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
