@@ -172,6 +172,15 @@
       "size": 4343370
     },
     {
+      "file": "Bookshelf-Forge-1.20.1-20.2.15.jar",
+      "id": "bookshelf",
+      "name": "Bookshelf",
+      "version": "20.2.15",
+      "desc": "A library for building other mods.",
+      "env": "",
+      "size": 343925
+    },
+    {
       "file": "BOMD-Forge-1.20.1-1.1.2.jar",
       "id": "bosses_of_mass_destruction",
       "name": "Bosses of Mass Destruction",
