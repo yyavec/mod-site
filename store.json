@@ -640,6 +640,15 @@
       "size": 14539
     },
     {
+      "file": "geckolib-forge-1.20.1-4.8.3.jar",
+      "id": "geckolib",
+      "name": "GeckoLib 4",
+      "version": "4.8.3",
+      "desc": "GeckoLib is an animation engine for Minecraft Mods, with support for complex 3D keyframe-based animations, 30+ easings, concurrent animation support, sound and particle keyframes, event keyframes, and more.",
+      "env": "",
+      "size": 1039046
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
