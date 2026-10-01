@@ -919,6 +919,15 @@
       "size": 8815210
     },
     {
+      "file": "noworldgenwarning-1.0.1.jar",
+      "id": "noworldgenwarning",
+      "name": "NoWorldgenWarning",
+      "version": "1.0.1",
+      "desc": "remove the warning in world generation",
+      "env": "",
+      "size": 5349
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
