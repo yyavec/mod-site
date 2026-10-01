@@ -460,6 +460,15 @@
       "size": 218215
     },
     {
+      "file": "defaultoptions-forge-1.20.1-18.0.4.jar",
+      "id": "defaultoptions",
+      "name": "Default Options",
+      "version": "18.0.4",
+      "desc": "A way for modpacks to ship a default (key) configuration without having to include an options.txt file. Also allows local options from any mod .cfg file.",
+      "env": "",
+      "size": 94684
+    },
+    {
       "file": "dodge_parry_reward-1.20.1forge-20.14.3.jar",
       "id": "dodge_parry_reward",
       "name": "Dodge Parry Reward",
