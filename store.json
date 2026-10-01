@@ -316,6 +316,15 @@
       "size": 431318
     },
     {
+      "file": "cupboard-1.20.1-3.7.jar",
+      "id": "cupboard",
+      "name": "Cupboard utilities",
+      "version": "",
+      "desc": "Cupboard mod providing utilities",
+      "env": "",
+      "size": 31643
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
