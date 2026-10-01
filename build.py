@@ -372,7 +372,13 @@ def main():
     chosen = [links[loader]] if loader in links else [links[k] for k in ("Fabric", "NeoForge", "Forge")]
     loader_links = "".join(f'<a class="btn-ghost" href="{u}" target="_blank" rel="noopener">{e(t)}{ext}</a>' for t, u in chosen)
     inst = store_installer()
-    if inst:  # 관리자가 올린 설치 프로그램이 있으면 그걸 크게, 공식 사이트는 작게
+    lurl = conf.get("LOADER_URL", "")
+    if re.match(r"^https://\S+$", lurl):  # 관리자가 정한 받기 링크가 있으면 그게 1순위
+        loader_links = (f'<a class="inst-dl" href="{e(lurl)}" target="_blank" rel="noopener"><svg class="i"><use href="#i-dl"/></svg>'
+                        f'<span><b>{e(loader or "모드 로더")} 설치 프로그램 받기</b><small>{e((loader + " " + ver).strip() or "공식 배포 링크")}</small></span></a>')
+        if "adfoc.us" in lurl:
+            loader_links += '<p class="gnote">광고 페이지가 먼저 떠요. <b>5초쯤 기다렸다가 오른쪽 위 SKIP</b>을 누르면 설치 파일이 받아져요.</p>'
+    elif inst:  # 관리자가 올린 설치 프로그램이 있으면 그걸 크게, 공식 사이트는 작게
         repo = os.environ.get("GITHUB_REPOSITORY", "yyavec/mod-site")
         url = f"https://github.com/{repo}/releases/download/store/{quote(inst['file'])}"
         dl = '<svg class="i"><use href="#i-dl"/></svg>'

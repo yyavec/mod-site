@@ -2,9 +2,9 @@
 // 구글 로그인(ID 토큰)으로 관리자인지 확인한 뒤, GitHub 저장소에 대신 저장한다.
 // 모드 파일은 store 릴리스에, 목록은 store.json에, 사이트 내용은 site.conf / season.json에 둔다.
 
-const CONF_KEYS = ["SITE_TITLE", "MOOD", "OWNER", "COMMUNITY", "SERVER_NAME", "SERVER_ADDRESS", "MC_VERSION", "LOADER",
+const CONF_KEYS = ["SITE_TITLE", "MOOD", "OWNER", "COMMUNITY", "LOADER_URL", "SERVER_NAME", "SERVER_ADDRESS", "MC_VERSION", "LOADER",
   "NOTICE", "NOTION_URL", "DISCORD_URL"];
-const URL_KEYS = new Set(["NOTION_URL", "DISCORD_URL"]);
+const URL_KEYS = new Set(["NOTION_URL", "DISCORD_URL", "LOADER_URL"]);
 const MAX_UPLOAD = 100 * 1024 * 1024;
 const WORKFLOW = "build.yml";
 
@@ -317,7 +317,7 @@ function checkUrl(v, what) {
 
 async function saveContent(data, gh) {
   const cin = data.conf || {}, vals = {};
-  for (const k of CONF_KEYS) vals[k] = URL_KEYS.has(k) ? checkUrl(cin[k], "노션·디스코드 주소") : one(cin[k]);
+  for (const k of CONF_KEYS) vals[k] = URL_KEYS.has(k) ? checkUrl(cin[k], k === "LOADER_URL" ? "설치 프로그램 링크" : "노션·디스코드 주소") : one(cin[k]);
   if (!["", "nightfall"].includes(vals.MOOD)) vals.MOOD = "";
   if (!vals.SITE_TITLE) throw new HttpError(400, "사이트 제목은 비워둘 수 없어요");
   const sin = data.season || {};
