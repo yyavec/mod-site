@@ -124,6 +124,14 @@ h1{font:400 33px/1.15 var(--pixel); letter-spacing:0; color:var(--text-primary);
 .addr{display:inline-flex; align-items:center; gap:6px; height:28px; padding:0 8px 0 10px; border-radius:var(--r-full); background:var(--bg-surface); color:var(--text-primary); font:500 12.5px var(--mono); border:0; cursor:pointer; transition:background var(--m-fast)}
 .addr:hover{background:var(--bg-raised)}
 .addr svg{width:14px; height:14px; color:var(--text-tertiary)}
+.now{display:inline-flex; align-items:center; gap:8px; height:30px; padding:0 12px 0 10px; border-radius:var(--r-full); background:var(--text-primary); color:var(--bg-canvas); text-decoration:none; box-shadow:0 2px 0 rgba(0,0,0,.15); transition:transform var(--m-fast)}
+.now:hover{transform:translateY(-1px)}
+.now-dot{position:relative; width:8px; height:8px; border-radius:50%; background:var(--accent)}
+.now-dot::after{content:""; position:absolute; inset:0; border-radius:50%; background:var(--accent); animation:ping 1.8s ease-out infinite}
+@keyframes ping{from{transform:scale(1); opacity:.8} to{transform:scale(2.6); opacity:0}}
+.now-k{font-size:12px; font-weight:500; opacity:.75}
+.now-v{font:400 13px/1 var(--pixel); letter-spacing:.02em}
+[data-mood="nightfall"] .now-dot,[data-mood="nightfall"] .now-dot::after{background:#B68CFF}
 .pill-link{display:inline-flex; align-items:center; gap:6px; height:28px; padding:0 12px; border-radius:var(--r-full); background:var(--bg-surface); color:var(--text-primary); font-size:13px; font-weight:600; text-decoration:none; box-shadow:0 2px 0 rgba(0,0,0,.08); transition:transform var(--m-fast), box-shadow var(--m-fast)}
 .pill-link:hover{transform:translateY(-1px); box-shadow:0 3px 0 rgba(0,0,0,.1)}
 .pill-link svg{width:13px; height:13px; color:var(--text-tertiary)}
@@ -401,6 +409,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
     <p class="eyebrow">{{COMMUNITY}}</p>
     <h1>{{SITE_TITLE}}</h1>
     <div class="meta">
+      <a class="now" href="#svTitle" {{NOW_HIDDEN}}><span class="now-dot" aria-hidden="true"></span><span class="now-k">현재 진행 중</span><span class="now-v">{{NOW_PLAYING}}</span></a>
       {{CHIPS}}
       <button class="addr" type="button" data-copy="{{SERVER_ADDRESS}}" data-toast="서버 주소를 복사했어요" {{ADDRESS_HIDDEN}} aria-label="서버 주소 {{SERVER_ADDRESS}} 복사">{{SERVER_ADDRESS}}<svg class="i"><use href="#i-copy"/></svg></button>
       <a class="pill-link" href="{{NOTION_URL}}" target="_blank" rel="noopener" {{NOTION_HIDDEN}}>공지 · 업데이트 소식<svg class="i"><use href="#i-ext"/></svg></a>

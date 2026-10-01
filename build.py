@@ -216,7 +216,8 @@ def season_html(e):
         body = f'<ol class="cands">{"".join(cards)}</ol>'
     return {"title": d.get("title", ""), "period": d.get("period", ""), "intro": d.get("intro", ""),
             "badge": d.get("badge", ""), "button": d.get("button") or "노션에서 자세히 보기",
-            "body": body, "voting": not win}
+            "body": body, "voting": not win,
+            "now": (win.get("pack") or win.get("name") or "") if win else ""}
 
 def main():
     conf = load_conf()
@@ -335,6 +336,8 @@ def main():
         "SEASON_INTRO": e(season["intro"]) if season else "",
         "SEASON_INTRO_HIDDEN": "" if season and season["intro"] else "hidden",
         "SEASON_BODY": season["body"] if season else "",
+        "NOW_PLAYING": e(season["now"]) if season else "",
+        "NOW_HIDDEN": "" if season and season["now"] else "hidden",
         "SEASON_NOTE": "별점은 운영자 추천도, 기간은 예정이에요." if season and season["voting"] else "",
         "SEASON_BADGE": e(season["badge"]) if season else "",
         "SEASON_BADGE_HIDDEN": "" if season and season["badge"] else "hidden",
