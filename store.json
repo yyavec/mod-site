@@ -206,6 +206,15 @@
       "desc": "A self-writing fullscreen map which also works as an add-on to Xaero's Minimap.",
       "env": "",
       "size": 1421224
+    },
+    {
+      "file": "yet_another_config_lib_v3-3.6.6+1.20.1-forge.jar",
+      "id": "yet_another_config_lib_v3",
+      "name": "YetAnotherConfigLib",
+      "version": "3.6.6+1.20.1-forge",
+      "desc": "YetAnotherConfigLib (yacl) is just that. A builder-based configuration library for Minecraft.",
+      "env": "",
+      "size": 1105891
     }
   ]
 }
