@@ -134,6 +134,15 @@
       "desc": "Bored of vanilla structure generation? This pack is for you!",
       "env": "",
       "size": 25458242
+    },
+    {
+      "file": "tudigong-forge1.20.1-1.4.1.jar",
+      "id": "tudigong",
+      "name": "Tu Di Gong",
+      "version": "1.4.1",
+      "desc": "Tudi Gong, a Chinese god Wayfinder.",
+      "env": "",
+      "size": 282993
     }
   ]
 }
