@@ -8,6 +8,15 @@
       "desc": "",
       "env": "",
       "size": 2168184
+    },
+    {
+      "file": "super_warden-20.13.0.jar",
+      "id": "super_warden",
+      "name": "Epic fight - Super Warden",
+      "version": "20.13.0",
+      "desc": "",
+      "env": "",
+      "size": 1089990
     }
   ]
 }
