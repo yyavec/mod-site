@@ -910,6 +910,15 @@
       "size": 227495
     },
     {
+      "file": "Nightfall.Enhance-1.1.4-all.jar",
+      "id": "efn_enhance",
+      "name": "Nightfall Enhance",
+      "version": "1.1.4",
+      "desc": "Very Cool Mod.",
+      "env": "",
+      "size": 8815210
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
