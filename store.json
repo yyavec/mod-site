@@ -89,6 +89,15 @@
       "desc": "Massively altered world generation with mountain ranges, underground rivers and more!",
       "env": "",
       "size": 349125
+    },
+    {
+      "file": "TerraBlender-forge-1.20.1-3.0.1.10.jar",
+      "id": "terrablender",
+      "name": "TerraBlender",
+      "version": "",
+      "desc": "A library mod for adding biomes in a simple and compatible manner with Minecraft's new biome/terrain system.",
+      "env": "",
+      "size": 107532
     }
   ]
 }
