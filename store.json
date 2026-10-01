@@ -694,6 +694,15 @@
       "size": 15144197
     },
     {
+      "file": "iss_ponder-forge1.20.1-1.0.3-all.jar",
+      "id": "iss_ponder",
+      "name": "Irons Spell Scroll Ponder",
+      "version": "1.0.3",
+      "desc": "Add Ponder to Irons Spell Scroll",
+      "env": "",
+      "size": 1600220
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
