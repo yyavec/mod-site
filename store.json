@@ -937,6 +937,15 @@
       "size": 19308698
     },
     {
+      "file": "Oh-The-Trees-Youll-Grow-forge-1.20.1-1.6.0.jar",
+      "id": "ohthetreesyoullgrow",
+      "name": "Oh The Trees You'll Grow",
+      "version": "1.6.0",
+      "desc": "A Minecraft library that aims to give users incredible configurability by allowing the creation of trees with Minecraft's structure template `.nbt` files.",
+      "env": "",
+      "size": 168345
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
