@@ -865,6 +865,15 @@
       "size": 839685
     },
     {
+      "file": "modernfix-forge-5.27.66+mc1.20.1.jar",
+      "id": "modernfix",
+      "name": "ModernFix",
+      "version": "5.27.66+mc1.20.1",
+      "desc": "Egregious, yet effective performance improvements for modern Minecraft",
+      "env": "",
+      "size": 1002234
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
