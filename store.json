@@ -242,6 +242,15 @@
       "desc": "A complete redesign of Minecraft's Nether Fortresses!",
       "env": "",
       "size": 619255
+    },
+    {
+      "file": "YungsBetterOceanMonuments-1.20-Forge-3.0.4.jar",
+      "id": "betteroceanmonuments",
+      "name": "YUNG's Better Ocean Monuments",
+      "version": "1.20-Forge-3.0.4",
+      "desc": "A complete redesign of Minecraft's ocean monuments!",
+      "env": "",
+      "size": 1033262
     }
   ]
 }
