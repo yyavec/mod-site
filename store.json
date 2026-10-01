@@ -568,6 +568,15 @@
       "size": 1647611
     },
     {
+      "file": "ferritecore-6.0.1-forge.jar",
+      "id": "ferritecore",
+      "name": "Ferrite Core",
+      "version": "",
+      "desc": "Reduces memory usage.",
+      "env": "",
+      "size": 123034
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
