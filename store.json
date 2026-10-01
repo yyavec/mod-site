@@ -433,6 +433,15 @@
       "size": 53100071
     },
     {
+      "file": "epicfight_arachne-1.0.0.jar",
+      "id": "epicfight_arachne",
+      "name": "EpicFight-Arachne",
+      "version": "1.0.0",
+      "desc": "",
+      "env": "",
+      "size": 7338704
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
