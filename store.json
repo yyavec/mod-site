@@ -316,6 +316,15 @@
       "size": 241148
     },
     {
+      "file": "certain_questing_additions-forge-1.1.7+mc1.20.1.jar",
+      "id": "certain_questing_additions",
+      "name": "Certain Questing Additions",
+      "version": "1.1.7",
+      "desc": "Certain visual improvements in FTB Quests Mod.",
+      "env": "",
+      "size": 1141295
+    },
+    {
       "file": "cinematiccataclysm-1.0.1-1.20.1.jar",
       "id": "cinematiccataclysm",
       "name": "Cinematic Cataclysm",
