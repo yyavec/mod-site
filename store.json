@@ -1054,6 +1054,15 @@
       "size": 639057
     },
     {
+      "file": "radiantgear-forge-2.2.0+1.20.1.jar",
+      "id": "radiantgear",
+      "name": "Radiant Gear",
+      "version": "2.2.0+1.20.1",
+      "desc": "A compatibility bridge between Curios API or Trinkets API and dynamic light mods such as Dynamic Lights, Lucent, and LambDynamicLights.",
+      "env": "",
+      "size": 47170
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
