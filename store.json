@@ -595,6 +595,15 @@
       "size": 157732
     },
     {
+      "file": "ftb-library-forge-2001.2.12.jar",
+      "id": "ftblibrary",
+      "name": "FTB Library",
+      "version": "2001.2.12",
+      "desc": "Foundational library for FTB mods.",
+      "env": "",
+      "size": 780523
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
