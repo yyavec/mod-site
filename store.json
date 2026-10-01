@@ -874,6 +874,15 @@
       "size": 1002234
     },
     {
+      "file": "moonlight-1.20-2.16.30-forge.jar",
+      "id": "moonlight",
+      "name": "Moonlight Library",
+      "version": "1.20-2.16.30",
+      "desc": "A small library with many cool unique features, from dynamic asset generation to dynamic villager schedules and simple multi loader utilities",
+      "env": "",
+      "size": 1389600
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
