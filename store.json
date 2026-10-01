@@ -397,6 +397,15 @@
       "size": 645196
     },
     {
+      "file": "epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar",
+      "id": "invincible",
+      "name": "Epic Fight - Invincible",
+      "version": "20.14.8.2",
+      "desc": "Make Epic Fight add-on developers easier to create complex combo weapon types. Add some useful commands",
+      "env": "",
+      "size": 268536
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
