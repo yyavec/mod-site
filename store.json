@@ -739,6 +739,15 @@
       "size": 276231
     },
     {
+      "file": "Kambrik-6.1.1+1.20.1-forge.jar",
+      "id": "kambrik",
+      "name": "Kambrik",
+      "version": "6.1.1+1.20.1",
+      "desc": "A Light-weight Kotlin Library Mod!",
+      "env": "",
+      "size": 325546
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
