@@ -748,6 +748,15 @@
       "size": 325546
     },
     {
+      "file": "killcam-1.0.3.jar",
+      "id": "killcam",
+      "name": "KillCam",
+      "version": "1.0.3",
+      "desc": "Cool Kill Cam",
+      "env": "",
+      "size": 141468
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
