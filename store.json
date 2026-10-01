@@ -577,6 +577,15 @@
       "size": 123034
     },
     {
+      "file": "Find.me-1.2.4.jar",
+      "id": "find_me",
+      "name": "Find me",
+      "version": "1.2.4",
+      "desc": "Find and summon your mounts and companions.",
+      "env": "",
+      "size": 603372
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
