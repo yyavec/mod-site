@@ -217,6 +217,15 @@
       "size": 54453322
     },
     {
+      "file": "cataclysm_dimension-forge1.20.1-1.6.2.jar",
+      "id": "cataclysm_dimension",
+      "name": "Cataclysm Dimension",
+      "version": "1.6.2",
+      "desc": "Make cataclysm's structures generate in different dimension",
+      "env": "",
+      "size": 152827
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
