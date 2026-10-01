@@ -946,6 +946,15 @@
       "size": 168345
     },
     {
+      "file": "p1neros-dialogue-lib-2.3.0-mc1.20.1-forge.jar",
+      "id": "p1nero_dl",
+      "name": "P1nero's Dialogue Lib",
+      "version": "2.3.0",
+      "desc": "",
+      "env": "",
+      "size": 83337
+    },
+    {
       "file": "p1nero_ec-20.14.0.9.jar",
       "id": "p1nero_ec",
       "name": "P1nero's Epic Cataclysm",
