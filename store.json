@@ -1054,6 +1054,15 @@
       "size": 2639494
     },
     {
+      "file": "LegendaryTooltips-1.20.1-forge-1.4.5.jar",
+      "id": "legendarytooltips",
+      "name": "Legendary Tooltips",
+      "version": "",
+      "desc": "Gives rare items a fancy tooltip and adds additional tooltip configuration options.",
+      "env": "",
+      "size": 55258
+    },
+    {
       "file": "limitedchunks-1.20.1-4.1.jar",
       "id": "limitedchunks",
       "name": "Limited Chunkloading",
