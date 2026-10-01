@@ -19,6 +19,15 @@
       "size": 1089990
     },
     {
+      "file": "sword_soaring-20.14.2.8-mc1.20.1-forge.jar",
+      "id": "sword_soaring",
+      "name": "Epic Fight - Sword Soaring",
+      "version": "20.14.2.8",
+      "desc": "",
+      "env": "",
+      "size": 17017922
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
