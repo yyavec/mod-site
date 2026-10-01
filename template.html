@@ -351,6 +351,42 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .card-rift.draw{animation:none}
 .voided.zap{animation:zap .35s ease-out}
 @keyframes zap{30%{transform:translate(-2px,1px)} 60%{transform:translate(2px,-1px)} 100%{transform:none}}
+
+/* ---------- 서브 서버: 공허 속 작은 쉼터 ---------- */
+.sub{position:relative; overflow:hidden; border-radius:var(--r-lg); background:linear-gradient(180deg, #CFEFFF 0%, #EAF8FF 55%, #F6FBF2 100%); border:1px solid #BFE3C8; box-shadow:var(--shadow-raised); color:#24301F}
+.sub::after{content:""; position:absolute; left:0; right:0; bottom:0; height:12px; background:linear-gradient(#62B23F 0 4px, #8B5A2B 4px); opacity:.9}
+.sub-sky{position:absolute; inset:0; pointer-events:none}
+.sub-sun{position:absolute; top:16px; right:20px; width:30px; animation:sunglow 4s ease-in-out infinite}
+.sub-sun svg{width:100%; height:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,210,74,.7))}
+@keyframes sunglow{50%{transform:scale(1.08)}}
+.sub-in{position:relative; padding:var(--s5) var(--s6) calc(var(--s5) + 12px); display:flex; flex-direction:column; gap:var(--s3)}
+.sub-top{display:flex; align-items:center; gap:var(--s3)}
+.sub-ic svg{width:38px; height:auto; animation:sway 4s ease-in-out infinite; transform-origin:50% 100%}
+@keyframes sway{50%{transform:rotate(-4deg)}}
+.sub-tt{display:flex; flex-direction:column; gap:2px}
+.sub-k{font-size:12px; font-weight:700; color:#3F7F27; letter-spacing:.02em}
+.sub h2{font:400 22px/1.2 var(--pixel); color:#24301F}
+.sub-desc{margin:0; font-size:14px; line-height:1.65; color:#46553F; max-width:60ch}
+.sub-meta{display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center}
+.sub-addr{display:inline-flex; align-items:center; gap:8px; height:34px; padding:0 12px; border-radius:var(--r-md); border:1px solid #9CCB8A; background:#fff; color:#24301F; font:500 13.5px var(--mono); cursor:pointer; box-shadow:0 2px 0 #9CCB8A; transition:transform var(--m-fast)}
+.sub-addr:hover{transform:translateY(-1px)}
+.sub-addr svg{width:14px; height:14px; color:#3F7F27}
+.sub-soon{font-size:13px; color:#5F6E57; background:rgba(255,255,255,.7); padding:6px 10px; border-radius:var(--r-md)}
+.sub-chip{font-size:12.5px; font-weight:600; color:#3F7F27; background:#E2F3D8; padding:6px 10px; border-radius:var(--r-full)}
+.sub-mods-h{font-size:12px; font-weight:700; color:#5F6E57; margin-top:var(--s1)}
+.sub-mods{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:var(--s2)}
+.sub-mods li{display:flex; flex-direction:column; gap:1px; padding:8px 10px; border-radius:var(--r-md); background:rgba(255,255,255,.75); border:1px solid #D7EBCF}
+.sub-mods b{font-size:13.5px; color:#24301F}
+.sub-mods span{font-size:12px; color:#5F6E57}
+:root[data-theme="dark"] .sub{background:linear-gradient(180deg, #1C2A3A 0%, #22333A 60%, #22301F 100%); border-color:#33503A; color:#E3EFD9}
+:root[data-theme="dark"] .sub h2,:root[data-theme="dark"] .sub-mods b{color:#EAF5E2}
+:root[data-theme="dark"] .sub-desc,:root[data-theme="dark"] .sub-mods span,:root[data-theme="dark"] .sub-mods-h{color:#AFC3A6}
+:root[data-theme="dark"] .sub-k{color:#8FD46D}
+:root[data-theme="dark"] .sub-mods li,:root[data-theme="dark"] .sub-soon{background:rgba(0,0,0,.25); border-color:#33503A; color:#C9D9BF}
+:root[data-theme="dark"] .sub-addr{background:#16211A; color:#EAF5E2; border-color:#3F6A45; box-shadow:0 2px 0 #3F6A45}
+:root[data-theme="dark"] .sub-chip{background:#26391F; color:#9FDB7C}
+:root[data-theme="dark"] .sub-sun svg{filter:drop-shadow(0 0 10px rgba(255,210,74,.35))}
+@media (max-width:600px){ .sub-in{padding:var(--s4) var(--s4) calc(var(--s4) + 12px)} .sub h2{font-size:19px} }
 /* ---------- mod list ---------- */
 .list-tools{display:flex; gap:var(--s3); align-items:center}
 .search{position:relative; flex:1; min-width:0}
@@ -775,6 +811,8 @@ footer .btn-ghost{margin-left:auto; height:30px}
     <div class="vote-cta" {{NOTION_HIDDEN}}><span>{{SEASON_NOTE}}</span><a class="btn-ghost" href="{{NOTION_URL}}" target="_blank" rel="noopener">{{SEASON_BUTTON}}<svg class="i"><use href="#i-ext"/></svg></a></div>
   </section>
 
+
+  {{SUB_SECTION}}
 
   <section class="section" aria-labelledby="mlTitle">
     <div class="sec-head"><h2 id="mlTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg>포함된 모드</h2><span class="sec-sub num" id="mlCount">{{COUNT}}개{{SERVER_ONLY_NOTE}}</span></div>

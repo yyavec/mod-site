@@ -284,6 +284,8 @@ async function saveContent(data, gh) {
   candidates.forEach((c, n) => { if (c.winner && candidates.findIndex(x => x.winner) !== n) delete c.winner; });
   const season = { show: sin.show !== false, title: one(sin.title, 60), badge: one(sin.badge, 20), period: one(sin.period, 60),
                    intro: one(sin.intro, 300), button: one(sin.button, 30), candidates,
+                   sub: sin.sub ? { show: sin.sub.show !== false, title: one(sin.sub.title, 40), address: one(sin.sub.address, 120), version: one(sin.sub.version, 20),
+                         desc: one(sin.sub.desc, 400), mods: (sin.sub.mods || []).slice(0, 30).map(m => ({ name: one(m.name, 60), desc: one(m.desc, 80) })).filter(m => m.name) } : undefined,
                    past: (sin.past || []).slice(0, 20).map(p => ({ title: one(p.title, 30), name: one(p.name, 60), pack: one(p.pack, 60) })).filter(p => p.name) };
 
   const [conf, seasonFile] = await Promise.all([gh.file("site.conf"), gh.file("season.json")]);

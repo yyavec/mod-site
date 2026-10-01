@@ -361,6 +361,19 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
         </div>
       </section>
 
+      <section class="panel" id="subPanel">
+        <div class="p-head"><h2>서브 서버 (바닐라)</h2><label class="switch"><span>사이트에 보이기</span><input type="checkbox" data-sub="show"></label></div>
+        <div class="fbody">
+          <div class="row" style="--cols:3">
+            <label class="f"><span>이름</span><input class="in" data-sub="title" placeholder="바닐라 플러스"></label>
+            <label class="f"><span>서버 주소</span><input class="in" data-sub="address" placeholder="예: vanilla.example.com"></label>
+            <label class="f"><span>마크 버전</span><input class="in" data-sub="version" placeholder="1.20.1"></label>
+          </div>
+          <label class="f"><span>설명</span><textarea class="in" data-sub="desc" rows="3"></textarea></label>
+          <label class="f"><span>필수 모드 <small>한 줄에 하나씩 · "이름 - 설명"</small></span><textarea class="in" data-sub="mods" rows="5" placeholder="Waystones - 거점 간 빠른 이동"></textarea></label>
+        </div>
+      </section>
+
       <section class="panel" id="svPanel">
         <div class="p-head"><h2>투표 · 후보</h2><label class="switch"><span id="svShowT">사이트에 보이기</span><input type="checkbox" data-s="show"></label></div>
         <div class="fbody">
@@ -674,6 +687,13 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
     form.querySelectorAll("[data-c]").forEach(el => el.value = C.conf[el.dataset.c] ?? "");
     form.querySelectorAll("[data-s]").forEach(el => el.type === "checkbox" ? el.checked = C.season.show !== false : el.value = C.season[el.dataset.s] ?? "");
     $("#svPanel").classList.toggle("sv-off", C.season.show === false);
+    const sub = C.season.sub || {};
+    form.querySelectorAll("[data-sub]").forEach(el => {
+      const k = el.dataset.sub;
+      if (el.type === "checkbox") el.checked = sub.show !== false;
+      else if (k === "mods") el.value = (sub.mods || []).map(m => m.desc ? `${m.name} - ${m.desc}` : m.name).join("\n");
+      else el.value = sub[k] ?? "";
+    });
     renderCands(); markDirty();
   }
   function markDirty(){
@@ -689,7 +709,13 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
   }
   form.addEventListener("input", e => {
     const el = e.target; el.classList.remove("bad");
-    if (el.dataset.c) C.conf[el.dataset.c] = el.value;
+    if (el.dataset.sub) {
+      const sub = C.season.sub = C.season.sub || {show: true, mods: []}, k = el.dataset.sub;
+      sub[k] = el.type === "checkbox" ? el.checked
+             : k === "mods" ? el.value.split("\n").map(l => l.trim()).filter(Boolean).map(l => { const [n, ...d] = l.split(/\s+-\s+/); return {name: n.trim(), desc: d.join(" - ").trim()}; })
+             : el.value;
+    }
+    else if (el.dataset.c) C.conf[el.dataset.c] = el.value;
     else if (el.dataset.s) {
       C.season[el.dataset.s] = el.type === "checkbox" ? el.checked : el.value;
       $("#svPanel").classList.toggle("sv-off", C.season.show === false);

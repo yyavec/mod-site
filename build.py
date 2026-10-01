@@ -388,6 +388,25 @@ def main():
         "OWNER": e(conf.get("OWNER", "")),
         "OWNER_HIDDEN": "" if conf.get("OWNER") else "hidden",
     })
+
+    # 서브 서버 (바닐라 플러스)
+    sub = (load_season() or {}).get("sub") or {}
+    sub_html = ""
+    if sub.get("show") is not False and (sub.get("title") or sub.get("mods")):
+        addr = sub.get("address", "")
+        addr_html = (f'<button class="sub-addr" type="button" data-copy="{e(addr)}" data-toast="서브 서버 주소를 복사했어요">'
+                     f'<span>{e(addr)}</span><svg class="i"><use href="#i-copy"/></svg></button>' if addr
+                     else '<span class="sub-soon">주소는 곧 공지할게요</span>')
+        ver = f'<span class="sub-chip">마인크래프트 {e(sub["version"])}</span>' if sub.get("version") else ""
+        mods = "".join(f'<li><b>{e(m.get("name", ""))}</b><span>{e(m.get("desc", ""))}</span></li>' for m in sub.get("mods", []) if m.get("name"))
+        sub_html = (f'<section class="sub" aria-labelledby="subTitle"><div class="sub-sky" aria-hidden="true"><span class="sub-sun"><svg class="px" viewBox="0 0 9 9" shape-rendering="crispEdges" aria-hidden="true"><rect x="4" y="0" width="1" height="1" fill="#FFD24A"/><rect x="1" y="1" width="1" height="1" fill="#FFD24A"/><rect x="7" y="1" width="1" height="1" fill="#FFD24A"/><rect x="3" y="2" width="3" height="1" fill="#FFD24A"/><rect x="2" y="3" width="5" height="1" fill="#FFD24A"/><rect x="0" y="4" width="1" height="1" fill="#FFD24A"/><rect x="2" y="4" width="2" height="1" fill="#FFD24A"/><rect x="4" y="4" width="1" height="1" fill="#FFF1B0"/><rect x="5" y="4" width="2" height="1" fill="#FFD24A"/><rect x="8" y="4" width="1" height="1" fill="#FFD24A"/><rect x="2" y="5" width="5" height="1" fill="#FFD24A"/><rect x="3" y="6" width="3" height="1" fill="#FFD24A"/><rect x="1" y="7" width="1" height="1" fill="#FFD24A"/><rect x="7" y="7" width="1" height="1" fill="#FFD24A"/><rect x="4" y="8" width="1" height="1" fill="#FFD24A"/></svg></span></div>'
+                    f'<div class="sub-in"><div class="sub-top"><span class="sub-ic"><svg class="px" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="2" height="1" fill="#6CC24A"/><rect x="2" y="1" width="4" height="1" fill="#6CC24A"/><rect x="1" y="2" width="2" height="1" fill="#6CC24A"/><rect x="3" y="2" width="1" height="1" fill="#4E9A31"/><rect x="4" y="2" width="3" height="1" fill="#6CC24A"/><rect x="2" y="3" width="1" height="1" fill="#6CC24A"/><rect x="3" y="3" width="1" height="1" fill="#4E9A31"/><rect x="4" y="3" width="2" height="1" fill="#6CC24A"/><rect x="3" y="4" width="1" height="1" fill="#8B5A2B"/><rect x="3" y="5" width="1" height="1" fill="#8B5A2B"/><rect x="0" y="6" width="2" height="1" fill="#4E9A31"/><rect x="2" y="6" width="1" height="1" fill="#3F7F27"/><rect x="3" y="6" width="2" height="1" fill="#4E9A31"/><rect x="5" y="6" width="1" height="1" fill="#3F7F27"/><rect x="6" y="6" width="2" height="1" fill="#4E9A31"/><rect x="0" y="7" width="1" height="1" fill="#8B5A2B"/><rect x="1" y="7" width="1" height="1" fill="#6E4520"/><rect x="2" y="7" width="2" height="1" fill="#8B5A2B"/><rect x="4" y="7" width="1" height="1" fill="#6E4520"/><rect x="5" y="7" width="2" height="1" fill="#8B5A2B"/><rect x="7" y="7" width="1" height="1" fill="#6E4520"/></svg></span>'
+                    f'<div class="sub-tt"><span class="sub-k">서브 서버 · 같이 열려 있어요</span><h2 id="subTitle">{e(sub.get("title", ""))}</h2></div></div>'
+                    f'<p class="sub-desc">{e(sub.get("desc", ""))}</p>'
+                    f'<div class="sub-meta">{addr_html}{ver}</div>'
+                    + (f'<div class="sub-mods-h">들어 있는 필수 모드</div><ul class="sub-mods">{mods}</ul>' if mods else "")
+                    + '</div></section>')
+    rep["SUB_SECTION"] = sub_html
     page = re.sub(r"\{\{(\w+)\}\}", lambda mt: rep.get(mt.group(1), mt.group(0)), tpl)
     (OUT / "index.html").write_text(page, encoding="utf-8")
     if (ROOT / "assets").is_dir():  # 사이트에 쓰는 그림
