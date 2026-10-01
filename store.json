@@ -379,6 +379,15 @@
       "size": 23220
     },
     {
+      "file": "epic_fight_avalon-20.12.6.4.jar",
+      "id": "epic_fight_avalon",
+      "name": "Epic fight - Avalon",
+      "version": "20.12.6.4",
+      "desc": "merlin's lib",
+      "env": "",
+      "size": 645196
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
