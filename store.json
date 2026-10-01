@@ -334,6 +334,15 @@
       "size": 398066
     },
     {
+      "file": "dodge_parry_reward-1.20.1forge-20.14.3.jar",
+      "id": "dodge_parry_reward",
+      "name": "Dodge Parry Reward",
+      "version": "20.14.3",
+      "desc": "add some skill book to award player when dodge or parry.",
+      "env": "",
+      "size": 287404
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
