@@ -604,6 +604,15 @@
       "size": 780523
     },
     {
+      "file": "ftb-quests-forge-2001.4.21.jar",
+      "id": "ftbquests",
+      "name": "FTB Quests",
+      "version": "2001.4.21",
+      "desc": "Lets you easily create and play with quests",
+      "env": "",
+      "size": 1254018
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
