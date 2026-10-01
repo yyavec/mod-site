@@ -1306,6 +1306,15 @@
       "size": 181437
     },
     {
+      "file": "preloading-tricks-3.5.10.jar",
+      "id": "preloading_tricks",
+      "name": "PreloadingTricks",
+      "version": "3.5.10",
+      "desc": "PreloadingTricks",
+      "env": "",
+      "size": 1781202
+    },
+    {
       "file": "Prism-1.20.1-forge-1.0.5.jar",
       "id": "prism",
       "name": "Prism",
