@@ -1009,6 +1009,15 @@
       "size": 141468
     },
     {
+      "file": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
+      "id": "konkrete",
+      "name": "Konkrete",
+      "version": "1.8.0",
+      "desc": "COPYRIGHT: Konkrete Copyright © 2020-2024 Keksuccino. Konkrete is licensed under Apache-2.0. Open Imaging Copyright © 2014 Dhyan Blum. Open Imaging is licensed under Apache-2.0. JsonPath Copyright © 2017 Jayway. JsonPath is licensed under Apache-2.0. Json-smart Copyright © netplex. Json-smart is lic",
+      "env": "",
+      "size": 625185
+    },
+    {
       "file": "kotlinforforge-4.12.0-all.jar",
       "id": "kotlinforforge",
       "name": "kotlinforforge-4.12.0-all",
