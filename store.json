@@ -343,6 +343,15 @@
       "size": 287404
     },
     {
+      "file": "Dodos.Mobs.1.0.1.beta.jar",
+      "id": "dodosmobs",
+      "name": "dodosmobs",
+      "version": "2.64",
+      "desc": "",
+      "env": "",
+      "size": 1197246
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
