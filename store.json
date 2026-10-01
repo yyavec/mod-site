@@ -451,6 +451,15 @@
       "size": 299741
     },
     {
+      "file": "epicfight-skilltree-forge-20.2.9-1.20.1.jar",
+      "id": "epicskills",
+      "name": "Epic Fight: Skill Tree",
+      "version": "20.2.9",
+      "desc": "An addon of Epic Fight that adds a skill tree system",
+      "env": "",
+      "size": 327927
+    },
+    {
       "file": "EpicFight.Nightfall-3.4.0.jar",
       "id": "efn",
       "name": "EpicFight Nightfall",
