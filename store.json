@@ -334,6 +334,15 @@
       "size": 27070339
     },
     {
+      "file": "chloride-FORGE-mc1.20.1-v1.7.5.jar",
+      "id": "chloride",
+      "name": "Chloride",
+      "version": "1.7.5",
+      "desc": "Makes sodium a tasteful experience",
+      "env": "",
+      "size": 956080
+    },
+    {
       "file": "cinematiccataclysm-1.0.1-1.20.1.jar",
       "id": "cinematiccataclysm",
       "name": "Cinematic Cataclysm",
