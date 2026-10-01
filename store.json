@@ -1423,6 +1423,15 @@
       "size": 14249
     },
     {
+      "file": "sodiumdynamiclights-forge-1.0.10-1.20.1.jar",
+      "id": "sodiumdynamiclights",
+      "name": "Sodium Dynamic Lights",
+      "version": "1.0.9",
+      "desc": "Fork of LambDynLights to work with Sodium on Neoforge 1.21+",
+      "env": "",
+      "size": 511601
+    },
+    {
       "file": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
       "id": "sound_physics_remastered",
       "name": "Sound Physics Remastered",
