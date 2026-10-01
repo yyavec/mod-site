@@ -91,6 +91,15 @@
       "size": 19499
     },
     {
+      "file": "azurelib-neo-1.20.1-3.1.9.jar",
+      "id": "azurelib",
+      "name": "AzureLib",
+      "version": "3.1.9",
+      "desc": "Java Minecraft mod using Bedrock models to create custom models and animations for items, blocks, entities",
+      "env": "",
+      "size": 1059994
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
