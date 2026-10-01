@@ -352,6 +352,15 @@
       "size": 1197246
     },
     {
+      "file": "domesticationinnovation-1.7.1-1.20.1.jar",
+      "id": "domesticationinnovation",
+      "name": "Domestication Innovation",
+      "version": "1.7.1",
+      "desc": "Vastly improves upon and compliments tameable mobs, both from vanilla and other mods.",
+      "env": "",
+      "size": 853614
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
