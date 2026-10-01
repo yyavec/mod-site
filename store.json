@@ -361,6 +361,15 @@
       "size": 3185275
     },
     {
+      "file": "Clear-Water-2.1.jar",
+      "id": "clearwater",
+      "name": "Clear Water",
+      "version": "2.1",
+      "desc": "See clearly under water!",
+      "env": "",
+      "size": 24435
+    },
+    {
       "file": "cloth-config-11.1.136-forge.jar",
       "id": "cloth_config",
       "name": "Cloth Config v10 API",
