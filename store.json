@@ -847,6 +847,15 @@
       "size": 1039046
     },
     {
+      "file": "globalshaderpackproperties-1.1.0-all.jar",
+      "id": "globalshaderpackproperties",
+      "name": "Global Shaderpack Properties",
+      "version": "1.1.0",
+      "desc": "Help modpack author to modify properties inside the shaderpacks",
+      "env": "",
+      "size": 697968
+    },
+    {
       "file": "HungerStrike-1.20.1-8.0.0.jar",
       "id": "hungerstrike",
       "name": "Hunger Strike",
