@@ -116,6 +116,15 @@
       "desc": "Spice up your world with new villages, pillager outposts, and even new ships!",
       "env": "",
       "size": 2864275
+    },
+    {
+      "file": "TravelersTitles-1.20-Forge-4.0.2.jar",
+      "id": "travelerstitles",
+      "name": "Traveler's Titles",
+      "version": "1.20-Forge-4.0.2",
+      "desc": "Epic, RPG-like titles when entering biomes & dimensions",
+      "env": "",
+      "size": 228191
     }
   ]
 }
