@@ -172,6 +172,10 @@ async function lastRun(gh) {
 
 /* ---------------- 모드 ---------------- */
 
+// GitHub는 올린 파일 이름에서 특수문자를 점(.)으로 바꾼다. 같은 파일인지 비교할 때 이 규칙을 따른다.
+const ghName = n => n.replace(/[^A-Za-z0-9._+-]/g, ".").replace(/\.{2,}/g, ".").replace(/^\.+|\.(?=\.[^.]+$)/g, "").replace(/\.+(\.[A-Za-z0-9]+)$/, "$1");
+const sameAsset = (a, name) => a.name === name || a.name === ghName(name);
+
 const one = (v, n = 200) => String(v ?? "").replace(/\s+/g, " ").trim().slice(0, n);
 
 async function upload(req, gh) {
@@ -188,7 +192,7 @@ async function upload(req, gh) {
   const assets = await gh.assets(rel);
   const { data, sha } = await readStore(gh);
   // 같은 이름 파일이 보관함에 있으면 먼저 지운다 (GitHub는 이름이 겹치면 못 올림)
-  const same = assets.find(a => a.name === name || a.name === name.replace(/ /g, "."));
+  const same = assets.find(a => sameAsset(a, name));
   if (same) await gh.call(`/releases/assets/${same.id}`, { method: "DELETE" });
 
   // 받은 파일을 그대로 흘려보낸다 (GitHub는 길이가 정해진 업로드만 받는다)
@@ -243,8 +247,8 @@ async function uploadInstaller(req, gh) {
   const rel = await gh.store();
   const assets = await gh.assets(rel);
   const { data, sha } = await readStore(gh);
-  if (data.mods.some(m => m.file === name || m.file === name.replace(/ /g, "."))) throw new HttpError(409, "모드 파일과 이름이 같아요. 파일 이름을 바꿔서 올려 주세요");
-  const same = assets.find(a => a.name === name || a.name === name.replace(/ /g, "."));
+  if (data.mods.some(m => m.file === name || m.file === ghName(name))) throw new HttpError(409, "모드 파일과 이름이 같아요. 파일 이름을 바꿔서 올려 주세요");
+  const same = assets.find(a => sameAsset(a, name));
   if (same) await gh.call(`/releases/assets/${same.id}`, { method: "DELETE" });
   const { readable, writable } = new FixedLengthStream(size);
   req.body.pipeTo(writable);
