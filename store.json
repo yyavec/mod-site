@@ -1,6 +1,15 @@
 {
   "mods": [
     {
+      "file": "0Pack2Reload-Forge-1.20.1-1.0.1.jar",
+      "id": "opack2reload",
+      "name": "0Pack2Reload",
+      "version": "",
+      "desc": "",
+      "env": "",
+      "size": 8537
+    },
+    {
       "file": "lost_aether_content-1.20.1-1.2.3.jar",
       "id": "lost_aether_content",
       "name": "Aether: Lost Content",
