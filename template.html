@@ -306,7 +306,16 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .gsub{margin:0; padding-left:1.2em; display:flex; flex-direction:column; gap:var(--s2)}
 .gsub li::marker{color:var(--text-tertiary); font-weight:600}
 .warn{display:inline-block; margin-left:4px; font-size:12px; font-weight:600; color:var(--warning); background:var(--warning-soft); padding:1px 6px; border-radius:var(--r-sm)}
-.glinks{display:flex; flex-wrap:wrap; gap:var(--s2)}
+.glinks{display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center}
+.inst-dl{display:inline-flex; align-items:center; gap:var(--s3); padding:10px 16px 10px 12px; border-radius:var(--r-md); background:var(--accent); color:var(--on-accent); text-decoration:none; border:2px solid var(--accent-edge); box-shadow:inset 0 -4px 0 rgba(0,0,0,.18); transition:background var(--m-fast), transform var(--m-fast)}
+.inst-dl:hover{background:var(--accent-hover)}
+.inst-dl:active{transform:translateY(2px)}
+.inst-dl svg{width:20px; height:20px; stroke-width:2}
+.inst-dl span{display:flex; flex-direction:column; gap:2px}
+.inst-dl b{color:inherit; font:400 15px/1.2 var(--pixel-s)}
+.inst-dl small{font:12px var(--mono); opacity:.8}
+.inst-alt{display:inline-flex; align-items:center; gap:5px; font-size:12.5px; color:var(--text-tertiary); text-decoration:underline; text-underline-offset:3px}
+.inst-alt svg{width:12px; height:12px}
 .gnote{font-size:13px; color:var(--text-tertiary); background:var(--bg-sunken); padding:var(--s2) var(--s3); border-radius:var(--r-sm)}
 .gfix{border-top:1px dashed var(--border-standard); padding-top:var(--s2)}
 .gfix summary{cursor:pointer; font-weight:600; color:var(--warning); font-size:13.5px}
@@ -749,9 +758,9 @@ footer .btn-ghost{margin-left:auto; height:30px}
           <p>모드를 쓰려면 먼저 <b>{{G_LOADER}}</b>을(를) 설치해야 해요. 아래 버튼에서 설치 파일을 받으세요.</p>
           <div class="glinks">{{G_LOADER_LINKS}}</div>
           <ol class="gsub">
-            <li>받은 설치 파일을 실행해요. <span data-os-show="win">(Windows는 <code>.exe</code>)</span><span data-os-show="mac" hidden>(Mac은 <code>.jar</code>. 안 열리면 우클릭 → 열기)</span></li>
+            <li>받은 설치 파일을 <b>두 번 눌러</b> 실행해요. <span class="gtip"><code>.jar</code> 파일이 안 열리면 우클릭 → 연결 프로그램 → <b>Java</b>로 열어요</span></li>
             <li><b>Minecraft 버전</b>을 <b class="hl">{{G_VERSION}}</b>(으)로 맞춰요. <span class="warn">버전이 다르면 서버에 못 들어와요</span></li>
-            <li><b>설치</b>를 누르고 끝날 때까지 기다려요.</li>
+            <li><b>클라이언트 설치</b>(Install client)가 선택된 상태로 <b>설치</b>(OK)를 누르고 끝날 때까지 기다려요.</li>
           </ol>
           {{G_VERSION_NOTE}}
           <button class="btn-ghost gdone" type="button">다 했어요 → 다음</button></div></details></li>

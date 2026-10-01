@@ -14,6 +14,7 @@ import shutil
 import zipfile
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent
 MODS = Path(os.environ.get("MODS_DIR", ROOT / "mods"))
@@ -142,6 +143,14 @@ def diff(old_mods, mods):
 SEASON = ROOT / "season.json"
 
 
+def store_installer():
+    """store.json에 등록된 로더 설치 프로그램 (없으면 None)."""
+    try:
+        return json.loads((ROOT / "store.json").read_text(encoding="utf-8")).get("installer")
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
 def content_id():
     """사이트 내용(site.conf, season.json)의 지문. 바뀌었는지 비교할 때 쓴다."""
     h = hashlib.sha1()
@@ -256,6 +265,7 @@ def main():
         changes = diff(prev["mods"], mods) if prev.get("mods") else []
     man_path.write_text(json.dumps({
         "build": build_id, "content": content_id(), "updated": updated, "changes": changes,
+        "installer": store_installer(),
         "mods": [{"id": m["id"], "name": m["name"], "version": m["version"], "file": m["file"]} for m in mods],
     }, ensure_ascii=False, indent=1), encoding="utf-8")
 
@@ -357,6 +367,14 @@ def main():
     ext = '<svg class="i"><use href="#i-ext"/></svg>'
     chosen = [links[loader]] if loader in links else [links[k] for k in ("Fabric", "NeoForge", "Forge")]
     loader_links = "".join(f'<a class="btn-ghost" href="{u}" target="_blank" rel="noopener">{e(t)}{ext}</a>' for t, u in chosen)
+    inst = store_installer()
+    if inst:  # 관리자가 올린 설치 프로그램이 있으면 그걸 크게, 공식 사이트는 작게
+        repo = os.environ.get("GITHUB_REPOSITORY", "yyavec/mod-site")
+        url = f"https://github.com/{repo}/releases/download/store/{quote(inst['file'])}"
+        dl = '<svg class="i"><use href="#i-dl"/></svg>'
+        loader_links = (f'<a class="inst-dl" href="{e(url)}">{dl}<span><b>{e(loader or "모드 로더")} 설치 프로그램 받기</b>'
+                        f'<small>{e(inst.get("name") or inst["file"])} · {fmt_size(int(inst.get("size") or 0))}</small></span></a>'
+                        + "".join(f'<a class="inst-alt" href="{u}" target="_blank" rel="noopener">공식 사이트{ext}</a>' for t, u in chosen[:1]))
     profile = {"Fabric": f"fabric-loader-{ver}", "Quilt": f"quilt-loader-{ver}", "NeoForge": "neoforge", "Forge": f"forge ({ver})"}.get(loader, "")
     notes = []
     if not loader:

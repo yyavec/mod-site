@@ -45,6 +45,8 @@ async function route(req, env, user) {
     case "POST /upload": return upload(req, gh);
     case "POST /delete": return removeMod(await req.json(), gh);
     case "POST /restore": return restoreMod(await req.json(), gh);
+    case "POST /installer": return uploadInstaller(req, gh);
+    case "POST /installer-remove": return removeInstaller(gh);
     case "GET /content": return getContent(gh);
     case "PUT /content": return saveContent(await req.json(), gh);
     case "POST /publish": return publish(gh);
@@ -151,7 +153,7 @@ async function state(gh) {
     const cmp = await gh.call(`/compare/${run.sha}...main`);
     contentChanged = (cmp.files || []).some(f => ["site.conf", "season.json"].includes(f.filename));
   }
-  return { mods: data.mods, content_changed: contentChanged, publish: run };
+  return { mods: data.mods, installer: data.installer || null, content_changed: contentChanged, publish: run };
 }
 
 async function lastRun(gh) {
@@ -227,6 +229,44 @@ async function restoreMod(body, gh) {
   data.mods.push(entry);
   await gh.put("store.json", JSON.stringify(data, null, 2) + "\n", sha, `모드 되돌리기: ${entry.name}`);
   return { ok: true };
+}
+
+/* ---------------- 로더 설치 프로그램 ---------------- */
+// '처음 왔어요' 2단계의 받기 버튼이 가리키는 파일. 모드와 같은 보관함(store)에 둔다.
+
+async function uploadInstaller(req, gh) {
+  const name = decodeURIComponent(req.headers.get("X-Filename") || "").split(/[\\/]/).pop().trim();
+  if (!/\.(jar|exe|msi|zip)$/i.test(name) || name.startsWith(".")) throw new HttpError(400, ".jar, .exe, .msi, .zip 파일만 올릴 수 있어요");
+  const size = +req.headers.get("Content-Length");
+  if (!size) throw new HttpError(400, "빈 파일이에요");
+  if (size > MAX_UPLOAD) throw new HttpError(413, "웹에서는 100MB가 넘는 파일을 올릴 수 없어요");
+  const rel = await gh.store();
+  const assets = await gh.assets(rel);
+  const { data, sha } = await readStore(gh);
+  if (data.mods.some(m => m.file === name || m.file === name.replace(/ /g, "."))) throw new HttpError(409, "모드 파일과 이름이 같아요. 파일 이름을 바꿔서 올려 주세요");
+  const same = assets.find(a => a.name === name || a.name === name.replace(/ /g, "."));
+  if (same) await gh.call(`/releases/assets/${same.id}`, { method: "DELETE" });
+  const { readable, writable } = new FixedLengthStream(size);
+  req.body.pipeTo(writable);
+  const up = await gh.call(`https://uploads.github.com/repos/${gh.repo}/releases/${rel.id}/assets?name=${encodeURIComponent(name)}`, {
+    method: "POST", body: readable, headers: { "Content-Type": "application/octet-stream" },
+  });
+  const prev = data.installer;
+  data.installer = { file: up.name, name, size: up.size };
+  await gh.put("store.json", JSON.stringify(data, null, 2) + "\n", sha, `설치 프로그램: ${name}`);
+  if (prev && prev.file !== up.name) {
+    const old = assets.find(a => a.name === prev.file);
+    if (old) await gh.call(`/releases/assets/${old.id}`, { method: "DELETE" }).catch(() => {});
+  }
+  return { installer: data.installer };
+}
+
+async function removeInstaller(gh) {
+  const { data, sha } = await readStore(gh);
+  if (!data.installer) return { installer: null };
+  delete data.installer;
+  await gh.put("store.json", JSON.stringify(data, null, 2) + "\n", sha, "설치 프로그램 내림");
+  return { installer: null };   // 파일은 '올리기' 때 정리된다
 }
 
 /* ---------------- 사이트 내용 ---------------- */
@@ -310,6 +350,7 @@ async function publish(gh) {
   // 목록에서 빠진 모드 파일은 이제 정리한다 (되돌리기는 올리기 전까지만 가능)
   const { data } = await readStore(gh);
   const keep = new Set(data.mods.map(m => m.file));
+  if (data.installer) keep.add(data.installer.file);
   const rel = await gh.store();
   for (const a of await gh.assets(rel)) {
     if (!keep.has(a.name)) await gh.call(`/releases/assets/${a.id}`, { method: "DELETE" });

@@ -213,6 +213,11 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
 .cand-head{display:flex; align-items:center; gap:var(--s2)}
 .cand-no{display:grid; place-items:center; width:22px; height:22px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font-size:12px; font-weight:600}
 .cand-head .tools{margin-left:auto; display:flex; gap:2px}
+.inst{display:flex; align-items:center; gap:var(--s3); padding:var(--s3); border:1.5px dashed var(--border-standard); border-radius:var(--r-md); background:var(--bg-raised); min-height:56px}
+.inst.over{border-color:var(--accent); background:var(--accent-soft)}
+.inst .ii{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; font-size:13px; color:var(--text-tertiary)}
+.inst .ii b{font:500 13px var(--mono); color:var(--text-primary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.inst .bar{height:3px; background:var(--bg-sunken); border-radius:99px; overflow:hidden} .inst .bar span{display:block; height:100%; width:0; background:var(--accent)}
 .win-btn{height:26px; padding:0 10px; border-radius:var(--r-full); border:1px dashed var(--border-standard); background:none; color:var(--text-tertiary); font:500 12px var(--font); cursor:pointer; transition:all var(--m-fast)}
 .win-btn:hover{border-color:var(--border-strong); color:var(--text-primary)}
 .win-btn.on{border:1px solid #E0A82E; background:#FCEBC0; color:#7A5400; font-weight:600}
@@ -347,6 +352,10 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
             <label class="f"><span>서버 주소</span><input class="in" data-c="SERVER_ADDRESS" placeholder="play.example.com"></label>
             <label class="f"><span>마크 버전</span><input class="in" data-c="MC_VERSION" placeholder="1.21.1"></label>
             <label class="f"><span>로더</span><select class="in" data-c="LOADER"><option value="">선택 안 함</option><option>Fabric</option><option>NeoForge</option><option>Forge</option><option>Quilt</option></select></label>
+          </div>
+          <div class="f"><span>로더 설치 프로그램 <small>‘처음 왔어요’ 2단계에 받기 버튼으로 나와요 · 바로 저장돼요</small></span>
+            <div class="inst" id="inst"></div>
+            <input type="file" id="instFile" accept=".jar,.exe,.msi,.zip" hidden>
           </div>
         </div>
       </section>
@@ -525,7 +534,9 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
       <li class="ch ch-${x.kind}"><span class="ck"><span aria-hidden="true">${sym[x.kind][1]}</span>${sym[x.kind][0]}</span>
       <span class="cn">${esc(x.name)}</span>
       <span class="cv num">${x.kind === "up" ? `${esc(x.from || "?")} → ${esc(x.to || "?")}` : esc(x.to || x.from || "")}</span></li>`).join("");
-    const n = c.length + (S.content_changed ? 1 : 0);
+    const instChanged = (S.installer?.file || "") !== (LIVE.installer?.file || "");
+    if (instChanged) $("#changes").insertAdjacentHTML("afterbegin", `<li class="ch ch-site"><span class="ck"><span aria-hidden="true">⇩</span>설치</span><span class="cn">${S.installer ? "설치 프로그램 " + esc(S.installer.name) : "설치 프로그램 내림"}</span></li>`);
+    const n = c.length + (S.content_changed ? 1 : 0) + (instChanged ? 1 : 0);
     $("#chCount").hidden = !n; $("#chCount").textContent = n;
     $("#synced").hidden = n > 0;
     $("#publishBtn").disabled = !!S.publish?.running;
@@ -535,7 +546,7 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
   }
   async function refresh(){
     S = await api("/state");
-    renderMods(); renderChanges(); renderPub(S.publish);
+    renderMods(); renderChanges(); renderPub(S.publish); renderInst();
   }
 
   /* ---------- 업로드 (jar 안의 모드 정보는 여기서 읽는다) ---------- */
@@ -776,6 +787,47 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
   }
   $("#tabMods").addEventListener("click", () => showTab("mods"));
   $("#tabSite").addEventListener("click", () => showTab("site"));
+
+  /* ---------- 로더 설치 프로그램 ---------- */
+  function renderInst(p){
+    const box = $("#inst"), i = S.installer;
+    if (p !== undefined) { box.innerHTML = `${icon("load")}<span class="ii"><b>올리는 중…</b><span class="bar"><span style="width:${p}%"></span></span></span>`; return; }
+    box.innerHTML = i
+      ? `${icon("check")}<span class="ii"><b title="${esc(i.name)}">${esc(i.name)}</b>${size(i.size || 0)} · 사이트에 올리면 받기 버튼에 나와요</span>
+         <button class="btn btn-secondary" type="button" data-inst="pick">바꾸기</button><button class="btn btn-ghost" type="button" data-inst="remove">내리기</button>`
+      : `${icon("up")}<span class="ii"><b>설치 프로그램이 없어요</b>여기로 끌어다 놓거나 눌러서 고르세요 (.jar · .exe)</span>
+         <button class="btn btn-secondary" type="button" data-inst="pick">파일 고르기</button>`;
+  }
+  function uploadInst(file){
+    if (!/\.(jar|exe|msi|zip)$/i.test(file.name)) return toast(".jar, .exe, .msi, .zip 파일만 올릴 수 있어요");
+    if (file.size > 100 * 1024 * 1024) return toast("웹에서는 100MB가 넘는 파일을 올릴 수 없어요");
+    const x = new XMLHttpRequest();
+    x.open("POST", API + "/installer");
+    x.setRequestHeader("Authorization", `Bearer ${token}`);
+    x.setRequestHeader("X-Filename", encodeURIComponent(file.name));
+    x.upload.onprogress = e => { if (e.lengthComputable) renderInst(e.loaded / e.total * 100); };
+    x.onload = () => {
+      let r = {}; try { r = JSON.parse(x.responseText); } catch {}
+      if (x.status === 401) return showLogin(r.message);
+      if (x.status !== 200) { toast(r.message || "올리지 못했어요"); return renderInst(); }
+      S.installer = r.installer; renderInst(); renderChanges();
+      toast("설치 프로그램을 올렸어요. ‘사이트에 올리기’를 누르면 반영돼요");
+    };
+    x.onerror = () => { toast("연결이 끊겼어요. 다시 시도해 주세요"); renderInst(); };
+    renderInst(0); x.send(file);
+  }
+  $("#inst").addEventListener("click", async e => {
+    const b = e.target.closest("[data-inst]"); if (!b) { if (!S.installer) $("#instFile").click(); return; }
+    if (b.dataset.inst === "pick") $("#instFile").click();
+    else if (b.dataset.inst === "remove") {
+      try { const r = await api("/installer-remove", {}); S.installer = r.installer; renderInst(); renderChanges(); toast("내렸어요. ‘사이트에 올리기’를 누르면 반영돼요"); }
+      catch (err) { toast(err.message || "내리지 못했어요"); }
+    }
+  });
+  $("#instFile").addEventListener("change", e => { const f = e.target.files[0]; e.target.value = ""; if (f) uploadInst(f); });
+  ["dragenter", "dragover"].forEach(ev => $("#inst").addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); $("#inst").classList.add("over"); }));
+  $("#inst").addEventListener("dragleave", () => $("#inst").classList.remove("over"));
+  $("#inst").addEventListener("drop", e => { e.preventDefault(); e.stopPropagation(); $("#inst").classList.remove("over"); const f = e.dataTransfer.files[0]; if (f) uploadInst(f); });
 
   /* ---------- 올리기 ---------- */
   let poll;
