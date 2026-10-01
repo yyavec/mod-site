@@ -946,6 +946,15 @@
       "size": 713860
     },
     {
+      "file": "mimic-1.0.5.jar",
+      "id": "mimic",
+      "name": "The Mimic",
+      "version": "1.0.5",
+      "desc": "",
+      "env": "",
+      "size": 6409566
+    },
+    {
       "file": "Towns-and-Towers-1.12-Fabric+Forge.jar",
       "id": "t_and_t",
       "name": "Towns and Towers",
