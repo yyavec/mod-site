@@ -80,6 +80,15 @@
       "desc": "Provide boss meshes for The Casket of Reveries",
       "env": "",
       "size": 173664
+    },
+    {
+      "file": "tectonic-forge-1.20.1-2.4.1.jar",
+      "id": "tectonic",
+      "name": "Tectonic",
+      "version": "2.4.1",
+      "desc": "Massively altered world generation with mountain ranges, underground rivers and more!",
+      "env": "",
+      "size": 349125
     }
   ]
 }
