@@ -10,6 +10,15 @@
       "size": 8537
     },
     {
+      "file": "aaa_particles-forge-1.20.1-2.2.3.jar",
+      "id": "aaa_particles",
+      "name": "AAA Particles",
+      "version": "2.2.3",
+      "desc": "Effekseer for Minecraft",
+      "env": "",
+      "size": 5253752
+    },
+    {
       "file": "aaa_particles_world-forge-1.20.1-2.0.0.jar",
       "id": "aaa_particles_world",
       "name": "AAA Particles: World",
