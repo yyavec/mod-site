@@ -202,7 +202,7 @@ h1{font:400 33px/1.15 var(--pixel); letter-spacing:0; color:var(--text-primary);
 .vlink:hover{color:#fff; background:#E0413A}
 .win-card{display:grid; grid-template-columns:auto minmax(0,1fr); gap:var(--s5); align-items:center; padding:var(--s5) var(--s6); background:linear-gradient(135deg, var(--accent-soft), var(--bg-surface) 70%); border:2px solid var(--accent); border-radius:var(--r-lg); box-shadow:0 3px 0 var(--accent-edge), var(--shadow-raised)}
 .win-card{position:relative; overflow:hidden}
-.win-card > :not(.win-bg){position:relative; z-index:1}
+.win-card > :not(.win-bg):not(.card-rift){position:relative; z-index:1}
 .win-bg{position:absolute; top:0; right:0; bottom:0; width:72%; background-size:cover; background-position:center 30%; opacity:.42; filter:saturate(.85); -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 35%, #000 75%); mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 35%, #000 75%); transition:opacity var(--m-std), transform 6s ease-out}
 .win-card:hover .win-bg{opacity:.6; transform:scale(1.03)}
 :root[data-theme="dark"] .win-bg{opacity:.5}
@@ -324,6 +324,20 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .nt-rank{color:#FFD24A}
 @media (max-width:600px){ .nametag{font-size:10px; bottom:30px; right:auto; left:var(--s3)} }
 .nt-rank::before{content:"["} .nt-rank::after{content:"]"}
+
+/* ===== 공허에 물든 카드들 ===== */
+:root{--rift-core:#6E46D8; --rift-glow:#B68CFF}
+:root[data-theme="dark"]{--rift-core:#E9DDFF; --rift-glow:#9B6BFF}
+.voided{isolation:isolate}
+[data-mood="nightfall"] .voided:not(.past-row):not(.notice){box-shadow:var(--shadow-raised), 0 0 0 1px rgba(155,107,255,.18), 0 0 22px rgba(130,80,230,.10)}
+.card-rift{position:absolute !important; inset:0; z-index:-1 !important; width:100%; height:100%; overflow:hidden; border-radius:inherit; pointer-events:none; animation:riftpulse 3.2s infinite; animation-delay:var(--rd,0s)}
+.card-rift path{fill:none; stroke-linecap:square; stroke-linejoin:miter}
+.card-rift .g{stroke:var(--rift-glow); stroke-width:3.5; opacity:.45; filter:blur(1.6px)}
+.card-rift .c{stroke:var(--rift-core); stroke-width:1.2; opacity:.85}
+.card-rift.draw path{stroke-dasharray:1; stroke-dashoffset:1; animation:riftdraw .5s ease-out forwards; animation-delay:var(--dd,0s)}
+.card-rift.draw{animation:none}
+.voided.zap{animation:zap .35s ease-out}
+@keyframes zap{30%{transform:translate(-2px,1px)} 60%{transform:translate(2px,-1px)} 100%{transform:none}}
 /* ---------- mod list ---------- */
 .list-tools{display:flex; gap:var(--s3); align-items:center}
 .search{position:relative; flex:1; min-width:0}
@@ -854,11 +868,61 @@ footer .btn-ghost{margin-left:auto; height:30px}
       at(130, () => { html.dataset.mood = "nightfall"; quake(); });
     });
     at(3200, () => { html.dataset.intro = "slam"; });
-    at(3620, quake);
+    at(3620, () => { quake(); voidCards(true); });
     at(4500, finish);
   }
 
+  // 공허의 균열이 다른 카드들로 번진다 (나이트폴 분위기에서만)
+  const VOID_CARDS = ".dl-card, .notice:not([hidden]), .guide, .past-row, .win-card, .changes, .mods:not([hidden]), .empty:not([hidden]), .cands > .cand, .history";
+  function crackPaths(w, h){
+    const r = (a, b) => a + Math.random() * (b - a), paths = [];
+    const n = w > 500 ? 3 : 2;
+    for (let k = 0; k < n; k++) {
+      // 모서리나 가장자리에서 시작해서 안쪽으로 갈라진다
+      const side = Math.floor(Math.random() * 4);
+      let x = side === 0 ? 0 : side === 1 ? w : r(w * .1, w * .9);
+      let y = side === 2 ? 0 : side === 3 ? h : r(h * .15, h * .85);
+      const ang = Math.atan2(h / 2 - y, w / 2 - x) + r(-.6, .6), len = Math.min(r(60, 170), Math.max(w, h) * .45);
+      const pts = [[x, y]], steps = 6;
+      for (let i = 0; i < steps; i++) {
+        x += Math.cos(ang) * len / steps + r(-7, 7); y += Math.sin(ang) * len / steps + r(-7, 7);
+        pts.push([x, y]);
+        if (i === 2 || i === 4) {   // 가지
+          let bx = x, by = y; const ba = ang + (Math.random() < .5 ? -1 : 1) * r(.6, 1.1), bp = [[bx, by]];
+          for (let j = 0; j < 3; j++) { bx += Math.cos(ba) * 12 + r(-4, 4); by += Math.sin(ba) * 12 + r(-4, 4); bp.push([bx, by]); }
+          paths.push(bp);
+        }
+      }
+      paths.push(pts);
+    }
+    return paths.map(p => "M" + p.map(q => q.map(v => v.toFixed(1)).join(",")).join(" L"));
+  }
+  function voidCards(animate){
+    document.querySelectorAll(".card-rift").forEach(x => x.remove());
+    if (html.dataset.mood !== "nightfall") return;
+    [...document.querySelectorAll(VOID_CARDS)].forEach((card, i) => {
+      const w = card.clientWidth, h = card.clientHeight; if (!w || !h) return;
+      card.classList.add("voided");
+      if (getComputedStyle(card).position === "static") card.style.position = "relative";
+      const d = crackPaths(w, h);
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("class", "card-rift" + (animate ? " draw" : ""));
+      svg.setAttribute("viewBox", `0 0 ${w} ${h}`); svg.setAttribute("preserveAspectRatio", "none"); svg.setAttribute("aria-hidden", "true");
+      svg.style.setProperty("--rd", `${(-Math.random() * 3).toFixed(2)}s`);
+      svg.style.setProperty("--dd", `${(i * .12).toFixed(2)}s`);
+      svg.innerHTML = d.map(p => `<path class="g" d="${p}" pathLength="1"/>`).join("") + d.map(p => `<path class="c" d="${p}" pathLength="1"/>`).join("");
+      card.prepend(svg);
+      if (animate) setTimeout(() => {
+        card.classList.remove("zap"); void card.offsetWidth; card.classList.add("zap");
+        setTimeout(() => svg.classList.remove("draw"), 700);
+      }, i * 120);
+    });
+  }
+  let voidT;
+  addEventListener("resize", () => { clearTimeout(voidT); voidT = setTimeout(() => voidCards(false), 300); });
+
   // 다크 모드 버튼
+  if (!html.dataset.intro) voidCards(false);
   const themeBtn = $("#themeBtn");
   function syncTheme(){
     const dark = html.dataset.theme === "dark";
