@@ -370,6 +370,15 @@
       "size": 177437
     },
     {
+      "file": "entityrespawner-1.1.0.jar",
+      "id": "entityrespawner",
+      "name": "Entity Respawner",
+      "version": "1.1.0",
+      "desc": "Help Boss Respawn",
+      "env": "",
+      "size": 23220
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
