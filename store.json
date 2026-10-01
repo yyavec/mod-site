@@ -100,6 +100,15 @@
       "size": 107532
     },
     {
+      "file": "aether-1.20.1-1.5.2-neoforge.jar",
+      "id": "aether",
+      "name": "The Aether",
+      "version": "",
+      "desc": "The Aether Team presents the original Aether mod! Up to date for modern Minecraft versions and fully compatible with multiplayer. The Aether is a dimension of floating islands high in the sky. Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, mythical creatur",
+      "env": "",
+      "size": 39746319
+    },
+    {
       "file": "tlc_forge-1.0.3-R-1.20.X.jar",
       "id": "tlc",
       "name": "The Lost Castle",
