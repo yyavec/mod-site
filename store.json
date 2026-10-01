@@ -37,6 +37,15 @@
       "size": 5904485
     },
     {
+      "file": "artifacts-forge-9.5.19.jar",
+      "id": "artifacts",
+      "name": "Artifacts",
+      "version": "9.5.19",
+      "desc": "Adds various new powerful uncraftable items to make exploration a bit more interesting",
+      "env": "",
+      "size": 850974
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
