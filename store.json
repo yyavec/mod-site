@@ -829,6 +829,15 @@
       "size": 58508
     },
     {
+      "file": "lootr-forge-1.20-0.7.35.94.jar",
+      "id": "lootr",
+      "name": "Lootr",
+      "version": "0.7.35.94",
+      "desc": "Makes loot chest loot per-user.",
+      "env": "",
+      "size": 463485
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
