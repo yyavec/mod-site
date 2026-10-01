@@ -730,6 +730,15 @@
       "size": 1409705
     },
     {
+      "file": "JustEnoughResources-1.20.1-1.4.0.247.jar",
+      "id": "jeresources",
+      "name": "Just Enough Resources",
+      "version": "1.4.0.247",
+      "desc": "Adds Resources and Mob Drops to JEI",
+      "env": "",
+      "size": 276231
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
