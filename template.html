@@ -31,8 +31,7 @@
   --pixel-s:"Galmuri9", var(--font);
   --mono:ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
+:root[data-theme="dark"]{
     color-scheme: dark;
     --bg-canvas:#16140F; --bg-surface:#1F1C16; --bg-raised:#26221B; --bg-sunken:#12100C;
     --text-primary:#EDE6D8; --text-secondary:#B5AA97; --text-tertiary:#8C826F; --text-disabled:#544C3F;
@@ -46,7 +45,7 @@
     --shadow-raised:0 0 0 1px rgba(255,255,255,.02);
     --shadow-floating:0 10px 32px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4);
   }
-}
+
 :root[data-theme="dark"]{
   color-scheme: dark;
   --bg-canvas:#16140F; --bg-surface:#1F1C16; --bg-raised:#26221B; --bg-sunken:#12100C;
@@ -91,14 +90,25 @@ h2 svg.px{width:18px; height:auto}
 .cloud.c2{top:78px; right:24%; width:60px; opacity:.7; animation-delay:-3s}
 @keyframes bob{50%{transform:translateX(10px)}}
 .spark{position:absolute; width:10px; height:auto; opacity:0}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .spark{opacity:.9; animation:twinkle 3s ease-in-out infinite} }
+:root[data-theme="dark"] .spark{opacity:.9; animation:twinkle 3s ease-in-out infinite}
+
 :root[data-theme="dark"] .spark{opacity:.9; animation:twinkle 3s ease-in-out infinite}
 .spark.s1{top:22px; right:18%} .spark.s2{top:70px; right:40%; animation-delay:-1.2s!important} .spark.s3{top:36px; left:58%; animation-delay:-2s!important}
 @keyframes twinkle{50%{opacity:.25}}
-.admin-link{position:absolute; top:var(--s3); right:var(--s3); z-index:2; display:inline-flex; align-items:center; gap:6px; height:30px; padding:0 12px; border-radius:var(--r-full); background:rgba(255,255,255,.7); color:var(--text-secondary); font-size:13px; font-weight:600; text-decoration:none; transition:background var(--m-fast), color var(--m-fast)}
+.hero-tools{position:absolute; top:var(--s3); right:var(--s3); z-index:3; display:flex; gap:var(--s2)}
+.theme-btn{display:inline-flex; align-items:center; gap:6px; height:30px; padding:0 12px; border:0; border-radius:var(--r-full); background:rgba(255,255,255,.7); color:var(--text-secondary); font:600 13px var(--font); cursor:pointer; transition:background var(--m-fast), color var(--m-fast)}
+.theme-btn:hover{background:var(--bg-surface); color:var(--text-primary)}
+.theme-btn svg{width:14px; height:14px}
+.theme-btn .ic-sun{display:none}
+:root[data-theme="dark"] .theme-btn{background:rgba(0,0,0,.3)}
+:root[data-theme="dark"] .theme-btn .ic-sun{display:block}
+:root[data-theme="dark"] .theme-btn .ic-moon{display:none}
+.theme-anim, .theme-anim *{transition:background-color .35s ease, color .35s ease, border-color .35s ease, fill .35s ease !important}
+.admin-link{display:inline-flex; align-items:center; gap:6px; height:30px; padding:0 12px; border-radius:var(--r-full); background:rgba(255,255,255,.7); color:var(--text-secondary); font-size:13px; font-weight:600; text-decoration:none; transition:background var(--m-fast), color var(--m-fast)}
 .admin-link:hover{background:var(--bg-surface); color:var(--text-primary)}
 .admin-link svg{width:14px; height:14px}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .admin-link{background:rgba(0,0,0,.3)} }
+:root[data-theme="dark"] .admin-link{background:rgba(0,0,0,.3)}
+
 :root[data-theme="dark"] .admin-link{background:rgba(0,0,0,.3)}
 .hero-in{position:relative; z-index:1; display:flex; align-items:flex-end; gap:var(--s6)}
 .hero-in .head{padding-bottom:var(--s8)}
@@ -114,10 +124,12 @@ h2 svg.px{width:18px; height:auto}
 .bubble.show{opacity:1; transform:none}
 .head{display:flex; flex-direction:column; gap:var(--s3); min-width:0}
 .eyebrow{display:inline-flex; align-self:flex-start; align-items:center; height:24px; padding:0 10px; border-radius:var(--r-full); background:rgba(255,255,255,.6); color:var(--text-secondary); font-size:13px; font-weight:600; margin:0}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .eyebrow{background:rgba(0,0,0,.25)} }
+:root[data-theme="dark"] .eyebrow{background:rgba(0,0,0,.25)}
+
 :root[data-theme="dark"] .eyebrow{background:rgba(0,0,0,.25)}
 h1{font:400 33px/1.15 var(--pixel); letter-spacing:0; color:var(--text-primary); text-shadow:0 2px 0 rgba(255,255,255,.55)}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) h1{text-shadow:0 2px 0 rgba(0,0,0,.4)} }
+:root[data-theme="dark"] h1{text-shadow:0 2px 0 rgba(0,0,0,.4)}
+
 :root[data-theme="dark"] h1{text-shadow:0 2px 0 rgba(0,0,0,.4)}
 .meta{display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center}
 .chip{display:inline-flex; align-items:center; height:28px; padding:0 10px; border-radius:var(--r-full); background:var(--bg-surface); color:var(--text-secondary); font-size:13px; font-weight:500}
@@ -193,7 +205,8 @@ h1{font:400 33px/1.15 var(--pixel); letter-spacing:0; color:var(--text-primary);
 .win-card > :not(.win-bg){position:relative; z-index:1}
 .win-bg{position:absolute; top:0; right:0; bottom:0; width:72%; background-size:cover; background-position:center 30%; opacity:.42; filter:saturate(.85); -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 35%, #000 75%); mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 35%, #000 75%); transition:opacity var(--m-std), transform 6s ease-out}
 .win-card:hover .win-bg{opacity:.6; transform:scale(1.03)}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .win-bg{opacity:.5} }
+:root[data-theme="dark"] .win-bg{opacity:.5}
+
 :root[data-theme="dark"] .win-bg{opacity:.5}
 .win-art svg{width:64px; height:auto; animation:shine 2.4s ease-in-out infinite}
 @keyframes shine{50%{transform:translateY(-3px)}}
@@ -364,15 +377,14 @@ footer .btn-ghost{margin-left:auto; height:30px}
   --accent:#6A43C7; --accent-hover:#5A36AE; --accent-pressed:#4B2C93; --accent-soft:#ECE6F8; --accent-edge:#43277F;
   --sky-top:#CFC9B2; --sky-bottom:#A8A28A; --spire-far:rgba(70,66,58,.28); --spire-near:rgba(52,48,44,.5); --fog:rgba(240,236,222,.55);
 }
-@media (prefers-color-scheme: dark){
-  :root[data-mood="nightfall"]:not([data-theme="light"]){
+:root[data-mood="nightfall"][data-theme="dark"]{
     --bg-canvas:#121117; --bg-surface:#1A1920; --bg-raised:#211F28; --bg-sunken:#0D0C11;
     --text-primary:#E9E5EF; --text-secondary:#ADA6B6; --text-tertiary:#847D8E;
     --border-subtle:#26242D; --border-standard:#34313D; --border-strong:#504B5B;
     --accent:#A585FF; --accent-hover:#B79CFF; --accent-pressed:#916CF0; --accent-soft:#221B33; --accent-edge:#5B3FAE; --on-accent:#120C1F;
     --sky-top:#1C1A24; --sky-bottom:#3A3542; --spire-far:rgba(12,10,16,.45); --spire-near:rgba(8,7,10,.75); --fog:rgba(120,110,140,.18);
   }
-}
+
 :root[data-mood="nightfall"][data-theme="dark"]{
   --bg-canvas:#121117; --bg-surface:#1A1920; --bg-raised:#211F28; --bg-sunken:#0D0C11;
   --text-primary:#E9E5EF; --text-secondary:#ADA6B6; --text-tertiary:#847D8E;
@@ -397,7 +409,8 @@ footer .btn-ghost{margin-left:auto; height:30px}
 [data-mood="nightfall"] .hero-in{z-index:2}
 [data-mood="nightfall"] .eyebrow{background:rgba(255,255,255,.45)}
 [data-mood="nightfall"] h1{text-shadow:0 2px 0 rgba(255,255,255,.35), 0 0 18px rgba(255,250,235,.5)}
-@media (prefers-color-scheme: dark){ :root[data-mood="nightfall"]:not([data-theme="light"]) h1{text-shadow:0 2px 0 rgba(0,0,0,.5), 0 0 22px rgba(166,124,255,.35)} :root[data-mood="nightfall"]:not([data-theme="light"]) .eyebrow{background:rgba(0,0,0,.35)} }
+:root[data-mood="nightfall"][data-theme="dark"] h1{text-shadow:0 2px 0 rgba(0,0,0,.5), 0 0 22px rgba(166,124,255,.35)} :root[data-mood="nightfall"][data-theme="dark"] .eyebrow{background:rgba(0,0,0,.35)}
+
 [data-mood="nightfall"] .admin-link{z-index:3}
 /* 캐릭터 + 대검 */
 .frog{--u:calc(84px / 18); position:relative}
@@ -439,7 +452,8 @@ footer .btn-ghost{margin-left:auto; height:30px}
 /* 페이지 전체 배경: 스크롤해도 뒤에서 지켜본다 */
 [data-mood="nightfall"] .beast-bg{display:block; position:fixed; z-index:0; left:50%; top:2vh; width:min(1500px,150vw); transform:translateX(-50%); pointer-events:none; animation:loom 16s ease-in-out infinite, beastin 2.2s ease-out both}
 [data-mood="nightfall"] .beast-bg .beast{opacity:.2}
-@media (prefers-color-scheme: dark){ :root[data-mood="nightfall"]:not([data-theme="light"]) .beast-bg .beast{opacity:.4} }
+:root[data-mood="nightfall"][data-theme="dark"] .beast-bg .beast{opacity:.4}
+
 :root[data-theme="dark"][data-mood="nightfall"] .beast-bg .beast{opacity:.4}
 @keyframes loom{0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(1.5vh) scale(1.02)}}
 @keyframes beastin{from{opacity:0; filter:blur(8px)}}
@@ -556,6 +570,14 @@ footer .btn-ghost{margin-left:auto; height:30px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
 </style>
 <script>
+// 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
+(() => {
+  let t = "light";
+  try { if (localStorage.getItem("theme") === "dark") t = "dark"; } catch {}
+  document.documentElement.dataset.theme = t;
+})();
+</script>
+<script>
 // 처음 들어올 때(창마다 한 번) 맑은 하늘 → 나이트폴 변신 장면을 보여 준다.
 (() => {
   const html = document.documentElement;
@@ -583,6 +605,8 @@ footer .btn-ghost{margin-left:auto; height:30px}
   <symbol id="i-star" viewBox="0 0 16 16"><path d="m8 1.8 1.85 3.9 4.25.55-3.12 2.95.8 4.2L8 11.33 4.22 13.4l.8-4.2L1.9 6.25l4.25-.55Z" stroke-linejoin="round"/></symbol>
   <symbol id="i-ext" viewBox="0 0 16 16"><path d="M6.5 3.5h-3v9h9v-3"/><path d="M9.5 2.5h4v4"/><path d="M13.5 2.5 7.5 8.5"/></symbol>
   <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3a5.5 5.5 0 1 0 6.5 6.5Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></symbol>
   <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M13.5 13.5 10.2 10.2"/></symbol>
 </svg>
 
@@ -606,7 +630,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
 <main class="wrap">
   <header class="hero">
     <span class="nametag" {{OWNER_HIDDEN}}><span class="nt-rank">홈주인</span>{{OWNER}}</span>
-    <a class="admin-link" href="admin.html" {{ADMIN_HIDDEN}}><svg class="i"><use href="#i-lock"/></svg>관리자</a>
+    <div class="hero-tools"><button class="theme-btn" id="themeBtn" type="button" aria-pressed="false" aria-label="다크 모드 켜기"><svg class="i ic-moon"><use href="#i-moon"/></svg><svg class="i ic-sun"><use href="#i-sun"/></svg><span class="theme-t">다크</span></button><a class="admin-link" href="admin.html" {{ADMIN_HIDDEN}}><svg class="i"><use href="#i-lock"/></svg>관리자</a></div>
     <div class="dragon-pass" aria-hidden="true"><svg class="dragon" viewBox="0 0 200 90" aria-hidden="true">
 <g class="d-far"><path d="M74,46 L70,28 L62,6 L56,14 L46,6 L42,16 L30,12 L34,24 L46,26 L50,22 L56,32 L64,28 L70,44Z"/></g>
 <g class="d-body"><path d="M8,53 L14,50 L20,47 L27,46 L31,40 L38,33 L36,41 L33,46 L41,43 L52,40 L64,43 L74,45 L90,44 L108,46 L118,51 L134,56 L152,60 L170,66 L184,62 L198,60 L190,66 L196,72 L184,70 L166,73 L146,68 L128,64 L112,63 L104,65 L106,76 L100,81 L98,77 L101,73 L96,66 L86,66 L84,76 L77,81 L76,77 L79,73 L76,65 L66,61 L54,58 L42,59 L32,58 L24,58 L15,57 L9,57Z"/><path d="M60,42 L63,36 L66,42ZM72,44 L75,38 L78,44ZM86,44 L89,38 L92,44ZM100,45 L103,39 L106,45ZM114,49 L117,43 L120,49ZM128,54 L131,48 L134,54ZM142,58 L145,52 L148,58ZM156,62 L159,56 L162,62Z"/></g>
@@ -833,6 +857,23 @@ footer .btn-ghost{margin-left:auto; height:30px}
     at(3620, quake);
     at(4500, finish);
   }
+
+  // 다크 모드 버튼
+  const themeBtn = $("#themeBtn");
+  function syncTheme(){
+    const dark = html.dataset.theme === "dark";
+    themeBtn.setAttribute("aria-pressed", String(dark));
+    themeBtn.setAttribute("aria-label", dark ? "라이트 모드로 바꾸기" : "다크 모드 켜기");
+    themeBtn.querySelector(".theme-t").textContent = dark ? "라이트" : "다크";
+  }
+  syncTheme();
+  themeBtn.addEventListener("click", () => {
+    html.classList.add("theme-anim");
+    html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem("theme", html.dataset.theme); } catch {}
+    syncTheme();
+    setTimeout(() => html.classList.remove("theme-anim"), 400);
+  });
 
   // 처음 왔어요: 단계 접기·펴기 + 진행 기록 (이 브라우저에만 저장)
   const guide = $("#guide"), steps = [...document.querySelectorAll(".gstep")], GKEY = "guide-done";
