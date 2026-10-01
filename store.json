@@ -388,6 +388,15 @@
       "size": 17017922
     },
     {
+      "file": "efs_iss-1.0.3.jar",
+      "id": "efs_iss",
+      "name": "Epic Fight Skill - Iron's Spells 'n Spellbooks",
+      "version": "1.0.3",
+      "desc": "",
+      "env": "",
+      "size": 299741
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
