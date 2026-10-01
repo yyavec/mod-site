@@ -341,6 +341,9 @@ def main():
         "DISCORD_URL": e(conf.get("DISCORD_URL", "")),
         "DISCORD_HIDDEN": "" if conf.get("DISCORD_URL") else "hidden",
         "ADMIN_HIDDEN": "" if conf.get("ADMIN_API") else "hidden",
+        "TOPBAR": e(conf.get("TOPBAR", "")),
+        "TOPBAR_UNTIL": e(conf.get("TOPBAR_UNTIL", "")),
+        "TOPBAR_HIDDEN": "" if conf.get("TOPBAR") else "hidden",
         "MOOD": conf.get("MOOD") if conf.get("MOOD") in ("nightfall",) else "",
     }
     season = season_html(e)

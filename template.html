@@ -406,6 +406,10 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 :root[data-theme="dark"] .sub-chip{background:#26391F; color:#9FDB7C}
 :root[data-theme="dark"] .sub-sun svg{filter:drop-shadow(0 0 10px rgba(255,210,74,.35))}
 @media (max-width:600px){ .sub-in{padding:var(--s4) var(--s4) calc(var(--s4) + 12px)} .sub h2{font-size:19px} }
+/* ---------- 맨 위 검은 띠 ---------- */
+.topbar{position:relative; z-index:5; display:flex; align-items:center; justify-content:center; gap:10px; min-height:38px; padding:8px var(--s4); margin:calc(-1 * (var(--s8) + env(safe-area-inset-top,0px))) calc(-1 * var(--s4)) var(--s6); background:#0B0A0D; color:#F4F1EA; font-size:13.5px; font-weight:600; text-align:center}
+.tb-tag{flex:none; font:400 11px/1 var(--pixel); color:#0B0A0D; background:#FFD24A; padding:4px 6px 3px; border-radius:3px; animation:blink 1.4s steps(1) infinite}
+@media (max-width:600px){ .topbar{margin-top:calc(-1 * (var(--s4) + env(safe-area-inset-top,0px))); margin-bottom:var(--s4); font-size:12.5px} }
 /* ---------- mod list ---------- */
 .list-tools{display:flex; gap:var(--s3); align-items:center}
 .search{position:relative; flex:1; min-width:0}
@@ -703,6 +707,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
 </g>
 
 </svg></div>
+<div class="topbar" id="topbar" data-until="{{TOPBAR_UNTIL}}" {{TOPBAR_HIDDEN}}><span class="tb-tag">BETA</span><span class="tb-t">{{TOPBAR}}</span></div>
 <main class="wrap">
   <header class="hero">
     <span class="nametag" {{OWNER_HIDDEN}}><span class="nt-rank">홈주인</span>{{OWNER}}</span>
@@ -1039,6 +1044,10 @@ footer .btn-ghost{margin-left:auto; height:30px}
   }
   let voidT;
   addEventListener("resize", () => { clearTimeout(voidT); voidT = setTimeout(() => voidCards(false), 300); });
+
+  // 맨 위 띠: 기한이 지나면 자동으로 숨긴다 (그날 끝까지는 보여 줌)
+  const topbar = $("#topbar");
+  if (topbar && topbar.dataset.until && new Date() > new Date(topbar.dataset.until + "T23:59:59+09:00")) topbar.hidden = true;
 
   // 다크 모드 버튼
   if (!html.dataset.intro) voidCards(false);
