@@ -224,6 +224,15 @@
       "desc": "API Library for YUNG's minecraft mods.",
       "env": "",
       "size": 370524
+    },
+    {
+      "file": "YungsBetterEndIsland-1.20-Forge-2.0.6.jar",
+      "id": "betterendisland",
+      "name": "YUNG's Better End Island",
+      "version": "1.20-Forge-2.0.6",
+      "desc": "A complete redesign of the End island, making the Ender Dragon fight much more fun and interesting!",
+      "env": "",
+      "size": 387111
     }
   ]
 }
