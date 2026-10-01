@@ -67,7 +67,8 @@
         "https://www.youtube.com/watch?v=9wKugA7QeQI",
         "https://www.youtube.com/shorts/_aY2a97-Shk"
       ],
-      "winner": true
+      "winner": true,
+      "image": "assets/nightfallcraft.jpg"
     }
   ]
 }

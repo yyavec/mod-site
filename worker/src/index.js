@@ -276,6 +276,7 @@ async function saveContent(data, gh) {
       tags: (c.tags || []).map(t => one(t, 30)).filter(Boolean).slice(0, 4),
       videos: (c.videos || []).filter(v => one(v)).map(v => checkUrl(v, `${i}번 후보의 영상 주소`)).slice(0, 5),
       ...(c.winner ? { winner: true } : {}),
+      ...(/^(assets\/[\w.-]+|https:\/\/\S+)$/.test(c.image || "") ? { image: c.image } : {}),
     };
   });
   // 당선은 한 명만

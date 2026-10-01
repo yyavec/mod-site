@@ -183,7 +183,9 @@ def season_html(e):
     if win:
         n, st = stars_of(win)
         no = cands.index(win) + 1
-        body = (f'<div class="win-card"><div class="win-art"><svg class="px trophy" viewBox="0 0 10 9" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="6" height="1" fill="#F2B636"/><rect x="0" y="1" width="3" height="1" fill="#F2B636"/><rect x="3" y="1" width="1" height="1" fill="#FFE58A"/><rect x="4" y="1" width="6" height="1" fill="#F2B636"/><rect x="0" y="2" width="1" height="1" fill="#F2B636"/><rect x="2" y="2" width="1" height="1" fill="#F2B636"/><rect x="3" y="2" width="1" height="1" fill="#FFE58A"/><rect x="4" y="2" width="4" height="1" fill="#F2B636"/><rect x="9" y="2" width="1" height="1" fill="#F2B636"/><rect x="1" y="3" width="8" height="1" fill="#F2B636"/><rect x="2" y="4" width="6" height="1" fill="#F2B636"/><rect x="3" y="5" width="4" height="1" fill="#F2B636"/><rect x="4" y="6" width="2" height="1" fill="#F2B636"/><rect x="3" y="7" width="4" height="1" fill="#F2B636"/><rect x="2" y="8" width="6" height="1" fill="#8B5A2B"/></svg></div><div class="win-main">'
+        img = str(win.get("image") or "")
+        bg = f'<div class="win-bg" style="background-image:url(\'{e(img)}\')" aria-hidden="true"></div>' if re.match(r"^(assets/[\w.-]+|https://\S+)$", img) else ""
+        body = (f'<div class="win-card{" has-bg" if bg else ""}">{bg}<div class="win-art"><svg class="px trophy" viewBox="0 0 10 9" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="6" height="1" fill="#F2B636"/><rect x="0" y="1" width="3" height="1" fill="#F2B636"/><rect x="3" y="1" width="1" height="1" fill="#FFE58A"/><rect x="4" y="1" width="6" height="1" fill="#F2B636"/><rect x="0" y="2" width="1" height="1" fill="#F2B636"/><rect x="2" y="2" width="1" height="1" fill="#F2B636"/><rect x="3" y="2" width="1" height="1" fill="#FFE58A"/><rect x="4" y="2" width="4" height="1" fill="#F2B636"/><rect x="9" y="2" width="1" height="1" fill="#F2B636"/><rect x="1" y="3" width="8" height="1" fill="#F2B636"/><rect x="2" y="4" width="6" height="1" fill="#F2B636"/><rect x="3" y="5" width="4" height="1" fill="#F2B636"/><rect x="4" y="6" width="2" height="1" fill="#F2B636"/><rect x="3" y="7" width="4" height="1" fill="#F2B636"/><rect x="2" y="8" width="6" height="1" fill="#8B5A2B"/></svg></div><div class="win-main">'
                 f'<div class="win-top"><span class="win-badge">투표 1위 · {no}번 후보</span></div>'
                 f'<div class="win-n">{e(win.get("name", ""))}</div><div class="cand-p">{e(win.get("pack", ""))}</div>'
                 f'<div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 {n}점">{st}</span>'
@@ -340,6 +342,8 @@ def main():
     })
     page = re.sub(r"\{\{(\w+)\}\}", lambda mt: rep.get(mt.group(1), mt.group(0)), tpl)
     (OUT / "index.html").write_text(page, encoding="utf-8")
+    if (ROOT / "assets").is_dir():  # 사이트에 쓰는 그림
+        shutil.copytree(ROOT / "assets", OUT / "assets", dirs_exist_ok=True)
 
     # 웹 관리자 화면 (로그인은 관리 서버가 확인한다)
     admin_tpl = ROOT / "admin.html"

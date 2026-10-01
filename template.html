@@ -184,6 +184,12 @@ h1{font:400 33px/1.15 var(--pixel); letter-spacing:0; color:var(--text-primary);
 .vlink::before{content:""; width:0; height:0; border-left:6px solid currentColor; border-top:4px solid transparent; border-bottom:4px solid transparent}
 .vlink:hover{color:#fff; background:#E0413A}
 .win-card{display:grid; grid-template-columns:auto minmax(0,1fr); gap:var(--s5); align-items:center; padding:var(--s5) var(--s6); background:linear-gradient(135deg, var(--accent-soft), var(--bg-surface) 70%); border:2px solid var(--accent); border-radius:var(--r-lg); box-shadow:0 3px 0 var(--accent-edge), var(--shadow-raised)}
+.win-card{position:relative; overflow:hidden}
+.win-card > :not(.win-bg){position:relative; z-index:1}
+.win-bg{position:absolute; top:0; right:0; bottom:0; width:72%; background-size:cover; background-position:center 30%; opacity:.42; filter:saturate(.85); -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 35%, #000 75%); mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 35%, #000 75%); transition:opacity var(--m-std), transform 6s ease-out}
+.win-card:hover .win-bg{opacity:.6; transform:scale(1.03)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .win-bg{opacity:.5} }
+:root[data-theme="dark"] .win-bg{opacity:.5}
 .win-art svg{width:64px; height:auto; animation:shine 2.4s ease-in-out infinite}
 @keyframes shine{50%{transform:translateY(-3px)}}
 .win-main{display:flex; flex-direction:column; gap:var(--s2); min-width:0}
@@ -294,6 +300,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
   .btn-dl{grid-column:1 / -1; width:100%}
   .install{padding:var(--s4)}
   .win-card{grid-template-columns:1fr; padding:var(--s5)}
+  .win-bg{width:100%; opacity:.28; -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 70%); mask-image:linear-gradient(to bottom, transparent 0%, #000 70%)}
   .win-art svg{width:48px}
   .win-n{font-size:22px}
   .hist{grid-template-columns:20px minmax(0,1fr) auto}
