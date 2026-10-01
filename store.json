@@ -190,6 +190,15 @@
       "size": 1753623
     },
     {
+      "file": "Bountiful-6.0.4+1.20.1-forge.jar",
+      "id": "bountiful",
+      "name": "Bountiful",
+      "version": "6.0.4+1.20.1",
+      "desc": "Bountiful adds bounty boards to the world.",
+      "env": "",
+      "size": 502662
+    },
+    {
       "file": "bountiful_npc-forge-1.20.1-1.0.5.jar",
       "id": "bountiful_npc",
       "name": "Bountiful Npc",
