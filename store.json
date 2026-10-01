@@ -937,6 +937,15 @@
       "size": 5945
     },
     {
+      "file": "ItemBorders-1.20.1-forge-1.2.2.jar",
+      "id": "itemborders",
+      "name": "Item Borders",
+      "version": "",
+      "desc": "Adds colored borders around items to indicate rarity.",
+      "env": "",
+      "size": 20832
+    },
+    {
       "file": "Jade-1.20.1-Forge-11.13.2.jar",
       "id": "jade",
       "name": "Jade",
