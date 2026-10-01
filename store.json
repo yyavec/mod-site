@@ -523,6 +523,15 @@
       "size": 127553
     },
     {
+      "file": "Fancy-Trail1.20.1-1.2.3-all.jar",
+      "id": "fancy_trail",
+      "name": "Fancy Trail",
+      "version": "1.2.3",
+      "desc": "Cool mod.",
+      "env": "",
+      "size": 5906048
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
