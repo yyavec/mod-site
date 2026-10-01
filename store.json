@@ -298,6 +298,15 @@
       "size": 64187
     },
     {
+      "file": "cosmeticarmorreworked-1.20.1-v1a.jar",
+      "id": "cosmeticarmorreworked",
+      "name": "CosmeticArmorReworked",
+      "version": "1.20.1-v1a",
+      "desc": "This mod allows you to wear two sets of armor, one for display, one for function. You can also hide armor for your skin. For PVP, you can stop the mod from functioning on your client side.",
+      "env": "",
+      "size": 88752
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
