@@ -1000,6 +1000,15 @@
       "size": 642732
     },
     {
+      "file": "Placebo-1.20.1-8.6.3.jar",
+      "id": "placebo",
+      "name": "Placebo",
+      "version": "8.6.3",
+      "desc": "1 (one) library boi",
+      "env": "",
+      "size": 282474
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
