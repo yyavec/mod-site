@@ -928,6 +928,15 @@
       "size": 1600220
     },
     {
+      "file": "iss_scroll_description-1.0.0.jar",
+      "id": "iss_scroll_description",
+      "name": "ISS-Scroll-Description",
+      "version": "1.0.0",
+      "desc": "",
+      "env": "",
+      "size": 5945
+    },
+    {
       "file": "Jade-1.20.1-Forge-11.13.2.jar",
       "id": "jade",
       "name": "Jade",
