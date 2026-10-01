@@ -262,6 +262,15 @@
       "size": 1181413
     },
     {
+      "file": "CombatEvolution-2.2.0.jar",
+      "id": "combat_evolution",
+      "name": "Combat Evolution",
+      "version": "2.2.0",
+      "desc": "Lib for making EpicFight Mob AI",
+      "env": "",
+      "size": 2752207
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
