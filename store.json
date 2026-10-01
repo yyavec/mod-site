@@ -143,6 +143,15 @@
       "desc": "Tudi Gong, a Chinese god Wayfinder.",
       "env": "",
       "size": 282993
+    },
+    {
+      "file": "uniqueaccessories-1.3.3-forge-mc1.20.1.jar",
+      "id": "uniqueaccessories",
+      "name": "Unique Accessories",
+      "version": "1.3.3",
+      "desc": "Adds unique accessories obtainable from defeating mobs or from chests in structures",
+      "env": "",
+      "size": 521352
     }
   ]
 }
