@@ -613,6 +613,15 @@
       "size": 1254018
     },
     {
+      "file": "ftb-teams-forge-2001.3.2.jar",
+      "id": "ftbteams",
+      "name": "FTB Teams",
+      "version": "2001.3.2",
+      "desc": "FTB Teams adds ability to create your own teams that can be used for quests etc.",
+      "env": "",
+      "size": 252579
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
