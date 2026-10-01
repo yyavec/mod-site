@@ -766,6 +766,15 @@
       "size": 603372
     },
     {
+      "file": "flerovium-forge-1.20.1-1.2.18-all.jar",
+      "id": "flerovium",
+      "name": "Flerovium",
+      "version": "1.2.18",
+      "desc": "",
+      "env": "",
+      "size": 253961
+    },
+    {
       "file": "ftb-essentials-forge-2001.2.4.jar",
       "id": "ftbessentials",
       "name": "FTB Essentials",
