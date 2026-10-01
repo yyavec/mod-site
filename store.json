@@ -1036,6 +1036,15 @@
       "size": 1794016
     },
     {
+      "file": "lang_amend-forge1.20.1-1.0.0-all.jar",
+      "id": "lang_amend",
+      "name": "Language Amend",
+      "version": "1.0.0",
+      "desc": "Fallback to Specific language when Selected translation is missing.",
+      "env": "",
+      "size": 638710
+    },
+    {
       "file": "lazyyyyy-lexforge-core-0.14.19.jar",
       "id": "lazyyyyy-lexforge-core",
       "name": "lazyyyyy-lexforge-core-0.14.19",
