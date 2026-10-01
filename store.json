@@ -19,6 +19,15 @@
       "size": 227511
     },
     {
+      "file": "architectury-9.2.14-forge.jar",
+      "id": "architectury",
+      "name": "Architectury",
+      "version": "9.2.14",
+      "desc": "A intermediary api aimed to ease developing multiplatform mods.",
+      "env": "",
+      "size": 580602
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
