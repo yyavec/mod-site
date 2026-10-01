@@ -251,6 +251,15 @@
       "desc": "A complete redesign of Minecraft's ocean monuments!",
       "env": "",
       "size": 1033262
+    },
+    {
+      "file": "Zeta-1.0-31.jar",
+      "id": "zeta",
+      "name": "Zeta",
+      "version": "",
+      "desc": "A fully featured Library designed around loading highly configurable, agile developed. modular mods",
+      "env": "",
+      "size": 1006518
     }
   ]
 }
