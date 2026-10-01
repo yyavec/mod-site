@@ -46,6 +46,15 @@
       "size": 850974
     },
     {
+      "file": "Ash.Of.Sin-Custom.Anti.Seat.Entity-1.20.1-1.0.1.jar",
+      "id": "ash_of_sin_custom_anti_seat_entity",
+      "name": "Ash Of Sin: Custom Anti Seat Entity",
+      "version": "1.0.1",
+      "desc": "The remnants clinging to life amidst the ashes.",
+      "env": "",
+      "size": 63730
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
