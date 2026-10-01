@@ -244,6 +244,15 @@
       "size": 700109
     },
     {
+      "file": "citadel-2.6.3-1.20.1.jar",
+      "id": "citadel",
+      "name": "Citadel",
+      "version": "2.6.3",
+      "desc": "A shared code library for many of Alexthe666's mods. Code used from LLibrary with permission.",
+      "env": "",
+      "size": 3185275
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
