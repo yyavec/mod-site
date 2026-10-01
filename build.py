@@ -326,6 +326,7 @@ def main():
         "DISCORD_URL": e(conf.get("DISCORD_URL", "")),
         "DISCORD_HIDDEN": "" if conf.get("DISCORD_URL") else "hidden",
         "ADMIN_HIDDEN": "" if conf.get("ADMIN_API") else "hidden",
+        "MOOD": conf.get("MOOD") if conf.get("MOOD") in ("nightfall",) else "",
     }
     season = season_html(e)
     rep.update({
