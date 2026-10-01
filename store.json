@@ -161,6 +161,15 @@
       "desc": "Very Cool Lib Mod.",
       "env": "",
       "size": 506870
+    },
+    {
+      "file": "waystones-forge-1.20.1-14.1.20.jar",
+      "id": "waystones",
+      "name": "Waystones",
+      "version": "14.1.20",
+      "desc": "Teleport back to activated waystones. For Survival, Adventure or Servers.",
+      "env": "",
+      "size": 533738
     }
   ]
 }
