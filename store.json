@@ -17,6 +17,15 @@
       "desc": "",
       "env": "",
       "size": 1089990
+    },
+    {
+      "file": "supplementaries-1.20-3.1.43-forge.jar",
+      "id": "supplementaries",
+      "name": "Supplementaries",
+      "version": "1.20-3.1.43",
+      "desc": "Many functional and useful Vanilla+ blocks",
+      "env": "",
+      "size": 13667742
     }
   ]
 }
