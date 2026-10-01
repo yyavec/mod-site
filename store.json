@@ -973,6 +973,15 @@
       "size": 932621
     },
     {
+      "file": "packetfixer-3.3.2-1.18-1.20.4-merged.jar",
+      "id": "packetfixer",
+      "name": "Packet Fixer",
+      "version": "3.3.2",
+      "desc": "A simple mod to solve various problems with packets/NBT's.",
+      "env": "",
+      "size": 188661
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
