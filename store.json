@@ -1081,6 +1081,15 @@
       "size": 2223589
     },
     {
+      "file": "servercore-forge-1.5.2+1.20.1.jar",
+      "id": "servercore",
+      "name": "ServerCore",
+      "version": "1.5.2+1.20.1",
+      "desc": "A Forge mod that aims to optimize the minecraft server.",
+      "env": "",
+      "size": 1508496
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
