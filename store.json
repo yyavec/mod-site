@@ -811,6 +811,15 @@
       "size": 122522
     },
     {
+      "file": "lithostitched-forge-1.20.1-1.4.11.jar",
+      "id": "lithostitched",
+      "name": "Lithostitched",
+      "version": "1.4.11",
+      "desc": "Library mod with new configurability and compatibility enhancements for worldgen.",
+      "env": "",
+      "size": 476347
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
