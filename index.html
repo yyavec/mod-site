@@ -7,47 +7,57 @@
 <meta name="description" content="우리 마크 서버 접속에 필요한 모드 0개를 한 번에 받으세요.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2014%2012%22%20shape-rendering%3D%22crispEdges%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%223%22%20y%3D%220%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%228%22%20y%3D%220%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%222%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%223%22%20y%3D%221%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%231F2A1A%22/%3E%3Crect%20x%3D%225%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%226%22%20y%3D%221%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%228%22%20y%3D%221%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%231F2A1A%22/%3E%3Crect%20x%3D%2210%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23FFFFFF%22/%3E%3Crect%20x%3D%2211%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%223%22%20y%3D%222%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%231F2A1A%22/%3E%3Crect%20x%3D%226%22%20y%3D%222%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%228%22%20y%3D%222%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%231F2A1A%22/%3E%3Crect%20x%3D%2211%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%226%22%20y%3D%223%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%228%22%20y%3D%223%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%2211%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%2212%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%220%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%224%22%20width%3D%2212%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%2213%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%220%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%222%22%20y%3D%225%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23F4A6A0%22/%3E%3Crect%20x%3D%224%22%20y%3D%225%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%2210%22%20y%3D%225%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23F4A6A0%22/%3E%3Crect%20x%3D%2212%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%2213%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%220%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%226%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%225%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%226%22%20y%3D%226%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%228%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%229%22%20y%3D%226%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%2213%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%220%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%227%22%20width%3D%225%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%226%22%20y%3D%227%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%228%22%20y%3D%227%22%20width%3D%225%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%2213%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%222%22%20y%3D%228%22%20width%3D%2210%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%2212%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%222%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%235AA23D%22/%3E%3Crect%20x%3D%223%22%20y%3D%229%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%226%22%20y%3D%229%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%228%22%20y%3D%229%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%237CC65A%22/%3E%3Crect%20x%3D%2211%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%235AA23D%22/%3E%3Crect%20x%3D%2212%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%220%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%2210%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%235AA23D%22/%3E%3Crect%20x%3D%223%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%225%22%20y%3D%2210%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%2210%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2210%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%235AA23D%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%221%22%20y%3D%2211%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2211%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%232F6B22%22/%3E%3C/svg%3E">
 <style>
 :root{
   color-scheme: light;
-  --bg-canvas:#F6F7F5; --bg-surface:#FFFFFF; --bg-raised:#FAFBF9; --bg-sunken:#EEF0EC;
-  --text-primary:#161A16; --text-secondary:#4B524B; --text-tertiary:#727A72; --text-disabled:#A8AEA8;
-  --border-subtle:#E3E6E1; --border-standard:#D0D5CE; --border-strong:#A7ADA6;
-  --accent:#2E7D3C; --accent-hover:#256A32; --accent-pressed:#1F5A2A; --accent-soft:#E6F1E7; --on-accent:#FFFFFF;
-  --success:#237A45; --success-soft:#E3F2E8;
-  --warning:#94580A; --warning-soft:#FAF0DE;
+  --bg-canvas:#F5F0E4; --bg-surface:#FFFDF8; --bg-raised:#FBF7EE; --bg-sunken:#EFE7D6;
+  --text-primary:#2A2318; --text-secondary:#5C5141; --text-tertiary:#877A66; --text-disabled:#B9AE9B;
+  --border-subtle:#E9DFCB; --border-standard:#D8CBB0; --border-strong:#B4A586;
+  --accent:#3D8B2C; --accent-hover:#357A26; --accent-pressed:#2B6520; --accent-soft:#E4F0D7; --accent-edge:#2A621E; --on-accent:#FFFFFF;
+  --success:#2F7D3A; --success-soft:#E2F1E2;
+  --warning:#9A5F0C; --warning-soft:#FCF0D5;
   --danger:#BC3A2F; --danger-soft:#FAE8E5;
-  --shadow-raised:0 1px 2px rgba(22,26,22,.05), 0 4px 16px rgba(22,26,22,.05);
-  --shadow-floating:0 8px 28px rgba(22,26,22,.14), 0 1px 3px rgba(22,26,22,.08);
+  --sky-top:#9FD7F2; --sky-bottom:#DDF1FA; --cloud:#FFFFFF;
+  --frog-line:#2F6B22; --frog-body:#7CC65A; --frog-dark:#5AA23D; --frog-cheek:#F4A6A0;
+  --shadow-raised:0 1px 0 rgba(90,70,30,.06), 0 6px 18px rgba(90,70,30,.07);
+  --shadow-floating:0 8px 28px rgba(42,35,24,.18), 0 1px 3px rgba(42,35,24,.1);
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s12:48px; --s16:64px;
-  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-full:999px;
+  --r-sm:4px; --r-md:8px; --r-lg:14px; --r-full:999px;
   --m-fast:100ms; --m-std:180ms;
   --font:"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", sans-serif;
+  --pixel:"Galmuri11", var(--font);
+  --pixel-s:"Galmuri9", var(--font);
   --mono:ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme: dark;
-    --bg-canvas:#111311; --bg-surface:#181B18; --bg-raised:#1E221E; --bg-sunken:#0D0F0D;
-    --text-primary:#E7EAE6; --text-secondary:#A8AFA7; --text-tertiary:#7E867D; --text-disabled:#4F564F;
-    --border-subtle:#242824; --border-standard:#313631; --border-strong:#4C534B;
-    --accent:#5FBF6E; --accent-hover:#74CC82; --accent-pressed:#4EA75C; --accent-soft:#1A2A1C; --on-accent:#0B170D;
-    --success:#5CC784; --success-soft:#15281B;
-    --warning:#E0A64E; --warning-soft:#2A2215;
+    --bg-canvas:#16140F; --bg-surface:#1F1C16; --bg-raised:#26221B; --bg-sunken:#12100C;
+    --text-primary:#EDE6D8; --text-secondary:#B5AA97; --text-tertiary:#8C826F; --text-disabled:#544C3F;
+    --border-subtle:#2C281F; --border-standard:#3A3529; --border-strong:#575040;
+    --accent:#6FBE4F; --accent-hover:#82CB63; --accent-pressed:#5DA840; --accent-soft:#1E2B17; --accent-edge:#3F7A2B; --on-accent:#0F1A0A;
+    --success:#6CC77C; --success-soft:#16261A;
+    --warning:#E6AE55; --warning-soft:#2B2314;
     --danger:#EE7B70; --danger-soft:#2E1917;
+    --sky-top:#141B38; --sky-bottom:#2A3566; --cloud:#3B4677;
+    --frog-line:#2A5A1F; --frog-body:#6DB64C; --frog-dark:#4E8F33; --frog-cheek:#D98C86;
     --shadow-raised:0 0 0 1px rgba(255,255,255,.02);
     --shadow-floating:0 10px 32px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4);
   }
 }
 :root[data-theme="dark"]{
   color-scheme: dark;
-  --bg-canvas:#111311; --bg-surface:#181B18; --bg-raised:#1E221E; --bg-sunken:#0D0F0D;
-  --text-primary:#E7EAE6; --text-secondary:#A8AFA7; --text-tertiary:#7E867D; --text-disabled:#4F564F;
-  --border-subtle:#242824; --border-standard:#313631; --border-strong:#4C534B;
-  --accent:#5FBF6E; --accent-hover:#74CC82; --accent-pressed:#4EA75C; --accent-soft:#1A2A1C; --on-accent:#0B170D;
-  --success:#5CC784; --success-soft:#15281B;
-  --warning:#E0A64E; --warning-soft:#2A2215;
+  --bg-canvas:#16140F; --bg-surface:#1F1C16; --bg-raised:#26221B; --bg-sunken:#12100C;
+  --text-primary:#EDE6D8; --text-secondary:#B5AA97; --text-tertiary:#8C826F; --text-disabled:#544C3F;
+  --border-subtle:#2C281F; --border-standard:#3A3529; --border-strong:#575040;
+  --accent:#6FBE4F; --accent-hover:#82CB63; --accent-pressed:#5DA840; --accent-soft:#1E2B17; --accent-edge:#3F7A2B; --on-accent:#0F1A0A;
+  --success:#6CC77C; --success-soft:#16261A;
+  --warning:#E6AE55; --warning-soft:#2B2314;
   --danger:#EE7B70; --danger-soft:#2E1917;
+  --sky-top:#141B38; --sky-bottom:#2A3566; --cloud:#3B4677;
+  --frog-line:#2A5A1F; --frog-body:#6DB64C; --frog-dark:#4E8F33; --frog-cheek:#D98C86;
   --shadow-raised:0 0 0 1px rgba(255,255,255,.02);
   --shadow-floating:0 10px 32px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4);
 }
@@ -59,51 +69,82 @@ body{
   margin:0; background:var(--bg-canvas); color:var(--text-primary);
   font:400 15px/1.55 var(--font); -webkit-font-smoothing:antialiased; font-feature-settings:"ss06";
   padding-inline:var(--s4);
-  padding-block:calc(var(--s12) + env(safe-area-inset-top,0px)) calc(var(--s16) + env(safe-area-inset-bottom,0px));
+  padding-block:calc(var(--s8) + env(safe-area-inset-top,0px)) calc(var(--s12) + env(safe-area-inset-bottom,0px));
 }
 .wrap{max-width:760px; margin-inline:auto; display:flex; flex-direction:column; gap:var(--s12)}
 .num{font-variant-numeric:tabular-nums}
 svg.i{width:16px; height:16px; flex:none; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+svg.px{display:block; flex:none}
 :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:var(--r-sm)}
 h1,h2{margin:0; text-wrap:balance}
-h2{font-size:17px; font-weight:600; line-height:1.3; letter-spacing:-.005em}
+h2{display:flex; align-items:center; gap:10px; font:400 18px/1.2 var(--pixel-s); letter-spacing:0}
+h2 svg.px{width:18px; height:auto}
 .section{display:flex; flex-direction:column; gap:var(--s4)}
-.sec-head{display:flex; align-items:baseline; gap:var(--s3); flex-wrap:wrap}
+.sec-head{display:flex; align-items:center; gap:var(--s3); flex-wrap:wrap}
 .sec-sub{font-size:13px; color:var(--text-tertiary)}
 
-/* ---------- header ---------- */
-.head{display:flex; flex-direction:column; gap:var(--s3)}
-.eyebrow{font-size:13px; font-weight:500; color:var(--text-tertiary); margin:0}
-h1{font-size:32px; font-weight:700; line-height:1.15; letter-spacing:-.02em}
+/* ---------- hero ---------- */
+.hero{position:relative; overflow:hidden; border-radius:var(--r-lg); background:linear-gradient(180deg, var(--sky-top), var(--sky-bottom)); padding:var(--s8) var(--s6) calc(var(--s8) + 24px); box-shadow:var(--shadow-raised)}
+.hero::after{content:""; position:absolute; left:0; right:0; bottom:0; height:24px; background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2224%22%20preserveAspectRatio%3D%22none%22%20viewBox%3D%220%200%2016%206%22%20shape-rendering%3D%22crispEdges%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%221%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%222%22%20y%3D%220%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%224%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%225%22%20y%3D%220%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%228%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%229%22%20y%3D%220%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%2213%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%2214%22%20y%3D%220%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%220%22%20y%3D%221%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%222%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%223%22%20y%3D%221%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%226%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%227%22%20y%3D%221%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%2210%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%2211%22%20y%3D%221%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%2214%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%2215%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%220%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%221%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%223%22%20y%3D%222%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%225%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%226%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%227%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%228%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%229%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%2210%22%20y%3D%222%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%2212%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%2213%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%2214%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2362B23F%22/%3E%3Crect%20x%3D%2215%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%234E9A31%22/%3E%3Crect%20x%3D%220%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%221%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%236E4520%22/%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%236E4520%22/%3E%3Crect%20x%3D%225%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%226%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23A87445%22/%3E%3Crect%20x%3D%227%22%20y%3D%223%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%2210%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%236E4520%22/%3E%3Crect%20x%3D%2211%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%2212%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23A87445%22/%3E%3Crect%20x%3D%2213%22%20y%3D%223%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%2215%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%236E4520%22/%3E%3Crect%20x%3D%220%22%20y%3D%224%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23A87445%22/%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%226%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%236E4520%22/%3E%3Crect%20x%3D%227%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%228%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23A87445%22/%3E%3Crect%20x%3D%229%22%20y%3D%224%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%2213%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%236E4520%22/%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%220%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%221%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%236E4520%22/%3E%3Crect%20x%3D%222%22%20y%3D%225%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%224%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23A87445%22/%3E%3Crect%20x%3D%225%22%20y%3D%225%22%20width%3D%225%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%2210%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23A87445%22/%3E%3Crect%20x%3D%2211%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3Crect%20x%3D%2212%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%236E4520%22/%3E%3Crect%20x%3D%2213%22%20y%3D%225%22%20width%3D%223%22%20height%3D%221%22%20fill%3D%22%238B5A2B%22/%3E%3C/svg%3E") repeat-x; background-size:64px 24px; image-rendering:pixelated}
+.cloud{position:absolute; width:96px; height:auto; opacity:.95; animation:bob 6s ease-in-out infinite}
+.cloud.c1{top:22px; right:7%}
+.cloud.c2{top:78px; right:24%; width:60px; opacity:.7; animation-delay:-3s}
+@keyframes bob{50%{transform:translateX(10px)}}
+.spark{position:absolute; width:10px; height:auto; opacity:0}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .spark{opacity:.9; animation:twinkle 3s ease-in-out infinite} }
+:root[data-theme="dark"] .spark{opacity:.9; animation:twinkle 3s ease-in-out infinite}
+.spark.s1{top:22px; right:18%} .spark.s2{top:70px; right:40%; animation-delay:-1.2s!important} .spark.s3{top:36px; left:58%; animation-delay:-2s!important}
+@keyframes twinkle{50%{opacity:.25}}
+.hero-in{position:relative; display:flex; align-items:flex-end; gap:var(--s5)}
+.frog-wrap{position:relative; flex:none}
+.frog{display:block; padding:0; border:0; background:none; cursor:pointer; border-radius:var(--r-md)}
+.frog svg{width:84px; height:auto; filter:drop-shadow(0 3px 0 rgba(0,0,0,.12))}
+.frog:hover svg{transform:translateY(-2px)}
+.frog.hop{animation:hop .5s cubic-bezier(.3,.7,.4,1)}
+@keyframes hop{30%{transform:translateY(-18px) scaleY(1.06)} 60%{transform:translateY(0) scaleY(.92)} 100%{transform:none}}
+.bubble{position:absolute; left:64px; top:-14px; white-space:nowrap; padding:6px 10px; background:var(--bg-surface); color:var(--text-primary); font:400 11px/1 var(--pixel); border:2px solid var(--text-primary); border-radius:var(--r-sm); opacity:0; transform:translateY(4px); transition:opacity var(--m-std), transform var(--m-std); pointer-events:none}
+.bubble::after{content:""; position:absolute; left:-7px; bottom:4px; width:8px; height:8px; background:var(--bg-surface); border-left:2px solid var(--text-primary); border-bottom:2px solid var(--text-primary); transform:skewY(-30deg)}
+.bubble.show{opacity:1; transform:none}
+.head{display:flex; flex-direction:column; gap:var(--s3); min-width:0}
+.eyebrow{display:inline-flex; align-self:flex-start; align-items:center; height:24px; padding:0 10px; border-radius:var(--r-full); background:rgba(255,255,255,.6); color:var(--text-secondary); font-size:13px; font-weight:600; margin:0}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .eyebrow{background:rgba(0,0,0,.25)} }
+:root[data-theme="dark"] .eyebrow{background:rgba(0,0,0,.25)}
+h1{font:400 33px/1.15 var(--pixel); letter-spacing:0; color:var(--text-primary); text-shadow:0 2px 0 rgba(255,255,255,.55)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) h1{text-shadow:0 2px 0 rgba(0,0,0,.4)} }
+:root[data-theme="dark"] h1{text-shadow:0 2px 0 rgba(0,0,0,.4)}
 .meta{display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center}
-.chip{display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font-size:13px; font-weight:500}
-.addr{display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 6px 0 10px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font:500 12.5px var(--mono); border:0; cursor:pointer; transition:color var(--m-fast), background var(--m-fast)}
-.addr:hover{color:var(--text-primary); background:var(--border-subtle)}
-.addr svg{width:14px; height:14px}
-.notice{margin:0; display:flex; gap:var(--s3); padding:var(--s3) var(--s4); border-radius:var(--r-md); background:var(--warning-soft); color:var(--text-primary); font-size:14px}
+.chip{display:inline-flex; align-items:center; height:28px; padding:0 10px; border-radius:var(--r-full); background:var(--bg-surface); color:var(--text-secondary); font-size:13px; font-weight:500}
+.addr{display:inline-flex; align-items:center; gap:6px; height:28px; padding:0 8px 0 10px; border-radius:var(--r-full); background:var(--bg-surface); color:var(--text-primary); font:500 12.5px var(--mono); border:0; cursor:pointer; transition:background var(--m-fast)}
+.addr:hover{background:var(--bg-raised)}
+.addr svg{width:14px; height:14px; color:var(--text-tertiary)}
+.pill-link{display:inline-flex; align-items:center; gap:6px; height:28px; padding:0 12px; border-radius:var(--r-full); background:var(--bg-surface); color:var(--text-primary); font-size:13px; font-weight:600; text-decoration:none; box-shadow:0 2px 0 rgba(0,0,0,.08); transition:transform var(--m-fast), box-shadow var(--m-fast)}
+.pill-link:hover{transform:translateY(-1px); box-shadow:0 3px 0 rgba(0,0,0,.1)}
+.pill-link svg{width:13px; height:13px; color:var(--text-tertiary)}
+.notice{margin:0; display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s3) var(--s4); border-radius:var(--r-md); background:var(--warning-soft); border:2px dashed color-mix(in srgb, var(--warning) 35%, transparent); color:var(--text-primary); font-size:14px; font-weight:500}
 .notice svg{color:var(--warning); margin-top:3px}
 
 /* ---------- download ---------- */
-.dl-card{background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); box-shadow:var(--shadow-raised); padding:var(--s6); display:grid; grid-template-columns:1fr auto; gap:var(--s4) var(--s6); align-items:center}
-.dl-title{font-size:20px; font-weight:600; letter-spacing:-.01em; line-height:1.3}
-.dl-facts{display:flex; flex-wrap:wrap; gap:var(--s1) var(--s3); margin-top:var(--s1); font-size:13px; color:var(--text-tertiary)}
+.dl-card{background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); box-shadow:var(--shadow-raised); padding:var(--s6); display:grid; grid-template-columns:auto 1fr auto; gap:var(--s4) var(--s5); align-items:center}
+.dl-block svg{width:52px; height:auto; filter:drop-shadow(0 3px 0 rgba(0,0,0,.12))}
+.dl-title{font:400 22px/1.25 var(--pixel)}
+.dl-facts{display:flex; flex-wrap:wrap; gap:var(--s1) var(--s3); margin-top:6px; font-size:13px; color:var(--text-tertiary)}
 .dl-facts .file{font-family:var(--mono); font-size:12.5px; color:var(--text-secondary)}
 .dl-facts .dot{color:var(--border-strong)}
-.btn-dl{display:inline-flex; align-items:center; justify-content:center; gap:var(--s2); height:48px; padding:0 var(--s6); border-radius:var(--r-md); background:var(--accent); color:var(--on-accent); font:600 16px/1 var(--font); text-decoration:none; transition:background var(--m-fast), transform var(--m-fast); white-space:nowrap}
+.btn-dl{display:inline-flex; align-items:center; justify-content:center; gap:var(--s2); height:52px; padding:0 var(--s6); border-radius:var(--r-sm); background:var(--accent); color:var(--on-accent); font:400 18px/1 var(--pixel-s); text-decoration:none; border:2px solid var(--accent-edge); box-shadow:inset 0 -5px 0 rgba(0,0,0,.2), inset 0 2px 0 rgba(255,255,255,.25); transition:background var(--m-fast), transform var(--m-fast), box-shadow var(--m-fast); white-space:nowrap}
 .btn-dl:hover{background:var(--accent-hover)}
-.btn-dl:active{background:var(--accent-pressed); transform:translateY(1px)}
-.btn-dl svg{width:18px; height:18px; stroke-width:1.8}
-.btn-dl[aria-disabled="true"]{background:var(--bg-sunken); color:var(--text-disabled); pointer-events:none}
-.dl-state{grid-column:1 / -1; display:flex; align-items:center; gap:var(--s2); font-size:13px; color:var(--text-secondary); padding-top:var(--s4); border-top:1px solid var(--border-subtle)}
+.btn-dl:active{background:var(--accent-pressed); transform:translateY(2px); box-shadow:inset 0 -2px 0 rgba(0,0,0,.2), inset 0 2px 0 rgba(255,255,255,.2)}
+.btn-dl svg{width:18px; height:18px; stroke-width:2}
+.btn-dl[aria-disabled="true"]{background:var(--bg-sunken); color:var(--text-disabled); border-color:var(--border-standard); box-shadow:inset 0 -5px 0 rgba(0,0,0,.05); pointer-events:none}
+.dl-state{grid-column:1 / -1; display:flex; align-items:center; gap:var(--s2); font-size:13px; color:var(--text-secondary); padding-top:var(--s4); border-top:1px dashed var(--border-standard)}
 .dl-state svg{width:15px; height:15px}
 .dl-state.ok svg{color:var(--success)}
 .dl-state.stale{color:var(--text-primary)}
 .dl-state.stale svg{color:var(--warning)}
 
 /* ---------- changes ---------- */
-.changes{list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+.changes{list-style:none; margin:0; padding:var(--s2) var(--s4); display:flex; flex-direction:column; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg)}
 .ch{display:grid; grid-template-columns:88px minmax(0,1fr) auto; gap:var(--s3); align-items:baseline; padding:var(--s2) 0; font-size:14px}
-.ch + .ch{border-top:1px solid var(--border-subtle)}
+.ch + .ch{border-top:1px dashed var(--border-subtle)}
 .ck{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600}
 .ck span{display:inline-grid; place-items:center; width:16px; height:16px; border-radius:var(--r-sm); font-size:12px; line-height:1}
 .ch-add .ck{color:var(--success)} .ch-add .ck span{background:var(--success-soft)}
@@ -114,108 +155,114 @@ h1{font-size:32px; font-weight:700; line-height:1.15; letter-spacing:-.02em}
 .cv .arrow{color:var(--border-strong)}
 .ch-del .cn{color:var(--text-secondary); text-decoration:line-through; text-decoration-color:var(--border-strong)}
 
+/* ---------- season vote ---------- */
+.badge-live{display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 9px; border-radius:var(--r-sm); background:var(--accent); color:var(--on-accent); font-size:12px; font-weight:700; box-shadow:inset 0 -2px 0 rgba(0,0,0,.18)}
+.badge-live::before{content:""; width:6px; height:6px; background:currentColor; animation:blink 1.4s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.season-intro{margin:0; font-size:14px; color:var(--text-secondary)}
+.cands{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:var(--s3); counter-reset:cand}
+.cand{counter-increment:cand; position:relative; display:flex; flex-direction:column; gap:var(--s3); padding:var(--s4); background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); box-shadow:var(--shadow-raised); transition:transform var(--m-std), box-shadow var(--m-std)}
+.cand:hover{transform:translateY(-2px); box-shadow:0 2px 0 rgba(90,70,30,.06), 0 10px 24px rgba(90,70,30,.1)}
+.cand::before{content:counter(cand); position:absolute; top:var(--s4); right:var(--s4); display:grid; place-items:center; width:24px; height:24px; border-radius:var(--r-sm); background:var(--bg-sunken); color:var(--text-tertiary); font:400 11px/1 var(--pixel)}
+.cand-main{min-width:0; padding-right:32px}
+.cand-n{font:400 16px/1.35 var(--pixel-s)}
+.cand-p{margin-top:2px; font-size:13px; color:var(--text-tertiary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.cand-meta{display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap}
+.stars{display:inline-flex; gap:1px}
+.stars svg{width:14px; height:14px; stroke-width:1.3; color:var(--border-strong)}
+.stars svg.on{color:#F2B636; fill:currentColor; stroke:#C98E14}
+.weeks{font-size:13px; font-weight:600; color:var(--text-secondary)}
+.cand-v{display:flex; gap:var(--s1); flex-wrap:wrap; margin-top:auto}
+.vlink{display:inline-flex; align-items:center; gap:5px; height:28px; padding:0 10px; border-radius:var(--r-sm); background:var(--bg-sunken); color:var(--text-secondary); font-size:12px; font-weight:600; text-decoration:none; white-space:nowrap; transition:color var(--m-fast), background var(--m-fast)}
+.vlink::before{content:""; width:0; height:0; border-left:6px solid currentColor; border-top:4px solid transparent; border-bottom:4px solid transparent}
+.vlink:hover{color:#fff; background:#E0413A}
+.vote-cta{display:flex; align-items:center; justify-content:space-between; gap:var(--s4); flex-wrap:wrap}
+.vote-cta span{font-size:13px; color:var(--text-tertiary)}
+
 /* ---------- install ---------- */
+.install{background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); padding:var(--s5) var(--s5) var(--s4); display:flex; flex-direction:column; gap:var(--s5)}
 .seg{display:inline-flex; background:var(--bg-sunken); border-radius:var(--r-md); padding:2px; margin-left:auto}
 .seg button{height:28px; padding:0 12px; border:0; background:none; color:var(--text-secondary); font:500 13px/1 var(--font); border-radius:6px; cursor:pointer; transition:color var(--m-fast)}
 .seg button:hover{color:var(--text-primary)}
 .seg button[aria-selected="true"]{background:var(--bg-surface); color:var(--text-primary); box-shadow:0 1px 2px rgba(0,0,0,.08), 0 0 0 1px var(--border-subtle)}
 .steps{list-style:none; margin:0; padding:0; counter-reset:step; display:flex; flex-direction:column; gap:var(--s5)}
-.steps > li{counter-increment:step; display:grid; grid-template-columns:24px minmax(0,1fr); gap:var(--s3)}
-.steps > li::before{content:counter(step); display:grid; place-items:center; width:24px; height:24px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font-size:12px; font-weight:600; font-variant-numeric:tabular-nums}
-.step-t{font-weight:500; line-height:24px}
+.steps > li{counter-increment:step; display:grid; grid-template-columns:28px minmax(0,1fr); gap:var(--s3)}
+.steps > li::before{content:counter(step); display:grid; place-items:center; width:28px; height:28px; border-radius:var(--r-sm); background:var(--accent-soft); color:var(--accent); font:400 11px/1 var(--pixel); box-shadow:inset 0 -2px 0 rgba(0,0,0,.06)}
+.step-t{font-weight:600; line-height:28px}
 .step-d{font-size:14px; color:var(--text-secondary); margin-top:2px}
 .path{display:flex; align-items:center; gap:var(--s2); margin-top:var(--s2); max-width:100%}
 .path code{flex:1; min-width:0; font:13px var(--mono); padding:8px 10px; border-radius:var(--r-md); background:var(--bg-sunken); color:var(--text-primary); overflow-x:auto; white-space:nowrap}
-.btn-ghost{display:inline-flex; align-items:center; gap:6px; height:34px; padding:0 10px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:500 13px/1 var(--font); text-decoration:none; cursor:pointer; white-space:nowrap; transition:background var(--m-fast), border-color var(--m-fast)}
+.btn-ghost{display:inline-flex; align-items:center; gap:6px; height:34px; padding:0 12px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:600 13px/1 var(--font); text-decoration:none; cursor:pointer; white-space:nowrap; box-shadow:0 2px 0 var(--border-subtle); transition:background var(--m-fast), border-color var(--m-fast), transform var(--m-fast)}
 .btn-ghost:hover{background:var(--bg-raised); border-color:var(--border-strong)}
+.btn-ghost:active{transform:translateY(1px); box-shadow:none}
 .btn-ghost svg{width:14px; height:14px}
 kbd{font:12px var(--mono); padding:1px 5px; border-radius:var(--r-sm); border:1px solid var(--border-standard); border-bottom-width:2px; color:var(--text-secondary); background:var(--bg-surface)}
+.guide-more{margin:0; padding-top:var(--s4); border-top:1px dashed var(--border-standard); font-size:14px; color:var(--text-secondary)}
+.guide-more a{color:var(--accent); font-weight:600; text-decoration:none}
+.guide-more a:hover{text-decoration:underline; text-underline-offset:3px}
 
 /* ---------- mod list ---------- */
 .list-tools{display:flex; gap:var(--s3); align-items:center}
 .search{position:relative; flex:1; min-width:0}
 .search svg{position:absolute; left:11px; top:50%; transform:translateY(-50%); color:var(--text-tertiary)}
-.search input{width:100%; height:38px; padding:0 12px 0 34px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:400 14px var(--font); transition:border-color var(--m-fast), box-shadow var(--m-fast)}
+.search input{width:100%; height:40px; padding:0 12px 0 34px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:400 14px var(--font); transition:border-color var(--m-fast), box-shadow var(--m-fast)}
 .search input::placeholder{color:var(--text-tertiary)}
 .search input:hover{border-color:var(--border-strong)}
 .search input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
 .search input::-webkit-search-cancel-button{cursor:pointer}
 .mods{list-style:none; margin:0; padding:0; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); overflow:hidden}
-.mod{display:grid; grid-template-columns:32px minmax(0,1fr) auto 64px; gap:var(--s3); align-items:center; padding:10px var(--s4); transition:background var(--m-fast)}
-.mod + .mod{border-top:1px solid var(--border-subtle)}
+.mod{display:grid; grid-template-columns:36px minmax(0,1fr) auto 64px; gap:var(--s3); align-items:center; padding:10px var(--s4); transition:background var(--m-fast)}
+.mod + .mod{border-top:1px dashed var(--border-subtle)}
 .mod:hover{background:var(--bg-raised)}
-.ic img,.ph{width:32px; height:32px; border-radius:6px; display:block}
+.ic img,.ph{width:36px; height:36px; border-radius:var(--r-sm); display:block}
 .ic img{image-rendering:pixelated; background:var(--bg-sunken)}
-.ph{display:grid; place-items:center; background:var(--bg-sunken); color:var(--text-tertiary); font-weight:600; font-size:14px}
+.ph{display:grid; place-items:center; background:var(--accent-soft); color:var(--accent); font:400 11px/1 var(--pixel)}
 .mi{display:flex; flex-direction:column; min-width:0}
-.mn{font-weight:500; font-size:14.5px; display:flex; align-items:center; gap:var(--s2); min-width:0}
+.mn{font-weight:600; font-size:14.5px; display:flex; align-items:center; gap:var(--s2); min-width:0}
 .md{font-size:13px; color:var(--text-tertiary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .mv{font:12.5px var(--mono); color:var(--text-secondary); max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .ms{font-size:13px; color:var(--text-tertiary); text-align:right}
-.tag{flex:none; display:inline-flex; align-items:center; height:18px; padding:0 6px; border-radius:var(--r-sm); font-size:11px; font-weight:500; letter-spacing:.01em; color:var(--text-secondary); background:var(--bg-sunken)}
+.tag{flex:none; display:inline-flex; align-items:center; height:20px; padding:0 7px; border-radius:var(--r-sm); font-size:11.5px; font-weight:600; color:var(--text-secondary); background:var(--bg-sunken)}
 .tag-muted{color:var(--text-tertiary); background:none; border:1px dashed var(--border-standard)}
 .mod.is-server .mn,.mod.is-server .ic{opacity:.6}
-.empty{padding:var(--s8) var(--s4); text-align:center; font-size:14px; color:var(--text-secondary); background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg)}
-.empty b{display:block; color:var(--text-primary); font-weight:500; margin-bottom:var(--s1)}
+.empty{display:flex; flex-direction:column; align-items:center; gap:var(--s2); padding:var(--s8) var(--s4); text-align:center; font-size:14px; color:var(--text-secondary); background:var(--bg-surface); border:2px dashed var(--border-standard); border-radius:var(--r-lg)}
+.empty b{display:block; color:var(--text-primary); font:400 16px/1.3 var(--pixel-s)}
+.empty svg.px{width:40px; height:auto; margin-bottom:var(--s1); opacity:.9}
 mark{background:var(--accent-soft); color:inherit; border-radius:2px}
 
-/* ---------- links ---------- */
-.xlink{display:inline-flex; align-items:center; gap:6px; color:var(--text-secondary); font-size:13px; font-weight:500; text-decoration:none; transition:color var(--m-fast)}
+/* ---------- links / footer ---------- */
+.xlink{display:inline-flex; align-items:center; gap:6px; color:var(--text-secondary); font-size:13px; font-weight:600; text-decoration:none; transition:color var(--m-fast)}
 .xlink:hover{color:var(--text-primary)}
 .xlink svg{width:13px; height:13px; color:var(--text-tertiary)}
-.pill-link{display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px; border-radius:var(--r-full); border:1px solid var(--border-standard); color:var(--text-primary); font-size:13px; font-weight:500; text-decoration:none; transition:border-color var(--m-fast), background var(--m-fast)}
-.pill-link:hover{border-color:var(--border-strong); background:var(--bg-surface)}
-.pill-link svg{width:13px; height:13px; color:var(--text-tertiary)}
-.guide-more{margin:0; font-size:14px; color:var(--text-secondary)}
-.guide-more a{color:var(--accent); font-weight:500; text-decoration:none}
-.guide-more a:hover{text-decoration:underline; text-underline-offset:3px}
-
-/* ---------- season vote ---------- */
-.badge-live{display:inline-flex; align-items:center; gap:6px; height:22px; padding:0 8px; border-radius:var(--r-full); background:var(--accent-soft); color:var(--accent); font-size:12px; font-weight:600}
-.badge-live::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor}
-.season-intro{margin:0; font-size:14px; color:var(--text-secondary)}
-.cands{list-style:none; margin:0; padding:0; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); overflow:hidden; counter-reset:cand}
-.cand{counter-increment:cand; display:grid; grid-template-columns:20px minmax(0,1fr) auto auto; gap:var(--s4); align-items:center; padding:var(--s3) var(--s4)}
-.cand::before{content:counter(cand); font-size:12px; font-weight:600; color:var(--text-tertiary); font-variant-numeric:tabular-nums; text-align:center}
-.cand + .cand{border-top:1px solid var(--border-subtle)}
-.cand-main{min-width:0}
-.cand-n{font-weight:600; font-size:15px; line-height:1.35}
-.cand-p{font-size:13px; color:var(--text-tertiary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.cand-meta{display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap; justify-content:flex-end}
-.stars{display:inline-flex; gap:1px}
-.stars svg{width:13px; height:13px; stroke-width:1.3; color:var(--border-strong)}
-.stars svg.on{color:var(--warning); fill:currentColor}
-.weeks{font-size:13px; color:var(--text-secondary); min-width:44px; text-align:right}
-.cand-v{display:flex; gap:var(--s1)}
-.vlink{display:inline-flex; align-items:center; height:26px; padding:0 8px; border-radius:var(--r-md); background:var(--bg-sunken); color:var(--text-secondary); font-size:12px; font-weight:500; text-decoration:none; white-space:nowrap; transition:color var(--m-fast), background var(--m-fast)}
-.vlink:hover{color:var(--text-primary); background:var(--border-subtle)}
-.vote-cta{display:flex; align-items:center; justify-content:space-between; gap:var(--s4); flex-wrap:wrap}
-.vote-cta span{font-size:13px; color:var(--text-tertiary)}
-
-footer{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s1) var(--s3); font-size:13px; color:var(--text-tertiary); padding-top:var(--s4); border-top:1px solid var(--border-subtle)}
+footer{display:flex; flex-wrap:wrap; align-items:center; gap:var(--s2) var(--s4); font-size:13px; color:var(--text-tertiary); padding-top:var(--s5); border-top:2px dashed var(--border-standard)}
+footer .bye{display:inline-flex; align-items:center; gap:var(--s2); font:400 11px/1 var(--pixel); color:var(--text-secondary); width:100%}
+footer .bye svg{width:28px; height:auto}
 footer .btn-ghost{margin-left:auto; height:30px}
 
 /* toast */
-.toast{position:fixed; left:50%; bottom:calc(var(--s6) + env(safe-area-inset-bottom,0px)); transform:translate(-50%,8px); opacity:0; pointer-events:none; display:flex; align-items:center; gap:var(--s2); padding:10px 14px; border-radius:var(--r-md); background:var(--text-primary); color:var(--bg-canvas); font-size:14px; font-weight:500; box-shadow:var(--shadow-floating); transition:opacity var(--m-std), transform var(--m-std); max-width:calc(100% - 32px)}
+.toast{position:fixed; left:50%; bottom:calc(var(--s6) + env(safe-area-inset-bottom,0px)); transform:translate(-50%,8px); opacity:0; pointer-events:none; display:flex; align-items:center; gap:var(--s2); padding:10px 14px; border-radius:var(--r-md); background:var(--text-primary); color:var(--bg-canvas); font-size:14px; font-weight:600; box-shadow:var(--shadow-floating); transition:opacity var(--m-std), transform var(--m-std); max-width:calc(100% - 32px)}
 .toast.show{opacity:1; transform:translate(-50%,0)}
 .toast svg{width:15px; height:15px}
 
 @media (max-width:600px){
-  body{padding-block:calc(var(--s8) + env(safe-area-inset-top,0px)) calc(var(--s12) + env(safe-area-inset-bottom,0px))}
+  body{padding-block:calc(var(--s4) + env(safe-area-inset-top,0px)) calc(var(--s12) + env(safe-area-inset-bottom,0px))}
   .wrap{gap:var(--s8)}
+  .hero{padding:var(--s6) var(--s5) calc(var(--s6) + 24px)}
+  .hero-in{flex-direction:column; align-items:flex-start; gap:var(--s4)}
+  .frog svg{width:64px}
+  .cloud.c1{right:-12px; width:72px} .cloud.c2{display:none}
+  .bubble{left:52px}
   h1{font-size:26px}
-  .dl-card{grid-template-columns:1fr; padding:var(--s5)}
-  .btn-dl{width:100%}
-  .mod{grid-template-columns:32px minmax(0,1fr) auto}
+  .dl-card{grid-template-columns:auto 1fr; padding:var(--s5)}
+  .dl-block svg{width:40px}
+  .btn-dl{grid-column:1 / -1; width:100%}
+  .install{padding:var(--s4)}
+  .mod{grid-template-columns:36px minmax(0,1fr) auto}
   .ms{display:none}
   .ch{grid-template-columns:76px minmax(0,1fr)}
-  .cand{grid-template-columns:20px minmax(0,1fr); row-gap:var(--s2)}
-  .cand::before{align-self:start; line-height:21px}
-  .cand-meta,.cand-v{grid-column:2; justify-content:flex-start}
-  .weeks{min-width:0; text-align:left}
   .cv{grid-column:2}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
 </style>
 </head>
 <body>
@@ -232,7 +279,12 @@ footer .btn-ghost{margin-left:auto; height:30px}
 </svg>
 
 <main class="wrap">
-  <header class="head">
+  <header class="hero">
+    <svg class="px cloud c1" viewBox="0 0 12 4" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="4" height="1" fill="var(--cloud)"/><rect x="2" y="1" width="6" height="1" fill="var(--cloud)"/><rect x="9" y="1" width="2" height="1" fill="var(--cloud)"/><rect x="1" y="2" width="11" height="1" fill="var(--cloud)"/><rect x="0" y="3" width="12" height="1" fill="var(--cloud)"/></svg><svg class="px cloud c2" viewBox="0 0 12 4" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="4" height="1" fill="var(--cloud)"/><rect x="2" y="1" width="6" height="1" fill="var(--cloud)"/><rect x="9" y="1" width="2" height="1" fill="var(--cloud)"/><rect x="1" y="2" width="11" height="1" fill="var(--cloud)"/><rect x="0" y="3" width="12" height="1" fill="var(--cloud)"/></svg>
+    <svg class="px spark s1" viewBox="0 0 5 5" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="#FFE58A"/><rect x="1" y="1" width="3" height="1" fill="#FFE58A"/><rect x="0" y="2" width="5" height="1" fill="#FFE58A"/><rect x="1" y="3" width="3" height="1" fill="#FFE58A"/><rect x="2" y="4" width="1" height="1" fill="#FFE58A"/></svg><svg class="px spark s2" viewBox="0 0 5 5" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="#FFE58A"/><rect x="1" y="1" width="3" height="1" fill="#FFE58A"/><rect x="0" y="2" width="5" height="1" fill="#FFE58A"/><rect x="1" y="3" width="3" height="1" fill="#FFE58A"/><rect x="2" y="4" width="1" height="1" fill="#FFE58A"/></svg><svg class="px spark s3" viewBox="0 0 5 5" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="#FFE58A"/><rect x="1" y="1" width="3" height="1" fill="#FFE58A"/><rect x="0" y="2" width="5" height="1" fill="#FFE58A"/><rect x="1" y="3" width="3" height="1" fill="#FFE58A"/><rect x="2" y="4" width="1" height="1" fill="#FFE58A"/></svg>
+    <div class="hero-in">
+    <div class="frog-wrap"><button class="frog" id="frog" type="button" aria-label="개구리 누르기"><svg class="px " viewBox="0 0 14 12" shape-rendering="crispEdges" role="img" aria-label="개구리"><rect x="3" y="0" width="3" height="1" fill="var(--frog-line)"/><rect x="8" y="0" width="3" height="1" fill="var(--frog-line)"/><rect x="2" y="1" width="1" height="1" fill="var(--frog-line)"/><rect x="3" y="1" width="2" height="1" fill="#1F2A1A"/><rect x="5" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="1" width="2" height="1" fill="var(--frog-line)"/><rect x="8" y="1" width="2" height="1" fill="#1F2A1A"/><rect x="10" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="11" y="1" width="1" height="1" fill="var(--frog-line)"/><rect x="2" y="2" width="1" height="1" fill="var(--frog-line)"/><rect x="3" y="2" width="3" height="1" fill="#1F2A1A"/><rect x="6" y="2" width="2" height="1" fill="var(--frog-line)"/><rect x="8" y="2" width="3" height="1" fill="#1F2A1A"/><rect x="11" y="2" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="3" width="1" height="1" fill="var(--frog-line)"/><rect x="2" y="3" width="1" height="1" fill="var(--frog-body)"/><rect x="3" y="3" width="3" height="1" fill="var(--frog-line)"/><rect x="6" y="3" width="2" height="1" fill="var(--frog-body)"/><rect x="8" y="3" width="3" height="1" fill="var(--frog-line)"/><rect x="11" y="3" width="1" height="1" fill="var(--frog-body)"/><rect x="12" y="3" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="4" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="4" width="12" height="1" fill="var(--frog-body)"/><rect x="13" y="4" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="5" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="5" width="1" height="1" fill="var(--frog-body)"/><rect x="2" y="5" width="2" height="1" fill="var(--frog-cheek)"/><rect x="4" y="5" width="6" height="1" fill="var(--frog-body)"/><rect x="10" y="5" width="2" height="1" fill="var(--frog-cheek)"/><rect x="12" y="5" width="1" height="1" fill="var(--frog-body)"/><rect x="13" y="5" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="6" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="6" width="4" height="1" fill="var(--frog-body)"/><rect x="5" y="6" width="1" height="1" fill="var(--frog-line)"/><rect x="6" y="6" width="2" height="1" fill="var(--frog-body)"/><rect x="8" y="6" width="1" height="1" fill="var(--frog-line)"/><rect x="9" y="6" width="4" height="1" fill="var(--frog-body)"/><rect x="13" y="6" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="7" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="7" width="5" height="1" fill="var(--frog-body)"/><rect x="6" y="7" width="2" height="1" fill="var(--frog-line)"/><rect x="8" y="7" width="5" height="1" fill="var(--frog-body)"/><rect x="13" y="7" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="8" width="1" height="1" fill="var(--frog-line)"/><rect x="2" y="8" width="10" height="1" fill="var(--frog-body)"/><rect x="12" y="8" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="9" width="1" height="1" fill="var(--frog-line)"/><rect x="2" y="9" width="1" height="1" fill="var(--frog-dark)"/><rect x="3" y="9" width="3" height="1" fill="var(--frog-body)"/><rect x="6" y="9" width="2" height="1" fill="var(--frog-line)"/><rect x="8" y="9" width="3" height="1" fill="var(--frog-body)"/><rect x="11" y="9" width="1" height="1" fill="var(--frog-dark)"/><rect x="12" y="9" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="10" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="10" width="2" height="1" fill="var(--frog-dark)"/><rect x="3" y="10" width="1" height="1" fill="var(--frog-line)"/><rect x="5" y="10" width="4" height="1" fill="var(--frog-line)"/><rect x="10" y="10" width="1" height="1" fill="var(--frog-line)"/><rect x="11" y="10" width="2" height="1" fill="var(--frog-dark)"/><rect x="13" y="10" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="11" width="2" height="1" fill="var(--frog-line)"/><rect x="11" y="11" width="2" height="1" fill="var(--frog-line)"/></svg></button><span class="bubble" id="bubble" aria-live="polite"></span></div>
+    <div class="head">
     <p class="eyebrow">🐸 노천극장 어르신들의 놀이터</p>
     <h1>마인크래프트 모드</h1>
     <div class="meta">
@@ -240,10 +292,13 @@ footer .btn-ghost{margin-left:auto; height:30px}
       <button class="addr" type="button" data-copy="" data-toast="서버 주소를 복사했어요" hidden aria-label="서버 주소  복사"><svg class="i"><use href="#i-copy"/></svg></button>
       <a class="pill-link" href="https://app.notion.com/p/PC-392cf08765fb80509327d3661adf92a6" target="_blank" rel="noopener" >공지 · 업데이트 소식<svg class="i"><use href="#i-ext"/></svg></a>
     </div>
-    <p class="notice" hidden><svg class="i"><use href="#i-info"/></svg><span></span></p>
+    </div>
+    </div>
   </header>
+  <p class="notice" hidden><svg class="i"><use href="#i-info"/></svg><span></span></p>
 
   <section class="dl-card" aria-labelledby="dlTitle">
+    <div class="dl-block"><svg class="px " viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="1" height="1" fill="#62B23F"/><rect x="1" y="0" width="1" height="1" fill="#4E9A31"/><rect x="2" y="0" width="2" height="1" fill="#62B23F"/><rect x="4" y="0" width="1" height="1" fill="#4E9A31"/><rect x="5" y="0" width="3" height="1" fill="#62B23F"/><rect x="0" y="1" width="2" height="1" fill="#62B23F"/><rect x="2" y="1" width="1" height="1" fill="#4E9A31"/><rect x="3" y="1" width="3" height="1" fill="#62B23F"/><rect x="6" y="1" width="1" height="1" fill="#4E9A31"/><rect x="7" y="1" width="1" height="1" fill="#62B23F"/><rect x="0" y="2" width="1" height="1" fill="#4E9A31"/><rect x="1" y="2" width="1" height="1" fill="#62B23F"/><rect x="2" y="2" width="1" height="1" fill="#8B5A2B"/><rect x="3" y="2" width="2" height="1" fill="#62B23F"/><rect x="5" y="2" width="1" height="1" fill="#8B5A2B"/><rect x="6" y="2" width="1" height="1" fill="#62B23F"/><rect x="7" y="2" width="1" height="1" fill="#4E9A31"/><rect x="0" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="1" y="3" width="1" height="1" fill="#6E4520"/><rect x="2" y="3" width="2" height="1" fill="#8B5A2B"/><rect x="4" y="3" width="1" height="1" fill="#6E4520"/><rect x="5" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="6" y="3" width="1" height="1" fill="#A87445"/><rect x="7" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="0" y="4" width="2" height="1" fill="#8B5A2B"/><rect x="2" y="4" width="1" height="1" fill="#A87445"/><rect x="3" y="4" width="3" height="1" fill="#8B5A2B"/><rect x="6" y="4" width="1" height="1" fill="#6E4520"/><rect x="7" y="4" width="1" height="1" fill="#8B5A2B"/><rect x="0" y="5" width="1" height="1" fill="#8B5A2B"/><rect x="1" y="5" width="1" height="1" fill="#6E4520"/><rect x="2" y="5" width="2" height="1" fill="#8B5A2B"/><rect x="4" y="5" width="1" height="1" fill="#A87445"/><rect x="5" y="5" width="3" height="1" fill="#8B5A2B"/><rect x="0" y="6" width="2" height="1" fill="#8B5A2B"/><rect x="2" y="6" width="1" height="1" fill="#6E4520"/><rect x="3" y="6" width="4" height="1" fill="#8B5A2B"/><rect x="7" y="6" width="1" height="1" fill="#A87445"/><rect x="0" y="7" width="1" height="1" fill="#A87445"/><rect x="1" y="7" width="3" height="1" fill="#8B5A2B"/><rect x="4" y="7" width="1" height="1" fill="#6E4520"/><rect x="5" y="7" width="3" height="1" fill="#8B5A2B"/></svg></div>
     <div>
       <div class="dl-title" id="dlTitle">모드 0개 한 번에 받기</div>
       <div class="dl-facts">
@@ -253,7 +308,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
       </div>
     </div>
     <a class="btn-dl" id="dlBtn" href="https://github.com/yyavec/mod-site/releases/latest/download/mods.zip" download aria-disabled="true" tabindex="-1"><svg class="i"><use href="#i-dl"/></svg>모드 받기</a>
-    <div class="dl-state" id="dlState" role="status"><svg class="i"><use href="#i-info"/></svg><span>처음이라면 받은 뒤 아래 설치 방법을 따라 하세요.</span></div>
+    <div class="dl-state" id="dlState" role="status"><svg class="i"><use href="#i-info"/></svg><span>처음이라면 받은 뒤 아래 설치 방법을 차근차근 따라 해요.</span></div>
   </section>
 
   <section class="section" aria-labelledby="chTitle" hidden>
@@ -262,15 +317,16 @@ footer .btn-ghost{margin-left:auto; height:30px}
   </section>
 
   <section class="section" aria-labelledby="svTitle" >
-    <div class="sec-head"><h2 id="svTitle">시즌 2 모드 투표</h2><span class="badge-live" >투표 중</span><span class="sec-sub">2026년 10월 1일부터</span></div>
+    <div class="sec-head"><h2 id="svTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="2" height="1" fill="#F2B636"/><rect x="3" y="1" width="2" height="1" fill="#F2B636"/><rect x="0" y="2" width="8" height="1" fill="#F2B636"/><rect x="1" y="3" width="6" height="1" fill="#F2B636"/><rect x="2" y="4" width="4" height="1" fill="#F2B636"/><rect x="1" y="5" width="2" height="1" fill="#F2B636"/><rect x="5" y="5" width="2" height="1" fill="#F2B636"/><rect x="0" y="6" width="2" height="1" fill="#F2B636"/><rect x="6" y="6" width="2" height="1" fill="#F2B636"/></svg>시즌 2 모드 투표</h2><span class="badge-live" >투표 중</span><span class="sec-sub">2026년 10월 1일부터</span></div>
     <p class="season-intro" >같이 하고 싶은 모드에 투표해 주세요. 투표는 노션 페이지에서 받아요.</p>
     <ol class="cands"><li class="cand"><div class="cand-main"><div class="cand-n">포켓몬 (RE)</div><div class="cand-p">Pebblemon</div></div><div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 4점"><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st"><use href="#i-star"/></svg></span><span class="weeks num">4–5주</span><span class="tag">기존 세이브 초기화</span></div><div class="cand-v"><a class="vlink" href="https://youtu.be/2tsCcWbiYgA" target="_blank" rel="noopener">영상 1</a><a class="vlink" href="https://youtu.be/b_80s3-dK8Y" target="_blank" rel="noopener">영상 2</a></div></li><li class="cand"><div class="cand-main"><div class="cand-n">좀비 아포칼립스</div><div class="cand-p">DeceasedCraft</div></div><div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 4점"><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st"><use href="#i-star"/></svg></span><span class="weeks num">4–5주</span></div><div class="cand-v"><a class="vlink" href="https://www.youtube.com/watch?v=3DxZ0WaqIgk" target="_blank" rel="noopener">영상 1</a><a class="vlink" href="https://www.youtube.com/watch?v=8zd41ajAERA" target="_blank" rel="noopener">영상 2</a></div></li><li class="cand"><div class="cand-main"><div class="cand-n">백룸 · 공포</div><div class="cand-p">Into the Backrooms: Found Footage</div></div><div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 5점"><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg></span><span class="weeks num">1주</span><span class="tag">단발성</span></div><div class="cand-v"><a class="vlink" href="https://youtu.be/NuqFMrwsleg" target="_blank" rel="noopener">영상 1</a><a class="vlink" href="https://www.youtube.com/watch?v=oixfYrKNSLM" target="_blank" rel="noopener">영상 2</a><a class="vlink" href="https://www.youtube.com/watch?v=i_C03f1MiRo" target="_blank" rel="noopener">영상 3</a></div></li><li class="cand"><div class="cand-main"><div class="cand-n">진격의 거인</div><div class="cand-p">Danny&#x27;s AOT</div></div><div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 3점"><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st"><use href="#i-star"/></svg><svg class="i st"><use href="#i-star"/></svg></span><span class="weeks num">1주</span><span class="tag">단발성</span></div><div class="cand-v"><a class="vlink" href="https://www.youtube.com/watch?v=2vFQzUN5faY" target="_blank" rel="noopener">영상 1</a><a class="vlink" href="https://www.youtube.com/watch?v=5yEdMB6Qnh4" target="_blank" rel="noopener">영상 2</a></div></li><li class="cand"><div class="cand-main"><div class="cand-n">RPG</div><div class="cand-p">Nightfallcraft</div></div><div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 5점"><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg><svg class="i st on"><use href="#i-star"/></svg></span><span class="weeks num">8주</span></div><div class="cand-v"><a class="vlink" href="https://www.youtube.com/watch?v=9wKugA7QeQI" target="_blank" rel="noopener">영상 1</a><a class="vlink" href="https://www.youtube.com/shorts/_aY2a97-Shk" target="_blank" rel="noopener">영상 2</a></div></li></ol>
     <div class="vote-cta" ><span>별점은 운영자 추천도, 기간은 예정이에요.</span><a class="btn-ghost" href="https://app.notion.com/p/PC-392cf08765fb80509327d3661adf92a6" target="_blank" rel="noopener">노션에서 투표하기<svg class="i"><use href="#i-ext"/></svg></a></div>
   </section>
 
   <section class="section" aria-labelledby="inTitle">
+    <div class="install">
     <div class="sec-head">
-      <h2 id="inTitle">설치 방법</h2>
+      <h2 id="inTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="1" y="0" width="5" height="1" fill="#4FC3C9"/><rect x="0" y="1" width="1" height="1" fill="#4FC3C9"/><rect x="4" y="1" width="1" height="1" fill="#8B5A2B"/><rect x="5" y="1" width="2" height="1" fill="#4FC3C9"/><rect x="4" y="2" width="1" height="1" fill="#8B5A2B"/><rect x="6" y="2" width="1" height="1" fill="#4FC3C9"/><rect x="3" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="2" y="4" width="1" height="1" fill="#8B5A2B"/><rect x="1" y="5" width="1" height="1" fill="#8B5A2B"/><rect x="0" y="6" width="1" height="1" fill="#8B5A2B"/></svg>설치 방법</h2>
       <div class="seg" role="tablist" aria-label="운영체제">
         <button type="button" role="tab" id="tab-win" data-os="win" aria-selected="true">Windows</button>
         <button type="button" role="tab" id="tab-mac" data-os="mac" aria-selected="false">macOS</button>
@@ -295,19 +351,20 @@ footer .btn-ghost{margin-left:auto; height:30px}
       </div></li>
     </ol>
     <p class="guide-more" >처음이라 막막하다면 <a href="https://app.notion.com/p/PC-392cf08765fb80509327d3661adf92a6" target="_blank" rel="noopener">노션의 스타터 팩</a>에 사진으로 된 단계별 설명이 있어요.</p>
+    </div>
   </section>
 
   <section class="section" aria-labelledby="mlTitle">
-    <div class="sec-head"><h2 id="mlTitle">포함된 모드</h2><span class="sec-sub num" id="mlCount">0개</span></div>
+    <div class="sec-head"><h2 id="mlTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg>포함된 모드</h2><span class="sec-sub num" id="mlCount">0개</span></div>
     <div class="list-tools" hidden>
       <label class="search"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="모드 이름으로 찾기" aria-label="모드 검색" autocomplete="off"></label>
     </div>
     <ul class="mods" id="mods" hidden></ul>
     <div class="empty" id="noMatch" hidden></div>
-    <div class="empty" ><b>아직 올라온 모드가 없어요</b>서버 관리자가 모드를 올리면 여기에 표시돼요.</div>
+    <div class="empty" ><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg><b>상자가 아직 비어 있어요</b>모드가 준비되면 여기에 차곡차곡 쌓여요.</div>
   </section>
 
-  <footer><span>2026년 9월 30일 15:29 업데이트</span><span>모드 0개</span><a class="xlink" href="https://app.notion.com/p/PC-392cf08765fb80509327d3661adf92a6" target="_blank" rel="noopener" >노션<svg class="i"><use href="#i-ext"/></svg></a><a class="xlink" href="https://discord.com/users/286139885826342912" target="_blank" rel="noopener" >문의 (디스코드)<svg class="i"><use href="#i-ext"/></svg></a><button class="btn-ghost" type="button" id="adminBtn" hidden><svg class="i"><use href="#i-upload"/></svg>모드 관리</button></footer>
+  <footer><span class="bye"><svg class="px " viewBox="0 0 14 12" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="3" height="1" fill="var(--frog-line)"/><rect x="8" y="0" width="3" height="1" fill="var(--frog-line)"/><rect x="2" y="1" width="1" height="1" fill="var(--frog-line)"/><rect x="3" y="1" width="2" height="1" fill="#1F2A1A"/><rect x="5" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="1" width="2" height="1" fill="var(--frog-line)"/><rect x="8" y="1" width="2" height="1" fill="#1F2A1A"/><rect x="10" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="11" y="1" width="1" height="1" fill="var(--frog-line)"/><rect x="2" y="2" width="1" height="1" fill="var(--frog-line)"/><rect x="3" y="2" width="3" height="1" fill="#1F2A1A"/><rect x="6" y="2" width="2" height="1" fill="var(--frog-line)"/><rect x="8" y="2" width="3" height="1" fill="#1F2A1A"/><rect x="11" y="2" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="3" width="1" height="1" fill="var(--frog-line)"/><rect x="2" y="3" width="1" height="1" fill="var(--frog-body)"/><rect x="3" y="3" width="3" height="1" fill="var(--frog-line)"/><rect x="6" y="3" width="2" height="1" fill="var(--frog-body)"/><rect x="8" y="3" width="3" height="1" fill="var(--frog-line)"/><rect x="11" y="3" width="1" height="1" fill="var(--frog-body)"/><rect x="12" y="3" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="4" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="4" width="12" height="1" fill="var(--frog-body)"/><rect x="13" y="4" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="5" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="5" width="1" height="1" fill="var(--frog-body)"/><rect x="2" y="5" width="2" height="1" fill="var(--frog-cheek)"/><rect x="4" y="5" width="6" height="1" fill="var(--frog-body)"/><rect x="10" y="5" width="2" height="1" fill="var(--frog-cheek)"/><rect x="12" y="5" width="1" height="1" fill="var(--frog-body)"/><rect x="13" y="5" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="6" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="6" width="4" height="1" fill="var(--frog-body)"/><rect x="5" y="6" width="1" height="1" fill="var(--frog-line)"/><rect x="6" y="6" width="2" height="1" fill="var(--frog-body)"/><rect x="8" y="6" width="1" height="1" fill="var(--frog-line)"/><rect x="9" y="6" width="4" height="1" fill="var(--frog-body)"/><rect x="13" y="6" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="7" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="7" width="5" height="1" fill="var(--frog-body)"/><rect x="6" y="7" width="2" height="1" fill="var(--frog-line)"/><rect x="8" y="7" width="5" height="1" fill="var(--frog-body)"/><rect x="13" y="7" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="8" width="1" height="1" fill="var(--frog-line)"/><rect x="2" y="8" width="10" height="1" fill="var(--frog-body)"/><rect x="12" y="8" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="9" width="1" height="1" fill="var(--frog-line)"/><rect x="2" y="9" width="1" height="1" fill="var(--frog-dark)"/><rect x="3" y="9" width="3" height="1" fill="var(--frog-body)"/><rect x="6" y="9" width="2" height="1" fill="var(--frog-line)"/><rect x="8" y="9" width="3" height="1" fill="var(--frog-body)"/><rect x="11" y="9" width="1" height="1" fill="var(--frog-dark)"/><rect x="12" y="9" width="1" height="1" fill="var(--frog-line)"/><rect x="0" y="10" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="10" width="2" height="1" fill="var(--frog-dark)"/><rect x="3" y="10" width="1" height="1" fill="var(--frog-line)"/><rect x="5" y="10" width="4" height="1" fill="var(--frog-line)"/><rect x="10" y="10" width="1" height="1" fill="var(--frog-line)"/><rect x="11" y="10" width="2" height="1" fill="var(--frog-dark)"/><rect x="13" y="10" width="1" height="1" fill="var(--frog-line)"/><rect x="1" y="11" width="2" height="1" fill="var(--frog-line)"/><rect x="11" y="11" width="2" height="1" fill="var(--frog-line)"/></svg>개굴! 오늘도 즐겜해요</span><span>2026년 9월 30일 15:29 업데이트</span><span>모드 0개</span><a class="xlink" href="https://app.notion.com/p/PC-392cf08765fb80509327d3661adf92a6" target="_blank" rel="noopener" >노션<svg class="i"><use href="#i-ext"/></svg></a><a class="xlink" href="https://discord.com/users/286139885826342912" target="_blank" rel="noopener" >문의 (디스코드)<svg class="i"><use href="#i-ext"/></svg></a><button class="btn-ghost" type="button" id="adminBtn" hidden><svg class="i"><use href="#i-upload"/></svg>모드 관리</button></footer>
 </main>
 
 <div class="toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-check"/></svg><span id="toastMsg"></span></div>
@@ -385,6 +442,17 @@ footer .btn-ghost{margin-left:auto; height:30px}
       toast("관리 화면이 꺼져 있어요. mod-site 폴더의 '모드 관리'를 먼저 실행하세요");
     });
   }
+
+  // 개구리
+  const frogBtn = $("#frog"), bubble = $("#bubble");
+  const lines = ["개굴!", "개굴개굴~", "모드 받았어?", "투표는 했고?", "오늘도 즐겜!", "나 쓰다듬지 마..", "개굴? 🪲"];
+  let li = 0, bubT;
+  frogBtn && frogBtn.addEventListener("click", () => {
+    frogBtn.classList.remove("hop"); void frogBtn.offsetWidth; frogBtn.classList.add("hop");
+    bubble.textContent = lines[li++ % lines.length];
+    bubble.classList.add("show");
+    clearTimeout(bubT); bubT = setTimeout(() => bubble.classList.remove("show"), 1600);
+  });
 
   // 모드 검색
   const q = $("#q"), rows = [...document.querySelectorAll("#mods .mod")], noMatch = $("#noMatch");
