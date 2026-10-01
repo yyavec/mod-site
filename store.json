@@ -379,6 +379,15 @@
       "size": 23220
     },
     {
+      "file": "epic-fight-20.14.17-mc1.20.1-forge.jar",
+      "id": "epicfight",
+      "name": "Epic Fight",
+      "version": "20.14.17",
+      "desc": "Fight til u dead",
+      "env": "",
+      "size": 8071119
+    },
+    {
       "file": "epic_fight_avalon-20.12.6.4.jar",
       "id": "epic_fight_avalon",
       "name": "Epic fight - Avalon",
