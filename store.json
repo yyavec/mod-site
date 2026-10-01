@@ -946,6 +946,15 @@
       "size": 168345
     },
     {
+      "file": "p1nero_bow-forge1.20.1-20.14.1.6.jar",
+      "id": "p1nero_bow",
+      "name": "P1nero's Epic Fight Bow",
+      "version": "20.14.1.6",
+      "desc": "Add bow anim to epic fight",
+      "env": "",
+      "size": 932621
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
