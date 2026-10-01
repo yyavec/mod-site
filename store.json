@@ -766,6 +766,15 @@
       "size": 7442998
     },
     {
+      "file": "Krypton.FNP-forge-1.20.1-0.2.28.2-1.20.1.jar",
+      "id": "krypton_fnp",
+      "name": "Krypton FNP",
+      "version": "0.2.28.2-1.20.1",
+      "desc": "Provides powerful network optimization capabilities for all mainstream systems.",
+      "env": "",
+      "size": 1794016
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
