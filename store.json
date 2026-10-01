@@ -1207,6 +1207,15 @@
       "size": 5349
     },
     {
+      "file": "oculus-mc1.20.1-1.8.0.jar",
+      "id": "oculus",
+      "name": "Oculus",
+      "version": "1.8.0",
+      "desc": "Unofficial Fork of \"Iris\", made to work with FML",
+      "env": "",
+      "size": 2851119
+    },
+    {
       "file": "Oh-The-Biomes-Weve-Gone-Forge-1.7.5.jar",
       "id": "biomeswevegone",
       "name": "Oh The Biomes We've Gone",
