@@ -1117,6 +1117,15 @@
       "size": 3114590
     },
     {
+      "file": "spiral_tower_village-0.0.3.jar",
+      "id": "spiral_tower_village",
+      "name": "Spiral Tower Village",
+      "version": "0.0.3",
+      "desc": "Adds unique towering villages built into ancient spirals with distinct building styles",
+      "env": "",
+      "size": 10661678
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
