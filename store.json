@@ -757,6 +757,15 @@
       "size": 141468
     },
     {
+      "file": "kotlinforforge-4.12.0-all.jar",
+      "id": "kotlinforforge",
+      "name": "kotlinforforge-4.12.0-all",
+      "version": "",
+      "desc": "",
+      "env": "",
+      "size": 7442998
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
