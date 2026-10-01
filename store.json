@@ -1099,6 +1099,15 @@
       "size": 1508496
     },
     {
+      "file": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
+      "id": "sound_physics_remastered",
+      "name": "Sound Physics Remastered",
+      "version": "1.20.1-1.5.1",
+      "desc": "Provides realistic sound attenuation, reverberation, and absorption through blocks.",
+      "env": "",
+      "size": 206984
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
