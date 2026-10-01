@@ -892,6 +892,15 @@
       "size": 36033850
     },
     {
+      "file": "multiplayer_boss_fight-forge1.20.1-1.0.3.jar",
+      "id": "multiplayer_boss_fight",
+      "name": "Multiplayer Boss Attribute Modifier",
+      "version": "1.0.3",
+      "desc": "",
+      "env": "",
+      "size": 19187
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
