@@ -541,6 +541,15 @@
       "size": 544856
     },
     {
+      "file": "fast_tpa-forge1.20.1-1.3.0.jar",
+      "id": "fast_tpa",
+      "name": "Fast TPA",
+      "version": "1.3.0",
+      "desc": "Help you send SOS to everyone when emergency^_^",
+      "env": "",
+      "size": 30707
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
