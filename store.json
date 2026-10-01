@@ -1036,6 +1036,15 @@
       "size": 1342987
     },
     {
+      "file": "Quark-4.0-462.jar",
+      "id": "quark",
+      "name": "Quark",
+      "version": "",
+      "desc": "Small things, improving Minecraft bit by bit.",
+      "env": "",
+      "size": 14935230
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
