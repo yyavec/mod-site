@@ -676,6 +676,15 @@
       "size": 186196
     },
     {
+      "file": "extrasounds-1.5.4+1.20.1-forge.jar",
+      "id": "extrasounds",
+      "name": "ExtraSounds Next",
+      "version": "1.5.2",
+      "desc": "Improve your clicks, scrolls and more with Extra Sounds.",
+      "env": "",
+      "size": 534488
+    },
+    {
       "file": "falchionmoveset-20.14.0.jar",
       "id": "falchionmoveset",
       "name": "falchion moveset",
