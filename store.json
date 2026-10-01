@@ -1063,6 +1063,15 @@
       "size": 47170
     },
     {
+      "file": "visual_keybinder-1.20.1.-.0.1.12.jar",
+      "id": "visual_keybinder",
+      "name": "Raw's Visual Keybinder",
+      "version": "1.20.1 - 0.1.12",
+      "desc": "Alternative keybinding screen. Provides an extra screen for keybinding for easier keybinding management. Visualise your keyboard and mouse to easily see which buttons are available, which buttons have conflicts and which bindings are on a certain key or button.",
+      "env": "",
+      "size": 258438
+    },
+    {
       "file": "resourcefulconfig-forge-1.20.1-2.1.3.jar",
       "id": "resourcefulconfig",
       "name": "Resourcefulconfig",
