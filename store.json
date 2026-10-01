@@ -496,6 +496,15 @@
       "size": 853614
     },
     {
+      "file": "embeddium-0.3.31+mc1.20.1.jar",
+      "id": "embeddium",
+      "name": "Embeddium",
+      "version": "0.3.31+mc1.20.1",
+      "desc": "Embeddium is a fork of Rubidium, a fork of Sodium with patches for Forge",
+      "env": "",
+      "size": 1320675
+    },
+    {
       "file": "EnchantingInfuser-v8.0.3-1.20.1-Forge.jar",
       "id": "enchantinginfuser",
       "name": "Enchanting Infuser",
