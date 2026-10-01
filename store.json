@@ -550,6 +550,15 @@
       "size": 30707
     },
     {
+      "file": "FastEvent-1.20.1-1.1.1.jar",
+      "id": "fast_event",
+      "name": "FastEvent",
+      "version": "1.1.1",
+      "desc": "Faster event listener for Forge",
+      "env": "",
+      "size": 32785
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
