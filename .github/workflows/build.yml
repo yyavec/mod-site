@@ -23,6 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 지난번에 받은 모드를 기억해 두었다가 다시 쓴다 (새로 올린 것만 받는다)
+      - name: 모드 보관함 기억 불러오기
+        uses: actions/cache@v4
+        with:
+          path: mods
+          key: mods-${{ hashFiles('store.json') }}
+          restore-keys: mods-
+
       - name: 모드 파일 받기
         run: |
           mkdir -p mods _site
@@ -31,8 +39,11 @@ jobs:
           for m in json.load(open("store.json"))["mods"]:
               print(m["file"])
           PY
+          # 목록에 없는 예전 파일은 지운다
+          for p in mods/*.jar; do [ -e "$p" ] || continue; grep -qxF "$(basename "$p")" files.txt || rm -f "$p"; done
           while IFS= read -r f; do
             [ -z "$f" ] && continue
+            [ -s "mods/$f" ] && continue   # 이미 있으면 건너뛴다
             # GitHub가 가끔 잠깐 오류를 내서, 실패하면 몇 번 다시 받는다
             for try in 1 2 3 4 5; do
               gh release download store -p "$f" -D mods --clobber && break
@@ -43,7 +54,9 @@ jobs:
           ls -la mods
 
       - name: 직전 목록 가져오기 (바뀐 모드 비교용)
-        run: curl -fsSL "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/manifest.json" -o _site/manifest.json || rm -f _site/manifest.json
+        run: |
+          curl -fsSL "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/manifest.json" -o _site/manifest.json || rm -f _site/manifest.json
+          python3 -c "import json;print(json.load(open('_site/manifest.json')).get('build',''))" > prev_build.txt 2>/dev/null || echo "" > prev_build.txt
 
       - name: 사이트 만들기
         run: |
@@ -51,8 +64,10 @@ jobs:
           ZIP_URL="https://github.com/${REPO}/releases/latest/download/mods.zip" OUT_DIR=_site MODS_DIR=mods python3 build.py
           mv _site/mods.zip mods.zip
 
-      - name: mods.zip 올리기
+      - name: mods.zip 올리기 (모드가 바뀌었을 때만)
         run: |
+          NOW=$(python3 -c "import json;print(json.load(open('_site/manifest.json'))['build'])")
+          if [ "$NOW" = "$(cat prev_build.txt)" ] && gh release view mods >/dev/null 2>&1; then echo "모드 그대로라 건너뜀"; exit 0; fi
           gh release delete mods -y --cleanup-tag || true
           gh release create mods mods.zip --title "모드 파일" --notes "사이트의 전체 다운로드 버튼이 이 파일을 받습니다." --latest
 
