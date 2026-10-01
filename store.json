@@ -532,6 +532,15 @@
       "size": 23220
     },
     {
+      "file": "entityculling-forge-1.10.2-mc1.20.1.jar",
+      "id": "entityculling",
+      "name": "EntityCulling",
+      "version": "1.10.2",
+      "desc": "This mod uses async path-tracing to hide Tiles/Entities that are not visible.",
+      "env": "",
+      "size": 1587585
+    },
+    {
       "file": "epic-fight-20.14.17-mc1.20.1-forge.jar",
       "id": "epicfight",
       "name": "Epic Fight",
