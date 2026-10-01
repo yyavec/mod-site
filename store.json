@@ -1081,6 +1081,15 @@
       "size": 2223589
     },
     {
+      "file": "smsn-forge-1.4.1-1.20.1.jar",
+      "id": "smsn",
+      "name": "Save My Shit Network",
+      "version": "1.4.1-1.20.1",
+      "desc": "Block common mods from connecting to the internet without affecting the mods' functionality, preventing slow loading or game crashes caused by network issues.",
+      "env": "",
+      "size": 132399
+    },
+    {
       "file": "servercore-forge-1.5.2+1.20.1.jar",
       "id": "servercore",
       "name": "ServerCore",
