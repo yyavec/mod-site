@@ -1764,5 +1764,10 @@
       "env": "",
       "size": 1006518
     }
-  ]
+  ],
+  "configs": {
+    "file": "minecraft-config.zip",
+    "name": "minecraft-config.zip",
+    "size": 493170
+  }
 }
