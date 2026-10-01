@@ -802,6 +802,15 @@
       "size": 16405
     },
     {
+      "file": "lionfishapi-2.7.jar",
+      "id": "lionfishapi",
+      "name": "LionfishAPI",
+      "version": "2.7",
+      "desc": "HELLO",
+      "env": "",
+      "size": 122522
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
