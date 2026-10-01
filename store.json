@@ -667,6 +667,15 @@
       "size": 134551
     },
     {
+      "file": "incontrol-1.20-9.4.6.jar",
+      "id": "incontrol",
+      "name": "InControl",
+      "version": "",
+      "desc": "Be in control of spawns",
+      "env": "",
+      "size": 361894
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
