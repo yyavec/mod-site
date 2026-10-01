@@ -307,6 +307,15 @@
       "size": 88752
     },
     {
+      "file": "cristellib-1.1.6-forge.jar",
+      "id": "cristellib",
+      "name": "Cristel Lib",
+      "version": "1.1.6",
+      "desc": "A Library mod for easy structure config and runtime datapacks.",
+      "env": "",
+      "size": 431318
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
