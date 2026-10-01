@@ -1027,6 +1027,15 @@
       "size": 52205
     },
     {
+      "file": "PuzzlesLib-v8.1.33-1.20.1-Forge.jar",
+      "id": "puzzleslib",
+      "name": "Puzzles Lib",
+      "version": "8.1.33",
+      "desc": "Why's it called Puzzles you ask? That's the puzzle!",
+      "env": "",
+      "size": 1342987
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
