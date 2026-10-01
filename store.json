@@ -856,6 +856,15 @@
       "size": 697968
     },
     {
+      "file": "gnetum-2.4.3.jar",
+      "id": "gnetum",
+      "name": "Gnetum",
+      "version": "2.4.3",
+      "desc": "Minecraft mod that distributes HUD updates over multiple frames to improve performance.",
+      "env": "",
+      "size": 725063
+    },
+    {
       "file": "HungerStrike-1.20.1-8.0.0.jar",
       "id": "hungerstrike",
       "name": "Hunger Strike",
