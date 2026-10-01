@@ -226,6 +226,15 @@
       "size": 152827
     },
     {
+      "file": "CerbonsAPI-Forge-1.20.1-1.1.0.jar",
+      "id": "cerbons_api",
+      "name": "Cerbons API",
+      "version": "1.1.0",
+      "desc": "API Library for CERBONS's minecraft mods.",
+      "env": "",
+      "size": 241148
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
