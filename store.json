@@ -658,6 +658,15 @@
       "size": 33579
     },
     {
+      "file": "Iceberg-1.20.1-forge-1.1.25.jar",
+      "id": "iceberg",
+      "name": "Iceberg",
+      "version": "",
+      "desc": "A library containing events, helpers, and utilities to make modding easier.",
+      "env": "",
+      "size": 134551
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
