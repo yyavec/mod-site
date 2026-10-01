@@ -424,6 +424,15 @@
       "size": 17017922
     },
     {
+      "file": "epicfight-extra-1.2-mc1.20.1-forge-all.jar",
+      "id": "epicfightx",
+      "name": "Epic Fight Extra",
+      "version": "1.2",
+      "desc": "Extra Epic Fight Animations and Skills",
+      "env": "",
+      "size": 23720352
+    },
+    {
       "file": "efs_iss-1.0.3.jar",
       "id": "efs_iss",
       "name": "Epic Fight Skill - Iron's Spells 'n Spellbooks",
