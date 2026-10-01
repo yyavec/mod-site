@@ -883,6 +883,15 @@
       "size": 1389600
     },
     {
+      "file": "mowziesmobs-1.8.2.jar",
+      "id": "mowziesmobs",
+      "name": "Mowzie's Mobs",
+      "version": "1.8.2",
+      "desc": "Mowzie's Mobs adds a variety of high-quality fantasy creatures to your Minecraft world.",
+      "env": "",
+      "size": 36033850
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
