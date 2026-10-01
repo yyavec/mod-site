@@ -317,6 +317,10 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .inst-alt{display:inline-flex; align-items:center; gap:5px; font-size:12.5px; color:var(--text-tertiary); text-decoration:underline; text-underline-offset:3px}
 .inst-alt svg{width:12px; height:12px}
 .gnote{font-size:13px; color:var(--text-tertiary); background:var(--bg-sunken); padding:var(--s2) var(--s3); border-radius:var(--r-sm)}
+.gshot{margin:var(--s2) 0 0; display:flex; gap:var(--s4); align-items:flex-start}
+.gshot img{width:200px; height:auto; flex:none; border-radius:var(--r-md); border:1px solid var(--border-standard); box-shadow:var(--shadow-raised)}
+.gshot figcaption{font-size:13px; color:var(--text-secondary); line-height:1.6; padding-top:var(--s1)}
+@media (max-width:600px){ .gshot{flex-direction:column} .gshot img{width:min(240px,100%)} }
 .gfix{border-top:1px dashed var(--border-standard); padding-top:var(--s2)}
 .gfix summary{cursor:pointer; font-weight:600; color:var(--warning); font-size:13.5px}
 .gfix ul{margin:var(--s2) 0 0; padding-left:1.2em; display:flex; flex-direction:column; gap:var(--s2)}
@@ -778,7 +782,9 @@ footer .btn-ghost{margin-left:auto; height:30px}
         <li><details class="gstep" data-step="4"><summary><span class="gno"></span><span class="gtt">게임 실행<small>런처에서 {{G_LOADER}} 버전 고르기</small></span><span class="chev"></span></summary><div class="gbody">
           <ol class="gsub">
             <li>마인크래프트 런처를 켜요.</li>
-            <li><b>플레이</b> 버튼 왼쪽의 버전 선택에서 <b class="hl">{{G_PROFILE}}</b>을(를) 골라요.</li>
+            <li><b>플레이</b> 버튼 왼쪽의 버전 선택을 눌러 <b class="hl">{{G_PROFILE}}</b>을(를) 골라요.
+              <figure class="gshot"><img src="assets/launcher-forge.png" alt="런처 버전 목록에서 맨 위의 forge 1.20.1-forge 항목을 고른 모습" width="282" height="402" loading="lazy">
+              <figcaption>이렇게 <b>forge</b> (<code>1.20.1-forge-…</code>)라고 적힌 걸 고르고 <b>플레이</b>를 누르면 돼요. 다른 항목(최신 릴리스, fabric 등)을 고르면 모드가 안 켜져요.</figcaption></figure></li>
             <li><b>플레이</b>! 처음에는 이것저것 받느라 시간이 좀 걸려요.</li>
           </ol>
           <details class="gfix"><summary>게임이 안 켜지거나 오류가 나요</summary><ul>

@@ -375,7 +375,7 @@ def main():
         loader_links = (f'<a class="inst-dl" href="{e(url)}">{dl}<span><b>{e(loader or "모드 로더")} 설치 프로그램 받기</b>'
                         f'<small>{e(inst.get("name") or inst["file"])} · {fmt_size(int(inst.get("size") or 0))}</small></span></a>'
                         + "".join(f'<a class="inst-alt" href="{u}" target="_blank" rel="noopener">공식 사이트{ext}</a>' for t, u in chosen[:1]))
-    profile = {"Fabric": f"fabric-loader-{ver}", "Quilt": f"quilt-loader-{ver}", "NeoForge": "neoforge", "Forge": f"forge ({ver})"}.get(loader, "")
+    profile = {"Fabric": f"fabric-loader-{ver}", "Quilt": f"quilt-loader-{ver}", "NeoForge": "neoforge", "Forge": f"forge ({ver}-forge-…)"}.get(loader, "")
     notes = []
     if not loader:
         notes.append("어떤 로더를 쓰는지는 서버가 열리면 공지할게요. 공지된 것 하나만 설치하면 돼요.")
