@@ -1,6 +1,15 @@
 {
   "mods": [
     {
+      "file": "alexsmobs-1.22.9.jar",
+      "id": "alexsmobs",
+      "name": "Alex's Mobs",
+      "version": "1.22.9",
+      "desc": "New, original, engaging, and aesthetic mobs for Minecraft.",
+      "env": "",
+      "size": 26350793
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
