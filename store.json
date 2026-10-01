@@ -1414,6 +1414,15 @@
       "size": 1508496
     },
     {
+      "file": "smoothchunk-1.20.1-4.1.jar",
+      "id": "smoothchunk",
+      "name": "Smoothchunk mod",
+      "version": "",
+      "desc": "Spreads chunk saves over time smoothly",
+      "env": "",
+      "size": 14249
+    },
+    {
       "file": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
       "id": "sound_physics_remastered",
       "name": "Sound Physics Remastered",
