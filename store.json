@@ -703,6 +703,15 @@
       "size": 5906048
     },
     {
+      "file": "fancytoasts-forge-1.20.1-1.4.7.jar",
+      "id": "fancytoasts",
+      "name": "FancyToasts",
+      "version": "1.4.7",
+      "desc": "Redesigns the old advancement toast system, replacing it with a more attractive and interesting one.",
+      "env": "",
+      "size": 378003
+    },
+    {
       "file": "fantasy_armor-forge-1.2.4-1.20.1.jar",
       "id": "fantasy_armor",
       "name": "Fantasy Armor",
