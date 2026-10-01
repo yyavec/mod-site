@@ -359,6 +359,9 @@ footer .btn-ghost{margin-left:auto; height:30px}
 .beast .b-brow{fill:#05040A}
 .beast .b-maw{fill:url(#bg-maw); animation:maw 3.4s ease-in-out infinite}
 .beast .b-teeth{fill:#E9E2D2}
+.beast .b-perch{fill:#0E0C12}
+.beast .b-perch-crack{fill:none!important; stroke:#2A2433; stroke-width:1.2}
+.beast .b-claw{fill:#2E2934}
 .beast .b-eyes path,.beast-eyes path{fill:#FF4A1C; filter:drop-shadow(0 0 3px #FF6A2A) drop-shadow(0 0 9px #FF3B10); animation:glare 4.5s infinite}
 @keyframes glare{0%,100%{opacity:1} 47%{opacity:1} 49%{opacity:.15} 51%{opacity:1} 70%{opacity:.75}}
 @keyframes maw{50%{filter:brightness(1.5)}}
@@ -376,6 +379,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
 @keyframes loom{0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(1.5vh) scale(1.02)}}
 @keyframes beastin{from{opacity:0; filter:blur(8px)}}
 .wrap{position:relative; z-index:1}
+@media (max-width:600px){ [data-mood="nightfall"] .beast-bg{width:150vw; top:auto; bottom:0} }
 
 /* ===== 첫 화면의 용 ===== */
 .dragon-pass,.beast-bg{display:none}
@@ -517,19 +521,19 @@ footer .btn-ghost{margin-left:auto; height:30px}
   <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M13.5 13.5 10.2 10.2"/></symbol>
 </svg>
 
-<div class="beast-bg" aria-hidden="true"><svg class="beast" viewBox="0 0 400 260" aria-hidden="true">
+<div class="beast-bg" aria-hidden="true"><svg class="beast" viewBox="0 0 400 300" aria-hidden="true">
 
 <g class="b-wings"><path class="b-wing-l" d="M162,118 L138,82 L100,46 L62,22 L28,8 L4,4 L8,30 L1,70 L14,72 L8,118 L22,122 L18,168 L34,166 L36,206 L54,190 L62,224 L82,196 L96,226 L110,198 L130,214 L142,186 L160,176Z"/><path class="b-wing-r" d="M238,118 L262,82 L300,46 L338,22 L372,8 L396,4 L392,30 L399,70 L386,72 L392,118 L378,122 L382,168 L366,166 L364,206 L346,190 L338,224 L318,196 L304,226 L290,198 L270,214 L258,186 L240,176Z"/>
 <path class="b-bone" d="M244,114 L300,46 L396,4 M300,46 L392,118 M300,46 L382,168 M300,46 L364,206 M300,46 L338,224 M300,46 L304,226 M156,114 L100,46 L4,4 M100,46 L8,118 M100,46 L18,168 M100,46 L36,206 M100,46 L62,224 M100,46 L96,226"/>
 <path class="b-arm" d="M228,128 L250,100 L300,46 L306,52 L258,110 L240,140Z M172,128 L150,100 L100,46 L94,52 L142,110 L160,140Z"/></g>
-<path class="b-body" d="M200,118 L226,124 L246,150 L258,196 L262,260 L138,260 L142,196 L154,150 L174,124Z"/>
-<g class="b-head"><path d="M226,72 L238,58 L252,40 L264,22 L270,8 L272,18 L266,38 L256,56 L244,72 L236,84Z M174,72 L162,58 L148,40 L136,22 L130,8 L128,18 L134,38 L144,56 L156,72 L164,84Z M236,90 L254,84 L274,80 L288,82 L272,88 L254,96 L240,104Z M164,90 L146,84 L126,80 L112,82 L128,88 L146,96 L160,104Z" class="b-horn"/>
+<path class="b-perch" d="M60,300 L84,262 L96,268 L112,236 L126,242 L138,214 L152,218 L164,204 L236,204 L248,218 L262,214 L274,242 L288,236 L304,268 L316,262 L340,300Z"/><path class="b-perch-crack" d="M150,230 L160,252 L154,270 M246,228 L238,250 L246,276 M200,214 L196,240 L204,262 L198,290"/><path class="b-body" d="M200,118 L226,124 L246,150 L258,196 L262,260 L138,260 L142,196 L154,150 L174,124Z"/>
+<path class="b-claw" d="M160,204 L163,214 L166,204ZM168,204 L171,214 L174,204ZM176,204 L179,214 L182,204ZM218,204 L221,214 L224,204ZM226,204 L229,214 L232,204ZM234,204 L237,214 L240,204Z"/><g class="b-head"><path d="M226,72 L238,58 L252,40 L264,22 L270,8 L272,18 L266,38 L256,56 L244,72 L236,84Z M174,72 L162,58 L148,40 L136,22 L130,8 L128,18 L134,38 L144,56 L156,72 L164,84Z M236,90 L254,84 L274,80 L288,82 L272,88 L254,96 L240,104Z M164,90 L146,84 L126,80 L112,82 L128,88 L146,96 L160,104Z" class="b-horn"/>
 <path class="b-crest" d="M212,62 L220,30 L224,66Z M188,62 L180,30 L176,66Z M228,70 L250,40 L238,84Z M172,70 L150,40 L162,84Z M240,88 L270,70 L245,102Z M160,88 L130,70 L155,102Z M245,106 L276,104 L242,122Z M155,106 L124,104 L158,122Z M240,124 L268,136 L236,138Z M160,124 L132,136 L164,138Z M235,142 L258,160 L231,154Z M165,142 L142,160 L169,154Z"/>
 
 
 
 <path d="M200,60 L216,62 L230,72 L240,88 L245,104 L241,120 L237,134 L233,148 L229,160 L226,168 L216,171 L207,168 L200,166 L200,166 L193,168 L184,171 L174,168 L171,160 L167,148 L163,134 L159,120 L155,104 L160,88 L170,72 L184,62 L200,60Z"/>
-<path d="M200,238 L211,236 L222,226 L232,208 L239,188 L240,172 L232,174 L230,190 L224,206 L213,216 L200,218 L200,218 L187,216 L176,206 L170,190 L168,174 L160,172 L161,188 L168,208 L178,226 L189,236 L200,238Z"/>
+
 <path class="b-brow" d="M205,150 L211,146 L214,150 L209,152Z M195,150 L189,146 L186,150 L191,152Z"/>
 </g>
 
