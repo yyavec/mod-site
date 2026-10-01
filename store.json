@@ -559,6 +559,15 @@
       "size": 32785
     },
     {
+      "file": "fdlib-1.0.9-1.20.1.jar",
+      "id": "fdlib",
+      "name": "FDLib",
+      "version": "1.0.9",
+      "desc": "A library with some cool features. Idk what other things to write here.",
+      "env": "",
+      "size": 1647611
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
