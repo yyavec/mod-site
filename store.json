@@ -451,6 +451,15 @@
       "size": 398066
     },
     {
+      "file": "CustomSkinLoader_Universal-15.0.1.jar",
+      "id": "customskinloader-bootstrap",
+      "name": "CustomSkinLoader Bootstrap",
+      "version": "15.0.1",
+      "desc": "Custom Skin Loader for Minecraft",
+      "env": "client",
+      "size": 218215
+    },
+    {
       "file": "dodge_parry_reward-1.20.1forge-20.14.3.jar",
       "id": "dodge_parry_reward",
       "name": "Dodge Parry Reward",
