@@ -1540,6 +1540,15 @@
       "size": 173664
     },
     {
+      "file": "tcrmodfilter-1.0.6.jar",
+      "id": "tcrmodfilter",
+      "name": "tcrmodfilter-1.0.6",
+      "version": "",
+      "desc": "",
+      "env": "",
+      "size": 4548
+    },
+    {
       "file": "tectonic-forge-1.20.1-2.4.1.jar",
       "id": "tectonic",
       "name": "Tectonic",
