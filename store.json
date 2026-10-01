@@ -71,6 +71,15 @@
       "desc": "Core Mod of The Casket of Reveries.",
       "env": "",
       "size": 39120708
+    },
+    {
+      "file": "tcrmeshes-1.0.0.jar",
+      "id": "tcrmeshes",
+      "name": "TCRMeshes",
+      "version": "1.0.0",
+      "desc": "Provide boss meshes for The Casket of Reveries",
+      "env": "",
+      "size": 173664
     }
   ]
 }
