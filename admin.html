@@ -357,6 +357,10 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
             <div class="inst" id="inst"></div>
             <input type="file" id="instFile" accept=".jar,.exe,.msi,.zip" hidden>
           </div>
+          <div class="f"><span>설정 파일 묶음 <small>.minecraft에 덮어쓸 config 폴더 등을 zip으로 · ‘처음 왔어요’ 3단계에 나와요</small></span>
+            <div class="inst" id="cfg"></div>
+            <input type="file" id="cfgFile" accept=".zip" hidden>
+          </div>
         </div>
       </section>
 
@@ -534,9 +538,13 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
       <li class="ch ch-${x.kind}"><span class="ck"><span aria-hidden="true">${sym[x.kind][1]}</span>${sym[x.kind][0]}</span>
       <span class="cn">${esc(x.name)}</span>
       <span class="cv num">${x.kind === "up" ? `${esc(x.from || "?")} → ${esc(x.to || "?")}` : esc(x.to || x.from || "")}</span></li>`).join("");
-    const instChanged = (S.installer?.file || "") !== (LIVE.installer?.file || "");
-    if (instChanged) $("#changes").insertAdjacentHTML("afterbegin", `<li class="ch ch-site"><span class="ck"><span aria-hidden="true">⇩</span>설치</span><span class="cn">${S.installer ? "설치 프로그램 " + esc(S.installer.name) : "설치 프로그램 내림"}</span></li>`);
-    const n = c.length + (S.content_changed ? 1 : 0) + (instChanged ? 1 : 0);
+    let extraN = 0;
+    for (const [slot, label] of [["installer", "설치 프로그램"], ["configs", "설정 파일"]]) {
+      if ((S[slot]?.file || "") === (LIVE[slot]?.file || "")) continue;
+      extraN++;
+      $("#changes").insertAdjacentHTML("afterbegin", `<li class="ch ch-site"><span class="ck"><span aria-hidden="true">⇩</span>파일</span><span class="cn">${S[slot] ? label + " " + esc(S[slot].name) : label + " 내림"}</span></li>`);
+    }
+    const n = c.length + (S.content_changed ? 1 : 0) + extraN;
     $("#chCount").hidden = !n; $("#chCount").textContent = n;
     $("#synced").hidden = n > 0;
     $("#publishBtn").disabled = !!S.publish?.running;
@@ -788,46 +796,55 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
   $("#tabMods").addEventListener("click", () => showTab("mods"));
   $("#tabSite").addEventListener("click", () => showTab("site"));
 
-  /* ---------- 로더 설치 프로그램 ---------- */
-  function renderInst(p){
-    const box = $("#inst"), i = S.installer;
+  /* ---------- 추가 파일: 로더 설치 프로그램, 설정 파일 묶음 ---------- */
+  const EXTRA = {
+    installer: {box: "#inst", input: "#instFile", ext: /\.(jar|exe|msi|zip)$/i, kinds: ".jar · .exe", empty: "설치 프로그램이 없어요", label: "설치 프로그램"},
+    configs: {box: "#cfg", input: "#cfgFile", ext: /\.zip$/i, kinds: ".zip", empty: "설정 파일 묶음이 없어요", label: "설정 파일"},
+  };
+  function renderExtra(slot, p){
+    const X = EXTRA[slot], box = $(X.box), i = S[slot];
     if (p !== undefined) { box.innerHTML = `${icon("load")}<span class="ii"><b>올리는 중…</b><span class="bar"><span style="width:${p}%"></span></span></span>`; return; }
     box.innerHTML = i
       ? `${icon("check")}<span class="ii"><b title="${esc(i.name)}">${esc(i.name)}</b>${size(i.size || 0)} · 사이트에 올리면 받기 버튼에 나와요</span>
-         <button class="btn btn-secondary" type="button" data-inst="pick">바꾸기</button><button class="btn btn-ghost" type="button" data-inst="remove">내리기</button>`
-      : `${icon("up")}<span class="ii"><b>설치 프로그램이 없어요</b>여기로 끌어다 놓거나 눌러서 고르세요 (.jar · .exe)</span>
-         <button class="btn btn-secondary" type="button" data-inst="pick">파일 고르기</button>`;
+         <button class="btn btn-secondary" type="button" data-x="pick">바꾸기</button><button class="btn btn-ghost" type="button" data-x="remove">내리기</button>`
+      : `${icon("up")}<span class="ii"><b>${X.empty}</b>여기로 끌어다 놓거나 눌러서 고르세요 (${X.kinds})</span>
+         <button class="btn btn-secondary" type="button" data-x="pick">파일 고르기</button>`;
   }
-  function uploadInst(file){
-    if (!/\.(jar|exe|msi|zip)$/i.test(file.name)) return toast(".jar, .exe, .msi, .zip 파일만 올릴 수 있어요");
+  const renderInst = () => { renderExtra("installer"); renderExtra("configs"); };
+  function uploadExtra(slot, file){
+    const X = EXTRA[slot];
+    if (!X.ext.test(file.name)) return toast(`${X.kinds} 파일만 올릴 수 있어요`);
     if (file.size > 100 * 1024 * 1024) return toast("웹에서는 100MB가 넘는 파일을 올릴 수 없어요");
     const x = new XMLHttpRequest();
-    x.open("POST", API + "/installer");
+    x.open("POST", API + "/" + slot);
     x.setRequestHeader("Authorization", `Bearer ${token}`);
     x.setRequestHeader("X-Filename", encodeURIComponent(file.name));
-    x.upload.onprogress = e => { if (e.lengthComputable) renderInst(e.loaded / e.total * 100); };
+    x.upload.onprogress = e => { if (e.lengthComputable) renderExtra(slot, e.loaded / e.total * 100); };
     x.onload = () => {
       let r = {}; try { r = JSON.parse(x.responseText); } catch {}
       if (x.status === 401) return showLogin(r.message);
-      if (x.status !== 200) { toast(r.message || "올리지 못했어요"); return renderInst(); }
-      S.installer = r.installer; renderInst(); renderChanges();
-      toast("설치 프로그램을 올렸어요. ‘사이트에 올리기’를 누르면 반영돼요");
+      if (x.status !== 200) { toast(r.message || "올리지 못했어요"); return renderExtra(slot); }
+      S[slot] = r[slot]; renderExtra(slot); renderChanges();
+      toast(`${X.label}을(를) 올렸어요. ‘사이트에 올리기’를 누르면 반영돼요`);
     };
-    x.onerror = () => { toast("연결이 끊겼어요. 다시 시도해 주세요"); renderInst(); };
-    renderInst(0); x.send(file);
+    x.onerror = () => { toast("연결이 끊겼어요. 다시 시도해 주세요"); renderExtra(slot); };
+    renderExtra(slot, 0); x.send(file);
   }
-  $("#inst").addEventListener("click", async e => {
-    const b = e.target.closest("[data-inst]"); if (!b) { if (!S.installer) $("#instFile").click(); return; }
-    if (b.dataset.inst === "pick") $("#instFile").click();
-    else if (b.dataset.inst === "remove") {
-      try { const r = await api("/installer-remove", {}); S.installer = r.installer; renderInst(); renderChanges(); toast("내렸어요. ‘사이트에 올리기’를 누르면 반영돼요"); }
-      catch (err) { toast(err.message || "내리지 못했어요"); }
-    }
-  });
-  $("#instFile").addEventListener("change", e => { const f = e.target.files[0]; e.target.value = ""; if (f) uploadInst(f); });
-  ["dragenter", "dragover"].forEach(ev => $("#inst").addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); $("#inst").classList.add("over"); }));
-  $("#inst").addEventListener("dragleave", () => $("#inst").classList.remove("over"));
-  $("#inst").addEventListener("drop", e => { e.preventDefault(); e.stopPropagation(); $("#inst").classList.remove("over"); const f = e.dataTransfer.files[0]; if (f) uploadInst(f); });
+  for (const slot of Object.keys(EXTRA)) {
+    const X = EXTRA[slot], box = $(X.box);
+    box.addEventListener("click", async e => {
+      const b = e.target.closest("[data-x]"); if (!b) { if (!S[slot]) $(X.input).click(); return; }
+      if (b.dataset.x === "pick") $(X.input).click();
+      else if (b.dataset.x === "remove") {
+        try { const r = await api(`/${slot}-remove`, {}); S[slot] = r[slot]; renderExtra(slot); renderChanges(); toast("내렸어요. ‘사이트에 올리기’를 누르면 반영돼요"); }
+        catch (err) { toast(err.message || "내리지 못했어요"); }
+      }
+    });
+    $(X.input).addEventListener("change", e => { const f = e.target.files[0]; e.target.value = ""; if (f) uploadExtra(slot, f); });
+    ["dragenter", "dragover"].forEach(ev => box.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); box.classList.add("over"); }));
+    box.addEventListener("dragleave", () => box.classList.remove("over"));
+    box.addEventListener("drop", e => { e.preventDefault(); e.stopPropagation(); box.classList.remove("over"); const f = e.dataTransfer.files[0]; if (f) uploadExtra(slot, f); });
+  }
 
   /* ---------- 올리기 ---------- */
   let poll;

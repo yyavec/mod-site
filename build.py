@@ -143,12 +143,16 @@ def diff(old_mods, mods):
 SEASON = ROOT / "season.json"
 
 
-def store_installer():
-    """store.json에 등록된 로더 설치 프로그램 (없으면 None)."""
+def store_extra(slot):
+    """store.json에 등록된 추가 파일 (installer: 로더 설치 프로그램, configs: .minecraft 설정 묶음)."""
     try:
-        return json.loads((ROOT / "store.json").read_text(encoding="utf-8")).get("installer")
+        return json.loads((ROOT / "store.json").read_text(encoding="utf-8")).get(slot)
     except (OSError, json.JSONDecodeError):
         return None
+
+
+def store_installer():
+    return store_extra("installer")
 
 
 def content_id():
@@ -265,7 +269,7 @@ def main():
         changes = diff(prev["mods"], mods) if prev.get("mods") else []
     man_path.write_text(json.dumps({
         "build": build_id, "content": content_id(), "updated": updated, "changes": changes,
-        "installer": store_installer(),
+        "installer": store_installer(), "configs": store_extra("configs"),
         "mods": [{"id": m["id"], "name": m["name"], "version": m["version"], "file": m["file"]} for m in mods],
     }, ensure_ascii=False, indent=1), encoding="utf-8")
 
@@ -393,6 +397,15 @@ def main():
         "G_PROFILE": e(profile if loader and ver else f"{loader or '모드 로더'} {ver}".strip() or "모드 로더"),
         "G_ADDR_ROW": addr_row,
     })
+    cfg = store_extra("configs")
+    if cfg:
+        repo = os.environ.get("GITHUB_REPOSITORY", "yyavec/mod-site")
+        curl = f"https://github.com/{repo}/releases/download/store/{quote(cfg['file'])}"
+        rep["G_CONFIG_DL"] = (f'<a class="inst-dl cfg-dl" href="{e(curl)}"><svg class="i"><use href="#i-dl"/></svg><span><b>설정 파일 받기</b>'
+                              f'<small>{e(cfg.get("name") or cfg["file"])} · {fmt_size(int(cfg.get("size") or 0))}</small></span></a>')
+        rep["G_CONFIG_HIDDEN"] = ""
+    else:
+        rep["G_CONFIG_DL"], rep["G_CONFIG_HIDDEN"] = "", "hidden"
 
     # 지난 시즌 (취소선 + 완결 도장)
     past = (load_season() or {}).get("past") or []
