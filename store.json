@@ -1108,6 +1108,15 @@
       "size": 206984
     },
     {
+      "file": "spark-1.10.53-forge.jar",
+      "id": "spark",
+      "name": "spark",
+      "version": "1.10.53",
+      "desc": "spark is a performance profiling plugin/mod for Minecraft clients, servers and proxies.",
+      "env": "",
+      "size": 3114590
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
