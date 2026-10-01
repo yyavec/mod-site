@@ -215,6 +215,15 @@
       "desc": "YetAnotherConfigLib (yacl) is just that. A builder-based configuration library for Minecraft.",
       "env": "",
       "size": 1105891
+    },
+    {
+      "file": "YungsApi-1.20-Forge-4.0.6.jar",
+      "id": "yungsapi",
+      "name": "YUNG's API",
+      "version": "1.20-Forge-4.0.6",
+      "desc": "API Library for YUNG's minecraft mods.",
+      "env": "",
+      "size": 370524
     }
   ]
 }
