@@ -481,7 +481,8 @@ footer .btn-ghost{margin-left:auto; height:30px}
   const html = document.documentElement;
   let seen = false;
   try { seen = sessionStorage.getItem("intro-seen") === "1"; } catch {}
-  if (html.dataset.mood === "nightfall" && !seen && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const force = /[?&]intro\b/.test(location.search);  // 주소 끝에 ?intro 를 붙이면 언제든 다시 보기
+  if (html.dataset.mood === "nightfall" && (force || !seen) && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     html.dataset.mood = ""; html.dataset.intro = "calm";
   }
 })();
