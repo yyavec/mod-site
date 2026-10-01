@@ -170,6 +170,15 @@
       "desc": "Teleport back to activated waystones. For Survival, Adventure or Servers.",
       "env": "",
       "size": 533738
+    },
+    {
+      "file": "WeaponsOfMiracles-2.0.15-mc1.20.1-forge.jar",
+      "id": "wom",
+      "name": "Weapons of miracle",
+      "version": "2.0.15",
+      "desc": "Weapons from another reality, waiting for you to find them and witness their powers !",
+      "env": "",
+      "size": 20276434
     }
   ]
 }
