@@ -44,6 +44,15 @@
       "desc": "",
       "env": "",
       "size": 107129
+    },
+    {
+      "file": "TaxFreeLevels-1.4.17-forge-1.20.1.jar",
+      "id": "taxfreelevels",
+      "name": "Tax Free Levels",
+      "version": "1.4.17",
+      "desc": "Flattens anvil and enchantment costs, removes the anvil limit and makes renaming items always cost 1 level.",
+      "env": "",
+      "size": 223855
     }
   ]
 }
