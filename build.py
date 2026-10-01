@@ -1,0 +1,323 @@
+#!/usr/bin/env python3
+"""mods/ 폴더의 .jar 파일로 site/index.html, site/mods.zip, site/icons/ 를 만든다.
+
+직전 빌드의 site/manifest.json 과 비교해서 추가·업데이트·삭제된 모드를 사이트에 보여준다.
+MODS_DIR, OUT_DIR, CONF_FILE 환경 변수로 경로를 바꿀 수 있다 (미리보기용).
+"""
+import hashlib
+import html
+import json
+import os
+import re
+import shlex
+import shutil
+import zipfile
+from datetime import datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+MODS = Path(os.environ.get("MODS_DIR", ROOT / "mods"))
+OUT = Path(os.environ.get("OUT_DIR", ROOT / "site"))
+ICON_MAX = 256 * 1024
+
+
+def load_conf():
+    conf = {}
+    for line in Path(os.environ.get("CONF_FILE", ROOT / "site.conf")).read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        parts = shlex.split(value)
+        conf[key.strip()] = parts[0] if parts else ""
+    return conf
+
+
+def toml_str(text, key):
+    """mods.toml 에서 key = "..." 또는 key = '''...''' 값을 읽는다."""
+    m = re.search(rf"^\s*{key}\s*=\s*('''|\"\"\")(.*?)\1", text, re.M | re.S)
+    if m:
+        return m.group(2).strip()
+    m = re.search(rf'^\s*{key}\s*=\s*"([^"]*)"', text, re.M)
+    return m.group(1) if m else None
+
+
+def read_meta(jar: Path):
+    """jar 안의 모드 정보(Fabric/Quilt/Forge/NeoForge)를 읽는다."""
+    meta = {"id": None, "name": None, "version": None, "desc": "", "env": "", "icon": None}
+    try:
+        with zipfile.ZipFile(jar) as z:
+            names = set(z.namelist())
+            icon_path = None
+            if "fabric.mod.json" in names:
+                d = json.loads(z.read("fabric.mod.json").decode("utf-8", "ignore"), strict=False)
+                meta.update(id=d.get("id"), name=d.get("name"), version=d.get("version"),
+                            desc=d.get("description") or "", env=d.get("environment") or "")
+                icon_path = d.get("icon")
+            elif "quilt.mod.json" in names:
+                d = json.loads(z.read("quilt.mod.json").decode("utf-8", "ignore"), strict=False)
+                ql = d.get("quilt_loader", {})
+                md = ql.get("metadata", {})
+                meta.update(id=ql.get("id"), name=md.get("name"), version=ql.get("version"),
+                            desc=md.get("description") or "", env=(d.get("minecraft") or {}).get("environment") or "")
+                icon_path = md.get("icon")
+            else:
+                for toml in ("META-INF/neoforge.mods.toml", "META-INF/mods.toml"):
+                    if toml in names:
+                        t = z.read(toml).decode("utf-8", "ignore")
+                        meta.update(id=toml_str(t, "modId"), name=toml_str(t, "displayName"),
+                                    version=toml_str(t, "version"), desc=toml_str(t, "description") or "")
+                        logo = toml_str(t, "logoFile")
+                        icon_path = logo and (logo if logo in names else None)
+                        break
+            if isinstance(icon_path, dict):  # {"16": "...", "128": "..."} → 가장 큰 것
+                icon_path = icon_path[max(icon_path, key=lambda k: int(k) if k.isdigit() else 0)]
+            if isinstance(icon_path, str) and icon_path in names:
+                info = z.getinfo(icon_path)
+                if info.file_size <= ICON_MAX and icon_path.lower().endswith(".png"):
+                    meta["icon"] = z.read(icon_path)
+    except (zipfile.BadZipFile, json.JSONDecodeError, OSError, ValueError):
+        pass
+    if meta["version"] and "${" in meta["version"]:
+        meta["version"] = None
+    meta["name"] = meta["name"] or jar.stem
+    meta["version"] = meta["version"] or ""
+    meta["id"] = meta["id"] or re.sub(r"[-_ ]?v?\d[\w.+-]*$", "", jar.stem).lower() or jar.stem.lower()
+    meta["desc"] = " ".join(str(meta["desc"]).split())
+    meta["env"] = meta["env"] if meta["env"] in ("client", "server") else ""
+    return meta
+
+
+def fmt_size(n):
+    for unit in ("B", "KB", "MB", "GB"):
+        if n < 1000 or unit == "GB":
+            return f"{n:.0f} {unit}" if unit == "B" else f"{n:.1f} {unit}"
+        n /= 1024
+
+
+def slug(s):
+    return re.sub(r"[^a-z0-9_.-]", "_", s.lower())[:64] or "mod"
+
+
+def fmt_date(iso):
+    d = datetime.fromisoformat(iso)
+    return f"{d.year}년 {d.month}월 {d.day}일 {d.hour:02d}:{d.minute:02d}"
+
+
+ENV_TAG = {
+    "client": '<span class="tag" title="게임하는 컴퓨터에서만 쓰는 모드예요">클라이언트</span>',
+    "server": '<span class="tag tag-muted" title="서버에만 설치하는 모드라 받을 필요가 없어요">서버 전용 · 받지 않음</span>',
+}
+
+
+def scan(folder=MODS):
+    """폴더의 jar 들을 읽어 모드 목록을 만든다 (서버 전용은 뒤로)."""
+    mods = []
+    for jar in sorted(Path(folder).glob("*.jar"), key=lambda p: p.name.lower()):
+        m = read_meta(jar)
+        m["file"], m["size"] = jar.name, jar.stat().st_size
+        mods.append(m)
+    mods.sort(key=lambda m: (m["env"] == "server", m["name"].lower()))
+    return mods
+
+
+def diff(old_mods, mods):
+    """이전 목록과 비교해 추가·업데이트·삭제를 돌려준다."""
+    old = {m["id"]: m for m in old_mods}
+    new = {m["id"]: m for m in mods}
+    changes = []
+    for i, m in new.items():
+        if i not in old:
+            changes.append({"kind": "add", "name": m["name"], "to": m["version"]})
+        elif old[i]["version"] != m["version"] or old[i]["file"] != m["file"]:
+            changes.append({"kind": "up", "name": m["name"], "from": old[i]["version"], "to": m["version"]})
+    for i, m in old.items():
+        if i not in new:
+            changes.append({"kind": "del", "name": m["name"], "from": m["version"]})
+    order = {"add": 0, "up": 1, "del": 2}
+    changes.sort(key=lambda c: (order[c["kind"]], c["name"].lower()))
+    return changes
+
+
+SEASON = ROOT / "season.json"
+
+
+def content_id():
+    """사이트 내용(site.conf, season.json)의 지문. 바뀌었는지 비교할 때 쓴다."""
+    h = hashlib.sha1()
+    for f in (Path(os.environ.get("CONF_FILE", ROOT / "site.conf")), SEASON):
+        h.update(f.read_bytes() if f.exists() else b"")
+    return h.hexdigest()[:10]
+
+
+def load_season():
+    try:
+        return json.loads(SEASON.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def season_html(e):
+    """season.json(투표 후보)을 카드 목록으로 만든다. 숨김이거나 후보가 없으면 None."""
+    d = load_season()
+    if not d or d.get("show") is False:
+        return None
+    star = '<svg class="i st{on}"><use href="#i-star"/></svg>'
+    cards = []
+    for c in d.get("candidates", []):
+        n = max(0, min(5, int(c.get("stars", 0))))
+        stars = "".join(star.format(on=" on" if i < n else "") for i in range(5))
+        tags = "".join(f'<span class="tag">{e(t)}</span>' for t in c.get("tags", []))
+        vids = "".join(
+            f'<a class="vlink" href="{e(v)}" target="_blank" rel="noopener">영상 {i}</a>'
+            for i, v in enumerate(c.get("videos", []), 1))
+        cards.append(
+            f'<li class="cand"><div class="cand-main"><div class="cand-n">{e(c.get("name", ""))}</div>'
+            f'<div class="cand-p">{e(c.get("pack", ""))}</div></div>'
+            f'<div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 {n}점">{stars}</span>'
+            f'<span class="weeks num">{e(c.get("weeks", ""))}</span>{tags}</div>'
+            f'<div class="cand-v">{vids}</div></li>')
+    return {"title": d.get("title", ""), "period": d.get("period", ""), "intro": d.get("intro", ""),
+            "badge": d.get("badge", ""), "button": d.get("button") or "노션에서 자세히 보기",
+            "cards": "".join(cards)}
+
+
+def main():
+    conf = load_conf()
+    OUT.mkdir(parents=True, exist_ok=True)
+    mods = scan(MODS)
+    client_mods = [m for m in mods if m["env"] != "server"]
+
+    # zip: 서버 전용 모드는 빼고 묶는다
+    zip_path = OUT / "mods.zip"
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+        for m in client_mods:
+            z.write(MODS / m["file"], m["file"])
+
+    # 아이콘
+    icons = OUT / "icons"
+    shutil.rmtree(icons, ignore_errors=True)
+    icons.mkdir()
+    for m in mods:
+        if m["icon"]:
+            p = icons / f"{slug(m['id'])}.png"
+            p.write_bytes(m["icon"])
+            m["icon_url"] = f"icons/{p.name}"
+
+    # 직전 빌드와 비교
+    build_id = hashlib.sha1("\n".join(f"{m['file']}:{m['size']}" for m in mods).encode()).hexdigest()[:10]
+    man_path = OUT / "manifest.json"
+    prev = {}
+    try:
+        prev = json.loads(man_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        pass
+    if prev.get("build") == build_id:
+        updated, changes = prev["updated"], prev.get("changes", [])
+    else:
+        updated = datetime.now().isoformat(timespec="minutes")
+        changes = diff(prev["mods"], mods) if prev.get("mods") else []
+    man_path.write_text(json.dumps({
+        "build": build_id, "content": content_id(), "updated": updated, "changes": changes,
+        "mods": [{"id": m["id"], "name": m["name"], "version": m["version"], "file": m["file"]} for m in mods],
+    }, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    e = html.escape
+
+    # 모드 목록
+    rows = []
+    for m in mods:
+        icon = (f'<img src="{e(m["icon_url"])}" alt="" loading="lazy" width="32" height="32">'
+                if m.get("icon_url") else f'<span class="ph" aria-hidden="true">{e(m["name"][:1].upper())}</span>')
+        search = f'{m["name"]} {m["id"]} {m["file"]} {m["desc"]}'.lower()
+        rows.append(
+            f'<li class="mod{" is-server" if m["env"] == "server" else ""}" data-q="{e(search)}">'
+            f'<span class="ic">{icon}</span>'
+            f'<span class="mi"><span class="mn">{e(m["name"])}{ENV_TAG.get(m["env"], "")}</span>'
+            f'<span class="md" title="{e(m["desc"])}">{e(m["desc"]) or e(m["file"])}</span></span>'
+            f'<span class="mv num" title="{e(m["file"])}">{e(m["version"]) or "—"}</span>'
+            f'<span class="ms num">{fmt_size(m["size"])}</span>'
+            "</li>"
+        )
+
+    # 변경 내역
+    sym = {"add": ("추가", "+"), "up": ("업데이트", "↑"), "del": ("삭제", "−")}
+    ch = []
+    for c in changes:
+        label, s = sym[c["kind"]]
+        if c["kind"] == "up":
+            ver = f'<span class="num">{e(c["from"] or "?")}</span><span class="arrow" aria-hidden="true">→</span><span class="num">{e(c["to"] or "?")}</span>'
+        else:
+            ver = f'<span class="num">{e(c.get("to") or c.get("from") or "")}</span>'
+        ch.append(f'<li class="ch ch-{c["kind"]}"><span class="ck"><span aria-hidden="true">{s}</span>{label}</span>'
+                  f'<span class="cn">{e(c["name"])}</span><span class="cv">{ver}</span></li>')
+
+    chips = []
+    if conf.get("MC_VERSION"):
+        chips.append(f'<span class="chip">마인크래프트 {e(conf["MC_VERSION"])}</span>')
+    if conf.get("LOADER"):
+        chips.append(f'<span class="chip">{e(conf["LOADER"])}</span>')
+
+    server_n = len(mods) - len(client_mods)
+    tpl = (ROOT / "template.html").read_text(encoding="utf-8")
+    rep = {
+        "SERVER_NAME": e(conf.get("SERVER_NAME") or "마크 서버"),
+        "SITE_TITLE": e(conf.get("SITE_TITLE") or conf.get("SERVER_NAME") or "마크 서버"),
+        "SERVER_ADDRESS": e(conf.get("SERVER_ADDRESS", "")),
+        "ADDRESS_HIDDEN": "" if conf.get("SERVER_ADDRESS") else "hidden",
+        "CHIPS": "".join(chips),
+        "CHIPS_HIDDEN": "" if chips else "hidden",
+        "NOTICE": e(conf.get("NOTICE", "")),
+        "NOTICE_HIDDEN": "" if conf.get("NOTICE") else "hidden",
+        "LOADER": e(conf.get("LOADER") or "모드 로더"),
+        "COUNT": str(len(client_mods)),
+        "TOTAL": str(len(mods)),
+        "SERVER_ONLY_NOTE": f" · 서버 전용 {server_n}개 제외" if server_n else "",
+        "ZIP_SIZE": fmt_size(zip_path.stat().st_size),
+        "ZIP_URL": e(os.environ.get("ZIP_URL", "mods.zip")),
+        "DISABLED": "" if client_mods else 'aria-disabled="true" tabindex="-1"',
+        "ROWS": "".join(rows),
+        "LIST_HIDDEN": "" if mods else "hidden",
+        "LIST_EMPTY_HIDDEN": "hidden" if mods else "",
+        "CHANGES": "".join(ch),
+        "CHANGES_HIDDEN": "" if ch else "hidden",
+        "UPDATED": fmt_date(updated),
+        "UPDATED_ISO": updated,
+        "BUILD": build_id,
+        "COMMUNITY": e(conf.get("COMMUNITY") or "서버 모드"),
+        "NOTION_URL": e(conf.get("NOTION_URL", "")),
+        "NOTION_HIDDEN": "" if conf.get("NOTION_URL") else "hidden",
+        "DISCORD_URL": e(conf.get("DISCORD_URL", "")),
+        "DISCORD_HIDDEN": "" if conf.get("DISCORD_URL") else "hidden",
+        "ADMIN_HIDDEN": "" if conf.get("ADMIN_API") else "hidden",
+    }
+    season = season_html(e)
+    rep.update({
+        "SEASON_TITLE": e(season["title"]) if season else "",
+        "SEASON_PERIOD": e(season["period"]) if season else "",
+        "SEASON_INTRO": e(season["intro"]) if season else "",
+        "SEASON_INTRO_HIDDEN": "" if season and season["intro"] else "hidden",
+        "SEASON_CARDS": season["cards"] if season else "",
+        "SEASON_BADGE": e(season["badge"]) if season else "",
+        "SEASON_BADGE_HIDDEN": "" if season and season["badge"] else "hidden",
+        "SEASON_BUTTON": e(season["button"]) if season else "",
+        "SEASON_HIDDEN": "" if season and season["cards"] else "hidden",
+    })
+    page = re.sub(r"\{\{(\w+)\}\}", lambda mt: rep.get(mt.group(1), mt.group(0)), tpl)
+    (OUT / "index.html").write_text(page, encoding="utf-8")
+
+    # 웹 관리자 화면 (로그인은 관리 서버가 확인한다)
+    admin_tpl = ROOT / "admin.html"
+    if admin_tpl.exists():
+        arep = {"ADMIN_API": e(conf.get("ADMIN_API", "")), "GOOGLE_CLIENT_ID": e(conf.get("GOOGLE_CLIENT_ID", "")),
+                "SITE_TITLE": rep["SITE_TITLE"], "REPO": e(os.environ.get("GITHUB_REPOSITORY", ""))}
+        apage = re.sub(r"\{\{(\w+)\}\}", lambda mt: arep.get(mt.group(1), mt.group(0)), admin_tpl.read_text(encoding="utf-8"))
+        (OUT / "admin.html").write_text(apage, encoding="utf-8")
+    extra = f", 서버 전용 {server_n}개는 zip에서 제외" if server_n else ""
+    print(f"모드 {len(mods)}개{extra} → {OUT}/index.html, mods.zip ({fmt_size(zip_path.stat().st_size)})")
+    if changes:
+        print("바뀐 점: " + ", ".join(f"{sym[c['kind']][0]} {c['name']}" for c in changes))
+
+
+if __name__ == "__main__":
+    main()

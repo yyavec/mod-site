@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>관리자 · {{SITE_TITLE}}</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20class%3D%22px%20%22%20viewBox%3D%220%200%2012%208%22%20shape-rendering%3D%22crispEdges%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%223%22%20y%3D%220%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%235EA646%22/%3E%3Crect%20x%3D%229%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%222%22%20y%3D%221%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%224%22%20y%3D%221%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%235EA646%22/%3E%3Crect%20x%3D%226%22%20y%3D%221%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%228%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23EEEEEE%22/%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%228%22%20y%3D%223%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23EEEEEE%22/%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23111111%22/%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23EEEEEE%22/%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%228%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23EEEEEE%22/%3E%3Crect%20x%3D%229%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23111111%22/%3E%3Crect%20x%3D%222%22%20y%3D%225%22%20width%3D%228%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%222%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%233A722A%22/%3E%3Crect%20x%3D%223%22%20y%3D%226%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%229%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%233A722A%22/%3E%3Crect%20x%3D%222%22%20y%3D%227%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%233A722A%22/%3E%3Crect%20x%3D%224%22%20y%3D%227%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%228%22%20y%3D%227%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%233A722A%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+:root{
+  color-scheme: light;
+  --bg-canvas:#F6F7F5; --bg-surface:#FFFFFF; --bg-raised:#FAFBF9; --bg-sunken:#EEF0EC;
+  --text-primary:#161A16; --text-secondary:#4B524B; --text-tertiary:#727A72; --text-disabled:#A8AEA8;
+  --border-subtle:#E3E6E1; --border-standard:#D0D5CE; --border-strong:#A7ADA6;
+  --accent:#2E7D3C; --accent-hover:#256A32; --accent-pressed:#1F5A2A; --accent-soft:#E6F1E7; --on-accent:#FFFFFF;
+  --success:#237A45; --success-soft:#E3F2E8;
+  --warning:#94580A; --warning-soft:#FAF0DE;
+  --danger:#BC3A2F; --danger-soft:#FAE8E5;
+  --shadow-raised:0 1px 2px rgba(22,26,22,.05), 0 4px 16px rgba(22,26,22,.05);
+  --shadow-floating:0 8px 28px rgba(22,26,22,.14), 0 1px 3px rgba(22,26,22,.08);
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s12:48px;
+  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-full:999px;
+  --m-fast:100ms; --m-std:180ms;
+  --font:"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", sans-serif;
+  --mono:ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg-canvas:#111311; --bg-surface:#181B18; --bg-raised:#1E221E; --bg-sunken:#0D0F0D;
+    --text-primary:#E7EAE6; --text-secondary:#A8AFA7; --text-tertiary:#7E867D; --text-disabled:#4F564F;
+    --border-subtle:#242824; --border-standard:#313631; --border-strong:#4C534B;
+    --accent:#5FBF6E; --accent-hover:#74CC82; --accent-pressed:#4EA75C; --accent-soft:#1A2A1C; --on-accent:#0B170D;
+    --success:#5CC784; --success-soft:#15281B;
+    --warning:#E0A64E; --warning-soft:#2A2215;
+    --danger:#EE7B70; --danger-soft:#2E1917;
+    --shadow-raised:0 0 0 1px rgba(255,255,255,.02);
+    --shadow-floating:0 10px 32px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg-canvas:#111311; --bg-surface:#181B18; --bg-raised:#1E221E; --bg-sunken:#0D0F0D;
+  --text-primary:#E7EAE6; --text-secondary:#A8AFA7; --text-tertiary:#7E867D; --text-disabled:#4F564F;
+  --border-subtle:#242824; --border-standard:#313631; --border-strong:#4C534B;
+  --accent:#5FBF6E; --accent-hover:#74CC82; --accent-pressed:#4EA75C; --accent-soft:#1A2A1C; --on-accent:#0B170D;
+  --success:#5CC784; --success-soft:#15281B;
+  --warning:#E0A64E; --warning-soft:#2A2215;
+  --danger:#EE7B70; --danger-soft:#2E1917;
+  --shadow-raised:0 0 0 1px rgba(255,255,255,.02);
+  --shadow-floating:0 10px 32px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0; background:var(--bg-canvas); color:var(--text-primary); font:400 15px/1.55 var(--font); -webkit-font-smoothing:antialiased; padding-inline:var(--s4); padding-block:var(--s8) var(--s12)}
+.wrap{max-width:1040px; margin-inline:auto; display:flex; flex-direction:column; gap:var(--s6)}
+.num{font-variant-numeric:tabular-nums}
+svg.i{width:16px; height:16px; flex:none; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:var(--r-sm)}
+h1,h2{margin:0}
+h1{font-size:24px; font-weight:700; letter-spacing:-.02em; line-height:1.2}
+h2{font-size:15px; font-weight:600; line-height:1.3}
+
+.top{display:flex; align-items:flex-end; gap:var(--s4); flex-wrap:wrap}
+.eyebrow{font-size:13px; font-weight:500; color:var(--text-tertiary); margin:0 0 var(--s1)}
+.top .right{margin-left:auto; display:flex; gap:var(--s2); align-items:center}
+.local{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--text-tertiary)}
+.local::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--success)}
+
+.grid{display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:var(--s6); align-items:start}
+.col{display:flex; flex-direction:column; gap:var(--s6); min-width:0}
+.panel{background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); min-width:0}
+.p-head{display:flex; align-items:center; gap:var(--s3); padding:var(--s4) var(--s4) var(--s3)}
+.p-head .sub{font-size:13px; color:var(--text-tertiary)}
+.p-head .right{margin-left:auto}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:6px; height:36px; padding:0 14px; border-radius:var(--r-md); font:500 14px/1 var(--font); cursor:pointer; border:1px solid transparent; white-space:nowrap; text-decoration:none; transition:background var(--m-fast), border-color var(--m-fast), color var(--m-fast)}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent); color:var(--on-accent); font-weight:600}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-primary:active{background:var(--accent-pressed)}
+.btn-secondary{background:var(--bg-surface); color:var(--text-primary); border-color:var(--border-standard)}
+.btn-secondary:hover{background:var(--bg-raised); border-color:var(--border-strong)}
+.btn-ghost{background:none; color:var(--text-secondary); height:30px; padding:0 8px; font-size:13px}
+.btn-ghost:hover{background:var(--bg-sunken); color:var(--text-primary)}
+.btn-danger{background:var(--danger); color:#fff; height:30px; padding:0 10px; font-size:13px}
+.btn-danger:hover{filter:brightness(1.07)}
+.btn[disabled]{background:var(--bg-sunken); color:var(--text-disabled); border-color:transparent; cursor:not-allowed; transform:none}
+.btn-block{width:100%; height:44px; font-size:15px}
+.icon-btn{width:30px; height:30px; padding:0; display:inline-grid; place-items:center; border-radius:var(--r-md); background:none; border:0; color:var(--text-tertiary); cursor:pointer; transition:background var(--m-fast), color var(--m-fast)}
+.icon-btn:hover{background:var(--danger-soft); color:var(--danger)}
+
+/* dropzone */
+.drop{position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s2); text-align:center; padding:var(--s8) var(--s4); border:1.5px dashed var(--border-standard); border-radius:var(--r-lg); background:var(--bg-surface); cursor:pointer; transition:border-color var(--m-fast), background var(--m-fast)}
+.drop:hover{border-color:var(--border-strong)}
+.drop.over{border-color:var(--accent); background:var(--accent-soft)}
+.drop .big{width:40px; height:40px; border-radius:var(--r-md); background:var(--bg-sunken); display:grid; place-items:center; color:var(--text-secondary); margin-bottom:var(--s1)}
+.drop.over .big{background:var(--bg-surface); color:var(--accent)}
+.drop .big svg{width:20px; height:20px}
+.drop-t{font-size:16px; font-weight:600}
+.drop-d{font-size:13px; color:var(--text-tertiary)}
+.drop-d u{text-decoration:none; color:var(--accent); font-weight:500}
+.drop input{position:absolute; inset:0; opacity:0; cursor:pointer}
+.drop:focus-within{outline:2px solid var(--accent); outline-offset:2px}
+
+/* upload results */
+.uploads:empty{display:none}
+.uploads{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--s1)}
+.up{display:grid; grid-template-columns:16px minmax(0,1fr) auto; gap:var(--s3); align-items:center; padding:var(--s2) var(--s3); border-radius:var(--r-md); background:var(--bg-surface); border:1px solid var(--border-subtle); font-size:13px}
+.up .nm{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.up .nm b{font-weight:500}
+.up .res{color:var(--text-tertiary); white-space:nowrap}
+.up.ok svg{color:var(--success)}
+.up.bad svg{color:var(--danger)} .up.bad .res{color:var(--danger)}
+.up .bar{grid-column:2 / -1; height:3px; background:var(--bg-sunken); border-radius:var(--r-full); overflow:hidden}
+.up .bar span{display:block; height:100%; width:0; background:var(--accent); transition:width var(--m-fast)}
+.spin{animation:spin .9s linear infinite} @keyframes spin{to{transform:rotate(360deg)}}
+
+/* list */
+.search{position:relative; padding:0 var(--s4) var(--s3)}
+.search svg{position:absolute; left:calc(var(--s4) + 10px); top:10px; color:var(--text-tertiary)}
+.search input{width:100%; height:36px; padding:0 12px 0 32px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:400 14px var(--font)}
+.search input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.mods{list-style:none; margin:0; padding:0}
+.mod{display:grid; grid-template-columns:32px minmax(0,1fr) auto 64px 30px; gap:var(--s3); align-items:center; padding:9px var(--s4); border-top:1px solid var(--border-subtle); min-height:56px}
+.mod:hover{background:var(--bg-raised)}
+.mod.new{animation:flash 1.6s ease-out}
+@keyframes flash{from{background:var(--accent-soft)}}
+.ic img,.ph{width:32px; height:32px; border-radius:6px; display:block}
+.ic img{image-rendering:pixelated; background:var(--bg-sunken)}
+.ph{display:grid; place-items:center; background:var(--bg-sunken); color:var(--text-tertiary); font-weight:600; font-size:14px}
+.mi{display:flex; flex-direction:column; min-width:0}
+.mn{font-weight:500; font-size:14.5px; display:flex; align-items:center; gap:var(--s2); min-width:0}
+.mn .t{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.mf{font:12px var(--mono); color:var(--text-tertiary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.mv{font:12.5px var(--mono); color:var(--text-secondary); max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.ms{font-size:13px; color:var(--text-tertiary); text-align:right}
+.tag{flex:none; display:inline-flex; align-items:center; height:18px; padding:0 6px; border-radius:var(--r-sm); font-size:11px; font-weight:500; color:var(--text-secondary); background:var(--bg-sunken)}
+.tag-muted{color:var(--text-tertiary); background:none; border:1px dashed var(--border-standard)}
+.confirm{grid-column:3 / -1; display:flex; align-items:center; justify-content:flex-end; gap:var(--s2); font-size:13px; color:var(--text-secondary)}
+.empty{padding:var(--s8) var(--s4); text-align:center; font-size:14px; color:var(--text-secondary); border-top:1px solid var(--border-subtle)}
+.empty b{display:block; color:var(--text-primary); font-weight:500; margin-bottom:2px}
+
+/* changes / publish */
+.side{position:sticky; top:var(--s6)}
+.count{display:inline-grid; place-items:center; min-width:20px; height:20px; padding:0 6px; border-radius:var(--r-full); background:var(--accent-soft); color:var(--accent); font-size:12px; font-weight:600}
+.changes{list-style:none; margin:0; padding:0 var(--s4)}
+.ch{display:grid; grid-template-columns:auto minmax(0,1fr); gap:var(--s1) var(--s3); padding:var(--s2) 0; font-size:13.5px; align-items:baseline}
+.ch + .ch{border-top:1px solid var(--border-subtle)}
+.ck{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; width:72px}
+.ck span{display:inline-grid; place-items:center; width:16px; height:16px; border-radius:var(--r-sm); line-height:1}
+.ch-add .ck{color:var(--success)} .ch-add .ck span{background:var(--success-soft)}
+.ch-up .ck{color:var(--text-secondary)} .ch-up .ck span{background:var(--bg-sunken)}
+.ch-del .ck{color:var(--danger)} .ch-del .ck span{background:var(--danger-soft)}
+.cn{font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.cv{grid-column:2; font:12px var(--mono); color:var(--text-tertiary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.synced{display:flex; gap:var(--s2); align-items:center; padding:0 var(--s4) var(--s2); font-size:13px; color:var(--text-secondary)}
+.synced svg{color:var(--success)}
+.actions{display:flex; flex-direction:column; gap:var(--s2); padding:var(--s4); border-top:1px solid var(--border-subtle); margin-top:var(--s2)}
+.hint{font-size:12px; color:var(--text-tertiary); text-align:center}
+
+.pub{border-top:1px solid var(--border-subtle)}
+.pub-head{display:flex; align-items:center; gap:var(--s2); padding:var(--s3) var(--s4); font-size:13px; font-weight:500}
+.pub-head.run{color:var(--text-secondary)}
+.pub-head.ok{color:var(--success)}
+.pub-head.bad{color:var(--danger)}
+.pub-head a{margin-left:auto; color:var(--accent); font-weight:500; text-decoration:none}
+.pub-head a:hover{text-decoration:underline}
+.pub-help{margin:0 var(--s4) var(--s3); padding:var(--s2) var(--s3); border-radius:var(--r-md); background:var(--warning-soft); font-size:13px}
+.pub-help code{font:12px var(--mono)}
+.log{margin:0; max-height:180px; overflow:auto; padding:var(--s3) var(--s4); background:var(--bg-sunken); font:11.5px/1.6 var(--mono); color:var(--text-secondary); white-space:pre-wrap; word-break:break-all; border-radius:0 0 var(--r-lg) var(--r-lg)}
+
+/* toast */
+.toast{position:fixed; left:50%; bottom:var(--s6); transform:translate(-50%,8px); opacity:0; pointer-events:none; display:flex; align-items:center; gap:var(--s3); padding:8px 8px 8px 14px; border-radius:var(--r-md); background:var(--text-primary); color:var(--bg-canvas); font-size:14px; font-weight:500; box-shadow:var(--shadow-floating); transition:opacity var(--m-std), transform var(--m-std); max-width:calc(100% - 32px)}
+.toast.show{opacity:1; transform:translate(-50%,0); pointer-events:auto}
+.toast button{height:28px; padding:0 10px; border:0; border-radius:6px; background:rgba(127,127,127,.25); color:inherit; font:600 13px var(--font); cursor:pointer}
+.toast button:hover{background:rgba(127,127,127,.4)}
+.toast.plain{padding:10px 14px}
+
+/* tabs */
+.tabs{display:inline-flex; background:var(--bg-sunken); border-radius:var(--r-md); padding:2px}
+.tabs button{display:inline-flex; align-items:center; gap:6px; height:30px; padding:0 14px; border:0; background:none; color:var(--text-secondary); font:500 14px/1 var(--font); border-radius:6px; cursor:pointer; transition:color var(--m-fast)}
+.tabs button:hover{color:var(--text-primary)}
+.tabs button[aria-selected="true"]{background:var(--bg-surface); color:var(--text-primary); box-shadow:0 1px 2px rgba(0,0,0,.08), 0 0 0 1px var(--border-subtle)}
+.tabs .dot{width:6px; height:6px; border-radius:50%; background:var(--warning)}
+
+/* content form */
+.fbody{display:flex; flex-direction:column; gap:var(--s4); padding:0 var(--s4) var(--s4)}
+.p-desc{margin:-4px var(--s4) var(--s3); font-size:13px; color:var(--text-tertiary)}
+.row{display:grid; grid-template-columns:repeat(var(--cols,1), minmax(0,1fr)); gap:var(--s3)}
+.f{display:flex; flex-direction:column; gap:6px; min-width:0}
+.f > span{font-size:13px; font-weight:500; color:var(--text-secondary)}
+.f > span small{font-weight:400; color:var(--text-tertiary); margin-left:4px}
+.in{width:100%; height:36px; padding:0 10px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:400 14px var(--font); transition:border-color var(--m-fast), box-shadow var(--m-fast)}
+textarea.in{height:auto; min-height:60px; padding:8px 10px; line-height:1.5; resize:vertical}
+.in::placeholder{color:var(--text-disabled)}
+.in:hover{border-color:var(--border-strong)}
+.in:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.in.bad{border-color:var(--danger); box-shadow:0 0 0 3px var(--danger-soft)}
+select.in{appearance:none; padding-right:28px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%23727A72' stroke-width='1.5'%3E%3Cpath d='m3 4.5 3 3 3-3'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center}
+.switch{display:inline-flex; align-items:center; gap:var(--s2); margin-left:auto; font-size:13px; color:var(--text-secondary); cursor:pointer}
+.switch input{appearance:none; width:32px; height:18px; border-radius:var(--r-full); background:var(--border-standard); position:relative; cursor:pointer; transition:background var(--m-fast); margin:0}
+.switch input::after{content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.2); transition:transform var(--m-fast)}
+.switch input:checked{background:var(--accent)}
+.switch input:checked::after{transform:translateX(14px)}
+.sv-off .fbody{opacity:.5}
+.cand{border:1px solid var(--border-subtle); border-radius:var(--r-md); background:var(--bg-raised); padding:var(--s3); display:flex; flex-direction:column; gap:var(--s3)}
+.cand-head{display:flex; align-items:center; gap:var(--s2)}
+.cand-no{display:grid; place-items:center; width:22px; height:22px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font-size:12px; font-weight:600}
+.cand-head .tools{margin-left:auto; display:flex; gap:2px}
+.icon-btn.plain:hover{background:var(--bg-sunken); color:var(--text-primary)}
+.icon-btn[disabled]{opacity:.35; pointer-events:none}
+.stars{display:inline-flex; align-items:center; height:36px}
+.stars button{width:26px; height:28px; padding:0; border:0; background:none; cursor:pointer; color:var(--border-strong); display:grid; place-items:center; border-radius:var(--r-sm)}
+.stars button svg{width:17px; height:17px; stroke-width:1.3}
+.stars button.on{color:var(--warning)} .stars button.on svg{fill:currentColor}
+.stars button:hover{background:var(--bg-sunken)}
+.add-cand{border:1.5px dashed var(--border-standard); background:none; color:var(--text-secondary); height:40px; border-radius:var(--r-md); font:500 14px var(--font); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:6px; transition:border-color var(--m-fast), color var(--m-fast)}
+.add-cand:hover{border-color:var(--accent); color:var(--accent)}
+.savebar{position:sticky; bottom:var(--s4); display:flex; align-items:center; gap:var(--s3); padding:var(--s2) var(--s2) var(--s2) var(--s4); border-radius:var(--r-lg); background:var(--text-primary); color:var(--bg-canvas); box-shadow:var(--shadow-floating); font-size:14px; font-weight:500}
+.savebar .msg{flex:1; min-width:0}
+.savebar .btn-ghost{color:inherit; opacity:.75} .savebar .btn-ghost:hover{background:rgba(127,127,127,.25); opacity:1; color:inherit}
+.savebar .btn-primary{height:32px}
+.savebar kbd{font:11px var(--mono); opacity:.6; margin-left:2px}
+.ch-site .ck{color:var(--warning)} .ch-site .ck span{background:var(--warning-soft)}
+
+@media (max-width:860px){
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .side{position:static}
+}
+@media (max-width:560px){
+  .row{grid-template-columns:minmax(0,1fr)}
+  .mod{grid-template-columns:32px minmax(0,1fr) auto 30px}
+  .ms{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+:root{ --skin-g:#529A3A; --skin-l:#5EA646; --skin-m:#3A722A; --skin-d:#345C22; --skin-belly:#DBB97A; --skin-belly-d:#B89060; }
+.topbar{display:flex; align-items:center; gap:var(--s3); flex-wrap:wrap}
+.home{display:inline-flex; align-items:center; gap:6px; height:32px; padding:0 12px 0 8px; border-radius:var(--r-full); background:var(--bg-surface); border:1px solid var(--border-subtle); color:var(--text-secondary); font-size:13px; font-weight:600; text-decoration:none}
+.home:hover{color:var(--text-primary); border-color:var(--border-standard)}
+.who{margin-left:auto; display:flex; align-items:center; gap:var(--s2); font-size:13px; color:var(--text-tertiary)}
+.who b{color:var(--text-secondary); font-weight:500}
+.top .head-skin{width:40px; height:auto}
+.top h1 + .local{margin-top:2px}
+/* login */
+.login{max-width:380px; margin:8vh auto 0; text-align:center; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); box-shadow:var(--shadow-raised); padding:var(--s8) var(--s6); display:flex; flex-direction:column; align-items:center; gap:var(--s3)}
+.login svg.px{width:64px; height:auto; image-rendering:pixelated}
+.login h1{font-size:22px}
+.login p{margin:0; font-size:14px; color:var(--text-secondary)}
+.login .err{color:var(--danger); font-size:13px; font-weight:500}
+#gbtn{min-height:44px; margin-top:var(--s2)}
+.setup{font-size:13px; color:var(--text-tertiary)}
+.pub-head a{margin-left:auto}
+.note{font-size:12px; color:var(--text-tertiary); padding:0 var(--s4) var(--s3)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-up" viewBox="0 0 16 16"><path d="M8 11V2.5"/><path d="M4.5 6 8 2.5 11.5 6"/><path d="M2.5 11v1.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V11"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="m5.5 8.2 1.7 1.7 3.3-3.4"/></symbol>
+  <symbol id="i-x" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="m6 6 4 4M10 6l-4 4"/></symbol>
+  <symbol id="i-load" viewBox="0 0 16 16"><path d="M8 2a6 6 0 1 1-6 6"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 16 16"><path d="M2.5 4.5h11"/><path d="M6 4.5V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1.5"/><path d="M4 4.5l.7 8.6a1 1 0 0 0 1 .9h4.6a1 1 0 0 0 1-.9l.7-8.6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M13.5 13.5 10.2 10.2"/></symbol>
+  <symbol id="i-star" viewBox="0 0 16 16"><path d="m8 1.8 1.85 3.9 4.25.55-3.12 2.95.8 4.2L8 11.33 4.22 13.4l.8-4.2L1.9 6.25l4.25-.55Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+  <symbol id="i-upar" viewBox="0 0 16 16"><path d="M8 12.5v-9M4.5 7 8 3.5 11.5 7"/></symbol>
+  <symbol id="i-dnar" viewBox="0 0 16 16"><path d="M8 3.5v9M4.5 9 8 12.5 11.5 9"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 16 16"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></symbol>
+</svg>
+
+<div class="wrap">
+  <div class="topbar">
+    <a class="home" href="./"><svg class="i" viewBox="0 0 16 16"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>홈페이지로</a>
+    <div class="who" id="who" hidden><span>로그인: <b id="whoEmail"></b></span><button class="btn btn-ghost" type="button" id="logout">로그아웃</button></div>
+  </div>
+
+  <section class="login" id="login">
+    <svg class="px" viewBox="0 0 12 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="3" y="0" width="6" height="1" fill="var(--skin-l)"/><rect x="9" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="2" y="1" width="2" height="1" fill="var(--skin-g)"/><rect x="4" y="1" width="2" height="1" fill="var(--skin-l)"/><rect x="6" y="1" width="4" height="1" fill="var(--skin-g)"/><rect x="2" y="2" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="4" y="3" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="2" y="4" width="1" height="1" fill="#111111"/><rect x="3" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="4" y="4" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="9" y="4" width="1" height="1" fill="#111111"/><rect x="2" y="5" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="3" y="6" width="6" height="1" fill="var(--skin-g)"/><rect x="9" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="2" y="7" width="2" height="1" fill="var(--skin-m)"/><rect x="4" y="7" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="7" width="2" height="1" fill="var(--skin-m)"/></svg>
+    <h1>관리자 모드</h1>
+    <p>관리자로 등록된 구글 계정으로 로그인하세요.</p>
+    <div id="gbtn"></div>
+    <p class="err" id="loginErr" hidden></p>
+    <p class="setup" id="setup" hidden>아직 관리자 로그인이 설정되지 않았어요.</p>
+  </section>
+
+  <div id="app" hidden style="display:contents">
+  <header class="top">
+    <div>
+      <p class="eyebrow" id="server">{{SITE_TITLE}}</p>
+      <h1>관리자 모드</h1>
+    </div>
+    <div class="tabs" role="tablist" aria-label="화면">
+      <button type="button" role="tab" id="tabMods" aria-selected="true" aria-controls="viewMods">모드</button>
+      <button type="button" role="tab" id="tabSite" aria-selected="false" aria-controls="viewSite">사이트 내용<span class="dot" id="dirtyDot" hidden title="저장 안 된 변경"></span></button>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="col" id="viewMods" role="tabpanel" aria-labelledby="tabMods">
+      <label class="drop" id="drop">
+        <span class="big"><svg class="i"><use href="#i-up"/></svg></span>
+        <span class="drop-t">모드 파일을 여기로 끌어다 놓으세요</span>
+        <span class="drop-d">.jar 파일 여러 개 가능 · 또는 <u>클릭해서 고르기</u> · 같은 모드의 예전 버전은 자동으로 교체돼요 · 파일당 100MB까지</span>
+        <input type="file" id="file" accept=".jar" multiple aria-label="모드 파일 고르기">
+      </label>
+      <ul class="uploads" id="uploads" aria-live="polite"></ul>
+
+      <section class="panel" aria-labelledby="listT">
+        <div class="p-head"><h2 id="listT">모드 폴더</h2><span class="sub num" id="listCount"></span></div>
+        <div class="search" id="searchBox"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="모드 찾기" aria-label="모드 찾기" autocomplete="off"></div>
+        <ul class="mods" id="mods"></ul>
+        <div class="empty" id="empty" hidden></div>
+      </section>
+    </div>
+
+    <form class="col" id="viewSite" role="tabpanel" aria-labelledby="tabSite" hidden autocomplete="off">
+      <section class="panel">
+        <div class="p-head"><h2>기본 정보</h2></div>
+        <div class="fbody">
+          <div class="row" style="--cols:2">
+            <label class="f"><span>사이트 제목</span><input class="in" data-c="SITE_TITLE" placeholder="마인크래프트 모드"></label>
+            <label class="f"><span>제목 위 작은 글씨</span><input class="in" data-c="COMMUNITY" placeholder="🐸 노천극장 어르신들의 놀이터"></label>
+          </div>
+          <label class="f"><span>공지 <small>사이트 위쪽 노란 띠. 비우면 안 보여요</small></span><input class="in" data-c="NOTICE" placeholder="예: 10월 5일 밤 9시 서버 오픈!"></label>
+          <label class="f"><span>서버 이름 <small>링크를 공유할 때 미리보기 설명에 쓰여요</small></span><input class="in" data-c="SERVER_NAME" placeholder="우리 마크 서버"></label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="p-head"><h2>서버 접속 정보</h2></div>
+        <p class="p-desc">서버를 연 다음 채우세요. 비워 둔 칸은 사이트에서 숨겨져요.</p>
+        <div class="fbody">
+          <div class="row" style="--cols:3">
+            <label class="f"><span>서버 주소</span><input class="in" data-c="SERVER_ADDRESS" placeholder="play.example.com"></label>
+            <label class="f"><span>마크 버전</span><input class="in" data-c="MC_VERSION" placeholder="1.21.1"></label>
+            <label class="f"><span>로더</span><select class="in" data-c="LOADER"><option value="">선택 안 함</option><option>Fabric</option><option>NeoForge</option><option>Forge</option><option>Quilt</option></select></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="p-head"><h2>링크</h2></div>
+        <div class="fbody">
+          <div class="row" style="--cols:2">
+            <label class="f"><span>노션 주소</span><input class="in" data-c="NOTION_URL" inputmode="url" placeholder="https://"></label>
+            <label class="f"><span>디스코드 문의 주소</span><input class="in" data-c="DISCORD_URL" inputmode="url" placeholder="https://"></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="svPanel">
+        <div class="p-head"><h2>투표 · 후보</h2><label class="switch"><span id="svShowT">사이트에 보이기</span><input type="checkbox" data-s="show"></label></div>
+        <div class="fbody">
+          <div class="row" style="--cols:3">
+            <label class="f"><span>섹션 제목</span><input class="in" data-s="title" placeholder="시즌 2 모드 투표"></label>
+            <label class="f"><span>상태 표시 <small>비우면 숨김</small></span><input class="in" data-s="badge" placeholder="투표 중"></label>
+            <label class="f"><span>기간</span><input class="in" data-s="period" placeholder="2026년 10월 1일부터"></label>
+          </div>
+          <div class="row" style="--cols:2">
+            <label class="f"><span>안내 문구</span><input class="in" data-s="intro" placeholder="같이 하고 싶은 모드에 투표해 주세요."></label>
+            <label class="f"><span>노션 버튼 글자</span><input class="in" data-s="button" placeholder="노션에서 투표하기"></label>
+          </div>
+          <div id="cands" style="display:flex; flex-direction:column; gap:var(--s3)"></div>
+          <button class="add-cand" type="button" id="addCand"><svg class="i"><use href="#i-plus"/></svg>후보 추가</button>
+        </div>
+      </section>
+
+      <div class="savebar" id="savebar" hidden>
+        <span class="msg" id="saveMsg">저장 안 된 변경이 있어요</span>
+        <button class="btn btn-ghost" type="button" id="revertBtn">되돌리기</button>
+        <button class="btn btn-primary" type="submit" id="saveBtn">저장<kbd>⌘S</kbd></button>
+      </div>
+    </form>
+
+    <aside class="col side">
+      <section class="panel" aria-labelledby="chT">
+        <div class="p-head"><h2 id="chT">사이트에 아직 안 올린 변경</h2><span class="right count num" id="chCount" hidden></span></div>
+        <ul class="changes" id="changes"></ul>
+        <div class="synced" id="synced" hidden><svg class="i"><use href="#i-check"/></svg>사이트와 같아요. 올릴 변경이 없어요.</div>
+        <div class="actions">
+          <button class="btn btn-primary btn-block" id="publishBtn" type="button"><svg class="i"><use href="#i-up"/></svg>사이트에 올리기</button>
+          <div class="hint">올리면 1~2분 뒤 친구들이 사이트에서 받을 수 있어요</div>
+        </div>
+        <div class="pub" id="pub" hidden>
+          <div class="pub-head" id="pubHead"></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button type="button" id="toastAct" hidden></button></div>
+<script>
+(() => {
+  const API = "{{ADMIN_API}}".replace(/\/$/, ""), CLIENT_ID = "{{GOOGLE_CLIENT_ID}}";
+  const $ = s => document.querySelector(s);
+  const icon = n => `<svg class="i${n === "load" ? " spin" : ""}"><use href="#i-${n}"/></svg>`;
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const size = n => n < 1000 ? `${n} B` : n < 1000 * 1024 ? `${(n/1024).toFixed(1)} KB` : `${(n/1048576).toFixed(1)} MB`;
+  const slug = s => (String(s).toLowerCase().replace(/[^a-z0-9_.-]/g, "_").slice(0, 64) || "mod");
+
+  /* ---------- 로그인 ---------- */
+  const TOKEN = "admin-token";
+  let token = null;
+  try {
+    const t = JSON.parse(sessionStorage.getItem(TOKEN));
+    if (t && t.exp * 1000 > Date.now() + 60e3) token = t.jwt;
+  } catch {}
+  const claims = jwt => JSON.parse(decodeURIComponent(escape(atob(jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")))));
+
+  function showLogin(msg){
+    token = null;
+    try { sessionStorage.removeItem(TOKEN); } catch {}
+    $("#app").hidden = true; $("#who").hidden = true; $("#login").hidden = false;
+    $("#loginErr").hidden = !msg; $("#loginErr").textContent = msg || "";
+    if (!API || !CLIENT_ID) { $("#setup").hidden = false; $("#gbtn").hidden = true; return; }
+    const draw = () => {
+      if (!window.google?.accounts?.id) return setTimeout(draw, 200);
+      google.accounts.id.initialize({ client_id: CLIENT_ID, callback: r => signIn(r.credential), auto_select: true });
+      google.accounts.id.renderButton($("#gbtn"), { theme: "outline", size: "large", shape: "pill", text: "signin_with", locale: "ko" });
+      google.accounts.id.prompt();
+    };
+    draw();
+  }
+  async function signIn(jwt){
+    token = jwt;
+    try {
+      const me = await api("/me");
+      try { sessionStorage.setItem(TOKEN, JSON.stringify({ jwt, exp: claims(jwt).exp })); } catch {}
+      start(me);
+    } catch (e) { showLogin(e.message || "로그인하지 못했어요"); }
+  }
+  $("#logout").addEventListener("click", () => { window.google?.accounts?.id?.disableAutoSelect(); showLogin(); });
+
+  async function api(path, body, method){
+    const r = await fetch(API + path, {
+      method: method || (body === undefined ? "GET" : "POST"),
+      headers: { "Authorization": `Bearer ${token}`, ...(body === undefined ? {} : { "Content-Type": "application/json" }) },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    }).catch(() => { throw { message: "관리 서버에 연결하지 못했어요. 인터넷 연결을 확인해 주세요" }; });
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 401) { showLogin(j.message); throw j; }
+    if (!r.ok) throw j;
+    return j;
+  }
+
+  let S = {mods: [], content_changed: false, publish: {}}, LIVE = {mods: []}, fresh = new Set();
+
+  /* ---------- toast ---------- */
+  let toastT;
+  function toast(msg, action){
+    const t = $("#toast"), b = $("#toastAct");
+    $("#toastMsg").textContent = msg;
+    b.hidden = !action; t.classList.toggle("plain", !action);
+    if (action) { b.textContent = action.label; b.onclick = () => { t.classList.remove("show"); action.run(); }; }
+    t.classList.add("show");
+    clearTimeout(toastT);
+    toastT = setTimeout(() => t.classList.remove("show"), action ? 6000 : 2600);
+  }
+
+  /* ---------- render ---------- */
+  const TAG = {client:'<span class="tag">클라이언트</span>', server:'<span class="tag tag-muted">서버 전용</span>'};
+  function diff(oldMods, mods){
+    const old = new Map(oldMods.map(m => [m.id, m])), now = new Map(mods.map(m => [m.id, m])), out = [];
+    for (const [i, m] of now) {
+      if (!old.has(i)) out.push({kind: "add", name: m.name, to: m.version});
+      else if (old.get(i).version !== m.version || old.get(i).file !== m.file) out.push({kind: "up", name: m.name, from: old.get(i).version, to: m.version});
+    }
+    for (const [i, m] of old) if (!now.has(i)) out.push({kind: "del", name: m.name, from: m.version});
+    const order = {add: 0, up: 1, del: 2};
+    return out.sort((a, b) => order[a.kind] - order[b.kind] || a.name.localeCompare(b.name));
+  }
+  function renderMods(){
+    const q = $("#q").value.trim().toLowerCase();
+    const list = S.mods.filter(m => !q || `${m.name} ${m.file} ${m.id}`.toLowerCase().includes(q));
+    $("#listCount").textContent = `${S.mods.length}개`;
+    $("#searchBox").hidden = S.mods.length < 6;
+    $("#mods").innerHTML = list.map(m => `
+      <li class="mod${fresh.has(m.file) ? " new" : ""}" data-file="${esc(m.file)}">
+        <span class="ic"><img src="icons/${esc(slug(m.id))}.png" alt="" onerror="this.outerHTML='<span class=ph>${esc((m.name[0] || "?").toUpperCase()).replace(/'/g, "")}</span>'"></span>
+        <span class="mi"><span class="mn"><span class="t">${esc(m.name)}</span>${TAG[m.env] || ""}</span><span class="mf" title="${esc(m.file)}">${esc(m.file)}</span></span>
+        <span class="mv" title="${esc(m.version)}">${esc(m.version) || "—"}</span>
+        <span class="ms num">${size(m.size)}</span>
+        <button class="icon-btn" type="button" data-del aria-label="${esc(m.name)} 삭제" title="삭제">${icon("trash")}</button>
+      </li>`).join("");
+    fresh.clear();
+    const empty = $("#empty");
+    empty.hidden = list.length > 0;
+    empty.innerHTML = S.mods.length
+      ? `<b>"${esc(q)}"에 맞는 모드가 없어요</b>다른 이름으로 찾아보세요.`
+      : `<b>모드가 아직 없어요</b>위에 .jar 파일을 끌어다 놓거나 눌러서 골라 주세요.`;
+  }
+  function renderChanges(){
+    const sym = {add:["추가","+"], up:["업데이트","↑"], del:["삭제","−"]};
+    const c = diff(LIVE.mods || [], S.mods);
+    $("#changes").innerHTML = (S.content_changed ? `<li class="ch ch-site"><span class="ck"><span aria-hidden="true">✎</span>내용</span><span class="cn">사이트 내용 수정</span></li>` : "") + c.map(x => `
+      <li class="ch ch-${x.kind}"><span class="ck"><span aria-hidden="true">${sym[x.kind][1]}</span>${sym[x.kind][0]}</span>
+      <span class="cn">${esc(x.name)}</span>
+      <span class="cv num">${x.kind === "up" ? `${esc(x.from || "?")} → ${esc(x.to || "?")}` : esc(x.to || x.from || "")}</span></li>`).join("");
+    const n = c.length + (S.content_changed ? 1 : 0);
+    $("#chCount").hidden = !n; $("#chCount").textContent = n;
+    $("#synced").hidden = n > 0;
+    $("#publishBtn").disabled = !!S.publish?.running;
+  }
+  async function loadLive(){
+    try { LIVE = await (await fetch(`manifest.json?t=${Date.now()}`, {cache: "no-store"})).json(); } catch { LIVE = {mods: []}; }
+  }
+  async function refresh(){
+    S = await api("/state");
+    renderMods(); renderChanges(); renderPub(S.publish);
+  }
+
+  /* ---------- 업로드 (jar 안의 모드 정보는 여기서 읽는다) ---------- */
+  const tomlStr = (t, k) => {
+    let m = new RegExp(`^\\s*${k}\\s*=\\s*('''|""")([\\s\\S]*?)\\1`, "m").exec(t);
+    if (m) return m[2].trim();
+    m = new RegExp(`^\\s*${k}\\s*=\\s*"([^"]*)"`, "m").exec(t);
+    return m ? m[1] : null;
+  };
+  async function readMeta(file){
+    const meta = {id: null, name: null, version: null, desc: "", env: ""};
+    try {
+      const z = await JSZip.loadAsync(file);
+      const txt = async p => z.file(p) ? z.file(p).async("string") : null;
+      let s;
+      if ((s = await txt("fabric.mod.json"))) {
+        const d = JSON.parse(s.replace(/[\u0000-\u001f]+/g, " "));
+        Object.assign(meta, {id: d.id, name: d.name, version: d.version, desc: d.description || "", env: d.environment || ""});
+      } else if ((s = await txt("quilt.mod.json"))) {
+        const d = JSON.parse(s), ql = d.quilt_loader || {}, md = ql.metadata || {};
+        Object.assign(meta, {id: ql.id, name: md.name, version: ql.version, desc: md.description || "", env: (d.minecraft || {}).environment || ""});
+      } else if ((s = (await txt("META-INF/neoforge.mods.toml")) || (await txt("META-INF/mods.toml")))) {
+        Object.assign(meta, {id: tomlStr(s, "modId"), name: tomlStr(s, "displayName"), version: tomlStr(s, "version"), desc: tomlStr(s, "description") || ""});
+      }
+    } catch {}
+    if (meta.version && meta.version.includes("${")) meta.version = null;
+    const stem = file.name.replace(/\.jar$/i, "");
+    meta.name = meta.name || stem;
+    meta.version = meta.version || "";
+    meta.id = meta.id || stem.replace(/[-_ ]?v?\d[\w.+-]*$/, "").toLowerCase() || stem.toLowerCase();
+    meta.desc = String(meta.desc).split(/\s+/).join(" ").slice(0, 300);
+    meta.env = ["client", "server"].includes(meta.env) ? meta.env : "";
+    return meta;
+  }
+  function uploadOne(file){
+    const li = document.createElement("li");
+    li.className = "up";
+    li.innerHTML = `${icon("load")}<span class="nm"><b></b></span><span class="res">확인하는 중…</span><span class="bar"><span></span></span>`;
+    li.querySelector("b").textContent = file.name;
+    $("#uploads").prepend(li);
+    const done = (ok, text) => {
+      li.className = "up " + (ok ? "ok" : "bad");
+      li.firstElementChild.outerHTML = icon(ok ? "check" : "x");
+      li.querySelector(".res").textContent = text;
+      li.querySelector(".bar")?.remove();
+      if (ok) setTimeout(() => li.remove(), 8000);
+    };
+    if (!/\.jar$/i.test(file.name)) { done(false, ".jar 파일만 올릴 수 있어요"); return Promise.resolve(); }
+    if (file.size > 100 * 1024 * 1024) { done(false, "웹에서는 100MB가 넘는 파일을 올릴 수 없어요"); return Promise.resolve(); }
+    return readMeta(file).then(meta => new Promise(resolve => {
+      li.querySelector(".res").textContent = "올리는 중…";
+      const x = new XMLHttpRequest();
+      x.open("POST", API + "/upload");
+      x.setRequestHeader("Authorization", `Bearer ${token}`);
+      x.setRequestHeader("X-Filename", encodeURIComponent(file.name));
+      x.setRequestHeader("X-Meta", encodeURIComponent(JSON.stringify(meta)));
+      x.upload.onprogress = e => { if (e.lengthComputable) li.querySelector(".bar span").style.width = (e.loaded / e.total * 100) + "%"; };
+      x.onload = () => {
+        let r = {}; try { r = JSON.parse(x.responseText); } catch {}
+        if (x.status === 401) { done(false, "로그인이 만료됐어요"); showLogin(r.message); }
+        else if (x.status !== 200) done(false, r.message || "올리지 못했어요");
+        else {
+          fresh.add(r.file);
+          li.querySelector("b").textContent = r.name || file.name;
+          done(true, r.result === "replace" ? `교체됨 · ${r.from || "?"} → ${r.version || "?"}`
+                   : r.result === "same" ? "같은 파일을 덮어썼어요" : `추가됨${r.version ? " · " + r.version : ""}`);
+        }
+        resolve();
+      };
+      x.onerror = () => { done(false, "연결이 끊겼어요. 다시 시도해 주세요"); resolve(); };
+      x.send(file);
+    }));
+  }
+  async function uploadAll(files){
+    for (const f of files) await uploadOne(f);
+    await refresh().catch(() => {});
+  }
+  $("#file").addEventListener("change", e => { uploadAll([...e.target.files]); e.target.value = ""; });
+  let depth = 0;
+  addEventListener("dragenter", e => { if (e.dataTransfer?.types.includes("Files")) { depth++; $("#drop").classList.add("over"); } });
+  addEventListener("dragleave", () => { if (--depth <= 0) { depth = 0; $("#drop").classList.remove("over"); } });
+  addEventListener("dragover", e => e.preventDefault());
+  addEventListener("drop", e => {
+    e.preventDefault(); depth = 0; $("#drop").classList.remove("over");
+    const files = [...(e.dataTransfer?.files || [])];
+    if (files.length && !$("#app").hidden) uploadAll(files);
+  });
+
+  /* ---------- 삭제 (확인 + 되돌리기) ---------- */
+  $("#mods").addEventListener("click", async e => {
+    const row = e.target.closest(".mod"); if (!row) return;
+    const file = row.dataset.file;
+    if (e.target.closest("[data-del]")) {
+      [...row.children].slice(2).forEach(c => c.hidden = true);
+      const c = document.createElement("span");
+      c.className = "confirm";
+      c.innerHTML = `<button class="btn btn-ghost" type="button" data-cancel>취소</button><button class="btn btn-danger" type="button" data-go>삭제</button>`;
+      row.appendChild(c);
+      c.querySelector("[data-go]").focus();
+    } else if (e.target.closest("[data-cancel]")) {
+      renderMods();
+    } else if (e.target.closest("[data-go]")) {
+      try {
+        const r = await api("/delete", {file});
+        await refresh();
+        toast(`${r.entry.name} 삭제함`, {label: "되돌리기", run: async () => {
+          try { await api("/restore", {entry: r.entry}); fresh.add(file); await refresh(); toast("되돌렸어요"); }
+          catch (err) { toast(err.message || "되돌리지 못했어요"); }
+        }});
+      } catch (err) { toast(err.message || "삭제하지 못했어요"); refresh().catch(() => {}); }
+    }
+  });
+  addEventListener("keydown", e => {
+    if (e.key === "Escape" && document.querySelector(".confirm")) renderMods();
+    if (e.key === "/" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && !$("#viewMods").hidden && !$("#searchBox").hidden) { e.preventDefault(); $("#q").focus(); }
+  });
+  $("#q").addEventListener("input", renderMods);
+
+  /* ---------- 사이트 내용 ---------- */
+  const form = $("#viewSite");
+  let C = null, saved = "";
+  const snap = () => JSON.stringify(C);
+  const blankCand = () => ({name: "", pack: "", stars: 3, weeks: "", tags: [], videos: []});
+  function renderCands(){
+    const list = C.season.candidates;
+    $("#cands").innerHTML = list.map((c, i) => `
+      <div class="cand" data-i="${i}">
+        <div class="cand-head"><span class="cand-no num">${i + 1}</span>
+          <span class="tools">
+            <button class="icon-btn plain" type="button" data-move="-1" aria-label="위로" title="위로" ${i ? "" : "disabled"}>${icon("upar")}</button>
+            <button class="icon-btn plain" type="button" data-move="1" aria-label="아래로" title="아래로" ${i < list.length - 1 ? "" : "disabled"}>${icon("dnar")}</button>
+            <button class="icon-btn" type="button" data-remove aria-label="${i + 1}번 후보 삭제" title="삭제">${icon("trash")}</button>
+          </span></div>
+        <div class="row" style="--cols:2">
+          <label class="f"><span>이름</span><input class="in" data-k="name" value="${esc(c.name)}" placeholder="예: 좀비 아포칼립스"></label>
+          <label class="f"><span>모드팩 이름</span><input class="in" data-k="pack" value="${esc(c.pack)}" placeholder="예: DeceasedCraft"></label>
+        </div>
+        <div class="row" style="--cols:3">
+          <div class="f"><span>추천도</span><span class="stars" role="radiogroup" aria-label="추천도">${[1,2,3,4,5].map(n =>
+            `<button type="button" role="radio" aria-checked="${n === c.stars}" aria-label="${n}점" data-star="${n}" class="${n <= c.stars ? "on" : ""}">${icon("star")}</button>`).join("")}</span></div>
+          <label class="f"><span>진행 기간</span><input class="in" data-k="weeks" value="${esc(c.weeks)}" placeholder="예: 4–5주"></label>
+          <label class="f"><span>태그 <small>쉼표로 구분</small></span><input class="in" data-k="tags" value="${esc(c.tags.join(", "))}" placeholder="예: 단발성"></label>
+        </div>
+        <label class="f"><span>영상 주소 <small>한 줄에 하나씩</small></span><textarea class="in" data-k="videos" rows="${Math.max(2, c.videos.length)}" placeholder="https://youtu.be/...">${esc(c.videos.join("\n"))}</textarea></label>
+      </div>`).join("");
+  }
+  function fill(){
+    form.querySelectorAll("[data-c]").forEach(el => el.value = C.conf[el.dataset.c] ?? "");
+    form.querySelectorAll("[data-s]").forEach(el => el.type === "checkbox" ? el.checked = C.season.show !== false : el.value = C.season[el.dataset.s] ?? "");
+    $("#svPanel").classList.toggle("sv-off", C.season.show === false);
+    renderCands(); markDirty();
+  }
+  function markDirty(){
+    const d = !!C && snap() !== saved;
+    $("#savebar").hidden = !d; $("#dirtyDot").hidden = !d;
+    return d;
+  }
+  async function loadContent(){
+    const r = await api("/content");
+    C = {conf: r.conf, season: Object.assign({show: true, candidates: []}, r.season)};
+    C.season.candidates = C.season.candidates || [];
+    saved = snap(); fill();
+  }
+  form.addEventListener("input", e => {
+    const el = e.target; el.classList.remove("bad");
+    if (el.dataset.c) C.conf[el.dataset.c] = el.value;
+    else if (el.dataset.s) {
+      C.season[el.dataset.s] = el.type === "checkbox" ? el.checked : el.value;
+      $("#svPanel").classList.toggle("sv-off", C.season.show === false);
+    } else if (el.dataset.k) {
+      const c = C.season.candidates[+el.closest(".cand").dataset.i], k = el.dataset.k;
+      c[k] = k === "tags" ? el.value.split(",").map(s => s.trim()).filter(Boolean)
+           : k === "videos" ? el.value.split(/\s+/).filter(Boolean) : el.value;
+    }
+    markDirty();
+  });
+  $("#cands").addEventListener("click", e => {
+    const card = e.target.closest(".cand"); if (!card) return;
+    const i = +card.dataset.i, list = C.season.candidates, b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.star) list[i].stars = +b.dataset.star;
+    else if (b.dataset.move) { const j = i + +b.dataset.move; [list[i], list[j]] = [list[j], list[i]]; }
+    else if ("remove" in b.dataset) {
+      const gone = list.splice(i, 1)[0];
+      toast(`${gone.name || "후보"} 삭제함`, {label: "되돌리기", run: () => { list.splice(i, 0, gone); renderCands(); markDirty(); }});
+    }
+    renderCands(); markDirty();
+  });
+  $("#addCand").addEventListener("click", () => {
+    C.season.candidates.push(blankCand()); renderCands(); markDirty();
+    $("#cands").lastElementChild.querySelector("input").focus();
+  });
+  $("#revertBtn").addEventListener("click", () => { C = JSON.parse(saved); fill(); toast("저장된 내용으로 되돌렸어요"); });
+  async function saveContent(){
+    if (!markDirty()) return true;
+    const b = $("#saveBtn"); b.disabled = true;
+    try {
+      const r = await api("/content", C, "PUT");
+      C = {conf: r.conf, season: r.season}; saved = snap(); fill();
+      await refresh();
+      toast("저장했어요. ‘사이트에 올리기’를 누르면 반영돼요");
+      return true;
+    } catch (err) {
+      showTab("site");
+      toast(err.message || "저장하지 못했어요");
+      const m = /(\d+)번 후보/.exec(err.message || "");
+      const bad = m ? $("#cands").children[m[1] - 1]?.querySelector(err.message.includes("영상") ? "[data-k=videos]" : "[data-k=name]")
+                    : err.message?.includes("주소") ? [...form.querySelectorAll("[data-c$=_URL]")].find(x => x.value && !/^https:\/\//.test(x.value.trim()))
+                    : err.message?.includes("제목") ? form.querySelector("[data-c=SITE_TITLE]") : null;
+      if (bad) { bad.classList.add("bad"); bad.focus(); }
+      return false;
+    } finally { b.disabled = false; }
+  }
+  form.addEventListener("submit", e => { e.preventDefault(); saveContent(); });
+  addEventListener("keydown", e => { if ((e.metaKey || e.ctrlKey) && e.key === "s" && C) { e.preventDefault(); saveContent(); } });
+  addEventListener("beforeunload", e => { if (C && markDirty()) e.preventDefault(); });
+
+  function showTab(which){
+    const site = which === "site";
+    $("#tabMods").setAttribute("aria-selected", String(!site));
+    $("#tabSite").setAttribute("aria-selected", String(site));
+    $("#viewMods").hidden = site; form.hidden = !site;
+    try { localStorage.setItem("admin-tab", which); } catch {}
+  }
+  $("#tabMods").addEventListener("click", () => showTab("mods"));
+  $("#tabSite").addEventListener("click", () => showTab("site"));
+
+  /* ---------- 올리기 ---------- */
+  let poll;
+  function renderPub(p){
+    if (!p || (!p.running && p.ok === null)) { $("#pub").hidden = true; return; }
+    $("#pub").hidden = false;
+    const head = $("#pubHead"), log = p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">기록 보기 ↗</a>` : "";
+    if (p.running) head.className = "pub-head run", head.innerHTML = `${icon("load")}올리는 중… 1~2분 걸려요${log}`;
+    else if (p.ok) head.className = "pub-head ok", head.innerHTML = `${icon("check")}사이트에 올렸어요<a href="./" target="_blank" rel="noopener">사이트 열기 ↗</a>`;
+    else head.className = "pub-head bad", head.innerHTML = `${icon("x")}올리지 못했어요${log}`;
+    $("#publishBtn").disabled = !!p.running;
+  }
+  function watchPublish(){
+    clearInterval(poll);
+    poll = setInterval(async () => {
+      const p = await api("/publish").catch(() => null);
+      if (!p) return;
+      S.publish = p; renderPub(p);
+      if (!p.running) {
+        clearInterval(poll);
+        if (p.ok) { toast("사이트에 올렸어요"); await loadLive(); refresh().catch(() => {}); }
+      }
+    }, 4000);
+  }
+  $("#publishBtn").addEventListener("click", async () => {
+    if (!(await saveContent())) return;
+    $("#publishBtn").disabled = true;
+    try {
+      const p = await api("/publish", {});
+      S.publish = {...p, running: true}; renderPub(S.publish); watchPublish();
+    } catch (err) { toast(err.message || "올리지 못했어요"); $("#publishBtn").disabled = false; }
+  });
+
+  /* ---------- 시작 ---------- */
+  async function start(me){
+    $("#login").hidden = true; $("#app").hidden = false; $("#who").hidden = false;
+    $("#whoEmail").textContent = me.email;
+    try { if (location.hash === "#site" || localStorage.getItem("admin-tab") === "site") showTab("site"); } catch {}
+    await loadLive();
+    await Promise.all([refresh(), loadContent()]).catch(err => toast(err.message || "불러오지 못했어요"));
+    if (S.publish?.running) watchPublish();
+  }
+  if (token) signIn(token); else showLogin();
+})();
+</script>
+</body>
+</html>

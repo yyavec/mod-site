@@ -1,0 +1,72 @@
+{
+  "show": true,
+  "title": "시즌 2 모드 투표",
+  "badge": "투표 중",
+  "period": "2026년 10월 1일부터",
+  "intro": "같이 하고 싶은 모드에 투표해 주세요. 투표는 노션 페이지에서 받아요.",
+  "button": "노션에서 투표하기",
+  "candidates": [
+    {
+      "name": "포켓몬 (RE)",
+      "pack": "Pebblemon",
+      "stars": 4,
+      "weeks": "4–5주",
+      "tags": [
+        "기존 세이브 초기화"
+      ],
+      "videos": [
+        "https://youtu.be/2tsCcWbiYgA",
+        "https://youtu.be/b_80s3-dK8Y"
+      ]
+    },
+    {
+      "name": "좀비 아포칼립스",
+      "pack": "DeceasedCraft",
+      "stars": 4,
+      "weeks": "4–5주",
+      "tags": [],
+      "videos": [
+        "https://www.youtube.com/watch?v=3DxZ0WaqIgk",
+        "https://www.youtube.com/watch?v=8zd41ajAERA"
+      ]
+    },
+    {
+      "name": "백룸 · 공포",
+      "pack": "Into the Backrooms: Found Footage",
+      "stars": 5,
+      "weeks": "1주",
+      "tags": [
+        "단발성"
+      ],
+      "videos": [
+        "https://youtu.be/NuqFMrwsleg",
+        "https://www.youtube.com/watch?v=oixfYrKNSLM",
+        "https://www.youtube.com/watch?v=i_C03f1MiRo"
+      ]
+    },
+    {
+      "name": "진격의 거인",
+      "pack": "Danny's AOT",
+      "stars": 3,
+      "weeks": "1주",
+      "tags": [
+        "단발성"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=2vFQzUN5faY",
+        "https://www.youtube.com/watch?v=5yEdMB6Qnh4"
+      ]
+    },
+    {
+      "name": "RPG",
+      "pack": "Nightfallcraft",
+      "stars": 5,
+      "weeks": "8주",
+      "tags": [],
+      "videos": [
+        "https://www.youtube.com/watch?v=9wKugA7QeQI",
+        "https://www.youtube.com/shorts/_aY2a97-Shk"
+      ]
+    }
+  ]
+}

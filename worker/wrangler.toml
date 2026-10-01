@@ -1,0 +1,9 @@
+name = "mod-site-admin"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[vars]
+REPO = "yyavec/mod-site"
+ALLOWED_ORIGIN = "https://yyavec.github.io"
+# GOOGLE_CLIENT_ID, ADMIN_EMAIL, GITHUB_TOKEN 은 `wrangler secret put` 으로 넣는다 (저장소가 공개라서).

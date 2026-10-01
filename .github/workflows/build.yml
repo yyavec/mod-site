@@ -1,0 +1,58 @@
+# 관리자 화면의 "사이트에 올리기"가 이 작업을 실행한다.
+# store 릴리스에 모아 둔 모드(.jar)를 받아 사이트를 만들고, mods.zip을 올린 뒤 GitHub Pages에 배포한다.
+name: 사이트 올리기
+on: workflow_dispatch
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 모드 파일 받기
+        run: |
+          mkdir -p mods _site
+          python3 - <<'PY' > files.txt
+          import json
+          for m in json.load(open("store.json"))["mods"]:
+              print(m["file"])
+          PY
+          while IFS= read -r f; do
+            [ -n "$f" ] && gh release download store -p "$f" -D mods --clobber
+          done < files.txt
+          ls -la mods
+
+      - name: 직전 목록 가져오기 (바뀐 모드 비교용)
+        run: curl -fsSL "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/manifest.json" -o _site/manifest.json || rm -f _site/manifest.json
+
+      - name: 사이트 만들기
+        run: |
+          OWNER="${GITHUB_REPOSITORY_OWNER}"; REPO="${GITHUB_REPOSITORY}"
+          ZIP_URL="https://github.com/${REPO}/releases/latest/download/mods.zip" OUT_DIR=_site MODS_DIR=mods python3 build.py
+          mv _site/mods.zip mods.zip
+
+      - name: mods.zip 올리기
+        run: |
+          gh release delete mods -y --cleanup-tag || true
+          gh release create mods mods.zip --title "모드 파일" --notes "사이트의 전체 다운로드 버튼이 이 파일을 받습니다." --latest
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4

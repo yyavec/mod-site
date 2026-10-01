@@ -1,2 +1,6 @@
-mods.zip
+__pycache__/
 .DS_Store
+_site/
+mods/
+node_modules/
+.wrangler/
