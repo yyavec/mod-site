@@ -622,6 +622,15 @@
       "size": 252579
     },
     {
+      "file": "ftb-xmod-compat-forge-2.1.3.jar",
+      "id": "ftbxmodcompat",
+      "name": "FTB XMod Compat",
+      "version": "2.1.3",
+      "desc": "Provides cross-mod compatibilty/integration for all main FTB mods",
+      "env": "",
+      "size": 129725
+    },
+    {
       "file": "dummmmmmy-1.20-2.0.12-forge.jar",
       "id": "dummmmmmy",
       "name": "MmmMmmMmmMmm",
