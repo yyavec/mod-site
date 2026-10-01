@@ -1,3 +1,13 @@
 {
-  "mods": []
+  "mods": [
+    {
+      "file": "test-mod-1.0.0.jar",
+      "id": "zz_testmod",
+      "name": "시험용 모드",
+      "version": "1.0.0",
+      "desc": "관리자 기능 시험",
+      "env": "client",
+      "size": 319
+    }
+  ]
 }
