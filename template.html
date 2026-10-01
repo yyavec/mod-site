@@ -261,6 +261,15 @@ kbd{font:12px var(--mono); padding:1px 5px; border-radius:var(--r-sm); border:1p
 
 
 /* ---------- 처음 왔어요 ---------- */
+/* 공허 속에서도 여기만은 안전하다는 느낌: 은은한 금빛 후광 */
+.guide{position:relative; border-color:rgba(232,190,90,.55); animation:halo 4s ease-in-out infinite}
+@keyframes halo{0%,100%{box-shadow:var(--shadow-raised), 0 0 0 1px rgba(255,214,120,.25), 0 0 18px 2px rgba(255,205,100,.22)} 50%{box-shadow:var(--shadow-raised), 0 0 0 1px rgba(255,214,120,.5), 0 0 34px 8px rgba(255,205,100,.38)}}
+.guide-head{position:relative; overflow:hidden}
+.guide-head::after{content:""; position:absolute; top:0; bottom:0; left:-40%; width:30%; background:linear-gradient(100deg, transparent, rgba(255,240,200,.45), transparent); transform:skewX(-18deg); animation:sheen 5.5s ease-in-out infinite; pointer-events:none}
+@keyframes sheen{0%,55%{left:-40%} 85%,100%{left:120%}}
+.guide-ic svg{animation:eggfloat 3s ease-in-out infinite; filter:drop-shadow(0 0 6px rgba(255,214,120,.8))}
+@keyframes eggfloat{50%{transform:translateY(-3px)}}
+:root[data-theme="dark"] .guide-head::after{background:linear-gradient(100deg, transparent, rgba(255,225,160,.18), transparent)}
 .guide{background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--r-lg); box-shadow:var(--shadow-raised); overflow:hidden}
 .guide-head{list-style:none; cursor:pointer; display:flex; align-items:center; gap:var(--s4); padding:var(--s4) var(--s5); transition:background var(--m-fast)}
 .guide-head::-webkit-details-marker{display:none}
@@ -326,15 +335,19 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .nt-rank::before{content:"["} .nt-rank::after{content:"]"}
 
 /* ===== 공허에 물든 카드들 ===== */
-:root{--rift-core:#6E46D8; --rift-glow:#B68CFF}
-:root[data-theme="dark"]{--rift-core:#E9DDFF; --rift-glow:#9B6BFF}
+:root{--rift-core:#F3ECFF; --rift-glow:#A47CFF; --fissure:#1A1023; --lip:#FFFFFF}
+:root[data-theme="dark"]{--rift-core:#F3ECFF; --rift-glow:#8E5CFF; --fissure:#05030A; --lip:#6B5A80}
 .voided{isolation:isolate}
 [data-mood="nightfall"] .voided:not(.past-row):not(.notice){box-shadow:var(--shadow-raised), 0 0 0 1px rgba(155,107,255,.18), 0 0 22px rgba(130,80,230,.10)}
 .card-rift{position:absolute !important; inset:0; z-index:-1 !important; width:100%; height:100%; overflow:hidden; border-radius:inherit; pointer-events:none; animation:riftpulse 3.2s infinite; animation-delay:var(--rd,0s)}
-.card-rift path{fill:none; stroke-linecap:square; stroke-linejoin:miter}
-.card-rift .g{stroke:var(--rift-glow); stroke-width:3.5; opacity:.45; filter:blur(1.6px)}
-.card-rift .c{stroke:var(--rift-core); stroke-width:1.2; opacity:.85}
-.card-rift.draw path{stroke-dasharray:1; stroke-dashoffset:1; animation:riftdraw .5s ease-out forwards; animation-delay:var(--dd,0s)}
+/* 실제 금처럼: 시작점은 굵고 끝으로 갈수록 가늘어지는 틈 + 안에서 새어 나오는 빛 */
+.crk .glow{fill:var(--rift-glow); opacity:.5; filter:blur(2.4px)}
+.crk .gap{fill:var(--fissure)}
+.crk .lip{fill:none; stroke:var(--lip); stroke-width:.6; opacity:.55}
+.crk .core{fill:none; stroke:var(--rift-core); stroke-width:.7; stroke-linecap:round; opacity:.9}
+.crk .chip{fill:var(--fissure); stroke:var(--rift-glow); stroke-width:.5}
+.draw .crk{animation:crackgrow .5s cubic-bezier(.2,.8,.3,1) both; animation-delay:var(--dd,0s)}
+@keyframes crackgrow{from{transform:scale(0); opacity:0} 20%{opacity:1}}
 .card-rift.draw{animation:none}
 .voided.zap{animation:zap .35s ease-out}
 @keyframes zap{30%{transform:translate(-2px,1px)} 60%{transform:translate(2px,-1px)} 100%{transform:none}}
@@ -500,11 +513,6 @@ footer .btn-ghost{margin-left:auto; height:30px}
 .now{position:relative; z-index:1}
 .rift{display:none; position:absolute; left:50%; top:50%; width:560px; height:140px; transform:translate(-50%,-50%); pointer-events:none; overflow:visible}
 [data-mood="nightfall"] .rift{display:block; animation:riftpulse 2.8s infinite}
-.rift path{fill:none; stroke-linecap:square; stroke-linejoin:miter; stroke-dasharray:1; stroke-dashoffset:0}
-.rift-glow path{stroke:#9B6BFF; stroke-width:4; opacity:.55; filter:blur(2px)}
-.rift-core path{stroke:#E9DDFF; stroke-width:1.5}
-.rift-shards rect{fill:#1B1424; stroke:#B68CFF; stroke-width:.8; animation:shard 3.6s ease-in-out infinite}
-.rift-shards rect:nth-child(2n){animation-delay:-1.4s}
 @keyframes shard{50%{transform:translateY(-4px)}}
 @keyframes riftpulse{0%,100%{opacity:1} 40%{opacity:.85} 46%{opacity:.2} 50%{opacity:.95} 54%{opacity:.25} 60%{opacity:1}}
 [data-intro]:not([data-intro="slam"]) .now{opacity:0}
@@ -512,8 +520,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
 [data-intro="slam"] .now{animation:slam .5s cubic-bezier(.55,0,.9,.45) both}
 @keyframes slam{0%{transform:translateY(-240px) scale(1.5) rotate(-6deg); opacity:0} 15%{opacity:1} 78%{transform:translateY(4px) scale(1.08,.86)} 90%{transform:translateY(-3px) scale(.98,1.04)} 100%{transform:none}}
 [data-intro="slam"] .rift{animation:none}
-[data-intro="slam"] .rift path{stroke-dashoffset:1; animation:riftdraw .45s .42s ease-out forwards}
-[data-intro="slam"] .rift-shards rect{opacity:0; animation:shardpop .5s .45s ease-out forwards}
+[data-intro="slam"] .rift .crk{animation:crackgrow .5s cubic-bezier(.2,.8,.3,1) both; animation-delay:calc(.42s + var(--dd,0s))}
 @keyframes riftdraw{to{stroke-dashoffset:0}}
 @keyframes shardpop{from{opacity:0; transform:scale(0)} to{opacity:1; transform:none}}
 @media (max-width:600px){ .rift{width:420px} }
@@ -658,7 +665,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
     <div class="head">
     <p class="eyebrow">{{COMMUNITY}}</p>
     <h1>{{SITE_TITLE}}</h1>
-    <div class="now-row" {{NOW_HIDDEN}}><span class="now-wrap"><svg class="rift" viewBox="0 0 560 140" aria-hidden="true"><g class="rift-glow"><path d="M170.0,72.0 L162.1,66.6 L152.0,69.1 L143.3,63.7 L134.1,67.3" pathLength="1"/><path d="M390.0,68.0 L406.3,71.4 L428.1,66.3 L448.5,65.5 L467.7,72.5 L483.4,65.8 L508.1,64.4 L525.0,62.0 L543.6,68.4 L560.6,64.5" pathLength="1"/><path d="M448.5,65.5 L464.6,76.4 L483.1,72.9 L496.4,81.0" pathLength="1"/><path d="M508.1,64.4 L522.3,70.0 L544.9,73.7 L561.0,80.8" pathLength="1"/><path d="M152.0,69.1 L138.7,63.0 L125.9,57.4" pathLength="1"/><path d="M210.0,55.0 L208.0,48.7 L209.8,42.1 L215.3,33.7" pathLength="1"/><path d="M310.0,85.0 L313.5,94.0 L309.6,100.2 L310.1,107.7" pathLength="1"/><path d="M365.0,85.0 L361.3,90.4 L362.5,99.1 L357.7,106.8" pathLength="1"/></g><g class="rift-core"><path d="M170.0,72.0 L162.1,66.6 L152.0,69.1 L143.3,63.7 L134.1,67.3" pathLength="1"/><path d="M390.0,68.0 L406.3,71.4 L428.1,66.3 L448.5,65.5 L467.7,72.5 L483.4,65.8 L508.1,64.4 L525.0,62.0 L543.6,68.4 L560.6,64.5" pathLength="1"/><path d="M448.5,65.5 L464.6,76.4 L483.1,72.9 L496.4,81.0" pathLength="1"/><path d="M508.1,64.4 L522.3,70.0 L544.9,73.7 L561.0,80.8" pathLength="1"/><path d="M152.0,69.1 L138.7,63.0 L125.9,57.4" pathLength="1"/><path d="M210.0,55.0 L208.0,48.7 L209.8,42.1 L215.3,33.7" pathLength="1"/><path d="M310.0,85.0 L313.5,94.0 L309.6,100.2 L310.1,107.7" pathLength="1"/><path d="M365.0,85.0 L361.3,90.4 L362.5,99.1 L357.7,106.8" pathLength="1"/></g><g class="rift-shards"><rect x="140" y="50" width="3" height="3" /><rect x="130" y="86" width="2" height="2" /><rect x="450" y="46" width="4" height="4" /><rect x="500" y="88" width="3" height="3" /><rect x="540" y="60" width="3" height="3" /><rect x="580" y="82" width="2" height="2" /><rect x="410" y="98" width="3" height="3" /><rect x="480" y="36" width="2" height="2" /></g></svg><a class="now" href="#svTitle"><span class="now-dot" aria-hidden="true"></span><span class="now-k">현재 진행 중!!</span><span class="now-v">{{NOW_PLAYING}}</span></a></span></div>
+    <div class="now-row" {{NOW_HIDDEN}}><span class="now-wrap"><svg class="rift" viewBox="0 0 560 140" aria-hidden="true"></svg><a class="now" href="#svTitle"><span class="now-dot" aria-hidden="true"></span><span class="now-k">현재 진행 중!!</span><span class="now-v">{{NOW_PLAYING}}</span></a></span></div>
     <div class="meta">
       {{CHIPS}}
       <button class="addr" type="button" data-copy="{{SERVER_ADDRESS}}" data-toast="서버 주소를 복사했어요" {{ADDRESS_HIDDEN}} aria-label="서버 주소 {{SERVER_ADDRESS}} 복사">{{SERVER_ADDRESS}}<svg class="i"><use href="#i-copy"/></svg></button>
@@ -873,30 +880,74 @@ footer .btn-ghost{margin-left:auto; height:30px}
   }
 
   // 공허의 균열이 다른 카드들로 번진다 (나이트폴 분위기에서만)
-  const VOID_CARDS = ".dl-card, .notice:not([hidden]), .guide, .past-row, .win-card, .changes, .mods:not([hidden]), .empty:not([hidden]), .cands > .cand, .history";
-  function crackPaths(w, h){
-    const r = (a, b) => a + Math.random() * (b - a), paths = [];
-    const n = w > 500 ? 3 : 2;
-    for (let k = 0; k < n; k++) {
-      // 모서리나 가장자리에서 시작해서 안쪽으로 갈라진다
-      const side = Math.floor(Math.random() * 4);
-      let x = side === 0 ? 0 : side === 1 ? w : r(w * .1, w * .9);
-      let y = side === 2 ? 0 : side === 3 ? h : r(h * .15, h * .85);
-      const ang = Math.atan2(h / 2 - y, w / 2 - x) + r(-.6, .6), len = Math.min(r(60, 170), Math.max(w, h) * .45);
-      const pts = [[x, y]], steps = 6;
-      for (let i = 0; i < steps; i++) {
-        x += Math.cos(ang) * len / steps + r(-7, 7); y += Math.sin(ang) * len / steps + r(-7, 7);
-        pts.push([x, y]);
-        if (i === 2 || i === 4) {   // 가지
-          let bx = x, by = y; const ba = ang + (Math.random() < .5 ? -1 : 1) * r(.6, 1.1), bp = [[bx, by]];
-          for (let j = 0; j < 3; j++) { bx += Math.cos(ba) * 12 + r(-4, 4); by += Math.sin(ba) * 12 + r(-4, 4); bp.push([bx, by]); }
-          paths.push(bp);
-        }
-      }
-      paths.push(pts);
+  const VOID_CARDS = ".dl-card, .notice:not([hidden]), .past-row, .win-card, .changes, .mods:not([hidden]), .empty:not([hidden]), .cands > .cand, .history";
+  // 실사 느낌 균열: 꺾이며 뻗어 나가고, 갈수록 가늘어지고, 잔가지가 갈라진다
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  function fissure(x, y, ang, len, w0, depth, out){
+    const n = Math.max(7, Math.round(len / 7)), pts = [[x, y]];
+    let a = ang;
+    for (let i = 1; i <= n; i++) {
+      a += rnd(-.38, .38) * (i % 3 === 0 ? 1.6 : 1);          // 가끔 크게 꺾인다
+      a += (ang - a) * .25;                                    // 원래 방향으로 조금씩 돌아온다
+      const step = len / n * rnd(.6, 1.35);
+      x += Math.cos(a) * step; y += Math.sin(a) * step; pts.push([x, y]);
     }
-    return paths.map(p => "M" + p.map(q => q.map(v => v.toFixed(1)).join(",")).join(" L"));
+    const L = [], R = [];
+    pts.forEach((p, i) => {
+      const q = pts[Math.min(i + 1, n)], o = pts[Math.max(i - 1, 0)];
+      const dx = q[0] - o[0], dy = q[1] - o[1], d = Math.hypot(dx, dy) || 1;
+      const nx = -dy / d, ny = dx / d, t = i / n;
+      const w = (w0 * Math.pow(1 - t, .85) + .2) / 2;
+      L.push([p[0] + nx * w * rnd(.5, 1.25), p[1] + ny * w * rnd(.5, 1.25)]);
+      R.push([p[0] - nx * w * rnd(.5, 1.25), p[1] - ny * w * rnd(.5, 1.25)]);
+      if (depth < 2 && i > 1 && i < n - 2 && Math.random() < (depth ? .12 : .22)) {
+        fissure(p[0], p[1], a + (Math.random() < .5 ? -1 : 1) * rnd(.45, 1.15), len * rnd(.22, .45) * (1 - t), w * 1.3, depth + 1, out);
+      }
+    });
+    const f = v => v.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" L");
+    out.push({ poly: "M" + f(L) + " L" + f(R.reverse()) + "Z", line: "M" + f(pts.slice(0, Math.ceil(n * .7))), x: pts[0][0], y: pts[0][1], depth });
   }
+  function crackSVG(seeds, delayBase){
+    let html = "";
+    seeds.forEach((sd, k) => {
+      const out = [];
+      fissure(sd.x, sd.y, sd.ang, sd.len, sd.w, 0, out);
+      const chips = Array.from({length: 3}, () => {
+        const cx = sd.x + Math.cos(sd.ang) * rnd(6, 26) + rnd(-8, 8), cy = sd.y + Math.sin(sd.ang) * rnd(6, 26) + rnd(-8, 8), r = rnd(1, 2.4);
+        return `M${(cx - r).toFixed(1)},${cy.toFixed(1)} L${cx.toFixed(1)},${(cy - r).toFixed(1)} L${(cx + r * 1.2).toFixed(1)},${(cy + r * .4).toFixed(1)}Z`;
+      }).join(" ");
+      html += `<g class="crk" style="transform-origin:${sd.x.toFixed(1)}px ${sd.y.toFixed(1)}px; --dd:${(delayBase + k * .06).toFixed(2)}s">` +
+        out.map(o => `<path class="glow" d="${o.poly}"/>`).join("") +
+        out.map(o => `<path class="gap" d="${o.poly}"/>`).join("") +
+        out.map(o => `<path class="lip" d="${o.poly}" transform="translate(-.5 -.5)"/>`).join("") +
+        out.filter(o => !o.depth).map(o => `<path class="core" d="${o.line}"/>`).join("") +
+        `<path class="chip" d="${chips}"/></g>`;
+    });
+    return html;
+  }
+  function cardSeeds(w, h){
+    const seeds = [], n = w > 500 ? 3 : 2;
+    for (let k = 0; k < n; k++) {
+      const side = Math.floor(Math.random() * 4);
+      const x = side === 0 ? 0 : side === 1 ? w : rnd(w * .1, w * .9);
+      const y = side === 2 ? 0 : side === 3 ? h : rnd(h * .15, h * .85);
+      seeds.push({ x, y, ang: Math.atan2(h / 2 - y, w / 2 - x) + rnd(-.55, .55), len: Math.min(rnd(70, 190), Math.max(w, h) * .5), w: rnd(3.5, 6) });
+    }
+    return seeds;
+  }
+  // 첫 화면 '현재 진행 중!!' 둘레의 큰 균열
+  function heroRift(){
+    const svg = document.querySelector(".rift"); if (!svg) return;
+    const pill = document.querySelector(".now"); const pw = pill ? pill.offsetWidth : 220;
+    const cx = 280, cy = 70, l = cx - pw / 2 + 4, r = cx + pw / 2 - 4;
+    svg.innerHTML = crackSVG([
+      { x: r, y: cy + rnd(-4, 4), ang: rnd(-.12, .12), len: 230, w: 7 },
+      { x: l, y: cy + rnd(-4, 4), ang: Math.PI + rnd(-.15, .15), len: 70, w: 6 },
+      { x: cx + rnd(-30, 40), y: cy - 15, ang: -Math.PI / 2 + rnd(-.4, .4), len: 34, w: 3.5 },
+      { x: cx + rnd(30, 80), y: cy + 15, ang: Math.PI / 2 + rnd(-.4, .4), len: 30, w: 3 },
+    ], 0);
+  }
+  heroRift();
   function voidCards(animate){
     document.querySelectorAll(".card-rift").forEach(x => x.remove());
     if (html.dataset.mood !== "nightfall") return;
@@ -904,13 +955,11 @@ footer .btn-ghost{margin-left:auto; height:30px}
       const w = card.clientWidth, h = card.clientHeight; if (!w || !h) return;
       card.classList.add("voided");
       if (getComputedStyle(card).position === "static") card.style.position = "relative";
-      const d = crackPaths(w, h);
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("class", "card-rift" + (animate ? " draw" : ""));
-      svg.setAttribute("viewBox", `0 0 ${w} ${h}`); svg.setAttribute("preserveAspectRatio", "none"); svg.setAttribute("aria-hidden", "true");
+      svg.setAttribute("viewBox", `0 0 ${w} ${h}`); svg.setAttribute("aria-hidden", "true");
       svg.style.setProperty("--rd", `${(-Math.random() * 3).toFixed(2)}s`);
-      svg.style.setProperty("--dd", `${(i * .12).toFixed(2)}s`);
-      svg.innerHTML = d.map(p => `<path class="g" d="${p}" pathLength="1"/>`).join("") + d.map(p => `<path class="c" d="${p}" pathLength="1"/>`).join("");
+      svg.innerHTML = crackSVG(cardSeeds(w, h), i * .12);
       card.prepend(svg);
       if (animate) setTimeout(() => {
         card.classList.remove("zap"); void card.offsetWidth; card.classList.add("zap");
