@@ -1018,6 +1018,15 @@
       "size": 181437
     },
     {
+      "file": "Prism-1.20.1-forge-1.0.5.jar",
+      "id": "prism",
+      "name": "Prism",
+      "version": "1.0.5",
+      "desc": "A library all about color! Provides lots of color-related functionality for dependent mods.",
+      "env": "",
+      "size": 52205
+    },
+    {
       "file": "supplementaries-1.20-3.1.43-forge.jar",
       "id": "supplementaries",
       "name": "Supplementaries",
