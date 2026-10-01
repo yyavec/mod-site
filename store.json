@@ -271,6 +271,15 @@
       "size": 2752207
     },
     {
+      "file": "configured-forge-1.20.1-2.2.3.jar",
+      "id": "configured",
+      "name": "Configured",
+      "version": "2.2.3",
+      "desc": "Creates a simple GUI config for every mod!",
+      "env": "",
+      "size": 418929
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
