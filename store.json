@@ -253,6 +253,15 @@
       "size": 3185275
     },
     {
+      "file": "cloth-config-11.1.136-forge.jar",
+      "id": "cloth_config",
+      "name": "Cloth Config v10 API",
+      "version": "11.1.136",
+      "desc": "An API for config screens.",
+      "env": "",
+      "size": 1181413
+    },
+    {
       "file": "super_golem-20.12.2.jar",
       "id": "super_golem",
       "name": "Epic fight - Super golem",
