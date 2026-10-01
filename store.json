@@ -179,6 +179,15 @@
       "desc": "Weapons from another reality, waiting for you to find them and witness their powers !",
       "env": "",
       "size": 20276434
+    },
+    {
+      "file": "wraithon-forge1.20.1-1.1.11.jar",
+      "id": "wraithon",
+      "name": "wraithon",
+      "version": "1.1.11",
+      "desc": "",
+      "env": "",
+      "size": 31054582
     }
   ]
 }
