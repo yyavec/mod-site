@@ -648,6 +648,13 @@ footer .btn-ghost{margin-left:auto; height:30px}
   .cv{grid-column:2}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+.live{display:inline-flex; align-items:center; gap:7px; height:28px; padding:0 12px 0 10px; border-radius:var(--r-full); background:var(--bg-surface); color:var(--text-primary); font-size:13px; font-weight:600; box-shadow:0 2px 0 rgba(0,0,0,.08); max-width:100%}
+.live-dot{flex:none; width:8px; height:8px; border-radius:50%; background:var(--text-tertiary)}
+.live.on .live-dot{background:var(--success); box-shadow:0 0 0 3px var(--success-soft); animation:livePulse 2s ease-in-out infinite}
+.live.off .live-dot{background:var(--danger); box-shadow:0 0 0 3px var(--danger-soft)}
+.live-who{font-weight:500; color:var(--text-secondary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+@keyframes livePulse{50%{box-shadow:0 0 0 5px transparent}}
+@media (prefers-reduced-motion:reduce){ .live.on .live-dot{animation:none} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -729,6 +736,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
     <div class="meta">
       {{CHIPS}}
       <button class="addr" type="button" data-copy="{{SERVER_ADDRESS}}" data-toast="서버 주소를 복사했어요" {{ADDRESS_HIDDEN}} aria-label="서버 주소 {{SERVER_ADDRESS}} 복사">{{SERVER_ADDRESS}}<svg class="i"><use href="#i-copy"/></svg></button>
+      <span class="live" id="live" data-host="{{SERVER_ADDRESS}}" {{ADDRESS_HIDDEN}} role="status" aria-live="polite"><span class="live-dot" aria-hidden="true"></span><span class="live-t">서버 확인 중…</span><span class="live-who"></span></span>
       <a class="pill-link" href="{{NOTION_URL}}" target="_blank" rel="noopener" {{NOTION_HIDDEN}}>공지 · 업데이트 소식<svg class="i"><use href="#i-ext"/></svg></a>
     </div>
     </div>
@@ -773,7 +781,8 @@ footer .btn-ghost{margin-left:auto; height:30px}
           <p>모드를 쓰려면 먼저 <b>{{G_LOADER}}</b>을(를) 설치해야 해요. 아래 버튼에서 설치 파일을 받으세요.</p>
           <div class="glinks">{{G_LOADER_LINKS}}</div>
           <ol class="gsub">
-            <li>받은 설치 파일을 <b>두 번 눌러</b> 실행해요. <span class="gtip"><code>.jar</code> 파일이 안 열리면 우클릭 → 연결 프로그램 → <b>Java</b>로 열어요</span></li>
+            <li><b>Java</b>가 없으면 먼저 설치해요. <a class="hl" href="https://adoptium.net/" target="_blank" rel="noopener">adoptium.net</a>에서 <b>Download</b>를 눌러 받고, 설치는 전부 기본값으로 넘기면 돼요. <span class="gtip">마인크래프트 런처 안의 Java로는 설치 파일이 안 열려요</span></li>
+            <li>받은 설치 파일을 <b>두 번 눌러</b> 실행해요. <span class="warn">마인크래프트가 열려 버리면?</span> <span class="gtip">설치 파일 우클릭 → 연결 프로그램 → 다른 앱 선택 → <b>OpenJDK Platform binary</b>(Java) → <b>항상 이 앱 사용</b> 체크</span></li>
             <li><b>Minecraft 버전</b>을 <b class="hl">{{G_VERSION}}</b>(으)로 맞춰요. <span class="warn">버전이 다르면 서버에 못 들어와요</span></li>
             <li><b>클라이언트 설치</b>(Install client)가 선택된 상태로 <b>설치</b>(OK)를 누르고 끝날 때까지 기다려요.</li>
           </ol>
@@ -1137,6 +1146,32 @@ footer .btn-ghost{margin-left:auto; height:30px}
     if (e.key === "/" && q && document.activeElement !== q) { e.preventDefault(); q.focus(); }
     if (e.key === "Escape" && document.activeElement === q) { q.value = ""; q.dispatchEvent(new Event("input")); q.blur(); }
   });
+})();
+</script>
+<script>
+/* 실시간 서버 상태: 켜짐/꺼짐 · 접속 인원 · 접속 중인 사람 (1분마다 새로고침) */
+(function(){
+  var el = document.getElementById('live'); if (!el || el.hidden) return;
+  var host = el.dataset.host; if (!host) { el.hidden = true; return; }
+  var t = el.querySelector('.live-t'), who = el.querySelector('.live-who');
+  function show(on, text, names){
+    el.classList.toggle('on', on); el.classList.toggle('off', !on);
+    t.textContent = text; who.textContent = names || '';
+    el.title = names ? '접속 중: ' + names : '';
+  }
+  function check(){
+    fetch('https://api.mcsrvstat.us/3/' + encodeURIComponent(host), {cache:'no-store'})
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (!d.online) return show(false, '서버 꺼짐');
+        var p = d.players || {}, n = p.online || 0;
+        var list = (p.list || []).map(function(x){ return x.name; }).filter(Boolean);
+        var names = list.length ? ' · ' + list.slice(0, 3).join(', ') + (n > 3 ? ' 외 ' + (n - 3) + '명' : '') : '';
+        show(true, n ? '접속 중 ' + n + '명' : '서버 켜짐 · 아무도 없어요', names);
+      })
+      .catch(function(){ el.classList.remove('on', 'off'); t.textContent = '상태 확인 안 됨'; who.textContent = ''; });
+  }
+  check(); setInterval(check, 60000);
 })();
 </script>
 </body>
