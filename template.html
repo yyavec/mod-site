@@ -693,6 +693,25 @@ footer .btn-ghost{margin-left:auto; height:30px}
 .rec-msg{font-size:13.5px; font-weight:600; color:var(--text-secondary)}
 .rec-msg.ok{color:var(--success)}
 .rec-msg.err{color:var(--danger)}
+.rec-log{display:flex; flex-direction:column; gap:var(--s3)}
+.rec-log-head{display:flex; align-items:center; gap:var(--s3); flex-wrap:wrap}
+.rec-log-head h3{margin:0; display:flex; align-items:center; gap:8px; font:400 17px/1.3 var(--pixel-s); color:var(--text-primary)}
+.rec-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; border-radius:var(--r-lg); background:var(--bg-surface); border:1px solid var(--border-subtle); box-shadow:var(--shadow-raised); overflow:hidden}
+.rec-item{display:flex; gap:var(--s3); align-items:flex-start; padding:var(--s3) var(--s4); border-top:1px solid var(--border-subtle)}
+.rec-item:first-child{border-top:0}
+.rec-item.is-mine{background:color-mix(in srgb, var(--accent-soft) 55%, transparent)}
+.rec-tag{flex:none; margin-top:1px; padding:3px 8px; border-radius:var(--r-full); font-size:11.5px; font-weight:700; white-space:nowrap; background:var(--accent-soft); color:var(--accent)}
+.rec-tag.van{background:var(--success-soft); color:var(--success)}
+.rec-body{flex:1; min-width:0}
+.rec-name{font-size:14.5px; font-weight:700; color:var(--text-primary); overflow-wrap:anywhere}
+.rec-name a{color:inherit; text-decoration:underline; text-decoration-color:var(--accent); text-underline-offset:3px}
+.rec-why{margin:3px 0 0; font-size:13.5px; line-height:1.55; color:var(--text-secondary); overflow-wrap:anywhere}
+.rec-meta{display:block; margin-top:4px; font-size:12px; color:var(--text-tertiary)}
+.rec-del{flex:none; height:28px; padding:0 10px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-secondary); font:600 12px/1 var(--font); cursor:pointer; transition:color var(--m-fast), border-color var(--m-fast), background var(--m-fast)}
+.rec-del:hover, .rec-del.sure{border-color:var(--danger); color:var(--danger); background:var(--danger-soft)}
+.rec-del:disabled{opacity:.6; cursor:default}
+.rec-empty{padding:var(--s5); text-align:center; font-size:13.5px; color:var(--text-tertiary)}
+@media (max-width:600px){ .rec-item{flex-wrap:wrap; padding:var(--s3)} .rec-body{flex-basis:100%; order:3} .rec-del{margin-left:auto} }
 @media (max-width:600px){ .rec-card{padding:var(--s4)} .rec-pick, .rec-fields{grid-template-columns:1fr} .rec-send{width:100%} }
 </style>
 <script>
@@ -907,7 +926,7 @@ footer .btn-ghost{margin-left:auto; height:30px}
   <section class="section" aria-labelledby="recTitle">
     <div class="sec-head"><h2 id="recTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg>모드 추천하기</h2><span class="sec-sub">누구나 · 로그인 없이</span></div>
     <form class="rec-card" id="recForm" novalidate>
-      <p class="rec-intro">같이 해 보고 싶은 모드가 있나요? 어느 서버에 넣으면 좋을지 고르고 알려 주세요. 주인이 하나하나 읽어 봐요!</p>
+      <p class="rec-intro">같이 해 보고 싶은 모드가 있나요? 어느 서버에 넣으면 좋을지 고르고 알려 주세요. 추천은 아래 기록에 모두에게 보이고, 내가 쓴 건 언제든 지울 수 있어요.</p>
       <div class="rec-pick" role="radiogroup" aria-label="추천할 서버">
         <button class="rec-opt" type="button" role="radio" aria-checked="true" data-v="본 모드 서버"><span class="rec-emo" aria-hidden="true">⚔️</span><span><b>본 모드 서버</b><small>지금 시즌 모드팩에 더하기</small></span></button>
         <button class="rec-opt" type="button" role="radio" aria-checked="false" data-v="바닐라 서버"><span class="rec-emo" aria-hidden="true">🌿</span><span><b>바닐라 서버</b><small>가볍게 노는 서브 서버에</small></span></button>
@@ -921,6 +940,10 @@ footer .btn-ghost{margin-left:auto; height:30px}
       </div>
       <div class="rec-foot"><button class="rec-send" type="submit">추천 보내기</button><span class="rec-msg" id="recMsg" role="status" aria-live="polite"></span></div>
     </form>
+    <div class="rec-log">
+      <div class="rec-log-head"><h3>추천 기록 <span class="sec-sub num" id="recCount"></span></h3><div class="seg" id="recTabs" role="tablist" aria-label="서버별로 보기"><button type="button" role="tab" aria-selected="true" data-f="all">전체</button><button type="button" role="tab" aria-selected="false" data-f="본 모드 서버">⚔️ 본 모드</button><button type="button" role="tab" aria-selected="false" data-f="바닐라 서버">🌿 바닐라</button></div></div>
+      <ul class="rec-list" id="recList" aria-live="polite"><li class="rec-empty">추천 기록을 불러오는 중…</li></ul>
+    </div>
   </section>
   <section class="section" aria-labelledby="mlTitle">
     <div class="sec-head"><h2 id="mlTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg>포함된 모드</h2><span class="sec-sub num" id="mlCount">{{COUNT}}개{{SERVER_ONLY_NOTE}}</span></div>
@@ -1237,16 +1260,68 @@ footer .btn-ghost{margin-left:auto; height:30px}
 })();
 </script>
 <script>
-/* 모드 추천: 주인의 구글 설문지로 보낸다 (로그인 없이 누구나) */
+/* 모드 추천: 주인의 구글 시트(Apps Script)에 쌓고, 모두가 기록을 본다. 쓴 사람은 이 브라우저에 저장된 열쇠로 자기 글만 지울 수 있다. */
 (function(){
   var f = document.getElementById('recForm'); if (!f) return;
-  var URL = 'https://docs.google.com/forms/d/e/1FAIpQLScAo5-EzJARBocuzn3pSmNK5AFdmHYm8vSfvXuJXGVhbSWEww/formResponse';
-  var E = {server:'entry.1175499646', name:'entry.843525202', link:'entry.905228873', why:'entry.247496741', nick:'entry.323026615'};
+  var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
   var F = f.elements, opts = f.querySelectorAll('.rec-opt'), msg = document.getElementById('recMsg'), btn = f.querySelector('.rec-send');
-  var server = '본 모드 서버';
+  var listEl = document.getElementById('recList'), countEl = document.getElementById('recCount'), tabs = document.querySelectorAll('#recTabs button');
+  var server = '본 모드 서버', filter = 'all', items = [], KEY = 'recTokens';
+  function mine(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ return {}; } }
+  function keep(id, token){ try { var m = mine(); m[id] = token; localStorage.setItem(KEY, JSON.stringify(m)); } catch(e){} }
+  function forget(id){ try { var m = mine(); delete m[id]; localStorage.setItem(KEY, JSON.stringify(m)); } catch(e){} }
+  function ago(t){
+    var s = (Date.now() - new Date(t).getTime()) / 1000;
+    if (!(s >= 0)) return '';
+    if (s < 60) return '방금'; if (s < 3600) return Math.floor(s / 60) + '분 전';
+    if (s < 86400) return Math.floor(s / 3600) + '시간 전'; if (s < 86400 * 30) return Math.floor(s / 86400) + '일 전';
+    var d = new Date(t); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+  }
+  function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function render(){
+    var m = mine(), shown = items.filter(function(it){ return filter === 'all' || it.server === filter; });
+    countEl.textContent = items.length ? items.length + '개' : '';
+    listEl.textContent = '';
+    if (!shown.length) { listEl.appendChild(el('li', 'rec-empty', items.length ? '이 서버에는 아직 추천이 없어요' : '아직 추천이 없어요. 첫 번째로 추천해 보세요!')); return; }
+    shown.forEach(function(it){
+      var li = el('li', 'rec-item' + (m[it.id] ? ' is-mine' : ''));
+      var van = it.server === '바닐라 서버';
+      li.appendChild(el('span', 'rec-tag' + (van ? ' van' : ''), van ? '🌿 바닐라' : '⚔️ 본 모드'));
+      var body = el('div', 'rec-body'), title = el('div', 'rec-name');
+      if (/^https?:\/\//i.test(it.link || '')) { var a = el('a', null, it.name); a.href = it.link; a.target = '_blank'; a.rel = 'noopener nofollow'; title.appendChild(a); }
+      else title.textContent = it.name;
+      body.appendChild(title);
+      if (it.why) body.appendChild(el('p', 'rec-why', it.why));
+      body.appendChild(el('small', 'rec-meta', (it.nick || '익명') + ' · ' + ago(it.time) + (m[it.id] ? ' · 내 추천' : '')));
+      li.appendChild(body);
+      if (m[it.id]) {
+        var del = el('button', 'rec-del', '지우기'); del.type = 'button';
+        del.addEventListener('click', function(){
+          if (!del.classList.contains('sure')) { del.classList.add('sure'); del.textContent = '정말 지울까요?'; setTimeout(function(){ del.classList.remove('sure'); del.textContent = '지우기'; }, 4000); return; }
+          del.disabled = true; del.textContent = '지우는 중…';
+          post({action:'delete', id:it.id, token:m[it.id]}).then(function(r){
+            if (r && r.ok || (r && r.error === 'notfound')) { forget(it.id); items = items.filter(function(x){ return x.id !== it.id; }); render(); }
+            else { del.disabled = false; del.textContent = '다시 시도'; }
+          }, function(){ del.disabled = false; del.textContent = '다시 시도'; });
+        });
+        li.appendChild(del);
+      }
+      listEl.appendChild(li);
+    });
+  }
+  function post(o){ return fetch(API, {method:'POST', body:JSON.stringify(o)}).then(function(r){ return r.json(); }); }
+  function load(){
+    fetch(API).then(function(r){ return r.json(); }).then(function(d){ items = (d && d.list) || []; render(); })
+      .catch(function(){ listEl.textContent = ''; listEl.appendChild(el('li', 'rec-empty', '추천 기록을 불러오지 못했어요. 잠시 뒤 새로고침해 주세요')); });
+  }
   opts.forEach(function(o){ o.addEventListener('click', function(){
     server = o.dataset.v;
     opts.forEach(function(x){ x.setAttribute('aria-checked', x === o ? 'true' : 'false'); });
+  }); });
+  tabs.forEach(function(t){ t.addEventListener('click', function(){
+    filter = t.dataset.f;
+    tabs.forEach(function(x){ x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+    render();
   }); });
   function say(t, cls){ msg.textContent = t; msg.className = 'rec-msg' + (cls ? ' ' + cls : ''); }
   f.addEventListener('submit', function(ev){
@@ -1254,18 +1329,18 @@ footer .btn-ghost{margin-left:auto; height:30px}
     if (F.hp.value) return;
     var name = F.name.value.trim();
     if (!name) { say('모드 이름을 적어 주세요', 'err'); F.name.focus(); return; }
-    var body = new URLSearchParams();
-    body.append(E.server, server); body.append(E.name, name);
-    body.append(E.link, F.link.value.trim()); body.append(E.why, F.why.value.trim()); body.append(E.nick, F.nick.value.trim());
     btn.disabled = true; say('보내는 중…');
-    fetch(URL, {method:'POST', mode:'no-cors', body:body})
-      .then(function(){
-        say('추천 고마워요! 🎉 ' + server + '에 「' + name + '」 잘 받았어요', 'ok');
+    post({action:'add', server:server, name:name, link:F.link.value.trim(), why:F.why.value.trim(), nick:F.nick.value.trim()})
+      .then(function(r){
+        if (!r || !r.ok) throw 0;
+        keep(r.item.id, r.token); items.unshift(r.item); render();
+        say('추천 고마워요! 🎉 아래 기록에 올라갔어요', 'ok');
         F.name.value = ''; F.link.value = ''; F.why.value = '';
       })
       .catch(function(){ say('보내지 못했어요. 잠시 뒤에 다시 눌러 주세요', 'err'); })
-      .then(function(){ setTimeout(function(){ btn.disabled = false; }, 5000); });
+      .then(function(){ setTimeout(function(){ btn.disabled = false; }, 4000); });
   });
+  load();
 })();
 </script>
 </body>
