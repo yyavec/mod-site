@@ -664,6 +664,36 @@ footer .btn-ghost{margin-left:auto; height:30px}
 .helpme .btn-ghost{flex:none; border-color:var(--accent); color:var(--accent); font-weight:700}
 .helpme .btn-ghost:hover{background:var(--accent-soft)}
 @media (max-width:600px){ .helpme{flex-wrap:wrap; padding:var(--s4)} .helpme .btn-ghost{width:100%; justify-content:center} }
+/* ---------- 모드 추천 ---------- */
+.rec-card{display:flex; flex-direction:column; gap:var(--s4); padding:var(--s5) var(--s6); border-radius:var(--r-lg); background:var(--bg-surface); border:1px solid var(--border-subtle); box-shadow:var(--shadow-raised)}
+.rec-intro{margin:0; font-size:14px; line-height:1.6; color:var(--text-secondary)}
+.rec-pick{display:grid; grid-template-columns:1fr 1fr; gap:var(--s3)}
+.rec-opt{display:flex; align-items:center; gap:var(--s3); padding:var(--s3) var(--s4); border-radius:var(--r-md); border:2px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); text-align:left; cursor:pointer; font:inherit; transition:border-color var(--m-fast), background var(--m-fast), transform var(--m-fast)}
+.rec-opt:hover{border-color:var(--accent)}
+.rec-opt:active{transform:translateY(1px)}
+.rec-opt[aria-checked="true"]{border-color:var(--accent); background:var(--accent-soft); box-shadow:0 3px 0 var(--accent-edge)}
+.rec-emo{flex:none; display:grid; place-items:center; width:38px; height:38px; border-radius:var(--r-md); background:var(--bg-sunken); font-size:20px}
+.rec-opt[aria-checked="true"] .rec-emo{background:var(--accent)}
+.rec-opt b{display:block; font:400 15px/1.3 var(--pixel-s)}
+.rec-opt small{display:block; margin-top:2px; font-size:12px; color:var(--text-tertiary)}
+.rec-opt[aria-checked="true"] b{color:var(--accent)}
+.rec-fields{display:grid; grid-template-columns:1fr 1fr; gap:var(--s3)}
+.rec-f{display:flex; flex-direction:column; gap:6px; font-size:13px; font-weight:600; color:var(--text-secondary)}
+.rec-f.wide{grid-column:1 / -1}
+.rec-f em{font-style:normal; font-weight:500; color:var(--text-tertiary)}
+.rec-f input, .rec-f textarea{width:100%; box-sizing:border-box; padding:10px 12px; border-radius:var(--r-md); border:1px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:400 14px/1.5 var(--font); transition:border-color var(--m-fast), box-shadow var(--m-fast)}
+.rec-f textarea{min-height:84px; resize:vertical}
+.rec-f input:focus, .rec-f textarea:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.rec-hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+.rec-foot{display:flex; align-items:center; gap:var(--s3); flex-wrap:wrap}
+.rec-send{display:inline-flex; align-items:center; justify-content:center; gap:var(--s2); height:46px; padding:0 var(--s6); border-radius:var(--r-sm); background:var(--accent); color:var(--on-accent); font:400 16px/1 var(--pixel-s); border:2px solid var(--accent-edge); box-shadow:inset 0 -4px 0 rgba(0,0,0,.2), inset 0 2px 0 rgba(255,255,255,.25); cursor:pointer; transition:background var(--m-fast), transform var(--m-fast)}
+.rec-send:hover{background:var(--accent-hover)}
+.rec-send:active{transform:translateY(2px)}
+.rec-send:disabled{opacity:.6; cursor:default; transform:none}
+.rec-msg{font-size:13.5px; font-weight:600; color:var(--text-secondary)}
+.rec-msg.ok{color:var(--success)}
+.rec-msg.err{color:var(--danger)}
+@media (max-width:600px){ .rec-card{padding:var(--s4)} .rec-pick, .rec-fields{grid-template-columns:1fr} .rec-send{width:100%} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -874,6 +904,24 @@ footer .btn-ghost{margin-left:auto; height:30px}
 
   {{SUB_SECTION}}
 
+  <section class="section" aria-labelledby="recTitle">
+    <div class="sec-head"><h2 id="recTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg>모드 추천하기</h2><span class="sec-sub">누구나 · 로그인 없이</span></div>
+    <form class="rec-card" id="recForm" novalidate>
+      <p class="rec-intro">같이 해 보고 싶은 모드가 있나요? 어느 서버에 넣으면 좋을지 고르고 알려 주세요. 주인이 하나하나 읽어 봐요!</p>
+      <div class="rec-pick" role="radiogroup" aria-label="추천할 서버">
+        <button class="rec-opt" type="button" role="radio" aria-checked="true" data-v="본 모드 서버"><span class="rec-emo" aria-hidden="true">⚔️</span><span><b>본 모드 서버</b><small>지금 시즌 모드팩에 더하기</small></span></button>
+        <button class="rec-opt" type="button" role="radio" aria-checked="false" data-v="바닐라 서버"><span class="rec-emo" aria-hidden="true">🌿</span><span><b>바닐라 서버</b><small>가볍게 노는 서브 서버에</small></span></button>
+      </div>
+      <div class="rec-fields">
+        <label class="rec-f">모드 이름<input name="name" maxlength="80" placeholder="예: Create" required></label>
+        <label class="rec-f">닉네임 <em>(선택)</em><input name="nick" maxlength="30" placeholder="누가 추천했는지"></label>
+        <label class="rec-f wide">모드 링크 <em>(선택)</em><input name="link" type="url" maxlength="300" placeholder="CurseForge · Modrinth 주소"></label>
+        <label class="rec-f wide">추천 이유 <em>(선택)</em><textarea name="why" maxlength="600" placeholder="어떤 점이 재밌는지 한 줄이면 충분해요"></textarea></label>
+        <label class="rec-hp" aria-hidden="true">비워 두세요<input name="hp" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <div class="rec-foot"><button class="rec-send" type="submit">추천 보내기</button><span class="rec-msg" id="recMsg" role="status" aria-live="polite"></span></div>
+    </form>
+  </section>
   <section class="section" aria-labelledby="mlTitle">
     <div class="sec-head"><h2 id="mlTitle"><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg>포함된 모드</h2><span class="sec-sub num" id="mlCount">{{COUNT}}개{{SERVER_ONLY_NOTE}}</span></div>
     <div class="list-tools" {{LIST_HIDDEN}}>
@@ -1186,6 +1234,38 @@ footer .btn-ghost{margin-left:auto; height:30px}
       .catch(function(){ el.classList.remove('on', 'off'); t.textContent = '상태 확인 안 됨'; who.textContent = ''; });
   }
   check(); setInterval(check, 60000);
+})();
+</script>
+<script>
+/* 모드 추천: 주인의 구글 설문지로 보낸다 (로그인 없이 누구나) */
+(function(){
+  var f = document.getElementById('recForm'); if (!f) return;
+  var URL = 'https://docs.google.com/forms/d/e/1FAIpQLScAo5-EzJARBocuzn3pSmNK5AFdmHYm8vSfvXuJXGVhbSWEww/formResponse';
+  var E = {server:'entry.1175499646', name:'entry.843525202', link:'entry.905228873', why:'entry.247496741', nick:'entry.323026615'};
+  var F = f.elements, opts = f.querySelectorAll('.rec-opt'), msg = document.getElementById('recMsg'), btn = f.querySelector('.rec-send');
+  var server = '본 모드 서버';
+  opts.forEach(function(o){ o.addEventListener('click', function(){
+    server = o.dataset.v;
+    opts.forEach(function(x){ x.setAttribute('aria-checked', x === o ? 'true' : 'false'); });
+  }); });
+  function say(t, cls){ msg.textContent = t; msg.className = 'rec-msg' + (cls ? ' ' + cls : ''); }
+  f.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if (F.hp.value) return;
+    var name = F.name.value.trim();
+    if (!name) { say('모드 이름을 적어 주세요', 'err'); F.name.focus(); return; }
+    var body = new URLSearchParams();
+    body.append(E.server, server); body.append(E.name, name);
+    body.append(E.link, F.link.value.trim()); body.append(E.why, F.why.value.trim()); body.append(E.nick, F.nick.value.trim());
+    btn.disabled = true; say('보내는 중…');
+    fetch(URL, {method:'POST', mode:'no-cors', body:body})
+      .then(function(){
+        say('추천 고마워요! 🎉 ' + server + '에 「' + name + '」 잘 받았어요', 'ok');
+        F.name.value = ''; F.link.value = ''; F.why.value = '';
+      })
+      .catch(function(){ say('보내지 못했어요. 잠시 뒤에 다시 눌러 주세요', 'err'); })
+      .then(function(){ setTimeout(function(){ btn.disabled = false; }, 5000); });
+  });
 })();
 </script>
 </body>
