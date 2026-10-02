@@ -1311,7 +1311,11 @@ footer .btn-ghost{margin-left:auto; height:30px}
   }
   function post(o){ return fetch(API, {method:'POST', body:JSON.stringify(o)}).then(function(r){ return r.json(); }); }
   function load(){
-    fetch(API).then(function(r){ return r.json(); }).then(function(d){ items = (d && d.list) || []; render(); })
+    fetch(API).then(function(r){ return r.json(); }).then(function(d){
+      var list = (d && d.list) || [], ids = {};
+      list.forEach(function(x){ ids[x.id] = 1; });
+      items = items.filter(function(x){ return !ids[x.id]; }).concat(list); render();
+    })
       .catch(function(){ listEl.textContent = ''; listEl.appendChild(el('li', 'rec-empty', '추천 기록을 불러오지 못했어요. 잠시 뒤 새로고침해 주세요')); });
   }
   opts.forEach(function(o){ o.addEventListener('click', function(){
