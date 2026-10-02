@@ -46,15 +46,6 @@
       "size": 20264145
     },
     {
-      "file": "alexsmobs-1.22.9.jar",
-      "id": "alexsmobs",
-      "name": "Alex's Mobs",
-      "version": "1.22.9",
-      "desc": "New, original, engaging, and aesthetic mobs for Minecraft.",
-      "env": "",
-      "size": 26350793
-    },
-    {
       "file": "apexhosting-partner-link-forge-1.20.1-1.0.3.jar",
       "id": "apexhosting_partner_link",
       "name": "Apex Hosting Partner Link",
