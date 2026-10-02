@@ -1,9 +1,9 @@
 {
   "show": true,
   "title": "시즌 2 · RPG",
-  "badge": "오늘 오픈",
+  "badge": "진행 중",
   "period": "2026년 10월 1일 오픈",
-  "intro": "투표 결과 5번 RPG 모드팩 Nightfallcraft로 정해졌어요. 오늘 서버를 열어요!",
+  "intro": "투표 결과 5번 RPG 모드팩 Nightfallcraft로 정해졌어요. 지금 서버가 열려 있어요!",
   "button": "노션에서 자세히 보기",
   "candidates": [
     {
@@ -72,7 +72,7 @@
     }
   ],
   "sub": {
-    "show": true,
+    "show": false,
     "title": "바닐라 플러스",
     "address": "",
     "version": "",
