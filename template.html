@@ -655,6 +655,15 @@ footer .btn-ghost{margin-left:auto; height:30px}
 .live-who{font-weight:500; color:var(--text-secondary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 @keyframes livePulse{50%{box-shadow:0 0 0 5px transparent}}
 @media (prefers-reduced-motion:reduce){ .live.on .live-dot{animation:none} }
+.helpme{margin:0; display:flex; gap:var(--s4); align-items:center; padding:var(--s4) var(--s5); border-radius:var(--r-lg); background:linear-gradient(135deg, var(--accent-soft), var(--bg-surface) 78%); border:2px solid var(--accent); box-shadow:0 3px 0 var(--accent-edge), var(--shadow-raised)}
+.helpme-ic{flex:none; display:grid; place-items:center; width:48px; height:48px; border-radius:var(--r-md); background:var(--accent); border:2px solid var(--accent-edge); box-shadow:inset 0 -4px 0 rgba(0,0,0,.2), inset 0 2px 0 rgba(255,255,255,.25)}
+.helpme-ic svg{width:26px; height:26px}
+.helpme-t{flex:1; min-width:0}
+.helpme-t b{display:block; margin-bottom:4px; font:400 17px/1.35 var(--pixel-s); color:var(--accent)}
+.helpme-t p{margin:0; font-size:14px; line-height:1.6; color:var(--text-secondary)}
+.helpme .btn-ghost{flex:none; border-color:var(--accent); color:var(--accent); font-weight:700}
+.helpme .btn-ghost:hover{background:var(--accent-soft)}
+@media (max-width:600px){ .helpme{flex-wrap:wrap; padding:var(--s4)} .helpme .btn-ghost{width:100%; justify-content:center} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -743,6 +752,11 @@ footer .btn-ghost{margin-left:auto; height:30px}
     </div>
   </header>
   <p class="notice" {{NOTICE_HIDDEN}}><svg class="i"><use href="#i-info"/></svg><span>{{NOTICE}}</span></p>
+  <aside class="helpme" aria-label="설치 도움">
+    <span class="helpme-ic" aria-hidden="true"><svg class="px" viewBox="0 0 9 8" shape-rendering="crispEdges"><rect x="1" y="0" width="7" height="1" fill="#fff"/><rect x="0" y="1" width="9" height="4" fill="#fff"/><rect x="1" y="5" width="7" height="1" fill="#fff"/><rect x="2" y="6" width="2" height="1" fill="#fff"/><rect x="2" y="7" width="1" height="1" fill="#fff"/><rect x="2" y="2" width="1" height="2" fill="var(--accent)"/><rect x="4" y="2" width="1" height="2" fill="var(--accent)"/><rect x="6" y="2" width="1" height="2" fill="var(--accent)"/></svg></span>
+    <div class="helpme-t"><b>도와드릴 테니 같이 풀어보시죠~</b><p>컴퓨터 환경이 모두 다 다르기 때문에, 가이드대로 따라와도 한 번에 되기는 쉽지 않을 거예요.</p></div>
+    <a class="btn-ghost" href="{{DISCORD_URL}}" target="_blank" rel="noopener" {{DISCORD_HIDDEN}}>디스코드로 물어보기<svg class="i"><use href="#i-ext"/></svg></a>
+  </aside>
 
   <section class="dl-card" aria-labelledby="dlTitle">
     <div class="dl-block"><svg class="px " viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="1" height="1" fill="#62B23F"/><rect x="1" y="0" width="1" height="1" fill="#4E9A31"/><rect x="2" y="0" width="2" height="1" fill="#62B23F"/><rect x="4" y="0" width="1" height="1" fill="#4E9A31"/><rect x="5" y="0" width="3" height="1" fill="#62B23F"/><rect x="0" y="1" width="2" height="1" fill="#62B23F"/><rect x="2" y="1" width="1" height="1" fill="#4E9A31"/><rect x="3" y="1" width="3" height="1" fill="#62B23F"/><rect x="6" y="1" width="1" height="1" fill="#4E9A31"/><rect x="7" y="1" width="1" height="1" fill="#62B23F"/><rect x="0" y="2" width="1" height="1" fill="#4E9A31"/><rect x="1" y="2" width="1" height="1" fill="#62B23F"/><rect x="2" y="2" width="1" height="1" fill="#8B5A2B"/><rect x="3" y="2" width="2" height="1" fill="#62B23F"/><rect x="5" y="2" width="1" height="1" fill="#8B5A2B"/><rect x="6" y="2" width="1" height="1" fill="#62B23F"/><rect x="7" y="2" width="1" height="1" fill="#4E9A31"/><rect x="0" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="1" y="3" width="1" height="1" fill="#6E4520"/><rect x="2" y="3" width="2" height="1" fill="#8B5A2B"/><rect x="4" y="3" width="1" height="1" fill="#6E4520"/><rect x="5" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="6" y="3" width="1" height="1" fill="#A87445"/><rect x="7" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="0" y="4" width="2" height="1" fill="#8B5A2B"/><rect x="2" y="4" width="1" height="1" fill="#A87445"/><rect x="3" y="4" width="3" height="1" fill="#8B5A2B"/><rect x="6" y="4" width="1" height="1" fill="#6E4520"/><rect x="7" y="4" width="1" height="1" fill="#8B5A2B"/><rect x="0" y="5" width="1" height="1" fill="#8B5A2B"/><rect x="1" y="5" width="1" height="1" fill="#6E4520"/><rect x="2" y="5" width="2" height="1" fill="#8B5A2B"/><rect x="4" y="5" width="1" height="1" fill="#A87445"/><rect x="5" y="5" width="3" height="1" fill="#8B5A2B"/><rect x="0" y="6" width="2" height="1" fill="#8B5A2B"/><rect x="2" y="6" width="1" height="1" fill="#6E4520"/><rect x="3" y="6" width="4" height="1" fill="#8B5A2B"/><rect x="7" y="6" width="1" height="1" fill="#A87445"/><rect x="0" y="7" width="1" height="1" fill="#A87445"/><rect x="1" y="7" width="3" height="1" fill="#8B5A2B"/><rect x="4" y="7" width="1" height="1" fill="#6E4520"/><rect x="5" y="7" width="3" height="1" fill="#8B5A2B"/></svg></div>
