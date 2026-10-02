@@ -71,13 +71,6 @@
       "image": "assets/nightfallcraft.jpg"
     }
   ],
-  "past": [
-    {
-      "title": "시즌 1",
-      "name": "포켓몬 모드",
-      "pack": "Cobblemon"
-    }
-  ],
   "sub": {
     "show": true,
     "title": "바닐라 플러스",
@@ -94,5 +87,12 @@
         "desc": "월드 지도와 웨이포인트"
       }
     ]
-  }
+  },
+  "past": [
+    {
+      "title": "시즌 1",
+      "name": "포켓몬 모드",
+      "pack": "Cobblemon"
+    }
+  ]
 }
