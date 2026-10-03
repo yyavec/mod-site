@@ -109,15 +109,6 @@
       "size": 24435
     },
     {
-      "file": "cloth-config-11.1.136-forge.jar",
-      "id": "cloth_config",
-      "name": "Cloth Config v10 API",
-      "version": "11.1.136",
-      "desc": "An API for config screens.",
-      "env": "",
-      "size": 1181413
-    },
-    {
       "file": "CombatEvolution-2.2.0.jar",
       "id": "combat_evolution",
       "name": "Combat Evolution",
