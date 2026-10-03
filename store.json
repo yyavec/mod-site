@@ -19,15 +19,6 @@
       "size": 686792
     },
     {
-      "file": "lost_aether_content-1.20.1-1.2.3.jar",
-      "id": "lost_aether_content",
-      "name": "Aether: Lost Content",
-      "version": "",
-      "desc": "A mod that brings back, or gives life to a lot of scrapped, unused, and even concepted content and features from Aether's past.",
-      "env": "",
-      "size": 20264145
-    },
-    {
       "file": "ApothicAttributes-1.20.1-1.3.7.jar",
       "id": "attributeslib",
       "name": "Apothic Attributes",
