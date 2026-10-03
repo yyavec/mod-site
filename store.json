@@ -1400,5 +1400,10 @@
     "file": "minecraft-config.zip",
     "name": "minecraft-config.zip",
     "size": 493170
+  },
+  "installer": {
+    "file": "fabric-installer-1.1.2.exe",
+    "name": "fabric-installer-1.1.2.exe",
+    "size": 491163
   }
 }
