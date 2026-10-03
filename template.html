@@ -1097,6 +1097,21 @@ button.ty.all{--c:#55546F}
 .on-copy{display:inline-flex; align-items:center; gap:6px; height:32px; padding:0 12px; border-radius:10px; border:0; background:#3682E6; color:#fff; font:700 13px var(--font); cursor:pointer; box-shadow:0 3px 0 #1E5BB2}
 .on-copy svg{width:14px; height:14px}
 @media (prefers-reduced-motion:reduce){ .online.is-on .on-dot, .on-list li{animation:none} }
+
+/* 처음 왔어요: 더 크게, 더 빛나게 */
+[data-mood="poke"] .guide{border:3px solid #F5C451 !important; animation:haloBig 2.6s ease-in-out infinite}
+@keyframes haloBig{0%,100%{box-shadow:0 0 0 3px rgba(255,214,120,.35), 0 0 26px 6px rgba(255,200,80,.45), 0 0 60px 14px rgba(255,225,130,.25)} 50%{box-shadow:0 0 0 6px rgba(255,214,120,.6), 0 0 46px 16px rgba(255,196,70,.75), 0 0 110px 32px rgba(255,232,150,.45)}}
+[data-mood="poke"] .guide-head{padding:26px 26px; background:linear-gradient(120deg, #FFF6D6 0%, #FFFFFF 45%, #FFF0C2 100%)}
+:root[data-mood="poke"][data-theme="dark"] .guide-head{background:linear-gradient(120deg, #3A3018 0%, #212035 50%, #3A3018 100%)}
+[data-mood="poke"] .guide-ic{width:64px !important; height:64px !important; filter:drop-shadow(0 0 10px rgba(255,214,120,1)) drop-shadow(0 0 22px rgba(255,190,60,.7))}
+[data-mood="poke"] .guide-t b{font:800 28px/1.15 var(--cb-head, var(--font)); letter-spacing:-.01em; background:linear-gradient(90deg, #B8860B, #F2B636 30%, #FFE08A 50%, #F2B636 70%, #B8860B); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:goldText 3.5s linear infinite}
+@keyframes goldText{to{background-position:-200% 0}}
+[data-mood="poke"] .guide-t small{font-size:15px; font-weight:600}
+[data-mood="poke"] .guide-prog{font-size:15px; padding:5px 12px; background:#FFE08A; color:#7A5200}
+[data-mood="poke"] .guide-head::before{content:"✦"; position:absolute; right:84px; top:10px; color:#F2B636; font-size:18px; animation:twinkle 1.8s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.2; transform:scale(.6) rotate(45deg)}}
+@media (max-width:600px){ [data-mood="poke"] .guide-head{padding:20px 16px} [data-mood="poke"] .guide-t b{font-size:23px} [data-mood="poke"] .guide-ic{width:52px !important; height:52px !important} }
+@media (prefers-reduced-motion:reduce){ [data-mood="poke"] .guide, [data-mood="poke"] .guide-t b, [data-mood="poke"] .guide-head::before{animation:none} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -1131,7 +1146,7 @@ button.ty.all{--c:#55546F}
       <p class="story-p2 story-r">그때 그 포켓몬 월드가 다시 열립니다.</p>
       <ul class="story-chips story-r"><li>🎯 누구나 쉽게</li><li>🛡️ 안정성 최우선</li><li>🤝 같이 하는 재미</li><li>🎒 새 모험, 새 도감</li></ul>
       <div class="story-r"><button class="story-enter" type="button" id="storyEnter">가이드북 보러 가기 <span aria-hidden="true">→</span></button>
-      <p class="story-note">모드 준비 완료 · 오픈 날짜는 곧 공지할게요</p></div>
+      <p class="story-note">🟢 지금 서버 열려 있어요! 바로 들어오세요</p></div>
     </div>
     <div class="story-new-in story-diff" aria-labelledby="diffH">
       <div class="story-ball" id="storyBall2" aria-hidden="true"></div>

@@ -1,7 +1,7 @@
 {
   "_설명": "관리자 화면에서 바꾸지 않는 테마 설정. mood: poke(포켓몬) / nightfall / 빈칸(맑은 하늘). 여기 값이 있으면 site.conf의 MOOD보다 먼저 쓴다.",
   "mood": "poke",
-  "now_label": "부활 준비 중!!",
+  "now_label": "현재 진행 중!!",
   "win_label": "시즌 1 · 다시 시작",
   "past_stamps": {
     "시즌 2": "중단"
