@@ -10,15 +10,6 @@
       "size": 1059994
     },
     {
-      "file": "betterendcities-1.0.0-1.20.1.jar",
-      "id": "betterendcities",
-      "name": "Better End Cities Vanilla",
-      "version": "1.0.0-1.20.1",
-      "desc": "Makes End Cities far more intricate, and contain more loot. All with Vanilla Blocks.",
-      "env": "",
-      "size": 81018
-    },
-    {
       "file": "better_structure_block-forge1.20.1-2.1.0-all.jar",
       "id": "better_structure_block",
       "name": "Better Structure Block",
