@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>
 // 처음 온 사람에게만 시즌 2 종료 → 포켓몬 부활 이야기를 보여 준다 (주소 끝에 ?story 를 붙이면 다시 보기)
-(function(){var d=document.documentElement;try{if(/[?&]story/.test(location.search)||!localStorage.getItem("story-s3-seen"))d.setAttribute("data-story","")}catch(e){d.setAttribute("data-story","")}})();
+(function(){var d=document.documentElement;try{if(/[?&]story\b/.test(location.search)||!localStorage.getItem("story-s3-seen"))d.setAttribute("data-story","")}catch(e){d.setAttribute("data-story","")}})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{SITE_TITLE}}</title>
