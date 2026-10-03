@@ -1112,6 +1112,45 @@ button.ty.all{--c:#55546F}
 @keyframes twinkle{50%{opacity:.2; transform:scale(.6) rotate(45deg)}}
 @media (max-width:600px){ [data-mood="poke"] .guide-head{padding:20px 16px} [data-mood="poke"] .guide-t b{font-size:23px} [data-mood="poke"] .guide-ic{width:52px !important; height:52px !important} }
 @media (prefers-reduced-motion:reduce){ [data-mood="poke"] .guide, [data-mood="poke"] .guide-t b, [data-mood="poke"] .guide-head::before{animation:none} }
+
+/* 조합법 */
+.rc{display:none}
+[data-mood="poke"] .rc{display:flex}
+.rc-tools{display:flex; flex-direction:column; gap:10px}
+.rc-search{width:100%; box-sizing:border-box; height:42px; padding:0 14px; border-radius:10px; border:2px solid var(--border-standard); background:var(--bg-surface); color:var(--text-primary); font:500 14.5px var(--font)}
+.rc-search:focus{outline:none; border-color:var(--accent)}
+.rc-chips{display:flex; flex-wrap:wrap; gap:6px}
+.rc-chip{height:30px; padding:0 12px; border-radius:999px; border:1.5px solid var(--border-standard); background:var(--bg-surface); color:var(--text-secondary); font:600 12.5px var(--font); cursor:pointer}
+.rc-chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+.rc-chip small{opacity:.7; margin-left:3px}
+.rc-quick{display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:12.5px; color:var(--text-tertiary)}
+.rc-quick button{height:28px; padding:0 10px; border-radius:8px; border:0; background:var(--accent-soft); color:var(--accent); font:700 12.5px var(--font); cursor:pointer}
+.rc-grid{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+.rc-card{padding:10px 12px 12px; background:#C6C6C6; border:3px solid; border-color:#FFFFFF #555555 #555555 #FFFFFF; border-radius:4px; color:#3F3F3F; box-shadow:0 0 0 2px #1F1F1F}
+.rc-head{display:flex; align-items:center; gap:8px; min-width:0}
+.rc-head b{font:700 14px var(--font); color:#2A2A2A; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.rc-mod{margin-left:auto; flex:none; padding:2px 7px; border-radius:4px; background:#8B8B8B; color:#fff; font:700 10.5px var(--font)}
+.rc-body{display:flex; align-items:center; gap:10px; margin-top:8px}
+.rc-g{display:grid; grid-template-columns:repeat(3, 38px); gap:2px}
+.rc-g.row{grid-template-columns:repeat(3, 38px)}
+.rc-s{position:relative; width:38px; height:38px; background:#8B8B8B; box-shadow:inset 2px 2px 0 #373737, inset -2px -2px 0 #FFFFFF; display:grid; place-items:center; cursor:pointer}
+.rc-s.empty{cursor:default}
+.rc-g .rc-s, .rc-out .rc-s, .rc-head .rc-s{border-radius:0 !important; min-height:0 !important; height:38px; margin:0; padding:0}
+.rc-out .rc-s{height:48px}
+.rc-head .rc-s{height:30px}
+.rc-s i{display:block; width:28px; height:28px; background:center/100% auto no-repeat; image-rendering:pixelated}
+.rc-s i.no{display:grid; place-items:center; font-style:normal; font-size:18px}
+.rc-s .tg{position:absolute; right:1px; top:0; font:700 9px/1 var(--font); color:#FFE08A; text-shadow:1px 1px 0 #000}
+.rc-s .ct{position:absolute; right:2px; bottom:1px; font:700 12px/1 var(--font); color:#fff; text-shadow:1px 1px 0 #3F3F3F}
+.rc-arrow{font:700 22px/1 var(--font); color:#8B8B8B}
+.rc-out{display:flex; flex-direction:column; align-items:center; gap:4px}
+.rc-out .rc-s{width:48px; height:48px}
+.rc-out .rc-s i{width:36px; height:36px}
+.rc-st{font:700 10.5px var(--font); color:#555}
+.rc-more{align-self:center; height:40px; padding:0 22px; border-radius:12px; border:0; background:var(--accent); color:#fff; font:700 14px var(--cb-head, var(--font)); cursor:pointer; box-shadow:0 4px 0 var(--accent-edge)}
+.rc-empty{grid-column:1 / -1; padding:24px; text-align:center; color:var(--text-tertiary)}
+.rc-count{font-size:13px; color:var(--text-tertiary)}
+@media (max-width:640px){ .rc-grid{grid-template-columns:1fr} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -1383,6 +1422,17 @@ button.ty.all{--c:#55546F}
     <div class="dex-tools"><input class="dex-search" id="dexSearch" type="search" placeholder="이름이나 번호로 찾기 (예: 피카츄, 25)" aria-label="도감 검색"><div class="dex-types" id="dexTypes" role="group" aria-label="타입으로 보기"></div></div>
     <div class="dex-grid" id="dexGrid" aria-live="polite"></div>
     <button class="dex-more" id="dexMore" type="button">더 보기</button>
+  </section>
+
+  <section class="section rc" aria-labelledby="rcTitle" id="recipes">
+    <div class="sec-head"><h2 id="rcTitle"><span class="cbk-ic" style="background-image:url(https://cdn.jsdelivr.net/gh/InventivetalentDev/minecraft-assets@1.21.1/assets/minecraft/textures/block/crafting_table_front.png); image-rendering:pixelated" aria-hidden="true"></span>조합법</h2><span class="sec-sub">서버 모드 조합법을 다 모았어요 (바닐라 제외) · <span id="rcCount">…</span></span></div>
+    <div class="rc-tools">
+      <input class="rc-search" id="rcSearch" type="search" placeholder="만들고 싶은 아이템 이름 (예: 몬스터볼, 메가링, 배낭)" aria-label="조합법 검색">
+      <div class="rc-quick" id="rcQuick">자주 찾는 것</div>
+      <div class="rc-chips" id="rcMods" role="group" aria-label="모드별로 보기"></div>
+    </div>
+    <div class="rc-grid" id="rcGrid" aria-live="polite"><p class="rc-empty">조합법을 불러오는 중…</p></div>
+    <button class="rc-more" id="rcMore" type="button" hidden>더 보기</button>
   </section>
 
   <section class="section" aria-labelledby="recTitle">
@@ -2208,6 +2258,74 @@ button.ty.all{--c:#55546F}
     });
     if (n > people.length) { var m = document.createElement('li'); m.className = 'more'; m.textContent = (people.length ? '+' + (n - people.length) + '명' : n + '명 접속 중'); list.appendChild(m); }
   });
+})();
+</script>
+<script>
+/* 조합법: assets/recipes/data.json (서버 모드에서 뽑은 조합법) 을 마크 작업대 모양으로 */
+(function(){
+  if (document.documentElement.dataset.mood !== 'poke') return;
+  var sec = document.getElementById('recipes'); if (!sec) return;
+  var grid = document.getElementById('rcGrid'), more = document.getElementById('rcMore'), q = document.getElementById('rcSearch'), mods = document.getElementById('rcMods'), quick = document.getElementById('rcQuick');
+  var BASE = 'assets/recipes/', D = null, mod = '', STEP = innerWidth < 640 ? 12 : 20, shown = STEP, cyc = [];
+  var ST = {craft:'작업대', shapeless:'작업대 (모양 자유)', pot:'요리 냄비', smelting:'화로', blasting:'용광로', smoking:'훈연기', campfire:'모닥불', stonecutting:'석재 절단기', smithing:'대장장이 작업대'};
+  function iconUrl(id){ var it = D.items[id]; if (!it || !it[1]) return ''; return /^https?:/.test(it[1]) ? it[1] : BASE + it[1]; }
+  function nm(id){ return (D.items[id] || [id])[0]; }
+  function slot(cell, count){
+    var s = document.createElement('span'); s.className = 'rc-s';
+    if (!cell) { s.classList.add('empty'); return s; }
+    var ids = cell[0], i = document.createElement('i');
+    function set(k){ var id = ids[k % ids.length], u = iconUrl(id); i.className = u ? '' : 'no'; i.style.backgroundImage = u ? 'url(' + u + ')' : ''; i.textContent = u ? '' : (/backpack/.test(id) ? '🎒' : '?'); s.title = nm(id) + (cell[1] ? ' (같은 종류 아무거나)' : ''); s.dataset.id = id; }
+    set(0); s.appendChild(i);
+    if (ids.length > 1) { cyc.push({set:set}); var tg = document.createElement('span'); tg.className = 'tg'; tg.textContent = '#'; s.appendChild(tg); }
+    if (count > 1) { var c = document.createElement('span'); c.className = 'ct'; c.textContent = count; s.appendChild(c); }
+    s.addEventListener('click', function(){ var id = s.dataset.id; if (id) { q.value = nm(id); shown = STEP; draw(); q.scrollIntoView({block:'center', behavior:'smooth'}); } });
+    return s;
+  }
+  function card(r){
+    var c = document.createElement('div'); c.className = 'rc-card';
+    var h = document.createElement('div'); h.className = 'rc-head';
+    var hi = slot([[r.o], ''], 0); hi.style.width = hi.style.height = '30px'; hi.querySelector('i').style.width = hi.querySelector('i').style.height = '22px';
+    var b = document.createElement('b'); b.textContent = nm(r.o) + (r.n > 1 ? ' ×' + r.n : '');
+    var md = document.createElement('span'); md.className = 'rc-mod'; md.textContent = (D.mods.find(function(m){ return m[0] === r.m; }) || [0, r.m])[1];
+    h.appendChild(hi); h.appendChild(b); h.appendChild(md); c.appendChild(h);
+    var body = document.createElement('div'); body.className = 'rc-body';
+    var g = document.createElement('div'); g.className = 'rc-g';
+    var cells = r.g ? r.g.slice() : r.i.slice();
+    if (r.g && (r.k === 'shapeless' || (r.k === 'pot' && r.g.length < 9))) while (cells.length < 9) cells.push(null);
+    if (!r.g) { g.classList.add('row'); }
+    cells.forEach(function(cell){ g.appendChild(slot(cell, 0)); });
+    var arrow = document.createElement('span'); arrow.className = 'rc-arrow'; arrow.textContent = '➜';
+    var out = document.createElement('div'); out.className = 'rc-out'; out.appendChild(slot([[r.o], ''], r.n));
+    var st = document.createElement('span'); st.className = 'rc-st'; st.textContent = ST[r.k] || ''; out.appendChild(st);
+    body.appendChild(g); body.appendChild(arrow); body.appendChild(out); c.appendChild(body);
+    return c;
+  }
+  function list(){
+    var s = q.value.trim().toLowerCase();
+    return D.recipes.filter(function(r){ return (!mod || r.m === mod) && (!s || nm(r.o).toLowerCase().indexOf(s) >= 0 || r.o.indexOf(s) >= 0); });
+  }
+  function draw(){
+    cyc = []; grid.textContent = '';
+    var l = list();
+    if (!l.length) { var e = document.createElement('p'); e.className = 'rc-empty'; e.textContent = '찾는 조합법이 없어요'; grid.appendChild(e); }
+    l.slice(0, shown).forEach(function(r){ grid.appendChild(card(r)); });
+    more.hidden = l.length <= shown;
+    document.getElementById('rcCount').textContent = l.length.toLocaleString() + '개';
+  }
+  var tick = 0; setInterval(function(){ tick++; cyc.forEach(function(c){ c.set(tick); }); }, 1300);
+  function start(){
+    fetch(BASE + 'data.json').then(function(r){ return r.json(); }).then(function(d){
+      D = d;
+      var all = document.createElement('button'); all.type = 'button'; all.className = 'rc-chip'; all.textContent = '전체'; all.setAttribute('aria-pressed', 'true'); all.dataset.m = ''; mods.appendChild(all);
+      d.mods.forEach(function(m){ var b = document.createElement('button'); b.type = 'button'; b.className = 'rc-chip'; b.dataset.m = m[0]; b.setAttribute('aria-pressed', 'false'); b.innerHTML = ''; b.textContent = m[1]; var sm = document.createElement('small'); sm.textContent = m[2]; b.appendChild(sm); mods.appendChild(b); });
+      mods.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; mod = b.dataset.m; mods.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); shown = STEP; draw(); });
+      ['몬스터볼', '회복 장치', 'PC', '메가링', '전송석', '배낭', '가챠'].forEach(function(w){ var b = document.createElement('button'); b.type = 'button'; b.textContent = w; b.addEventListener('click', function(){ q.value = w; shown = STEP; draw(); }); quick.appendChild(b); });
+      draw();
+    }).catch(function(){ grid.innerHTML = '<p class="rc-empty">조합법을 불러오지 못했어요. 새로고침해 주세요</p>'; });
+  }
+  q.addEventListener('input', function(){ if (D) { shown = STEP; draw(); } });
+  more.addEventListener('click', function(){ shown += STEP; draw(); });
+  if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting) { io.disconnect(); start(); } }, {rootMargin:'400px'}); io.observe(sec); } else start();
 })();
 </script>
 </body>
