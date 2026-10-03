@@ -1,6 +1,6 @@
 {
   "show": true,
-  "title": "시즌 2-1 · 포켓몬 부활",
+  "title": "시즌 2-1 · Cobblemon",
   "badge": "부활!",
   "period": "오픈 날짜는 곧 공지할게요",
   "intro": "나이트폴은 여기서 멈추고, 모두가 제일 재밌게 놀았던 포켓몬 모드가 돌아와요. 이번엔 안정성을 최우선으로 준비하겠습니다.",
@@ -16,8 +16,7 @@
         "안정성 최우선"
       ],
       "videos": [],
-      "winner": true,
-      "label": "시즌 1 · 다시 시작"
+      "winner": true
     }
   ],
   "sub": {
@@ -46,75 +45,7 @@
     {
       "title": "시즌 2",
       "name": "RPG",
-      "pack": "Nightfallcraft",
-      "stamp": "중단"
+      "pack": "Nightfallcraft"
     }
-  ],
-  "archive_s2_vote": [
-    {
-      "name": "포켓몬 (RE)",
-      "pack": "Pebblemon",
-      "stars": 4,
-      "weeks": "4–5주",
-      "tags": [
-        "기존 세이브 초기화"
-      ],
-      "videos": [
-        "https://youtu.be/2tsCcWbiYgA",
-        "https://youtu.be/b_80s3-dK8Y"
-      ]
-    },
-    {
-      "name": "좀비 아포칼립스",
-      "pack": "DeceasedCraft",
-      "stars": 4,
-      "weeks": "4–5주",
-      "tags": [],
-      "videos": [
-        "https://www.youtube.com/watch?v=3DxZ0WaqIgk",
-        "https://www.youtube.com/watch?v=8zd41ajAERA"
-      ]
-    },
-    {
-      "name": "백룸 · 공포",
-      "pack": "Into the Backrooms: Found Footage",
-      "stars": 5,
-      "weeks": "1주",
-      "tags": [
-        "단발성"
-      ],
-      "videos": [
-        "https://youtu.be/NuqFMrwsleg",
-        "https://www.youtube.com/watch?v=oixfYrKNSLM",
-        "https://www.youtube.com/watch?v=i_C03f1MiRo"
-      ]
-    },
-    {
-      "name": "진격의 거인",
-      "pack": "Danny's AOT",
-      "stars": 3,
-      "weeks": "1주",
-      "tags": [
-        "단발성"
-      ],
-      "videos": [
-        "https://www.youtube.com/watch?v=2vFQzUN5faY",
-        "https://www.youtube.com/watch?v=5yEdMB6Qnh4"
-      ]
-    },
-    {
-      "name": "RPG",
-      "pack": "Nightfallcraft",
-      "stars": 5,
-      "weeks": "8주",
-      "tags": [],
-      "videos": [
-        "https://www.youtube.com/watch?v=9wKugA7QeQI",
-        "https://www.youtube.com/shorts/_aY2a97-Shk"
-      ],
-      "winner": true,
-      "image": "assets/nightfallcraft.jpg"
-    }
-  ],
-  "now_label": "부활 준비 중!!"
+  ]
 }
