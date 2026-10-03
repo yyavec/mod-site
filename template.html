@@ -817,7 +817,7 @@ html[data-story], html[data-story] body{overflow:hidden}
 .story:focus{outline:none}
 .past-stamp.stop{color:#6B5BA8; border-color:#6B5BA8; box-shadow:inset 0 0 0 1px rgba(107,91,168,.25)}
 .foot-replay{margin-top:var(--s2); text-align:center; font-size:12.5px; color:var(--text-tertiary)}
-/* ---------- 포켓몬 분위기: 트레이너 변신 + 친구들 ---------- */
+/* ---------- 포켓몬 분위기: 트레이너 변신 + 포켓몬 친구들 ---------- */
 .frog .trainer{display:none; position:absolute; left:calc(var(--u) * -3); top:calc(var(--u) * -3); width:calc(var(--u) * 21); height:auto; pointer-events:none; overflow:visible}
 [data-mood="poke"]:not([data-intro="pcalm"]):not([data-intro="pthrow"]) .frog .trainer{display:block}
 [data-intro="ptrainer"] .frog .trainer{animation:tPop .45s cubic-bezier(.2,1.6,.5,1) both}
@@ -828,36 +828,43 @@ html[data-story], html[data-story] body{overflow:hidden}
 .pk-throw{position:absolute; z-index:5; width:26px; height:26px; left:0; top:0; pointer-events:none}
 .pk-throw svg, .mon-ball svg{width:100%; height:100%; display:block}
 .pk-poof{position:absolute; z-index:5; pointer-events:none; width:12px; height:12px; background:#fff; border-radius:2px; box-shadow:0 0 0 2px rgba(255,255,255,.6)}
+.pk-ring{position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; border:3px solid #FF5A4E; pointer-events:none}
 [data-intro^="p"] .now{opacity:0}
 [data-intro="pparty"] .now{opacity:1; animation:nowPop .6s cubic-bezier(.2,1.5,.5,1) both}
 @keyframes nowPop{0%{transform:translateY(16px) scale(.6); opacity:0} 100%{transform:none; opacity:1}}
-.pk-ring{position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; border:3px solid #FF5A4E; pointer-events:none}
-#guide > summary.has-mon{overflow:visible}
-/* 친구들 (원작 캐릭터가 아닌 오리지널 꼬마 몬스터) */
+/* 포켓몬 친구들 */
 .has-mon{position:relative}
 .has-mon > .mon:not(.win-bg):not(.card-rift){position:absolute; z-index:6}
-.mon{position:absolute; z-index:6; width:36px; height:39px; padding:0; border:0; background:none; cursor:pointer; opacity:0; pointer-events:none; -webkit-tap-highlight-color:transparent}
+.mon{position:absolute; z-index:6; display:flex; align-items:flex-end; justify-content:center; width:60px; height:60px; padding:0; border:0; background:none; cursor:pointer; opacity:0; pointer-events:none; -webkit-tap-highlight-color:transparent}
+.mon.perch{bottom:calc(100% - 14px); width:54px; height:54px}
+.mon.perch img{max-width:54px; max-height:54px}
 .mon.on{opacity:1; pointer-events:auto; animation:monIn .5s cubic-bezier(.2,1.6,.5,1) both}
-.mon svg{width:100%; height:100%; display:block; overflow:visible; filter:drop-shadow(0 2px 0 rgba(0,0,0,.12))}
-.mon .bd{transform-box:fill-box; transform-origin:50% 100%; animation:monBob 2.4s ease-in-out infinite; animation-delay:var(--bob, 0s)}
-.mon .ey{transform-box:fill-box; transform-origin:50% 50%; animation:monBlink 5s infinite; animation-delay:var(--blink, 0s)}
-.mon.hop .bd{animation:monHop .55s cubic-bezier(.3,.7,.4,1)}
-.mon.wave .bd{animation:monWave .9s ease-in-out}
+.mon img{display:block; max-width:60px; max-height:60px; width:auto; height:auto; transform-origin:50% 100%; animation:monBob 2.6s ease-in-out infinite; animation-delay:var(--bob, 0s); filter:drop-shadow(0 3px 0 rgba(0,0,0,.12))}
+.mon.flip img{scale:-1 1}
+.mon.hop img{animation:monHop .55s cubic-bezier(.3,.7,.4,1)}
+.mon.wave img{animation:monWave .9s ease-in-out}
 .mon:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px}
-.mon-say{position:absolute; left:50%; bottom:calc(100% + 6px); translate:-50% 0; white-space:nowrap; padding:5px 8px; border-radius:6px; background:var(--bg-surface); color:var(--text-primary); border:2px solid var(--text-primary); font:400 11px/1 var(--pixel); opacity:0; transform:translateY(4px) scale(.9); transition:opacity .18s, transform .18s; pointer-events:none}
-.mon-say::after{content:""; position:absolute; left:50%; top:100%; width:6px; height:6px; margin-left:-3px; margin-top:-2px; background:var(--bg-surface); border-right:2px solid var(--text-primary); border-bottom:2px solid var(--text-primary); transform:rotate(45deg)}
-.mon.say .mon-say{opacity:1; transform:none}
+.mon-heart{position:absolute; z-index:8; width:14px; height:12px; pointer-events:none}
 .mon-ball{position:absolute; z-index:6; width:16px; height:16px; pointer-events:none}
-.mon-flash{position:absolute; z-index:7; width:44px; height:44px; border-radius:50%; pointer-events:none; background:radial-gradient(circle, #fff 0%, rgba(255,255,255,.8) 40%, transparent 70%)}
-.hero .mon{bottom:20px; top:auto}
-.hero .mon.sm{width:30px; height:32.5px}
+.mon-flash{position:absolute; z-index:7; width:52px; height:52px; border-radius:50%; pointer-events:none; background:radial-gradient(circle, #fff 0%, rgba(255,255,255,.8) 40%, transparent 70%)}
+.hero .mon{bottom:18px; width:52px; height:52px}
+.hero .mon img{max-width:52px; max-height:52px}
 @keyframes monIn{0%{transform:scale(0) translateY(10px)} 100%{transform:none}}
-@keyframes monBob{0%,100%{transform:none} 50%{transform:translateY(-2px) scaleY(.96)}}
-@keyframes monBlink{0%,92%,100%{transform:none} 95%{transform:scaleY(.15)}}
-@keyframes monHop{30%{transform:translateY(-14px) scaleY(1.08)} 60%{transform:translateY(0) scaleY(.88)} 100%{transform:none}}
-@keyframes monWave{0%,100%{transform:none} 25%{transform:rotate(-10deg)} 50%{transform:rotate(9deg)} 75%{transform:rotate(-6deg)}}
-@media (max-width:600px){ .mon{width:30px; height:32.5px} .hero .mon.far{display:none} .hero .mon.m1{left:44% !important} .hero .mon.m2{left:56% !important} }
-@media (prefers-reduced-motion:reduce){ .mon .bd, .mon .ey, [data-mood="poke"] .frog .trainer .held{animation:none !important} .mon.on{animation:none} }
+@keyframes monBob{0%,100%{transform:none} 50%{transform:translateY(-2px) scaleY(.97)}}
+@keyframes monHop{30%{transform:translateY(-16px) scaleY(1.06)} 60%{transform:translateY(0) scaleY(.9)} 100%{transform:none}}
+@keyframes monWave{0%,100%{transform:none} 25%{transform:rotate(-9deg)} 50%{transform:rotate(8deg)} 75%{transform:rotate(-5deg)}}
+/* 포켓몬 퍼레이드 */
+.parade{position:relative; height:84px; margin:0; border-radius:var(--r-lg); overflow:hidden; background:linear-gradient(180deg, #BFE6FF 0%, #E6F6FF 62%, transparent 62%), repeating-linear-gradient(90deg, #5DB13C 0 16px, #4E9A31 16px 32px); background-size:100% 100%, 100% 24px; background-position:0 0, 0 100%; background-repeat:no-repeat; box-shadow:var(--shadow-raised)}
+:root[data-theme="dark"] .parade{background:linear-gradient(180deg, #1B2A3E 0%, #22364F 62%, transparent 62%), repeating-linear-gradient(90deg, #3E7F2A 0 16px, #346E23 16px 32px); background-size:100% 100%, 100% 24px; background-position:0 0, 0 100%; background-repeat:no-repeat}
+.parade-walk{position:absolute; left:0; bottom:18px; height:60px; display:flex; align-items:flex-end; will-change:transform; pointer-events:none}
+.parade-walk img{display:block; max-height:58px; max-width:72px; width:auto; height:auto; animation:paradeStep .5s ease-in-out infinite alternate}
+.parade-walk.right img{scale:-1 1}
+.parade-dex{position:absolute; z-index:2; top:8px; right:10px; display:inline-flex; align-items:center; gap:6px; padding:4px 9px 3px; border-radius:var(--r-full); background:rgba(255,255,255,.85); color:#22364D; font:400 11px/1 var(--pixel); box-shadow:0 1px 0 rgba(0,0,0,.08)}
+:root[data-theme="dark"] .parade-dex{background:rgba(0,0,0,.45); color:#E8F1FF}
+.parade-dex svg{width:12px; height:12px}
+@keyframes paradeStep{to{transform:translateY(-3px)}}
+@media (max-width:600px){ .mon{width:48px; height:48px} .mon img{max-width:48px; max-height:48px} .hero .mon{width:42px; height:42px} .hero .mon img{max-width:42px; max-height:42px} .hero .mon.far{display:none} .hero .mon.m1{left:44% !important} .hero .mon.m2{left:57% !important} .parade{height:72px} .parade-walk img{max-height:48px; max-width:60px} }
+@media (prefers-reduced-motion:reduce){ .mon img, .parade-walk img, [data-mood="poke"] .frog .trainer .held{animation:none !important} .mon.on{animation:none} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -1375,9 +1382,7 @@ html[data-story], html[data-story] body{overflow:hidden}
 
   // 개구리
   const frogBtn = $("#frog"), bubble = $("#bubble");
-  const lines = document.documentElement.dataset.mood === "poke"
-    ? ["안녕!", "가라, 몬스터볼!", "도감 채우러 가자!", "모자 멋있지?", "오늘도 즐겜!", "등껍질 아니고 배야"]
-    : ["안녕!", "모드 받았어?", "투표는 했고?", "오늘도 즐겜!", "간지러워..", "등껍질 아니고 배야"];
+  const lines = ["안녕!", "모드 받았어?", "투표는 했고?", "오늘도 즐겜!", "간지러워..", "등껍질 아니고 배야"];
   let li = 0, bubT;
   frogBtn && frogBtn.addEventListener("click", () => {
     frogBtn.classList.remove("hop"); void frogBtn.offsetWidth; frogBtn.classList.add("hop");
@@ -1632,68 +1637,78 @@ html[data-story], html[data-story] body{overflow:hidden}
 })();
 </script>
 <script>
-/* 포켓몬 분위기: 몬스터볼이 날아와 트레이너로 변신 + 사이트 곳곳에 꼬마 몬스터 친구들 (오리지널 디자인) */
+/* 포켓몬 분위기: 몬스터볼이 날아와 트레이너로 변신 + 도감 전체(1~1025)에서 무작위로 포켓몬 친구들이 나온다 */
 (function(){
   var html = document.documentElement;
   if (html.dataset.mood !== 'poke') return;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MAX = 1025;
+  var ANI = 'https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/showdown/';
+  var STILL = 'https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/';
   var BALL = ['....KKKK....','..KKRRRRKK..','.KRrRRRRRRK.','.KrRRRRRRRK.','KRRRRKKRRRRK','KKKKKWWKKKKK','KWWWWKKWWWWK','KWWWWWWWWWWK','.KWWWWWWWWwK','.KwWWWWWWwwK','..KKwwwwKK..','....KKKK....'];
   var BALLC = {K:'#1D1D25', R:'#E3403A', r:'#FF8A7E', W:'#F6F6F6', w:'#D3D7DE'};
-  function px(rows, col, dx, dy){
+  function px(rows, col){
     var s = '';
-    rows.forEach(function(row, y){
-      var x = 0;
-      while (x < row.length) {
-        var c = row[x], n = 1;
-        if (!col[c]) { x++; continue; }
-        while (row[x + n] === c) n++;
-        s += '<rect x="' + (x + (dx || 0)) + '" y="' + (y + (dy || 0)) + '" width="' + n + '" height="1" fill="' + col[c] + '"/>';
-        x += n;
-      }
-    });
+    rows.forEach(function(row, y){ for (var x = 0; x < row.length; x++) if (col[row[x]]) s += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + col[row[x]] + '"/>'; });
     return s;
   }
   var ballSvg = '<svg viewBox="0 0 12 12" shape-rendering="crispEdges">' + px(BALL, BALLC) + '</svg>';
-  // 꼬마 몬스터: 공통 몸통 + 머리 장식만 다르다
-  var BODY = ['....KKKK....','..KKMMMMKK..','.KMMLLMMMMK.','.KMLMMMMMMK.','KMMMMMMMMMMK','KMMMMMMMMMMK','KMPMMMMMMPMK','KSMMMKKMMMSK','.KSSMMMMSSK.','..KKKKKKKK..'];
-  var EYES = ['............','............','............','............','...EW...EW..','...EE...EE..'];
-  var KINDS = {
-    leaf:  {name:'새싹이', top:['......GG....','.....GgG....','.....KG.....'], c:{M:'#8BD46A', S:'#5FAE45', L:'#C7F0A8', G:'#3E9B3A', g:'#7CD35E'}, cry:['새싹새싹!', '광합성 중~', '물 좀 줄래?']},
-    fire:  {name:'불씨', top:['.....F......','....FfF.....','....FfFF....'], c:{M:'#FFA35E', S:'#E0703A', L:'#FFD3A6', F:'#FF5A3C', f:'#FFD54A'}, cry:['화르륵!', '따뜻하지?', '불꽃 조심~']},
-    water: {name:'방울이', top:['......K.....','.....KMK....','....KMLMK...'], over:['...KMMMMK...'], c:{M:'#72C3FF', S:'#3B8FE0', L:'#D2EDFF'}, cry:['뽀글뽀글!', '촉촉해~', '수영할래?']},
-    spark: {name:'찌릿이', top:['.......YY...','......YY....','.....K.Y....'], c:{M:'#FFD94A', S:'#E6B520', L:'#FFF1A8', Y:'#FF9F1A'}, cry:['찌릿!', '충전 완료!', '파지직~']},
-    fluff: {name:'몽실이', top:['............','..KK....KK..','.KLLK..KLLK.'], c:{M:'#FFB6D8', S:'#F07FB0', L:'#FFE3F0'}, cry:['몽실몽실~', '안아줘!', '폭신해!']}
-  };
-  var COMMON = {K:'#2A2233', P:'#FF8FA8'};
-  function monSvg(k){
-    var d = KINDS[k], col = Object.assign({}, COMMON, d.c), eye = {E:'#1D1D25', W:'#FFFFFF'};
-    return '<svg viewBox="0 0 12 13" shape-rendering="crispEdges"><g class="bd">' + px(d.top, col) + px(BODY, col, 0, 3) + px(d.over || [], col, 0, 3) + '<g class="ey">' + px(EYES, eye, 0, 3) + '</g></g></svg>';
+  var heartSvg = '<svg viewBox="0 0 7 6" shape-rendering="crispEdges">' + px(['.RR.RR.','RrRRRRR','RRRRRRR','.RRRRR.','..RRR..','...R...'], {R:'#FF5A7A', r:'#FFC2CF'}) + '</svg>';
+  // 도감 기록: 이 브라우저에서 만난 포켓몬
+  var met = {};
+  try { (localStorage.getItem('pk-met') || '').split(',').forEach(function(n){ if (n) met[n] = 1; }); } catch(e){}
+  var dexEl = null;
+  function meet(id){
+    if (met[id]) return; met[id] = 1;
+    try { localStorage.setItem('pk-met', Object.keys(met).join(',')); } catch(e){}
+    if (dexEl) dexEl.textContent = Object.keys(met).length;
   }
-  var HELLO = ['안녕!', '반가워~', '같이 놀자!', '어서 와!', '부활 축하해!'];
-  var MORE = ['모드 받았어?', '도감 채우러 가자!', '몬스터볼은 무서워..', '오늘도 즐겜!', '나도 데려가 줘~'];
-  function pick(a){ return a[Math.floor(Math.random() * a.length)]; }
+  // 덱: 1~1025를 섞어서 차례로 꺼낸다 (아직 못 만난 포켓몬 먼저)
+  var deck = [];
+  function draw(){
+    if (!deck.length) {
+      var fresh = [], seen = [];
+      for (var i = 1; i <= MAX; i++) (met[i] ? seen : fresh).push(i);
+      [fresh, seen].forEach(function(a){ for (var j = a.length - 1; j > 0; j--) { var k = Math.floor(Math.random() * (j + 1)), t = a[j]; a[j] = a[k]; a[k] = t; } });
+      deck = fresh.concat(seen);
+    }
+    return deck.shift();
+  }
+  function sprite(id, lazy){
+    var img = new Image(); img.alt = ''; img.decoding = 'async'; if (lazy) img.loading = 'lazy'; img.draggable = false;
+    img.src = ANI + id + '.gif';
+    img.onerror = function(){ if (img.src.indexOf(STILL) < 0) img.src = STILL + id + '.png'; };
+    return img;
+  }
   var seq = 0;
-  function makeMon(kind, host, style, extra){
-    var b = document.createElement('button'), sayEl = document.createElement('span');
-    b.type = 'button'; b.className = 'mon' + (extra ? ' ' + extra : '');
-    b.setAttribute('aria-label', KINDS[kind].name + ' 쓰다듬기');
-    b.innerHTML = monSvg(kind); sayEl.className = 'mon-say'; b.appendChild(sayEl);
-    b.style.setProperty('--bob', (-(seq * .37) % 2.4) + 's'); b.style.setProperty('--blink', (-(seq * 1.3) % 5) + 's'); seq++;
+  function makeMon(host, style, extra){
+    var id = draw(), b = document.createElement('button');
+    b.type = 'button'; b.className = 'mon' + (extra ? ' ' + extra : '') + (Math.random() < .5 ? ' flip' : '');
+    b.setAttribute('aria-label', '포켓몬 도감 ' + id + '번 쓰다듬기');
+    var img = sprite(id, true); img.style.setProperty('--bob', (-(seq++ * .43) % 2.6) + 's'); b.appendChild(img);
     Object.keys(style).forEach(function(k){ b.style[k] = style[k]; });
-    var t;
-    b.say = function(text, ms){ sayEl.textContent = text; b.classList.add('say'); clearTimeout(t); t = setTimeout(function(){ b.classList.remove('say'); }, ms || 1800); };
     b.addEventListener('click', function(e){
       e.preventDefault(); e.stopPropagation();
-      b.classList.remove('hop'); void b.offsetWidth; b.classList.add('hop');
-      b.say(Math.random() < .5 ? KINDS[kind].name + ': ' + pick(KINDS[kind].cry) : pick(MORE));
+      b.classList.remove('hop', 'wave'); void b.offsetWidth; b.classList.add('hop'); hearts(b, host);
     });
-    b.addEventListener('animationend', function(e){ if (e.animationName === 'monHop' || e.animationName === 'monWave') b.classList.remove('hop', 'wave'); });
+    b.addEventListener('animationend', function(e){ if (e.animationName === 'monHop' || e.animationName === 'monWave') b.classList.remove('hop', 'wave'); }, true);
+    b._id = id;
     host.appendChild(b);
     return b;
   }
-  // 몬스터볼이 떨어져 펑! 하고 나온다
+  function hearts(mon, host){
+    if (reduce) return;
+    var hb = host.getBoundingClientRect(), mb = mon.getBoundingClientRect();
+    for (var i = 0; i < 3; i++) {
+      var h = document.createElement('div'); h.className = 'mon-heart'; h.innerHTML = heartSvg;
+      h.style.left = (mb.left - hb.left + mb.width / 2 - 7 + (i - 1) * 12) + 'px'; h.style.top = (mb.top - hb.top + 6) + 'px'; host.appendChild(h);
+      h.animate([{transform:'translateY(0) scale(.4)', opacity:0}, {transform:'translateY(-10px) scale(1)', opacity:1, offset:.3}, {transform:'translateY(-34px) scale(.8)', opacity:0}], {duration:900, delay:i * 90, easing:'ease-out', fill:'both'}).onfinish = (function(el){ return function(){ el.remove(); }; })(h);
+    }
+  }
+  // 몬스터볼이 떨어져 흔들리다 펑! 하고 나온다
   function release(mon, host, delay){
     setTimeout(function(){
+      meet(mon._id);
       if (reduce) { mon.classList.add('on'); return; }
       var hb = host.getBoundingClientRect(), mb = mon.getBoundingClientRect();
       var cx = mb.left - hb.left + mb.width / 2, cy = mb.top - hb.top + mb.height - 8;
@@ -1702,47 +1717,69 @@ html[data-story], html[data-story] body{overflow:hidden}
       ball.animate([{transform:'translate(0,-70px) rotate(-200deg)', opacity:0}, {transform:'translate(0,-70px) rotate(-200deg)', opacity:1, offset:.1}, {transform:'translate(0,0) rotate(0)', opacity:1, offset:.7}, {transform:'translate(0,-8px) rotate(10deg)', opacity:1, offset:.85}, {transform:'translate(0,0)', opacity:1}], {duration:620, easing:'ease-in'}).onfinish = function(){
         ball.animate([{transform:'rotate(0)'}, {transform:'rotate(-18deg)'}, {transform:'rotate(14deg)'}, {transform:'rotate(0)'}], {duration:360}).onfinish = function(){
           ball.remove();
-          var f = document.createElement('div'); f.className = 'mon-flash'; f.style.left = (cx - 22) + 'px'; f.style.top = (cy - 26) + 'px'; host.appendChild(f);
-          f.animate([{transform:'scale(.2)', opacity:1}, {transform:'scale(1.4)', opacity:0}], {duration:420, easing:'ease-out'}).onfinish = function(){ f.remove(); };
+          var f = document.createElement('div'); f.className = 'mon-flash'; f.style.left = (cx - 26) + 'px'; f.style.top = (cy - 34) + 'px'; host.appendChild(f);
+          f.animate([{transform:'scale(.2)', opacity:1}, {transform:'scale(1.5)', opacity:0}], {duration:420, easing:'ease-out'}).onfinish = function(){ f.remove(); };
           mon.classList.add('on');
-          setTimeout(function(){ mon.classList.add('wave'); mon.say(pick(HELLO), 2200); }, 380);
+          setTimeout(function(){ mon.classList.add('wave'); hearts(mon, host); }, 420);
         };
       };
     }, delay || 0);
   }
-  // 카드 위에 앉는 친구들
+  // 카드 위에 앉는 포켓몬
   var PERCH = [
-    ['.notice', 'leaf', {right:'30px', top:'-37px'}],
-    ['.dl-card', 'spark', {right:'28px', top:'-37px'}],
-    ['.helpme', 'water', {right:'40px', top:'-37px'}],
-    ['.win-card', 'fire', {right:'26px', bottom:'12px'}],
-    ['#recForm', 'fluff', {right:'40px', top:'-37px'}],
-    ['.list-tools', 'spark', {right:'16px', top:'-37px'}]
+    ['.notice', {right:'26px'}, 'perch'],
+    ['.dl-card', {right:'24px'}, 'perch'],
+    ['.dl-card', {right:'96px'}, 'perch'],
+    ['.helpme', {right:'34px'}, 'perch'],
+    ['.win-card', {right:'22px', bottom:'10px'}, ''],
+    ['#recForm', {right:'36px'}, 'perch'],
+    ['.list-tools', {right:'14px'}, 'perch'],
+    ['.list-tools', {right:'84px'}, 'perch']
   ];
   function perch(){
     var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting) { io.unobserve(e.target); var m = e.target._mon; release(m, e.target, 150); } });
+      es.forEach(function(e){ if (e.isIntersecting) { io.unobserve(e.target); (e.target._mons || []).forEach(function(m, i){ release(m, e.target, 150 + i * 280); }); } });
     }, {threshold:.35}) : null;
     PERCH.forEach(function(p){
       var host = document.querySelector(p[0]); if (!host) return;
       host.classList.add('has-mon');
-      host._mon = makeMon(p[1], host, p[2]);
-      if (io) io.observe(host); else release(host._mon, host, 0);
+      var m = makeMon(host, p[1], p[2]);
+      if (!host._mons) { host._mons = []; if (io) io.observe(host); }
+      host._mons.push(m);
+      if (!io) release(m, host, 0);
     });
   }
-  // 첫 화면 풀밭 친구들
+  // 퍼레이드: 첫 화면 아래 풀밭을 포켓몬들이 줄지어 지나간다
+  function parade(){
+    var hero = document.querySelector('.hero'); if (!hero) return;
+    var box = document.createElement('div'); box.className = 'parade'; box.setAttribute('aria-hidden', 'true');
+    box.innerHTML = '<span class="parade-dex">' + ballSvg + '만난 포켓몬 <b>0</b> / ' + MAX + '</span>';
+    hero.insertAdjacentElement('afterend', box);
+    dexEl = box.querySelector('b'); dexEl.textContent = Object.keys(met).length;
+    if (reduce) { for (var r = 0; r < 7; r++) { var w0 = document.createElement('div'), id0 = draw(); w0.className = 'parade-walk'; w0.style.transform = 'translateX(' + (r * 14 + 3) + '%)'; w0.style.left = '0'; w0.appendChild(sprite(id0)); box.appendChild(w0); meet(id0); } return; }
+    var visible = true, timer = null;
+    function spawn(){
+      if (!visible || document.hidden) return;
+      var W = box.clientWidth, right = Math.random() < .5, id = draw(), w = document.createElement('div');
+      w.className = 'parade-walk' + (right ? ' right' : ''); w.appendChild(sprite(id)); box.appendChild(w); meet(id);
+      var from = right ? -90 : W + 20, to = right ? W + 20 : -90, ms = (W + 110) / (38 + Math.random() * 30) * 1000;
+      w.animate([{transform:'translateX(' + from + 'px)'}, {transform:'translateX(' + to + 'px)'}], {duration:ms, easing:'linear'}).onfinish = function(){ w.remove(); };
+    }
+    function loop(){ spawn(); timer = setTimeout(loop, 1400 + Math.random() * 1600); }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }).observe(box);
+    for (var i = 0; i < 4; i++) setTimeout(spawn, i * 450);
+    timer = setTimeout(loop, 2200);
+  }
+  // 첫 화면 풀밭 포켓몬
   var hero = document.querySelector('.hero'), heroMons = [];
   function heroCrew(){
     if (!hero) return;
     hero.classList.add('has-mon');
-    [['fluff', '31%', 'm1'], ['spark', '40%', 'sm m2'], ['leaf', '49%', 'far'], ['water', '58%', 'sm far']].forEach(function(m){
-      heroMons.push(makeMon(m[0], hero, {left:m[1]}, m[2]));
-    });
+    [['31%', 'm1'], ['40%', 'm2'], ['49%', 'far'], ['58%', 'far']].forEach(function(m){ heroMons.push(makeMon(hero, {left:m[0]}, m[1])); });
   }
   function heroParty(){ heroMons.forEach(function(m, i){ release(m, hero, i * 260); }); }
   // 트레이너 변신 장면
-  var frog = document.getElementById('frog'), bubble = document.getElementById('bubble');
-  function talk(t, ms){ if (!bubble) return; bubble.textContent = t; bubble.classList.add('show'); setTimeout(function(){ bubble.classList.remove('show'); }, ms || 1400); }
+  var frog = document.getElementById('frog');
   function quake(){ hero.classList.remove('quake'); void hero.offsetWidth; hero.classList.add('quake'); }
   function intro(){
     var timers = [], at = function(ms, fn){ timers.push(setTimeout(fn, ms)); };
@@ -1760,7 +1797,7 @@ html[data-story], html[data-story] body{overflow:hidden}
         b.animate([{transform:'translate(' + tx + 'px,' + ty + 'px) scale(1)', opacity:1}, {transform:'translate(' + tx + 'px,' + ty + 'px) scale(1.8)', opacity:0}], {duration:260, fill:'forwards'}).onfinish = function(){ b.remove(); };
         var ring = document.createElement('div'); ring.className = 'pk-ring'; ring.style.left = (tx + 3) + 'px'; ring.style.top = (ty + 3) + 'px'; hero.appendChild(ring);
         ring.animate([{transform:'scale(.4)', opacity:1}, {transform:'scale(4)', opacity:0}], {duration:600, easing:'ease-out', fill:'forwards'}).onfinish = function(){ ring.remove(); };
-        quake(); talk('...!?', 900);
+        quake();
         for (var k = 0; k < 9; k++) {
           var p = document.createElement('div'), a = k / 9 * Math.PI * 2; p.className = 'pk-poof';
           p.style.left = (tx + 7) + 'px'; p.style.top = (ty + 7) + 'px'; hero.appendChild(p);
@@ -1769,12 +1806,12 @@ html[data-story], html[data-story] body{overflow:hidden}
       };
     });
     at(1350, function(){ html.dataset.intro = 'ptrainer'; frog.classList.remove('hop'); void frog.offsetWidth; frog.classList.add('hop'); });
-    at(1700, function(){ talk('트레이너 변신 완료!', 1600); });
-    at(2400, function(){ html.dataset.intro = 'pparty'; heroParty(); });
-    at(4200, done);
+    at(2100, function(){ html.dataset.intro = 'pparty'; heroParty(); });
+    at(3900, done);
   }
   heroCrew();
-  function start(){ if (html.dataset.intro === 'pcalm') intro(); else { heroMons.forEach(function(m){ m.classList.add('on'); }); perch(); } }
+  parade();
+  function start(){ if (html.dataset.intro === 'pcalm') intro(); else { heroMons.forEach(function(m){ meet(m._id); m.classList.add('on'); }); perch(); } }
   if (html.hasAttribute('data-story')) addEventListener('story:closed', function(){ setTimeout(start, 350); }, {once:true});
   else start();
 })();
