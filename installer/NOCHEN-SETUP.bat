@@ -50,11 +50,44 @@ function ServersDat([string]$path, [string]$name, [string]$ip) {
   [IO.File]::WriteAllBytes($path, $ms.ToArray())
 }
 
-try {
+# ---- 맨 위 그림: 주인 얼굴 + 몬스터볼 (24비트 색, 안 되면 16색으로) ----
+function Banner {
+  $face = '548F3E,519835,67B04B,67B04B,519835,67B04B,519835,548F3E;519835,67B04B,67B04B,67B04B,67B04B,67B04B,67B04B,519835;67B04B,67B04B,67B04B,67B04B,67B04B,67B04B,67B04B,67B04B;67B04B,67B04B,67B04B,67B04B,67B04B,67B04B,67B04B,67B04B;FFFFFF,FFFFFF,67B04B,67B04B,67B04B,67B04B,FFFFFF,FFFFFF;000000,FFFFFF,67B04B,67B04B,67B04B,67B04B,FFFFFF,000000;519835,67B04B,67B04B,67B04B,67B04B,67B04B,67B04B,519835;548F3E,519835,67B04B,67B04B,67B04B,519835,519835,548F3E'.Split(';')
+  $ball = ',,1D1D25,1D1D25,1D1D25,1D1D25,,;,1D1D25,E3403A,E3403A,E3403A,E3403A,1D1D25,;1D1D25,E3403A,FF8A7E,E3403A,E3403A,E3403A,E3403A,1D1D25;1D1D25,E3403A,E3403A,1D1D25,1D1D25,E3403A,E3403A,1D1D25;1D1D25,1D1D25,1D1D25,F4F4F4,F4F4F4,1D1D25,1D1D25,1D1D25;1D1D25,F4F4F4,F4F4F4,1D1D25,1D1D25,F4F4F4,F4F4F4,1D1D25;,1D1D25,F4F4F4,F4F4F4,F4F4F4,F4F4F4,1D1D25,;,,1D1D25,1D1D25,1D1D25,1D1D25,,'.Split(';')
+  $text = @('', '', @('노천극장 놀이터', 'Green'), @('코블몬 서버 설치 프로그램', 'White'), @('Cobblemon · Fabric · Minecraft 1.21.1', 'Cyan'), @('made by 주끼삐끼 (JOOKKIBBIKKI)', 'DarkGray'), '', '')
+  $vt = $false
+  try {
+    Add-Type -Namespace Nochen -Name Con -MemberDefinition '[DllImport("kernel32.dll")] public static extern IntPtr GetStdHandle(int h); [DllImport("kernel32.dll")] public static extern bool GetConsoleMode(IntPtr h, out int m); [DllImport("kernel32.dll")] public static extern bool SetConsoleMode(IntPtr h, int m);' -ErrorAction Stop
+    $h = [Nochen.Con]::GetStdHandle(-11); $m = 0
+    if ([Nochen.Con]::GetConsoleMode($h, [ref]$m)) { $vt = [Nochen.Con]::SetConsoleMode($h, $m -bor 4) }
+  } catch {}
+  $E = [char]27
+  function Px([string]$hex) {
+    if (-not $hex) { Write-Host '  ' -NoNewline; return }
+    if ($vt) { $r = [Convert]::ToInt32($hex.Substring(0, 2), 16); $g = [Convert]::ToInt32($hex.Substring(2, 2), 16); $bb = [Convert]::ToInt32($hex.Substring(4, 2), 16); Write-Host ("$E[48;2;$r;$g;$bb" + 'm  ' + "$E[0m") -NoNewline }
+    else {
+      $map = @{ '000000' = 'Black'; '1D1D25' = 'Black'; 'FFFFFF' = 'White'; 'F4F4F4' = 'White'; 'E3403A' = 'Red'; 'FF8A7E' = 'Red' }
+      $col = if ($map.ContainsKey($hex)) { $map[$hex] } elseif ($hex -eq '67B04B') { 'Green' } else { 'DarkGreen' }
+      Write-Host '  ' -BackgroundColor $col -NoNewline
+    }
+  }
   Write-Host ''
-  Say '  ============================================' Green
-  Say '     노천극장 서버 설치 프로그램' Green
-  Say '  ============================================' Green
+  for ($y = 0; $y -lt 8; $y++) {
+    Write-Host '   ' -NoNewline
+    foreach ($c in $face[$y].Split(',')) { Px $c }
+    Write-Host '  ' -NoNewline
+    foreach ($c in $ball[$y].Split(',')) { Px $c }
+    $t = $text[$y]
+    if ($t -is [array]) { Write-Host ('    ' + $t[0]) -ForegroundColor $t[1] } else { Write-Host '' }
+  }
+  Write-Host ''
+  Write-Host '   ' -NoNewline; Write-Host (' ' * 4) -NoNewline
+  Write-Host '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━' -ForegroundColor DarkRed
+}
+
+try {
+  try { $Host.UI.RawUI.WindowTitle = '노천극장 놀이터 · 코블몬 설치' } catch {}
+  Banner
   Say '  창을 닫지 말고 끝날 때까지 기다려 주세요.' Gray
   Say '  코블몬과 상관없는 예전 모드 · 설정 · 버전은 백업 없이 지워져요.' Yellow
 
