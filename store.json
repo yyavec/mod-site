@@ -1,15 +1,6 @@
 {
   "mods": [
     {
-      "file": "L_Enders_Cataclysm-3.27-curios-fix.jar",
-      "id": "cataclysm",
-      "name": "cataclysm",
-      "version": "3.27",
-      "desc": "Hello Also Listen Cataclysmic Tunes https://www.curseforge.com/minecraft/texture-packs/cataclysmic-tunes Artist=dogulkkun,mango03034,Gytator,LegendNoob Patron [Adam, Angry Mutant Enderman, darkMind204, DENOBODY2, Hippo0824, printa, walker, 참치, 3T, danimodder, EternalOne, Karat Feng, lucy, nameed, Pe",
-      "env": "",
-      "size": 73915890
-    },
-    {
       "file": "cataclysm_dimension-forge1.20.1-1.6.2.jar",
       "id": "cataclysm_dimension",
       "name": "Cataclysm Dimension",
