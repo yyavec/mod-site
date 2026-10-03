@@ -1,11 +1,56 @@
 {
   "show": true,
-  "title": "시즌 2 · RPG",
-  "badge": "진행 중",
-  "period": "2026년 10월 1일 오픈",
-  "intro": "투표 결과 5번 RPG 모드팩 Nightfallcraft로 정해졌어요. 지금 서버가 열려 있어요!",
+  "title": "시즌 3 · 포켓몬 부활",
+  "badge": "부활!",
+  "period": "오픈 날짜는 곧 공지할게요",
+  "intro": "나이트폴은 여기서 멈추고, 모두가 제일 재밌게 놀았던 포켓몬 모드가 돌아와요. 이번엔 안정성을 최우선으로 준비할게요!",
   "button": "노션에서 자세히 보기",
   "candidates": [
+    {
+      "name": "포켓몬 모드 (부활)",
+      "pack": "Cobblemon",
+      "stars": 5,
+      "weeks": "",
+      "tags": [
+        "시즌 1 부활",
+        "안정성 최우선"
+      ],
+      "videos": [],
+      "winner": true,
+      "label": "시즌 1 · 다시 시작"
+    }
+  ],
+  "sub": {
+    "show": false,
+    "title": "바닐라 플러스",
+    "address": "",
+    "version": "",
+    "desc": "모드에만 치중하지 않고, 우리끼리 편한 마음으로 놀 수 있는 공간이 필요하다고 생각해서 필수 모드만 넣은 바닐라 서버를 서브로 함께 열었어요. 처음에 한 번만 등록해 두면 메인 서버와 왔다 갔다 하면서 편하게 쓸 수 있어요.",
+    "mods": [
+      {
+        "name": "Waystones",
+        "desc": "거점 간 빠른 이동"
+      },
+      {
+        "name": "JourneyMap",
+        "desc": "월드 지도와 웨이포인트"
+      }
+    ]
+  },
+  "past": [
+    {
+      "title": "시즌 1",
+      "name": "포켓몬 모드",
+      "pack": "Cobblemon"
+    },
+    {
+      "title": "시즌 2",
+      "name": "RPG",
+      "pack": "Nightfallcraft",
+      "stamp": "중단"
+    }
+  ],
+  "archive_s2_vote": [
     {
       "name": "포켓몬 (RE)",
       "pack": "Pebblemon",
@@ -71,28 +116,5 @@
       "image": "assets/nightfallcraft.jpg"
     }
   ],
-  "sub": {
-    "show": false,
-    "title": "바닐라 플러스",
-    "address": "",
-    "version": "",
-    "desc": "모드에만 치중하지 않고, 우리끼리 편한 마음으로 놀 수 있는 공간이 필요하다고 생각해서 필수 모드만 넣은 바닐라 서버를 서브로 함께 열었어요. 처음에 한 번만 등록해 두면 메인 서버와 왔다 갔다 하면서 편하게 쓸 수 있어요.",
-    "mods": [
-      {
-        "name": "Waystones",
-        "desc": "거점 간 빠른 이동"
-      },
-      {
-        "name": "JourneyMap",
-        "desc": "월드 지도와 웨이포인트"
-      }
-    ]
-  },
-  "past": [
-    {
-      "title": "시즌 1",
-      "name": "포켓몬 모드",
-      "pack": "Cobblemon"
-    }
-  ]
+  "now_label": "부활 준비 중!!"
 }
