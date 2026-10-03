@@ -7,6 +7,8 @@
 (function(){var d=document.documentElement,q=location.search;
   if(/[?&]nf\b/.test(q)){d.setAttribute("data-frame","");d.setAttribute("data-mood","nightfall");return;}
   if(/[?&]story\b/.test(q)){d.setAttribute("data-story","");return;}
+  var ALWAYS=true; /* 당분간 들어올 때마다 팝업. 처음 3번만 보이게 되돌리려면 false */
+  if(ALWAYS){d.setAttribute("data-story","");return;}
   try{if(sessionStorage.getItem("story-shown"))return;var n=+(localStorage.getItem("story-visits")||0);if(n>=3)return;
     localStorage.setItem("story-visits",n+1);sessionStorage.setItem("story-shown","1");d.setAttribute("data-story","")}catch(e){}
 })();
