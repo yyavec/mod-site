@@ -5,5 +5,6 @@
   "win_label": "시즌 1 · 다시 시작",
   "past_stamps": {
     "시즌 2": "중단"
-  }
+  },
+  "fabric_loader": "0.19.3"
 }

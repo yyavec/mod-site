@@ -56,6 +56,7 @@ try {
   Say '     노천극장 서버 설치 프로그램' Green
   Say '  ============================================' Green
   Say '  창을 닫지 말고 끝날 때까지 기다려 주세요.' Gray
+  Say '  코블몬과 상관없는 예전 모드 · 설정 · 버전은 백업 없이 지워져요.' Yellow
 
   Step 1 '서버 정보 확인'
   $cfg = Invoke-RestMethod ($SITE + 'install.json?t=' + [DateTime]::Now.Ticks)
@@ -80,7 +81,7 @@ try {
   $vdir = Join-Path $root ('versions\' + $vid)
   New-Item -ItemType Directory -Force -Path $vdir | Out-Null
   Fetch ('https://meta.fabricmc.net/v2/versions/loader/' + $mc + '/' + $lv + '/profile/json') (Join-Path $vdir ($vid + '.json'))
-  Say ('  ' + $vid + ' 준비 완료')
+  Say ('  Fabric ' + $lv + ' (마인크래프트 ' + $mc + ') 준비 완료')
 
   Step 3 '노천극장 전용 폴더 준비'
   $game = Join-Path $root ([string]$cfg.folder)
@@ -128,7 +129,6 @@ try {
   $files = @('launcher_profiles.json', 'launcher_profiles_microsoft_store.json') | ForEach-Object { Join-Path $root $_ } | Where-Object { Test-Path $_ }
   if (-not $files) { $files = @(Join-Path $root 'launcher_profiles.json'); WriteJson $files[0] ([pscustomobject]@{ profiles = [pscustomobject]@{}; version = 3 }) }
   foreach ($f in $files) {
-    Copy-Item -LiteralPath $f -Destination ($f + '.nochen-backup') -Force
     $j = [IO.File]::ReadAllText($f, [Text.Encoding]::UTF8) | ConvertFrom-Json
     if (-not $j.profiles) { $j | Add-Member -NotePropertyName profiles -NotePropertyValue ([pscustomobject]@{}) -Force }
     $j.profiles | Add-Member -NotePropertyName 'nochen-server' -NotePropertyValue $prof -Force
@@ -136,19 +136,36 @@ try {
   }
   Say ('  런처에 "' + $cfg.profileName + '" 추가 (메모리 ' + $xmx + 'GB)') Green
 
-  Step 7 '예전 모드 정리 (선택)'
+  Step 7 '코블몬과 상관없는 파일 정리'
+  $gone = New-Object System.Collections.Generic.List[string]
+  function Wipe([string]$p, [string]$label) {
+    if (Test-Path -LiteralPath $p) { Remove-Item -LiteralPath $p -Recurse -Force -ErrorAction SilentlyContinue; if (-not (Test-Path -LiteralPath $p)) { $gone.Add($label) } }
+  }
+  # 1) .minecraft\mods 에 남은 예전 모드 (폴더는 두고 안만 비움)
   $old = Join-Path $root 'mods'
-  if ((Test-Path $old) -and (Get-ChildItem -LiteralPath $old -Force | Select-Object -First 1)) {
-    Say '  기존 .minecraft\mods 폴더에 예전 모드가 남아 있어요.' Yellow
-    Say '  노천극장은 전용 폴더를 쓰니까 그대로 둬도 괜찮아요.'
-    $a = Read-Host '  깔끔하게 백업 폴더로 옮겨서 정리할까요? (Y/N)'
-    if ($a -match '^[yY]') {
-      $bak = Join-Path $root ('mods_backup_' + (Get-Date -Format 'yyyyMMdd_HHmm'))
-      Move-Item -LiteralPath $old -Destination $bak
-      New-Item -ItemType Directory -Force -Path $old | Out-Null
-      Say ('  정리했어요. 예전 모드는 여기 보관: ' + $bak) Green
-    } else { Say '  그대로 뒀어요.' }
-  } else { Say '  정리할 예전 모드가 없어요.' }
+  if (Test-Path -LiteralPath $old) {
+    $items = @(Get-ChildItem -LiteralPath $old -Force)
+    if ($items.Count) { $items | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue; $gone.Add('.minecraft\mods 안의 예전 모드 ' + $items.Count + '개') }
+  }
+  # 2) 예전 모드팩이 남긴 설정 · 예전 정리 때 만든 백업
+  Wipe (Join-Path $root 'config') '.minecraft\config (예전 모드 설정)'
+  Wipe (Join-Path $root 'defaultconfigs') '.minecraft\defaultconfigs'
+  Get-ChildItem -LiteralPath $root -Directory -Filter 'mods_backup_*' -ErrorAction SilentlyContinue | ForEach-Object { Wipe $_.FullName $_.Name }
+  Get-ChildItem -LiteralPath $root -Filter '*.nochen-backup' -ErrorAction SilentlyContinue | ForEach-Object { Wipe $_.FullName $_.Name }
+  if (Test-Path -LiteralPath (Join-Path $game 'defaultconfigs')) { Wipe (Join-Path $game 'defaultconfigs') '노천극장 폴더의 예전 defaultconfigs'; Wipe (Join-Path $game 'config') '노천극장 폴더의 예전 config' }
+  # 3) Forge · NeoForge 버전, 노천극장용이 아닌 Fabric 버전
+  $vroot = Join-Path $root 'versions'
+  if (Test-Path -LiteralPath $vroot) {
+    Get-ChildItem -LiteralPath $vroot -Directory | Where-Object { ($_.Name -match 'forge') -or (($_.Name -like 'fabric-loader-*') -and ($_.Name -ne $vid)) } | ForEach-Object { Wipe $_.FullName ('버전 ' + $_.Name) }
+  }
+  # 4) 런처 목록에서 지운 버전을 쓰던 항목
+  foreach ($f in $files) {
+    $j = [IO.File]::ReadAllText($f, [Text.Encoding]::UTF8) | ConvertFrom-Json
+    $drop = @($j.profiles.PSObject.Properties | Where-Object { $_.Name -ne 'nochen-server' -and (([string]$_.Value.lastVersionId -match 'forge') -or ((([string]$_.Value.lastVersionId) -like 'fabric-loader-*') -and ([string]$_.Value.lastVersionId -ne $vid))) })
+    foreach ($p in $drop) { $j.profiles.PSObject.Properties.Remove($p.Name); $gone.Add('런처 항목 ' + $(if ($p.Value.name) { $p.Value.name } else { $p.Value.lastVersionId })) }
+    if ($drop.Count) { WriteJson $f $j }
+  }
+  if ($gone.Count) { foreach ($g in $gone) { Say ('  - ' + $g + ' 지움') } ; Say '  깔끔하게 정리했어요' Green } else { Say '  정리할 게 없어요. 이미 깔끔해요' Green }
 
   Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue
   Write-Host ''

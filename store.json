@@ -1,1406 +1,277 @@
 {
   "mods": [
     {
-      "file": "certain_questing_additions-forge-1.1.7+mc1.20.1.jar",
-      "id": "certain_questing_additions",
-      "name": "Certain Questing Additions",
-      "version": "1.1.7",
-      "desc": "Certain visual improvements in FTB Quests Mod.",
+      "file": "accessories-fabric-1.1.0-beta.53+1.21.1.jar",
+      "id": "accessories",
+      "name": "Accessories",
+      "version": "1.1.0-beta.53+1.21.1",
+      "desc": "A extendable and data-driven Accessory Mod for Minecraft",
       "env": "",
-      "size": 1141295
+      "size": 1095802
     },
     {
-      "file": "chloride-FORGE-mc1.20.1-v1.7.5.jar",
-      "id": "chloride",
-      "name": "Chloride",
-      "version": "1.7.5",
-      "desc": "Makes sodium a tasteful experience",
+      "file": "architectury-13.0.8-fabric.jar",
+      "id": "architectury",
+      "name": "Architectury",
+      "version": "13.0.8",
+      "desc": "A intermediary api aimed to ease developing multiplatform mods.",
       "env": "",
-      "size": 956080
+      "size": 600915
     },
     {
-      "file": "cinematiccataclysm-1.0.1-1.20.1.jar",
-      "id": "cinematiccataclysm",
-      "name": "Cinematic Cataclysm",
-      "version": "1.0.1",
-      "desc": "Adds one-time intro cutscenes for some L_Enders_Cataclysm bosses",
+      "file": "athena-fabric-1.21.1-4.0.6.jar",
+      "id": "athena",
+      "name": "Athena",
+      "version": "4.0.6",
+      "desc": "Crossplatform Baked Model Loader",
       "env": "",
-      "size": 700109
+      "size": 88425
     },
     {
-      "file": "citadel-2.6.3-1.20.1.jar",
-      "id": "citadel",
-      "name": "Citadel",
-      "version": "2.6.3",
-      "desc": "A shared code library for many of Alexthe666's mods. Code used from LLibrary with permission.",
+      "file": "balm-fabric-1.21.1-21.0.60.jar",
+      "id": "balm",
+      "name": "Balm",
+      "version": "21.0.60",
+      "desc": "Abstraction Layer (but not really) for Blay's multiplatform mods",
       "env": "",
-      "size": 3185275
+      "size": 769488
     },
     {
-      "file": "Clear-Water-2.1.jar",
-      "id": "clearwater",
-      "name": "Clear Water",
-      "version": "2.1",
-      "desc": "See clearly under water!",
+      "file": "chipped-fabric-1.21.1-4.0.2.jar",
+      "id": "chipped",
+      "name": "Chipped",
+      "version": "4.0.2",
+      "desc": "Every block needs a friend!",
       "env": "",
-      "size": 24435
+      "size": 15016830
     },
     {
-      "file": "CombatEvolution-2.2.0.jar",
-      "id": "combat_evolution",
-      "name": "Combat Evolution",
-      "version": "2.2.0",
-      "desc": "Lib for making EpicFight Mob AI",
+      "file": "cloth-config-15.0.130-fabric.jar",
+      "id": "cloth-config",
+      "name": "Cloth Config v15",
+      "version": "15.0.130",
+      "desc": "An API for config screens.",
       "env": "",
-      "size": 2752207
+      "size": 1144380
     },
     {
-      "file": "configured-forge-1.20.1-2.2.3.jar",
-      "id": "configured",
-      "name": "Configured",
-      "version": "2.2.3",
-      "desc": "Creates a simple GUI config for every mod!",
+      "file": "cobbledgacha-fabric-1.21.1-3.0.3.jar",
+      "id": "cobbledgacha",
+      "name": "Cobbled Gacha",
+      "version": "3.0.3",
+      "desc": "Adds Cobblemon-centric gacha machines that drop awesome loot! Or maybe not?",
       "env": "",
-      "size": 418929
+      "size": 1148291
     },
     {
-      "file": "coroutil-forge-1.20.1-1.3.7.jar",
-      "id": "coroutil",
-      "name": "CoroUtil",
-      "version": "1.20.1-1.3.7",
-      "desc": "It utils",
+      "file": "CobbleDollars-fabric-2.0.0+Beta-5.1+1.21.1.jar",
+      "id": "cobbledollars",
+      "name": "CobbleDollars",
+      "version": "2.0.0+Beta-5.1+1.21.1",
+      "desc": "Accumulate CobbleDollars and spend it all at merchants!",
       "env": "",
-      "size": 64187
+      "size": 369528
     },
     {
-      "file": "cosmeticarmorreworked-1.20.1-v1a.jar",
-      "id": "cosmeticarmorreworked",
-      "name": "CosmeticArmorReworked",
-      "version": "1.20.1-v1a",
-      "desc": "This mod allows you to wear two sets of armor, one for display, one for function. You can also hide armor for your skin. For PVP, you can stop the mod from functioning on your client side.",
+      "file": "cobblemon_minimons-1.2.6.jar",
+      "id": "cobblemon_minimons",
+      "name": "Cobblemon Minimons",
+      "version": "1.2.6",
+      "desc": "Capture and display mini 3D Pokemon models as decorations!",
       "env": "",
-      "size": 88752
+      "size": 472330
     },
     {
-      "file": "cristellib-1.1.6-forge.jar",
-      "id": "cristellib",
-      "name": "Cristel Lib",
-      "version": "1.1.6",
-      "desc": "A Library mod for easy structure config and runtime datapacks.",
+      "file": "cobblemon-additions-4.3.0.jar",
+      "id": "cobblemon-additions",
+      "name": "Cobblemon Additions",
+      "version": "4.3.0",
+      "desc": "A Datapack turned Mod that adds villages with Pokemon Village/City variants - Originally made for the Brocraft server.\n\nThis will spawn in a variety of structures within the villages as well. We are planning on adding rare structures!",
       "env": "",
-      "size": 431318
+      "size": 3198962
     },
     {
-      "file": "cupboard-1.20.1-3.7.jar",
-      "id": "cupboard",
-      "name": "Cupboard utilities",
-      "version": "",
-      "desc": "Cupboard mod providing utilities",
+      "file": "Cobblemon-fabric-1.7.3+1.21.1.jar",
+      "id": "cobblemon",
+      "name": "Cobblemon",
+      "version": "1.7.3+1.21.1",
+      "desc": "Adds Pokémon to the world, letting you find, battle, capture, and evolve them.",
       "env": "",
-      "size": 31643
+      "size": 135801550
     },
     {
-      "file": "curios-forge-5.14.1+1.20.1.jar",
-      "id": "curios",
-      "name": "Curios API",
-      "version": "",
-      "desc": "A flexible and expandable accessory/equipment API for users and developers.",
+      "file": "cobblenav-fabric-2.3.3.jar",
+      "id": "cobblenav",
+      "name": "Cobblenav",
+      "version": "2.3.3",
+      "desc": "The Cobblenav mod is inspired by the item and related mechanics featured in the games Pokémon RSE and Pokémon ORAS",
       "env": "",
-      "size": 398066
+      "size": 1090821
     },
     {
-      "file": "CustomSkinLoader_Universal-15.0.1.jar",
-      "id": "customskinloader-bootstrap",
-      "name": "CustomSkinLoader Bootstrap",
-      "version": "15.0.1",
-      "desc": "Custom Skin Loader for Minecraft",
-      "env": "client",
-      "size": 218215
-    },
-    {
-      "file": "defaultoptions-forge-1.20.1-18.0.4.jar",
-      "id": "defaultoptions",
-      "name": "Default Options",
-      "version": "18.0.4",
-      "desc": "A way for modpacks to ship a default (key) configuration without having to include an options.txt file. Also allows local options from any mod .cfg file.",
+      "file": "Cobbreeding-fabric-2.2.2.jar",
+      "id": "cobbreeding",
+      "name": "Cobbreeding",
+      "version": "2.2.2",
+      "desc": "Adds Pokémon breeding to Cobblemon!",
       "env": "",
-      "size": 94684
+      "size": 475560
     },
     {
-      "file": "dodge_parry_reward-1.20.1forge-20.14.3.jar",
-      "id": "dodge_parry_reward",
-      "name": "Dodge Parry Reward",
-      "version": "20.14.3",
-      "desc": "add some skill book to award player when dodge or parry.",
+      "file": "complete-cobblemon-collection-myths-and-legends-compat-2.1.0.jar",
+      "id": "mr_complete_cobblemoncollectionmythsandlegendscompat",
+      "name": "Complete Cobblemon Collection - Myths and Legends compat",
+      "version": "2.1.0",
+      "desc": "The Largest Cobblemon Addon Pack that gives Models, Spawns and Animations for EVERY SINGLE POKEMON.",
       "env": "",
-      "size": 287404
+      "size": 18494181
     },
     {
-      "file": "Dodos.Mobs.1.0.1.beta.jar",
-      "id": "dodosmobs",
-      "name": "dodosmobs",
-      "version": "2.64",
-      "desc": "",
+      "file": "fabric-api-0.116.13+1.21.1.jar",
+      "id": "fabric-api",
+      "name": "Fabric API",
+      "version": "0.116.13+1.21.1",
+      "desc": "Core API module providing key hooks and intercompatibility features.",
       "env": "",
-      "size": 1197246
+      "size": 2427135
     },
     {
-      "file": "domesticationinnovation-1.7.1-1.20.1.jar",
-      "id": "domesticationinnovation",
-      "name": "Domestication Innovation",
-      "version": "1.7.1",
-      "desc": "Vastly improves upon and compliments tameable mobs, both from vanilla and other mods.",
+      "file": "ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar",
+      "id": "forgeconfigapiport",
+      "name": "Forge Config API Port",
+      "version": "21.1.6",
+      "desc": "Provides NeoForge's & Forge's config systems to other modding ecosystems. Designed for a multi-loader architecture.",
       "env": "",
-      "size": 853614
+      "size": 633065
     },
     {
-      "file": "embeddium-0.3.31+mc1.20.1.jar",
-      "id": "embeddium",
-      "name": "Embeddium",
-      "version": "0.3.31+mc1.20.1",
-      "desc": "Embeddium is a fork of Rubidium, a fork of Sodium with patches for Forge",
-      "env": "",
-      "size": 1320675
-    },
-    {
-      "file": "EnchantingInfuser-v8.0.3-1.20.1-Forge.jar",
-      "id": "enchantinginfuser",
-      "name": "Enchanting Infuser",
-      "version": "8.0.3",
-      "desc": "An all new enchanting table: Choose your enchantments for fair prices! Plus no more randomness!",
-      "env": "",
-      "size": 177437
-    },
-    {
-      "file": "EnchantmentDescriptions-Forge-1.20.1-17.1.21.jar",
-      "id": "enchdesc",
-      "name": "EnchantmentDescriptions",
-      "version": "17.1.21",
-      "desc": "Adds descriptions of enchantments to their tooltip.",
-      "env": "",
-      "size": 66883
-    },
-    {
-      "file": "entityrespawner-1.1.0.jar",
-      "id": "entityrespawner",
-      "name": "Entity Respawner",
-      "version": "1.1.0",
-      "desc": "Help Boss Respawn",
-      "env": "",
-      "size": 23220
-    },
-    {
-      "file": "entityculling-forge-1.10.2-mc1.20.1.jar",
-      "id": "entityculling",
-      "name": "EntityCulling",
-      "version": "1.10.2",
-      "desc": "This mod uses async path-tracing to hide Tiles/Entities that are not visible.",
-      "env": "",
-      "size": 1587585
-    },
-    {
-      "file": "epic-fight-20.14.17-mc1.20.1-forge.jar",
-      "id": "epicfight",
-      "name": "Epic Fight",
-      "version": "20.14.17",
-      "desc": "Fight til u dead",
-      "env": "",
-      "size": 8071119
-    },
-    {
-      "file": "epic_fight_avalon-20.12.6.4.jar",
-      "id": "epic_fight_avalon",
-      "name": "Epic fight - Avalon",
-      "version": "20.12.6.4",
-      "desc": "merlin's lib",
-      "env": "",
-      "size": 645196
-    },
-    {
-      "file": "epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar",
-      "id": "invincible",
-      "name": "Epic Fight - Invincible",
-      "version": "20.14.8.2",
-      "desc": "Make Epic Fight add-on developers easier to create complex combo weapon types. Add some useful commands",
-      "env": "",
-      "size": 268536
-    },
-    {
-      "file": "super_golem-20.12.2.jar",
-      "id": "super_golem",
-      "name": "Epic fight - Super golem",
-      "version": "20.12.2",
-      "desc": "",
-      "env": "",
-      "size": 2168184
-    },
-    {
-      "file": "super_warden-20.13.0.jar",
-      "id": "super_warden",
-      "name": "Epic fight - Super Warden",
-      "version": "20.13.0",
-      "desc": "",
-      "env": "",
-      "size": 1089990
-    },
-    {
-      "file": "sword_soaring-20.14.2.8-mc1.20.1-forge.jar",
-      "id": "sword_soaring",
-      "name": "Epic Fight - Sword Soaring",
-      "version": "20.14.2.8",
-      "desc": "",
-      "env": "",
-      "size": 17017922
-    },
-    {
-      "file": "epicfight-extra-1.2-mc1.20.1-forge-all.jar",
-      "id": "epicfightx",
-      "name": "Epic Fight Extra",
-      "version": "1.2",
-      "desc": "Extra Epic Fight Animations and Skills",
-      "env": "",
-      "size": 23720352
-    },
-    {
-      "file": "efs_iss-1.0.3.jar",
-      "id": "efs_iss",
-      "name": "Epic Fight Skill - Iron's Spells 'n Spellbooks",
-      "version": "1.0.3",
-      "desc": "",
-      "env": "",
-      "size": 299741
-    },
-    {
-      "file": "epicfight-skilltree-forge-20.2.9-1.20.1.jar",
-      "id": "epicskills",
-      "name": "Epic Fight: Skill Tree",
-      "version": "20.2.9",
-      "desc": "An addon of Epic Fight that adds a skill tree system",
-      "env": "",
-      "size": 327927
-    },
-    {
-      "file": "epic-knights-1.20.1-forge-10.11.jar",
-      "id": "magistuarmory",
-      "name": "Epic-Knights: Shields, Armor and Weapons",
-      "version": "10.11",
-      "desc": "Adds medieval stuff to the game",
-      "env": "",
-      "size": 2913733
-    },
-    {
-      "file": "EpicFight.Nightfall-3.4.0.jar",
-      "id": "efn",
-      "name": "EpicFight Nightfall",
-      "version": "3.4.0",
-      "desc": "Very Cool Mod.",
-      "env": "",
-      "size": 53100071
-    },
-    {
-      "file": "epicfight_arachne-1.0.0.jar",
-      "id": "epicfight_arachne",
-      "name": "EpicFight-Arachne",
-      "version": "1.0.0",
-      "desc": "",
-      "env": "",
-      "size": 7338704
-    },
-    {
-      "file": "epicfight_leonidas-1.0.1.jar",
-      "id": "epicfight_leonidas",
-      "name": "EpicFight-Leonidas",
-      "version": "1.0.1",
-      "desc": "",
-      "env": "",
-      "size": 8366555
-    },
-    {
-      "file": "expandability-9.0.4.jar",
-      "id": "expandability",
-      "name": "ExpandAbility",
-      "version": "9.0.4",
-      "desc": "Library mod that provides increased control over vanilla abilities",
-      "env": "",
-      "size": 80765
-    },
-    {
-      "file": "explorerscompass-edited-1.20.1-1.4.0-forge.jar",
-      "id": "explorerscompass",
-      "name": "Explorer's Compass",
-      "version": "1.20.1-1.3.3-forge",
-      "desc": "Search for and locate structures anywhere in the world.",
-      "env": "",
-      "size": 186196
-    },
-    {
-      "file": "extrasounds-1.5.4+1.20.1-forge.jar",
-      "id": "extrasounds",
-      "name": "ExtraSounds Next",
-      "version": "1.5.2",
-      "desc": "Improve your clicks, scrolls and more with Extra Sounds.",
-      "env": "",
-      "size": 534488
-    },
-    {
-      "file": "falchionmoveset-20.14.0.jar",
-      "id": "falchionmoveset",
-      "name": "falchion moveset",
-      "version": "20.14.0",
-      "desc": "",
-      "env": "",
-      "size": 127553
-    },
-    {
-      "file": "Fancy-Trail1.20.1-1.2.3-all.jar",
-      "id": "fancy_trail",
-      "name": "Fancy Trail",
-      "version": "1.2.3",
-      "desc": "Cool mod.",
-      "env": "",
-      "size": 5906048
-    },
-    {
-      "file": "fancytoasts-forge-1.20.1-1.4.7.jar",
-      "id": "fancytoasts",
-      "name": "FancyToasts",
-      "version": "1.4.7",
-      "desc": "Redesigns the old advancement toast system, replacing it with a more attractive and interesting one.",
-      "env": "",
-      "size": 378003
-    },
-    {
-      "file": "fantasy_armor-forge-1.2.4-1.20.1.jar",
-      "id": "fantasy_armor",
-      "name": "Fantasy Armor",
-      "version": "1.2.4-1.20.1",
-      "desc": "Welcome to the world of fantasy equipment! This mod adds awesome armor sets that will diversify your look and help you better express yourself and your character. Don't forget to try other mods from the Medieval Series as well!",
-      "env": "",
-      "size": 544856
-    },
-    {
-      "file": "fast_tpa-forge1.20.1-1.3.0.jar",
-      "id": "fast_tpa",
-      "name": "Fast TPA",
-      "version": "1.3.0",
-      "desc": "Help you send SOS to everyone when emergency^_^",
-      "env": "",
-      "size": 30707
-    },
-    {
-      "file": "FastEvent-1.20.1-1.1.1.jar",
-      "id": "fast_event",
-      "name": "FastEvent",
-      "version": "1.1.1",
-      "desc": "Faster event listener for Forge",
-      "env": "",
-      "size": 32785
-    },
-    {
-      "file": "fdlib-1.0.9-1.20.1.jar",
-      "id": "fdlib",
-      "name": "FDLib",
-      "version": "1.0.9",
-      "desc": "A library with some cool features. Idk what other things to write here.",
-      "env": "",
-      "size": 1647611
-    },
-    {
-      "file": "ferritecore-6.0.1-forge.jar",
-      "id": "ferritecore",
-      "name": "Ferrite Core",
-      "version": "",
-      "desc": "Reduces memory usage.",
-      "env": "",
-      "size": 123034
-    },
-    {
-      "file": "Find.me-1.2.4.jar",
-      "id": "find_me",
-      "name": "Find me",
-      "version": "1.2.4",
-      "desc": "Find and summon your mounts and companions.",
-      "env": "",
-      "size": 603372
-    },
-    {
-      "file": "flerovium-forge-1.20.1-1.2.18-all.jar",
-      "id": "flerovium",
-      "name": "Flerovium",
-      "version": "1.2.18",
-      "desc": "",
-      "env": "",
-      "size": 253961
-    },
-    {
-      "file": "fluid-tick-structure-processor-0.1.0.dirty-forge-1.20.1.jar",
-      "id": "minecraft",
-      "name": "FluidTickStructureProcessor",
-      "version": "0.1.0.dirty",
-      "desc": "FluidTickStructureProcessor",
-      "env": "",
-      "size": 37448
-    },
-    {
-      "file": "ftb-essentials-forge-2001.2.4.jar",
-      "id": "ftbessentials",
-      "name": "FTB Essentials",
-      "version": "2001.2.4",
-      "desc": "Adds many essential utility commands for servers",
-      "env": "",
-      "size": 157732
-    },
-    {
-      "file": "ftb-library-forge-2001.2.12.jar",
-      "id": "ftblibrary",
-      "name": "FTB Library",
-      "version": "2001.2.12",
-      "desc": "Foundational library for FTB mods.",
-      "env": "",
-      "size": 780523
-    },
-    {
-      "file": "ftb-quests-forge-2001.4.21.jar",
-      "id": "ftbquests",
-      "name": "FTB Quests",
-      "version": "2001.4.21",
-      "desc": "Lets you easily create and play with quests",
-      "env": "",
-      "size": 1254018
-    },
-    {
-      "file": "ftb-teams-forge-2001.3.2.jar",
-      "id": "ftbteams",
-      "name": "FTB Teams",
-      "version": "2001.3.2",
-      "desc": "FTB Teams adds ability to create your own teams that can be used for quests etc.",
-      "env": "",
-      "size": 252579
-    },
-    {
-      "file": "ftb-xmod-compat-forge-2.1.3.jar",
-      "id": "ftbxmodcompat",
-      "name": "FTB XMod Compat",
-      "version": "2.1.3",
-      "desc": "Provides cross-mod compatibilty/integration for all main FTB mods",
-      "env": "",
-      "size": 129725
-    },
-    {
-      "file": "fullstackwatchdog-1.0.1+1.19.2-forge.jar",
-      "id": "fullstackwatchdog",
-      "name": "FullStack Watchdog",
-      "version": "1.0.1+1.19.2-forge",
-      "desc": "Makes watchdog print the entire stacktrace of every thread because truncating stacktraces is stupid.",
-      "env": "",
-      "size": 14539
-    },
-    {
-      "file": "geckolib-forge-1.20.1-4.8.3.jar",
+      "file": "geckolib-fabric-1.21.1-4.9.2.jar",
       "id": "geckolib",
       "name": "GeckoLib 4",
-      "version": "4.8.3",
+      "version": "4.9.2",
       "desc": "GeckoLib is an animation engine for Minecraft Mods, with support for complex 3D keyframe-based animations, 30+ easings, concurrent animation support, sound and particle keyframes, event keyframes, and more.",
       "env": "",
-      "size": 1039046
+      "size": 660416
     },
     {
-      "file": "globalshaderpackproperties-1.1.0-all.jar",
-      "id": "globalshaderpackproperties",
-      "name": "Global Shaderpack Properties",
-      "version": "1.1.0",
-      "desc": "Help modpack author to modify properties inside the shaderpacks",
+      "file": "Gts-2.5.1-fabric.jar",
+      "id": "gts",
+      "name": "Cobblemon GTS",
+      "version": "2.5.1",
+      "desc": "A Global Trading System mod made for Cobblemon to allow player to player sales.",
       "env": "",
-      "size": 697968
+      "size": 1386494
     },
     {
-      "file": "gnetum-2.4.3.jar",
-      "id": "gnetum",
-      "name": "Gnetum",
-      "version": "2.4.3",
-      "desc": "Minecraft mod that distributes HUD updates over multiple frames to improve performance.",
+      "file": "journeymap-fabric-1.21.1-6.0.0.jar",
+      "id": "journeymap",
+      "name": "Journeymap",
+      "version": "1.21.1-6.0.0",
+      "desc": "JourneyMap: Real-time map in-game or in a web browser as you explore. JourneyMap API: v2.0.0-1.21.1. Built: 2026-06-26-19:41:07.",
       "env": "",
-      "size": 725063
+      "size": 4164427
     },
     {
-      "file": "HungerStrike-1.20.1-8.0.0.jar",
-      "id": "hungerstrike",
-      "name": "Hunger Strike",
-      "version": "8.0.0",
-      "desc": "Restores pre-hunger health mechanics",
+      "file": "legendarymonuments-fabric-1.21.1-8.0.3.jar",
+      "id": "legendarymonuments",
+      "name": "Legendary Monuments",
+      "version": "8.0.3",
+      "desc": "Adds special spawning methods for Legendaries and Mythicals (Zacian, Zamazenta, Reshiram, Zekrom, Kyurem, Hoopa, Cosmog, Keldeo, Regigigas, All Regis, Cobalion...",
       "env": "",
-      "size": 33579
+      "size": 16595316
     },
     {
-      "file": "Iceberg-1.20.1-forge-1.1.25.jar",
-      "id": "iceberg",
-      "name": "Iceberg",
-      "version": "",
-      "desc": "A library containing events, helpers, and utilities to make modding easier.",
-      "env": "",
-      "size": 134551
-    },
-    {
-      "file": "incontrol-1.20-9.4.6.jar",
-      "id": "incontrol",
-      "name": "InControl",
-      "version": "",
-      "desc": "Be in control of spawns",
-      "env": "",
-      "size": 361894
-    },
-    {
-      "file": "indestructible-20.13.0.jar",
-      "id": "indestructible",
-      "name": "Indestructible",
-      "version": "20.13.0",
-      "desc": "",
-      "env": "",
-      "size": 264932
-    },
-    {
-      "file": "InvMove-0.9.3+1.20.1-Forge.jar",
-      "id": "invmove",
-      "name": "InvMove",
-      "version": "0.9.3",
-      "desc": "Lets you move while in inventories.",
-      "env": "",
-      "size": 270522
-    },
-    {
-      "file": "irons_spellbooks-1.20.1-3.15.4.jar",
-      "id": "irons_spellbooks",
-      "name": "Iron's Spells 'n Spellbooks",
-      "version": "1.20.1-3.15.4",
-      "desc": "A magic mod for Minecraft returning to the classic RPG spellcasting fantasy.",
-      "env": "",
-      "size": 15144197
-    },
-    {
-      "file": "iss_ponder-forge1.20.1-1.0.3-all.jar",
-      "id": "iss_ponder",
-      "name": "Irons Spell Scroll Ponder",
-      "version": "1.0.3",
-      "desc": "Add Ponder to Irons Spell Scroll",
-      "env": "",
-      "size": 1600220
-    },
-    {
-      "file": "iss_scroll_description-1.0.0.jar",
-      "id": "iss_scroll_description",
-      "name": "ISS-Scroll-Description",
-      "version": "1.0.0",
-      "desc": "",
-      "env": "",
-      "size": 5945
-    },
-    {
-      "file": "ItemBorders-1.20.1-forge-1.2.2.jar",
-      "id": "itemborders",
-      "name": "Item Borders",
-      "version": "",
-      "desc": "Adds colored borders around items to indicate rarity.",
-      "env": "",
-      "size": 20832
-    },
-    {
-      "file": "Jade-1.20.1-Forge-11.13.2.jar",
-      "id": "jade",
-      "name": "Jade",
-      "version": "",
-      "desc": "Minecraft mod shows what you are looking at. (Hwyla fork)",
-      "env": "",
-      "size": 552486
-    },
-    {
-      "file": "JadeAddons-1.20.1-Forge-5.5.0.jar",
-      "id": "jadeaddons",
-      "name": "Jade Addons",
-      "version": "",
-      "desc": "Jade additional mod supports",
-      "env": "",
-      "size": 91771
-    },
-    {
-      "file": "jecharacters-1.20.1-forge-4.6.3.jar",
-      "id": "jecharacters",
-      "name": "Just Enough Characters",
-      "version": "4.6.3",
-      "desc": "Pinyin search for JEI and more.",
-      "env": "",
-      "size": 267125
-    },
-    {
-      "file": "jei-1.20.1-forge-15.20.0.130.jar",
-      "id": "jei",
-      "name": "Just Enough Items",
-      "version": "15.20.0.130",
-      "desc": "JEI is an item and recipe viewing mod for Minecraft, built from the ground up for stability and performance.",
-      "env": "",
-      "size": 1409705
-    },
-    {
-      "file": "JustEnoughResources-1.20.1-1.4.0.247.jar",
-      "id": "jeresources",
-      "name": "Just Enough Resources",
-      "version": "1.4.0.247",
-      "desc": "Adds Resources and Mob Drops to JEI",
-      "env": "",
-      "size": 276231
-    },
-    {
-      "file": "Kambrik-6.1.1+1.20.1-forge.jar",
-      "id": "kambrik",
-      "name": "Kambrik",
-      "version": "6.1.1+1.20.1",
-      "desc": "A Light-weight Kotlin Library Mod!",
-      "env": "",
-      "size": 325546
-    },
-    {
-      "file": "killcam-1.0.3.jar",
-      "id": "killcam",
-      "name": "KillCam",
-      "version": "1.0.3",
-      "desc": "Cool Kill Cam",
-      "env": "",
-      "size": 141468
-    },
-    {
-      "file": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
-      "id": "konkrete",
-      "name": "Konkrete",
-      "version": "1.8.0",
-      "desc": "COPYRIGHT: Konkrete Copyright © 2020-2024 Keksuccino. Konkrete is licensed under Apache-2.0. Open Imaging Copyright © 2014 Dhyan Blum. Open Imaging is licensed under Apache-2.0. JsonPath Copyright © 2017 Jayway. JsonPath is licensed under Apache-2.0. Json-smart Copyright © netplex. Json-smart is lic",
-      "env": "",
-      "size": 625185
-    },
-    {
-      "file": "kotlinforforge-4.12.0-all.jar",
-      "id": "kotlinforforge",
-      "name": "kotlinforforge-4.12.0-all",
-      "version": "",
-      "desc": "",
-      "env": "",
-      "size": 7442998
-    },
-    {
-      "file": "Krypton.FNP-forge-1.20.1-0.2.28.2-1.20.1.jar",
-      "id": "krypton_fnp",
-      "name": "Krypton FNP",
-      "version": "0.2.28.2-1.20.1",
-      "desc": "Provides powerful network optimization capabilities for all mainstream systems.",
-      "env": "",
-      "size": 1794016
-    },
-    {
-      "file": "lang_amend-forge1.20.1-1.0.0-all.jar",
-      "id": "lang_amend",
-      "name": "Language Amend",
-      "version": "1.0.0",
-      "desc": "Fallback to Specific language when Selected translation is missing.",
-      "env": "",
-      "size": 638710
-    },
-    {
-      "file": "lazyyyyy-lexforge-core-0.14.19.jar",
-      "id": "lazyyyyy-lexforge-core",
-      "name": "lazyyyyy-lexforge-core-0.14.19",
-      "version": "",
-      "desc": "",
-      "env": "",
-      "size": 2639494
-    },
-    {
-      "file": "LegendaryTooltips-1.20.1-forge-1.4.5.jar",
-      "id": "legendarytooltips",
-      "name": "Legendary Tooltips",
-      "version": "",
-      "desc": "Gives rare items a fancy tooltip and adds additional tooltip configuration options.",
-      "env": "",
-      "size": 55258
-    },
-    {
-      "file": "limitedchunks-1.20.1-4.1.jar",
-      "id": "limitedchunks",
-      "name": "Limited Chunkloading",
-      "version": "1.8",
-      "desc": "Limited chunks mod which unloads chunks a give time after the last visiting player logs off",
-      "env": "",
-      "size": 16405
-    },
-    {
-      "file": "lionfishapi-2.7.jar",
-      "id": "lionfishapi",
-      "name": "LionfishAPI",
-      "version": "2.7",
-      "desc": "HELLO",
-      "env": "",
-      "size": 122522
-    },
-    {
-      "file": "lithostitched-forge-1.20.1-1.4.11.jar",
+      "file": "lithostitched-1.7.12-fabric-21.1.jar",
       "id": "lithostitched",
       "name": "Lithostitched",
-      "version": "1.4.11",
-      "desc": "Library mod with new configurability and compatibility enhancements for worldgen.",
+      "version": "1.7.12",
+      "desc": "A library mod with new configurability and compatibility enhancements for worldgen",
       "env": "",
-      "size": 476347
+      "size": 827221
     },
     {
-      "file": "Log-Begone-Forge-1.20.1-1.0.8.jar",
-      "id": "logbegone",
-      "name": "Log Begone",
-      "version": "",
-      "desc": "I hate log spam, don't you?",
+      "file": "mega_showdown-fabric-1.8.4+1.7.3+1.21.1.jar",
+      "id": "mega_showdown",
+      "name": "Cobblemon:Mega Showdown",
+      "version": "1.8.4+1.7.3+1.21.1",
+      "desc": "Adding mega evolutions, z-moves, teralization, dynamax, ultra burst and fusions to the game Features - Cosmetics - All form changes - Ridding supported - All 48 megas - Accessories support - Adds primal's - Adds tera gimmik - Adds mega gimmik - Adds z moves gimmik - Adds dynamax gimmik - Adds ultra ",
       "env": "",
-      "size": 58508
+      "size": 17213370
     },
     {
-      "file": "lootr-forge-1.20-0.7.35.94.jar",
-      "id": "lootr",
-      "name": "Lootr",
-      "version": "0.7.35.94",
-      "desc": "Makes loot chest loot per-user.",
+      "file": "missingmons-cobblemon-3.6.1.jar",
+      "id": "mr_missingmons_cobblemon",
+      "name": "MissingMons [cobblemon]",
+      "version": "3.6.1",
+      "desc": "MissingMons adds textures, models, animations and spawn for cobblemon that's curently not in the game yet but the catch is you guys get to vote for what i will be adding!",
       "env": "",
-      "size": 463485
+      "size": 3540078
     },
     {
-      "file": "melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
-      "id": "melody",
-      "name": "Melody",
-      "version": "1.0.2",
-      "desc": "OpenAL-based library mod for playing background music. COPYRIGHT: > Melody © Copyright 2023 Keksuccino. Melody is licensed under MIT.",
+      "file": "owo-lib-0.12.15.4+1.21.jar",
+      "id": "owo",
+      "name": "oωo",
+      "version": "0.12.15.4+1.21",
+      "desc": "yes its bad i know thanks",
       "env": "",
-      "size": 37178
+      "size": 1183559
     },
     {
-      "file": "mixin-booster-0.1.3+1.20.1.jar",
-      "id": "mixin-booster",
-      "name": "mixin-booster-0.1.3+1.20.1",
-      "version": "",
-      "desc": "",
+      "file": "rctapi-fabric-1.21.1-0.15.2-beta.jar",
+      "id": "rctapi",
+      "name": "Radical Cobblemon Trainers API",
+      "version": "0.15.2-beta",
+      "desc": "Trainer management and battle API for Cobblemon.",
       "env": "",
-      "size": 1312078
+      "size": 234250
     },
     {
-      "file": "dummmmmmy-1.20-2.0.12-forge.jar",
-      "id": "dummmmmmy",
-      "name": "MmmMmmMmmMmm",
-      "version": "1.20-2.0.11",
-      "desc": "don't hurt me pls :S",
+      "file": "rctmod-fabric-1.21.1-0.18.1-beta.jar",
+      "id": "rctmod",
+      "name": "Radical Cobblemon Trainers",
+      "version": "0.18.1-beta",
+      "desc": "Over 1500 unique and challenging trainers, from the Pokemon ROM hacks Radical Red (v3.02) and Unbound (v2.0.3.2) as well as the main series games Brilliant Diamond/Shining Pearl, that will spawn naturally in your world.",
       "env": "",
-      "size": 839685
+      "size": 6757956
     },
     {
-      "file": "modernfix-forge-5.27.66+mc1.20.1.jar",
-      "id": "modernfix",
-      "name": "ModernFix",
-      "version": "5.27.66+mc1.20.1",
-      "desc": "Egregious, yet effective performance improvements for modern Minecraft",
+      "file": "resourcefullib-fabric-1.21-3.0.12.jar",
+      "id": "resourcefullib",
+      "name": "Resourceful Lib",
+      "version": "3.0.12",
+      "desc": "Library Mod by Team Resourceful",
       "env": "",
-      "size": 1002234
+      "size": 485586
     },
     {
-      "file": "moonlight-1.20-2.16.30-forge.jar",
-      "id": "moonlight",
-      "name": "Moonlight Library",
-      "version": "1.20-2.16.30",
-      "desc": "A small library with many cool unique features, from dynamic asset generation to dynamic villager schedules and simple multi loader utilities",
+      "file": "sophisticatedbackpacks-1.21.1-3.23.4.3.106.jar",
+      "id": "sophisticatedbackpacks",
+      "name": "Sophisticated Backpacks",
+      "version": "1.21.1-3.23.4.3.106",
+      "desc": "Fancy and functional backpacks.",
       "env": "",
-      "size": 1389600
+      "size": 988478
     },
     {
-      "file": "MouseTweaks-forge-mc1.20.1-2.25.1.jar",
-      "id": "mousetweaks",
-      "name": "Mouse Tweaks",
-      "version": "",
-      "desc": "A mod that enhances the inventory management by adding various additional functions to the usual mouse buttons.",
+      "file": "sophisticatedcore-1.21.1-1.2.9.21.168.jar",
+      "id": "sophisticatedcore",
+      "name": "Sophisticated Core",
+      "version": "1.21.1-1.2.9.21.168",
+      "desc": "A library / shared functionality mod for Sophisticated Storage and Backpacks",
       "env": "",
-      "size": 76237
+      "size": 2996065
     },
     {
-      "file": "mowziesmobs-1.8.2.jar",
-      "id": "mowziesmobs",
-      "name": "Mowzie's Mobs",
-      "version": "1.8.2",
-      "desc": "Mowzie's Mobs adds a variety of high-quality fantasy creatures to your Minecraft world.",
-      "env": "",
-      "size": 36033850
-    },
-    {
-      "file": "multiplayer_boss_fight-forge1.20.1-1.0.3.jar",
-      "id": "multiplayer_boss_fight",
-      "name": "Multiplayer Boss Attribute Modifier",
-      "version": "1.0.3",
-      "desc": "",
-      "env": "",
-      "size": 19187
-    },
-    {
-      "file": "NaturesCompass-1.20.1-1.12.0-forge.jar",
-      "id": "naturescompass",
-      "name": "Nature's Compass",
-      "version": "1.20.1-1.12.0-forge",
-      "desc": "Search for a biome and get information about it.",
-      "env": "",
-      "size": 227495
-    },
-    {
-      "file": "Nightfall.Enhance-1.1.4-all.jar",
-      "id": "efn_enhance",
-      "name": "Nightfall Enhance",
-      "version": "1.1.4",
-      "desc": "Very Cool Mod.",
-      "env": "",
-      "size": 8815210
-    },
-    {
-      "file": "noworldgenwarning-1.0.1.jar",
-      "id": "noworldgenwarning",
-      "name": "NoWorldgenWarning",
-      "version": "1.0.1",
-      "desc": "remove the warning in world generation",
-      "env": "",
-      "size": 5349
-    },
-    {
-      "file": "oculus-mc1.20.1-1.8.0.jar",
-      "id": "oculus",
-      "name": "Oculus",
-      "version": "1.8.0",
-      "desc": "Unofficial Fork of \"Iris\", made to work with FML",
-      "env": "",
-      "size": 2851119
-    },
-    {
-      "file": "Oh-The-Biomes-Weve-Gone-Forge-1.7.5.jar",
-      "id": "biomeswevegone",
-      "name": "Oh The Biomes We've Gone",
-      "version": "1.7.5",
-      "desc": "Sequel to Oh The Biomes You'll Go, this mod adds a variety of new biomes to the game.",
-      "env": "",
-      "size": 19308698
-    },
-    {
-      "file": "Oh-The-Trees-Youll-Grow-forge-1.20.1-1.6.0.jar",
-      "id": "ohthetreesyoullgrow",
-      "name": "Oh The Trees You'll Grow",
-      "version": "1.6.0",
-      "desc": "A Minecraft library that aims to give users incredible configurability by allowing the creation of trees with Minecraft's structure template `.nbt` files.",
-      "env": "",
-      "size": 168345
-    },
-    {
-      "file": "pbf1-1.1.2.jar",
-      "id": "pbf1",
-      "name": "P1nero's Battle Field1",
-      "version": "1.1.2",
-      "desc": "Add a new dimension for boss fight.",
-      "env": "",
-      "size": 5297745
-    },
-    {
-      "file": "p1neros-dialogue-lib-2.3.0-mc1.20.1-forge.jar",
-      "id": "p1nero_dl",
-      "name": "P1nero's Dialogue Lib",
-      "version": "2.3.0",
-      "desc": "",
-      "env": "",
-      "size": 83337
-    },
-    {
-      "file": "p1nero_ec-20.14.0.9.jar",
-      "id": "p1nero_ec",
-      "name": "P1nero's Epic Cataclysm",
-      "version": "20.14.0.9",
-      "desc": "Epic Fight x Cataclysm Weapon",
-      "env": "",
-      "size": 4080772
-    },
-    {
-      "file": "p1nero_bow-forge1.20.1-20.14.1.6.jar",
-      "id": "p1nero_bow",
-      "name": "P1nero's Epic Fight Bow",
-      "version": "20.14.1.6",
-      "desc": "Add bow anim to epic fight",
-      "env": "",
-      "size": 932621
-    },
-    {
-      "file": "packetfixer-3.3.2-1.18-1.20.4-merged.jar",
-      "id": "packetfixer",
-      "name": "Packet Fixer",
-      "version": "3.3.2",
-      "desc": "A simple mod to solve various problems with packets/NBT's.",
-      "env": "",
-      "size": 188661
-    },
-    {
-      "file": "Patchouli-1.20.1-85-FORGE.jar",
-      "id": "patchouli",
-      "name": "Patchouli",
-      "version": "",
-      "desc": "Accessible, Data-Driven, Dependency-Free Documentation for Minecraft Modders and Pack Makers",
-      "env": "",
-      "size": 642732
-    },
-    {
-      "file": "Placebo-1.20.1-8.6.3.jar",
-      "id": "placebo",
-      "name": "Placebo",
-      "version": "8.6.3",
-      "desc": "1 (one) library boi",
-      "env": "",
-      "size": 282474
-    },
-    {
-      "file": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
-      "id": "playeranimator",
-      "name": "Player Animator",
-      "version": "1.0.2-rc1+1.20",
-      "desc": "Look for FabricMC (or QuiltMC) builds...",
-      "env": "",
-      "size": 181437
-    },
-    {
-      "file": "preloading-tricks-3.5.10.jar",
-      "id": "preloading_tricks",
-      "name": "PreloadingTricks",
-      "version": "3.5.10",
-      "desc": "PreloadingTricks",
-      "env": "",
-      "size": 1781202
-    },
-    {
-      "file": "Prism-1.20.1-forge-1.0.5.jar",
-      "id": "prism",
-      "name": "Prism",
-      "version": "1.0.5",
-      "desc": "A library all about color! Provides lots of color-related functionality for dependent mods.",
-      "env": "",
-      "size": 52205
-    },
-    {
-      "file": "PuzzlesLib-v8.1.33-1.20.1-Forge.jar",
-      "id": "puzzleslib",
-      "name": "Puzzles Lib",
-      "version": "8.1.33",
-      "desc": "Why's it called Puzzles you ask? That's the puzzle!",
-      "env": "",
-      "size": 1342987
-    },
-    {
-      "file": "Quark-4.0-462.jar",
-      "id": "quark",
-      "name": "Quark",
-      "version": "",
-      "desc": "Small things, improving Minecraft bit by bit.",
-      "env": "",
-      "size": 14935230
-    },
-    {
-      "file": "quick-pack-forge-1.3.2+1.20.1-all.jar",
-      "id": "quick_pack",
-      "name": "quick-pack",
-      "version": "1.3.2",
-      "desc": "Improve datapack / resourcepack zip file loading times",
-      "env": "",
-      "size": 639057
-    },
-    {
-      "file": "radiantgear-forge-2.2.0+1.20.1.jar",
-      "id": "radiantgear",
-      "name": "Radiant Gear",
-      "version": "2.2.0+1.20.1",
-      "desc": "A compatibility bridge between Curios API or Trinkets API and dynamic light mods such as Dynamic Lights, Lucent, and LambDynamicLights.",
-      "env": "",
-      "size": 47170
-    },
-    {
-      "file": "visual_keybinder-1.20.1.-.0.1.12.jar",
-      "id": "visual_keybinder",
-      "name": "Raw's Visual Keybinder",
-      "version": "1.20.1 - 0.1.12",
-      "desc": "Alternative keybinding screen. Provides an extra screen for keybinding for easier keybinding management. Visualise your keyboard and mouse to easily see which buttons are available, which buttons have conflicts and which bindings are on a certain key or button.",
-      "env": "",
-      "size": 258438
-    },
-    {
-      "file": "rebind_narrator-1.20.1-forge-2025.12.23.jar",
-      "id": "rebind_narrator",
-      "name": "Rebind Narrator",
-      "version": "2025.12.23",
-      "desc": "Adds a keybind to options for the narrator.",
-      "env": "",
-      "size": 214624
-    },
-    {
-      "file": "resourcefulconfig-forge-1.20.1-2.1.3.jar",
-      "id": "resourcefulconfig",
-      "name": "Resourcefulconfig",
-      "version": "2.1.3",
-      "desc": "A library for creating config files for your mod across multiple platforms.",
-      "env": "",
-      "size": 136923
-    },
-    {
-      "file": "Ribbits-1.20.1-Forge-3.0.5.jar",
-      "id": "ribbits",
-      "name": "Ribbits",
-      "version": "1.20.1-Forge-3.0.5",
-      "desc": "Adds cute little frogs to swamps!",
-      "env": "",
-      "size": 2223589
-    },
-    {
-      "file": "smsn-forge-1.4.1-1.20.1.jar",
-      "id": "smsn",
-      "name": "Save My Shit Network",
-      "version": "1.4.1-1.20.1",
-      "desc": "Block common mods from connecting to the internet without affecting the mods' functionality, preventing slow loading or game crashes caused by network issues.",
-      "env": "",
-      "size": 132399
-    },
-    {
-      "file": "servercore-forge-1.5.2+1.20.1.jar",
-      "id": "servercore",
-      "name": "ServerCore",
-      "version": "1.5.2+1.20.1",
-      "desc": "A Forge mod that aims to optimize the minecraft server.",
-      "env": "",
-      "size": 1508496
-    },
-    {
-      "file": "smoothchunk-1.20.1-4.1.jar",
-      "id": "smoothchunk",
-      "name": "Smoothchunk mod",
-      "version": "",
-      "desc": "Spreads chunk saves over time smoothly",
-      "env": "",
-      "size": 14249
-    },
-    {
-      "file": "sodiumdynamiclights-forge-1.0.10-1.20.1.jar",
-      "id": "sodiumdynamiclights",
-      "name": "Sodium Dynamic Lights",
-      "version": "1.0.9",
-      "desc": "Fork of LambDynLights to work with Sodium on Neoforge 1.21+",
-      "env": "",
-      "size": 511601
-    },
-    {
-      "file": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
-      "id": "sound_physics_remastered",
-      "name": "Sound Physics Remastered",
-      "version": "1.20.1-1.5.1",
-      "desc": "Provides realistic sound attenuation, reverberation, and absorption through blocks.",
-      "env": "",
-      "size": 206984
-    },
-    {
-      "file": "spark-1.10.53-forge.jar",
-      "id": "spark",
-      "name": "spark",
-      "version": "1.10.53",
-      "desc": "spark is a performance profiling plugin/mod for Minecraft clients, servers and proxies.",
-      "env": "",
-      "size": 3114590
-    },
-    {
-      "file": "spiral_tower_village-0.0.3.jar",
-      "id": "spiral_tower_village",
-      "name": "Spiral Tower Village",
-      "version": "0.0.3",
-      "desc": "Adds unique towering villages built into ancient spirals with distinct building styles",
-      "env": "",
-      "size": 10661678
-    },
-    {
-      "file": "structure_gel-1.20.1-2.16.2.jar",
-      "id": "structure_gel",
-      "name": "Structure Gel API",
-      "version": "",
-      "desc": "An API mod to improve the developer side of structure gen",
-      "env": "",
-      "size": 966028
-    },
-    {
-      "file": "structure_layout_optimizer-forge-1.0.11.jar",
-      "id": "structure_layout_optimizer",
-      "name": "Structure Layout Optimizer",
-      "version": "1.0.11",
-      "desc": "An attempt at optimizing jigsaw generation",
-      "env": "",
-      "size": 246413
-    },
-    {
-      "file": "summoningrituals-forge-1.20.1-2.0.8.jar",
-      "id": "summoningrituals",
-      "name": "Summoning Rituals",
-      "version": "1.20.1-2.0.8",
-      "desc": "Create custom summoning rituals for items and mobs.",
-      "env": "",
-      "size": 218380
-    },
-    {
-      "file": "supplementaries-1.20-3.1.43-forge.jar",
-      "id": "supplementaries",
-      "name": "Supplementaries",
-      "version": "1.20-3.1.43",
-      "desc": "Many functional and useful Vanilla+ blocks",
-      "env": "",
-      "size": 13667742
-    },
-    {
-      "file": "Tab-Stats-1.20-1.0.5.jar",
-      "id": "tabstats",
-      "name": "Tab Stats",
-      "version": "1.0.5",
-      "desc": "",
-      "env": "",
-      "size": 107129
-    },
-    {
-      "file": "TaxFreeLevels-1.4.17-forge-1.20.1.jar",
-      "id": "taxfreelevels",
-      "name": "Tax Free Levels",
-      "version": "1.4.17",
-      "desc": "Flattens anvil and enchantment costs, removes the anvil limit and makes renaming items always cost 1 level.",
-      "env": "",
-      "size": 223855
-    },
-    {
-      "file": "tcr_bosses-1.1.11-all.jar",
-      "id": "tcr_bosses",
-      "name": "TCR Bosses",
-      "version": "1.1.11",
-      "desc": "Bosses for TCR",
-      "env": "",
-      "size": 1172001
-    },
-    {
-      "file": "tcrcore-2.8.7.jar",
-      "id": "tcrcore",
-      "name": "TCR Core",
-      "version": "2.8.7",
-      "desc": "Core Mod of The Casket of Reveries.",
-      "env": "",
-      "size": 39120708
-    },
-    {
-      "file": "tcrmeshes-1.0.0.jar",
-      "id": "tcrmeshes",
-      "name": "TCRMeshes",
-      "version": "1.0.0",
-      "desc": "Provide boss meshes for The Casket of Reveries",
-      "env": "",
-      "size": 173664
-    },
-    {
-      "file": "tcrmodfilter-1.0.6.jar",
-      "id": "tcrmodfilter",
-      "name": "tcrmodfilter-1.0.6",
-      "version": "",
-      "desc": "",
-      "env": "",
-      "size": 4548
-    },
-    {
-      "file": "tectonic-forge-1.20.1-2.4.1.jar",
-      "id": "tectonic",
-      "name": "Tectonic",
-      "version": "2.4.1",
-      "desc": "Massively altered world generation with mountain ranges, underground rivers and more!",
-      "env": "",
-      "size": 349125
-    },
-    {
-      "file": "TerraBlender-forge-1.20.1-3.0.1.10.jar",
-      "id": "terrablender",
-      "name": "TerraBlender",
-      "version": "",
-      "desc": "A library mod for adding biomes in a simple and compatible manner with Minecraft's new biome/terrain system.",
-      "env": "",
-      "size": 107532
-    },
-    {
-      "file": "aether-1.20.1-1.5.2-neoforge.jar",
-      "id": "aether",
-      "name": "The Aether",
-      "version": "",
-      "desc": "The Aether Team presents the original Aether mod! Up to date for modern Minecraft versions and fully compatible with multiplayer. The Aether is a dimension of floating islands high in the sky. Ascend through a Glowstone portal and begin a new survival adventure packed with new ores, mythical creatur",
-      "env": "",
-      "size": 39746319
-    },
-    {
-      "file": "tlc_forge-1.0.3-R-1.20.X.jar",
-      "id": "tlc",
-      "name": "The Lost Castle",
-      "version": "1.0.2",
-      "desc": "The Lost Castle introduces an enormous castle that you'll be able to find with the help of a map given by a journeyman cartographer.",
-      "env": "",
-      "size": 713860
-    },
-    {
-      "file": "mimic-1.0.5.jar",
-      "id": "mimic",
-      "name": "The Mimic",
-      "version": "1.0.5",
-      "desc": "",
-      "env": "",
-      "size": 6409566
-    },
-    {
-      "file": "Towns-and-Towers-1.12-Fabric+Forge.jar",
-      "id": "t_and_t",
-      "name": "Towns and Towers",
-      "version": "1.12",
-      "desc": "Spice up your world with new villages, pillager outposts, and even new ships!",
-      "env": "",
-      "size": 2864275
-    },
-    {
-      "file": "TravelersTitles-1.20-Forge-4.0.2.jar",
-      "id": "travelerstitles",
-      "name": "Traveler's Titles",
-      "version": "1.20-Forge-4.0.2",
-      "desc": "Epic, RPG-like titles when entering biomes & dimensions",
-      "env": "",
-      "size": 228191
-    },
-    {
-      "file": "trek-B0.6.jar",
-      "id": "mr_trek",
-      "name": "Trek",
-      "version": "1-B0.6",
-      "desc": "Bored of vanilla structure generation? This pack is for you!",
-      "env": "",
-      "size": 25458242
-    },
-    {
-      "file": "tudigong-forge1.20.1-1.4.1.jar",
-      "id": "tudigong",
-      "name": "Tu Di Gong",
-      "version": "1.4.1",
-      "desc": "Tudi Gong, a Chinese god Wayfinder.",
-      "env": "",
-      "size": 282993
-    },
-    {
-      "file": "uniqueaccessories-1.3.3-forge-mc1.20.1.jar",
-      "id": "uniqueaccessories",
-      "name": "Unique Accessories",
-      "version": "1.3.3",
-      "desc": "Adds unique accessories obtainable from defeating mobs or from chests in structures",
-      "env": "",
-      "size": 521352
-    },
-    {
-      "file": "VIX-1.1.0-all.jar",
-      "id": "vix",
-      "name": "VIX",
-      "version": "1.1.0",
-      "desc": "Very Cool Lib Mod.",
-      "env": "",
-      "size": 506870
-    },
-    {
-      "file": "waystones-forge-1.20.1-14.1.20.jar",
+      "file": "waystones-fabric-1.21.1-21.1.35.jar",
       "id": "waystones",
       "name": "Waystones",
-      "version": "14.1.20",
+      "version": "21.1.35",
       "desc": "Teleport back to activated waystones. For Survival, Adventure or Servers.",
       "env": "",
-      "size": 533738
-    },
-    {
-      "file": "WeaponsOfMiracles-2.0.15-mc1.20.1-forge.jar",
-      "id": "wom",
-      "name": "Weapons of miracle",
-      "version": "2.0.15",
-      "desc": "Weapons from another reality, waiting for you to find them and witness their powers !",
-      "env": "",
-      "size": 20276434
-    },
-    {
-      "file": "DungeonsArise-1.20.x-2.1.58-release.jar",
-      "id": "dungeons_arise",
-      "name": "When Dungeons Arise",
-      "version": "2.1.58-1.20.x",
-      "desc": "Elegant - and likely dangerous - structures and roguelike dungeons to lose yourself in...",
-      "env": "",
-      "size": 8762342
-    },
-    {
-      "file": "wraithon-forge1.20.1-1.1.11.jar",
-      "id": "wraithon",
-      "name": "wraithon",
-      "version": "1.1.11",
-      "desc": "",
-      "env": "",
-      "size": 31054582
-    },
-    {
-      "file": "xaerominimap-forge-1.20.1-26.4.2.jar",
-      "id": "xaerominimap",
-      "name": "Xaero's Minimap",
-      "version": "26.4.2",
-      "desc": "The most vanilla-looking minimap for Minecraft.",
-      "env": "",
-      "size": 2195245
-    },
-    {
-      "file": "yet_another_config_lib_v3-3.6.6+1.20.1-forge.jar",
-      "id": "yet_another_config_lib_v3",
-      "name": "YetAnotherConfigLib",
-      "version": "3.6.6+1.20.1-forge",
-      "desc": "YetAnotherConfigLib (yacl) is just that. A builder-based configuration library for Minecraft.",
-      "env": "",
-      "size": 1105891
-    },
-    {
-      "file": "YungsApi-1.20-Forge-4.0.6.jar",
-      "id": "yungsapi",
-      "name": "YUNG's API",
-      "version": "1.20-Forge-4.0.6",
-      "desc": "API Library for YUNG's minecraft mods.",
-      "env": "",
-      "size": 370524
-    },
-    {
-      "file": "YungsBetterEndIsland-1.20-Forge-2.0.6.jar",
-      "id": "betterendisland",
-      "name": "YUNG's Better End Island",
-      "version": "1.20-Forge-2.0.6",
-      "desc": "A complete redesign of the End island, making the Ender Dragon fight much more fun and interesting!",
-      "env": "",
-      "size": 387111
-    },
-    {
-      "file": "YungsBetterNetherFortresses-1.20-Forge-2.0.6.jar",
-      "id": "betterfortresses",
-      "name": "YUNG's Better Nether Fortresses",
-      "version": "1.20-Forge-2.0.6",
-      "desc": "A complete redesign of Minecraft's Nether Fortresses!",
-      "env": "",
-      "size": 619255
-    },
-    {
-      "file": "YungsBetterOceanMonuments-1.20-Forge-3.0.4.jar",
-      "id": "betteroceanmonuments",
-      "name": "YUNG's Better Ocean Monuments",
-      "version": "1.20-Forge-3.0.4",
-      "desc": "A complete redesign of Minecraft's ocean monuments!",
-      "env": "",
-      "size": 1033262
+      "size": 1186038
     }
   ],
-  "configs": {
-    "file": "minecraft-config.zip",
-    "name": "minecraft-config.zip",
-    "size": 493170
-  },
+  "configs": null,
   "installer": {
     "file": "fabric-installer-1.1.2.exe",
     "name": "fabric-installer-1.1.2.exe",
