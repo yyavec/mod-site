@@ -10,15 +10,6 @@
       "size": 646346
     },
     {
-      "file": "better_trident_model-forge1.20.1-1.2.0.jar",
-      "id": "better_trident_model",
-      "name": "BetterTridentModel",
-      "version": "1.2.0",
-      "desc": "Replace the trident model",
-      "env": "",
-      "size": 1031045
-    },
-    {
       "file": "bookofdragons-1.31-1.20.1.jar",
       "id": "bookofdragons",
       "name": "bookofdragons",
