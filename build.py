@@ -141,6 +141,7 @@ def diff(old_mods, mods):
 
 
 SEASON = ROOT / "season.json"
+THEME = ROOT / "theme.json"  # 관리자 화면이 건드리지 않는 테마 설정 (분위기, 첫 화면 문구, 지난 시즌 도장)
 
 
 def store_extra(slot):
@@ -161,6 +162,13 @@ def content_id():
     for f in (Path(os.environ.get("CONF_FILE", ROOT / "site.conf")), SEASON):
         h.update(f.read_bytes() if f.exists() else b"")
     return h.hexdigest()[:10]
+
+
+def load_theme():
+    try:
+        return json.loads(THEME.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
 
 
 def load_season():
@@ -199,7 +207,7 @@ def season_html(e):
         img = str(win.get("image") or "")
         bg = f'<div class="win-bg" style="background-image:url(\'{e(img)}\')" aria-hidden="true"></div>' if re.match(r"^(assets/[\w.-]+|https://\S+)$", img) else ""
         body = (f'<div class="win-card{" has-bg" if bg else ""}">{bg}<div class="win-art"><svg class="px trophy" viewBox="0 0 10 9" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="6" height="1" fill="#F2B636"/><rect x="0" y="1" width="3" height="1" fill="#F2B636"/><rect x="3" y="1" width="1" height="1" fill="#FFE58A"/><rect x="4" y="1" width="6" height="1" fill="#F2B636"/><rect x="0" y="2" width="1" height="1" fill="#F2B636"/><rect x="2" y="2" width="1" height="1" fill="#F2B636"/><rect x="3" y="2" width="1" height="1" fill="#FFE58A"/><rect x="4" y="2" width="4" height="1" fill="#F2B636"/><rect x="9" y="2" width="1" height="1" fill="#F2B636"/><rect x="1" y="3" width="8" height="1" fill="#F2B636"/><rect x="2" y="4" width="6" height="1" fill="#F2B636"/><rect x="3" y="5" width="4" height="1" fill="#F2B636"/><rect x="4" y="6" width="2" height="1" fill="#F2B636"/><rect x="3" y="7" width="4" height="1" fill="#F2B636"/><rect x="2" y="8" width="6" height="1" fill="#8B5A2B"/></svg></div><div class="win-main">'
-                f'<div class="win-top"><span class="win-badge">{e(win.get("label") or f"투표 1위 · {no}번 후보")}</span></div>'
+                f'<div class="win-top"><span class="win-badge">{e(load_theme().get("win_label") or win.get("label") or f"투표 1위 · {no}번 후보")}</span></div>'
                 f'<div class="win-n">{e(win.get("name", ""))}</div><div class="cand-p">{e(win.get("pack", ""))}</div>'
                 f'<div class="cand-meta"><span class="stars" role="img" aria-label="추천도 5점 중 {n}점">{st}</span>'
                 f'<span class="weeks num">{e(win.get("weeks", ""))}</span>{tags_of(win)}</div>'
@@ -231,7 +239,7 @@ def season_html(e):
     return {"title": d.get("title", ""), "period": d.get("period", ""), "intro": d.get("intro", ""),
             "badge": d.get("badge", ""), "button": d.get("button") or "노션에서 자세히 보기",
             "body": body, "voting": not win,
-            "now": (win.get("pack") or win.get("name") or "") if win else "", "now_label": d.get("now_label") or "현재 진행 중!!"}
+            "now": (win.get("pack") or win.get("name") or "") if win else "", "now_label": load_theme().get("now_label") or d.get("now_label") or "현재 진행 중!!"}
 
 def main():
     conf = load_conf()
@@ -345,7 +353,7 @@ def main():
         "TOPBAR": e(conf.get("TOPBAR", "")),
         "TOPBAR_UNTIL": e(conf.get("TOPBAR_UNTIL", "")),
         "TOPBAR_HIDDEN": "" if conf.get("TOPBAR") else "hidden",
-        "MOOD": conf.get("MOOD") if conf.get("MOOD") in ("nightfall",) else "",
+        "MOOD": (load_theme().get("mood") or conf.get("MOOD")) if (load_theme().get("mood") or conf.get("MOOD")) in ("nightfall", "poke") else "",
     }
     season = season_html(e)
     rep.update({
@@ -420,12 +428,14 @@ def main():
 
     # 지난 시즌 (취소선 + 완결 도장)
     past = (load_season() or {}).get("past") or []
+    stamps = load_theme().get("past_stamps") or {}
+    stamp_of = lambda p: stamps.get(p.get("title", "")) or p.get("stamp") or "완"
     ball = '<svg class="px" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="4" height="1" fill="#E3403A"/><rect x="1" y="1" width="6" height="1" fill="#E3403A"/><rect x="0" y="2" width="8" height="1" fill="#E3403A"/><rect x="0" y="3" width="3" height="1" fill="#222"/><rect x="3" y="3" width="2" height="1" fill="#fff"/><rect x="5" y="3" width="3" height="1" fill="#222"/><rect x="0" y="4" width="3" height="1" fill="#222"/><rect x="3" y="4" width="2" height="1" fill="#fff"/><rect x="5" y="4" width="3" height="1" fill="#222"/><rect x="0" y="5" width="8" height="1" fill="#F2F2F2"/><rect x="1" y="6" width="6" height="1" fill="#F2F2F2"/><rect x="2" y="7" width="4" height="1" fill="#DADADA"/></svg>'
     rep.update({
         "PAST_ROWS": "".join(
             f'<div class="past-row">{ball}<span class="past-k">{e(p.get("title", ""))}</span>'
             f'<span class="past-t">{e(p.get("name", ""))}<small>{e(p.get("pack", ""))}</small></span>'
-            f'<span class="past-stamp{" stop" if p.get("stamp") else ""}">{e(p.get("stamp") or "완")}</span></div>' for p in past),
+            f'<span class="past-stamp{" stop" if stamp_of(p) != "완" else ""}">{e(stamp_of(p))}</span></div>' for p in past),
         "PAST_HIDDEN": "" if past else "hidden",
         "OWNER": e(conf.get("OWNER", "")),
         "OWNER_HIDDEN": "" if conf.get("OWNER") else "hidden",
