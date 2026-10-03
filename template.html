@@ -1076,6 +1076,27 @@ button.ty.all{--c:#55546F}
 .diff-keep-h{margin:16px 0 0; font:700 13px "Lexend", var(--font); color:#2F6B1C}
 .diff-back{margin-top:10px; background:none; border:0; color:#4E6378; font:600 13px var(--font); text-decoration:underline; text-underline-offset:3px; cursor:pointer}
 @media (max-width:560px){ .diff-grid{grid-template-columns:1fr} }
+
+/* 현재 접속 중 배너 */
+.online{position:relative; display:flex; flex-direction:column; gap:12px; padding:18px 20px; border-radius:18px; overflow:hidden; color:#F2F2F7; background:radial-gradient(60% 120% at 100% 0%, rgba(93,177,60,.28), transparent 60%), linear-gradient(135deg, #1E1D31, #2A2846); box-shadow:0 14px 32px rgba(20,18,40,.28)}
+.online::after{content:""; position:absolute; right:-20px; bottom:-28px; width:150px; height:150px; border-radius:50%; border:14px solid rgba(255,255,255,.05); pointer-events:none}
+.on-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.on-dot{flex:none; width:12px; height:12px; border-radius:50%; background:#8A8FA0}
+.online.is-on .on-dot{background:#4ADE80; box-shadow:0 0 0 0 rgba(74,222,128,.7); animation:onPulse 1.8s ease-out infinite}
+.online.is-off .on-dot{background:#F87171}
+@keyframes onPulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.7)} 100%{box-shadow:0 0 0 12px rgba(74,222,128,0)}}
+.on-title{font:800 20px/1.2 var(--cb-head, var(--font)); letter-spacing:-.01em}
+.on-title em{font-style:normal; color:#FFCB05}
+.on-sub{font-size:13px; color:#B9B8CF}
+.on-list{display:flex; flex-wrap:wrap; gap:8px; margin:0; padding:0; list-style:none}
+.on-list li{display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 14px 0 5px; border-radius:999px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.14); font:700 14px var(--font); animation:onIn .35s cubic-bezier(.2,1.4,.5,1) both}
+.on-list li img{width:30px; height:30px; border-radius:7px; image-rendering:pixelated; background:#3A3958}
+.on-list li.more{padding:0 14px; color:#FFCB05}
+@keyframes onIn{0%{opacity:0; transform:scale(.8)} 100%{opacity:1; transform:none}}
+.on-foot{display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:12.5px; color:#9897B0}
+.on-copy{display:inline-flex; align-items:center; gap:6px; height:32px; padding:0 12px; border-radius:10px; border:0; background:#3682E6; color:#fff; font:700 13px var(--font); cursor:pointer; box-shadow:0 3px 0 #1E5BB2}
+.on-copy svg{width:14px; height:14px}
+@media (prefers-reduced-motion:reduce){ .online.is-on .on-dot, .on-list li{animation:none} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -1221,6 +1242,11 @@ button.ty.all{--c:#55546F}
     </div>
     </div>
   </header>
+  <section class="online" id="online" aria-live="polite" {{ADDRESS_HIDDEN}}>
+    <div class="on-head"><span class="on-dot" aria-hidden="true"></span><b class="on-title" id="onTitle">서버 확인 중…</b><span class="on-sub" id="onSub"></span></div>
+    <ul class="on-list" id="onList"></ul>
+    <div class="on-foot"><button class="on-copy" type="button" data-copy="{{SERVER_ADDRESS}}" data-toast="서버 주소를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>서버 주소 복사</button><span>1분마다 새로고침돼요</span></div>
+  </section>
   <p class="notice" {{NOTICE_HIDDEN}}><svg class="i"><use href="#i-info"/></svg><span>{{NOTICE}}</span></p>
   <details class="guide" id="guide">
     <summary class="guide-head">
@@ -1672,13 +1698,14 @@ button.ty.all{--c:#55546F}
     fetch('https://api.mcsrvstat.us/3/' + encodeURIComponent(host), {cache:'no-store'})
       .then(function(r){ return r.json(); })
       .then(function(d){
+        try { window.dispatchEvent(new CustomEvent('live:data', {detail:d})); } catch(e){}
         if (!d.online) return show(false, '서버 꺼짐');
         var p = d.players || {}, n = p.online || 0;
         var list = (p.list || []).map(function(x){ return x.name; }).filter(Boolean);
         var names = list.length ? ' · ' + list.slice(0, 3).join(', ') + (n > 3 ? ' 외 ' + (n - 3) + '명' : '') : '';
         show(true, n ? '접속 중 ' + n + '명' : '서버 켜짐 · 아무도 없어요', names);
       })
-      .catch(function(){ el.classList.remove('on', 'off'); t.textContent = '상태 확인 안 됨'; who.textContent = ''; });
+      .catch(function(){ el.classList.remove('on', 'off'); t.textContent = '상태 확인 안 됨'; who.textContent = ''; try { window.dispatchEvent(new CustomEvent('live:data', {detail:null})); } catch(e){} });
   }
   check(); setInterval(check, 60000);
 })();
@@ -2136,6 +2163,36 @@ button.ty.all{--c:#55546F}
     more.hidden = list.length <= shown;
   }
   window.cobbleReady.then(function(d){ data = d; document.getElementById('dexCount').textContent = d.LIST.length; draw(); });
+})();
+</script>
+<script>
+/* 현재 접속 중 배너: 실시간 상태(live:data)를 받아 얼굴 + 닉네임으로 */
+(function(){
+  var box = document.getElementById('online'); if (!box || box.hidden) return;
+  var title = document.getElementById('onTitle'), sub = document.getElementById('onSub'), list = document.getElementById('onList');
+  function face(p){
+    var img = new Image(); img.alt = ''; img.width = 30; img.height = 30; img.loading = 'lazy';
+    img.src = 'https://minotar.net/helm/' + encodeURIComponent(p.name) + '/60';
+    img.onerror = function(){ if (img.src.indexOf('mc-heads') < 0) img.src = 'https://mc-heads.net/avatar/' + encodeURIComponent(p.uuid || p.name) + '/60'; };
+    return img;
+  }
+  window.addEventListener('live:data', function(e){
+    var d = e.detail; list.textContent = '';
+    box.classList.remove('is-on', 'is-off');
+    if (!d) { title.textContent = '서버 상태를 확인하지 못했어요'; sub.textContent = '잠시 뒤 다시 확인해요'; return; }
+    if (!d.online) { box.classList.add('is-off'); title.textContent = '서버가 쉬는 중이에요'; sub.textContent = '열리면 여기에 바로 보여요'; return; }
+    box.classList.add('is-on');
+    var p = d.players || {}, n = p.online || 0, people = (p.list || []).filter(function(x){ return x && x.name; });
+    if (!n) { title.innerHTML = '지금은 아무도 없어요'; sub.textContent = '첫 번째로 들어가 볼까요?'; return; }
+    title.innerHTML = '지금 <em>' + n + '명</em>이 놀고 있어요!';
+    sub.textContent = '최대 ' + (p.max || '?') + '명';
+    people.forEach(function(x, i){
+      var li = document.createElement('li'); li.style.animationDelay = (i * 60) + 'ms';
+      li.appendChild(face(x)); var s = document.createElement('span'); s.textContent = x.name; li.appendChild(s);
+      list.appendChild(li);
+    });
+    if (n > people.length) { var m = document.createElement('li'); m.className = 'more'; m.textContent = (people.length ? '+' + (n - people.length) + '명' : n + '명 접속 중'); list.appendChild(m); }
+  });
 })();
 </script>
 </body>
