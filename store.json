@@ -1,15 +1,6 @@
 {
   "mods": [
     {
-      "file": "ba_bt-1.20.1-3.0.0-beta3.2.1.jar",
-      "id": "ba_bt",
-      "name": "Brass-Amber BattleTowers",
-      "version": "1.20.1-3.0.0-beta3.2.1",
-      "desc": "Mod is a continuation of BattleTowers Mod from YogBox/Tekkit days with revamped towers and bosses.Stays true to the core of BattleTowers while also adding:New item textures - Brass_McCraftyNew Music - Rotch GwyltNew towers - Brass_McCrafty and MilamberNew Ai/Entities - X and Milamber.",
-      "env": "",
-      "size": 54453322
-    },
-    {
       "file": "L_Enders_Cataclysm-3.27-curios-fix.jar",
       "id": "cataclysm",
       "name": "cataclysm",
