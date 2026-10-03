@@ -1531,15 +1531,6 @@
       "size": 1105891
     },
     {
-      "file": "YouDied-1.20-3.0.0.17-forge.jar",
-      "id": "you_died",
-      "name": "You Died",
-      "version": "",
-      "desc": "A mod that adds a Dark Souls inspired death screen",
-      "env": "",
-      "size": 289212
-    },
-    {
       "file": "YungsApi-1.20-Forge-4.0.6.jar",
       "id": "yungsapi",
       "name": "YUNG's API",
