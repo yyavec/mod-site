@@ -1583,15 +1583,6 @@
       "desc": "A fully featured Library designed around loading highly configurable, agile developed. modular mods",
       "env": "",
       "size": 1006518
-    },
-    {
-      "file": "alexsmobs-1.22.9.jar",
-      "id": "alexsmobs",
-      "name": "Alex's Mobs",
-      "version": "1.22.9",
-      "desc": "New, original, engaging, and aesthetic mobs for Minecraft.",
-      "env": "",
-      "size": 26350793
     }
   ],
   "configs": {
