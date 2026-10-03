@@ -1,15 +1,6 @@
 {
   "mods": [
     {
-      "file": "cataclysm_dimension-forge1.20.1-1.6.2.jar",
-      "id": "cataclysm_dimension",
-      "name": "Cataclysm Dimension",
-      "version": "1.6.2",
-      "desc": "Make cataclysm's structures generate in different dimension",
-      "env": "",
-      "size": 152827
-    },
-    {
       "file": "certain_questing_additions-forge-1.1.7+mc1.20.1.jar",
       "id": "certain_questing_additions",
       "name": "Certain Questing Additions",
