@@ -1,15 +1,6 @@
 {
   "mods": [
     {
-      "file": "Ash.Of.Sin-No.More.Too.Many.Structures-1.20.1-1.0.13.jar",
-      "id": "ash_of_sin_no_more_too_many_structures",
-      "name": "Ash Of Sin: No More Too Many Structures",
-      "version": "1.0.13",
-      "desc": "The remnants clinging to life amidst the ashes.",
-      "env": "",
-      "size": 94448
-    },
-    {
       "file": "AttributeFix-Forge-1.20.1-21.0.5.jar",
       "id": "attributefix",
       "name": "AttributeFix",
