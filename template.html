@@ -4,7 +4,12 @@
 <meta charset="utf-8">
 <script>
 // 처음 온 사람에게만 시즌 2 종료 → 포켓몬 부활 이야기를 보여 준다 (주소 끝에 ?story 를 붙이면 다시 보기)
-(function(){var d=document.documentElement;try{if(/[?&]story\b/.test(location.search)||!localStorage.getItem("story-s3-seen"))d.setAttribute("data-story","")}catch(e){d.setAttribute("data-story","")}})();
+(function(){var d=document.documentElement,q=location.search;
+  if(/[?&]nf\b/.test(q)){d.setAttribute("data-frame","");d.setAttribute("data-mood","nightfall");return;}
+  if(/[?&]story\b/.test(q)){d.setAttribute("data-story","");return;}
+  try{if(sessionStorage.getItem("story-shown"))return;var n=+(localStorage.getItem("story-visits")||0);if(n>=3)return;
+    localStorage.setItem("story-visits",n+1);sessionStorage.setItem("story-shown","1");d.setAttribute("data-story","")}catch(e){}
+})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{SITE_TITLE}}</title>
@@ -724,13 +729,15 @@ html[data-story], html[data-story] body{overflow:hidden}
 .story-half{position:absolute; inset:0; will-change:transform, clip-path; transition:transform 1s cubic-bezier(.6,0,.85,.4), opacity 1s ease-in, filter 1s}
 .story-half.b{display:none}
 .story.cut .story-half.b{display:block}
-.story-nf{position:absolute; inset:0; display:grid; place-items:center; padding:24px 16px 120px; color:#EEE8FF; background:radial-gradient(70% 55% at 72% 6%, rgba(176,140,255,.28), transparent 62%), radial-gradient(60% 40% at 15% 100%, rgba(110,60,150,.35), transparent 70%), linear-gradient(180deg, #15121F 0%, #221C30 50%, #2E2535 100%)}
+.story-nf{position:absolute; inset:0; display:grid; place-items:center; padding:24px 16px; color:#EEE8FF; background:radial-gradient(70% 55% at 72% 6%, rgba(176,140,255,.28), transparent 62%), radial-gradient(60% 40% at 15% 100%, rgba(110,60,150,.35), transparent 70%), linear-gradient(180deg, #15121F 0%, #221C30 50%, #2E2535 100%)}
 .story-nf::before{content:""; position:absolute; inset:-20% -10%; background:radial-gradient(40% 18% at 30% 70%, rgba(200,190,230,.10), transparent 70%), radial-gradient(35% 14% at 75% 78%, rgba(200,190,230,.08), transparent 70%); animation:sFog 14s ease-in-out infinite alternate; pointer-events:none}
 .story-nf::after{content:""; position:absolute; inset:0; background:#fff; opacity:0; animation:sBolt 9s infinite; pointer-events:none}
 .story-ruins{position:absolute; left:0; right:0; bottom:0; width:100%; height:130px; pointer-events:none}
 .story-ash{position:absolute; inset:0; pointer-events:none; overflow:hidden}
 .story-ash i{position:absolute; top:-10px; width:3px; height:3px; background:rgba(220,210,255,.55); animation:sAsh linear infinite}
-.story-card{position:relative; z-index:2; width:min(540px, 100%); text-align:center}
+.story-card{position:relative; z-index:2; width:min(540px, 100%); text-align:center; padding:30px 24px 28px; border-radius:16px; background:rgba(22,17,34,.9); border:2px solid rgba(190,160,255,.38); box-shadow:0 24px 60px rgba(0,0,0,.55), 0 0 0 6px rgba(140,100,230,.12), inset 0 1px 0 rgba(255,255,255,.08); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px)}
+.story-bg{position:absolute; inset:0; width:100%; height:100%; border:0; pointer-events:none; filter:blur(2.5px) brightness(.85) saturate(.9); transform:scale(1.02)}
+.story-dim{position:absolute; inset:0; pointer-events:none; background:radial-gradient(60% 50% at 50% 50%, rgba(10,8,20,.15), rgba(10,8,20,.5))}
 .story-kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(190,160,255,.28); font:400 12px/1 var(--pixel-s); letter-spacing:.04em; color:#CDBBFF}
 .story-kicker b{width:8px; height:8px; background:#FF5A4E; box-shadow:0 0 10px #FF5A4E; animation:sBlink 1.2s steps(2) infinite}
 .story-h, .story-h2{display:block; text-align:center; letter-spacing:0}
@@ -826,6 +833,7 @@ html[data-story], html[data-story] body{overflow:hidden}
 @keyframes tPop{0%{transform:scale(1.35); opacity:0; filter:brightness(3)} 100%{transform:none; opacity:1; filter:none}}
 @keyframes tToss{0%,70%,100%{transform:none} 78%{transform:translateY(-3px)} 86%{transform:none}}
 .pk-throw{position:absolute; z-index:5; width:26px; height:26px; left:0; top:0; pointer-events:none}
+.pk-throw.fixed{position:fixed; z-index:9000; filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
 .pk-throw svg, .mon-ball svg{width:100%; height:100%; display:block}
 .pk-poof{position:absolute; z-index:5; pointer-events:none; width:12px; height:12px; background:#fff; border-radius:2px; box-shadow:0 0 0 2px rgba(255,255,255,.6)}
 .pk-ring{position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; border:3px solid #FF5A4E; pointer-events:none}
@@ -881,7 +889,7 @@ html[data-story], html[data-story] body{overflow:hidden}
   let seen = false;
   try { seen = sessionStorage.getItem("intro-seen") === "1"; } catch {}
   const force = /[?&]intro\b/.test(location.search);  // 주소 끝에 ?intro 를 붙이면 언제든 다시 보기
-  if (html.dataset.mood === "nightfall" && (force || !seen) && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (html.dataset.mood === "nightfall" && !html.hasAttribute("data-frame") && (force || !seen) && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     html.dataset.mood = ""; html.dataset.intro = "calm";
   }
   if (html.dataset.mood === "poke" && (force || !seen) && !matchMedia("(prefers-reduced-motion: reduce)").matches) html.dataset.intro = "pcalm";
@@ -905,8 +913,9 @@ html[data-story], html[data-story] body{overflow:hidden}
   <div class="story-old" id="storyOld">
     <div class="story-half a">
       <div class="story-nf">
+        <iframe class="story-bg" src="./?nf" title="" tabindex="-1" aria-hidden="true" loading="eager"></iframe>
+        <div class="story-dim" aria-hidden="true"></div>
         <div class="story-ash" aria-hidden="true"></div>
-        <svg class="story-ruins" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true"><path fill="#0F0C16" d="M0 130V92h18V70h10v22h14V58h8V40h10v18h8v34h22V80h12v12h18V64h6V50h12v14h6v28h30V74h10v-8h8v26h26V56h10V30h6v-8h8v8h6v26h10v36h20V78h16v14h22V60h8v32h18V84h10V66h12v26h18V72h8v20h20v38z"/><path fill="#1B1626" d="M0 130v-14h40v-8h30v8h60v-10h50v10h70v-6h60v6h90v14z"/></svg>
         <div class="story-card">
           <span class="story-kicker"><b aria-hidden="true"></b>시즌 2 · 나이트폴 공지</span>
           <h2 class="story-h" id="storyH">나이트폴 모드를<br>여기서 멈춥니다</h2>
@@ -1789,12 +1798,12 @@ html[data-story], html[data-story] body{overflow:hidden}
       html.dataset.intro = 'pthrow';
       var hb = hero.getBoundingClientRect(), fb = frog.getBoundingClientRect();
       var tx = fb.left - hb.left + fb.width * .45 - 13, ty = fb.top - hb.top + fb.height * .38 - 13;
-      var sx = hb.width + 30, sy = hb.height * .2;
-      var b = document.createElement('div'); b.className = 'pk-throw'; b.innerHTML = ballSvg; hero.appendChild(b);
+      var sx = innerWidth / 2 - 13, sy = innerHeight / 2 - 13, ex = hb.left + tx, ey = hb.top + ty;
+      var b = document.createElement('div'); b.className = 'pk-throw fixed'; b.innerHTML = ballSvg; document.body.appendChild(b);
       var kf = [];
-      for (var i = 0; i <= 10; i++) { var t = i / 10, x = sx + (tx - sx) * t, y = sy + (ty - sy) * t - Math.sin(Math.PI * t) * hb.height * .45; kf.push({transform:'translate(' + x + 'px,' + y + 'px) rotate(' + (-720 * t) + 'deg)'}); }
-      b.animate(kf, {duration:760, easing:'cubic-bezier(.3,.1,.6,1)', fill:'forwards'}).onfinish = function(){
-        b.animate([{transform:'translate(' + tx + 'px,' + ty + 'px) scale(1)', opacity:1}, {transform:'translate(' + tx + 'px,' + ty + 'px) scale(1.8)', opacity:0}], {duration:260, fill:'forwards'}).onfinish = function(){ b.remove(); };
+      for (var i = 0; i <= 12; i++) { var t = i / 12, x = sx + (ex - sx) * t, y = sy + (ey - sy) * t - Math.sin(Math.PI * t) * Math.min(220, innerHeight * .3), s = t < .15 ? .2 + t / .15 * .8 : 1; kf.push({transform:'translate(' + x + 'px,' + y + 'px) rotate(' + (-900 * t) + 'deg) scale(' + s + ')', opacity:t < .08 ? t / .08 : 1}); }
+      b.animate(kf, {duration:900, easing:'cubic-bezier(.3,.1,.6,1)', fill:'forwards'}).onfinish = function(){
+        b.animate([{transform:'translate(' + ex + 'px,' + ey + 'px) scale(1)', opacity:1}, {transform:'translate(' + ex + 'px,' + ey + 'px) scale(1.8)', opacity:0}], {duration:260, fill:'forwards'}).onfinish = function(){ b.remove(); };
         var ring = document.createElement('div'); ring.className = 'pk-ring'; ring.style.left = (tx + 3) + 'px'; ring.style.top = (ty + 3) + 'px'; hero.appendChild(ring);
         ring.animate([{transform:'scale(.4)', opacity:1}, {transform:'scale(4)', opacity:0}], {duration:600, easing:'ease-out', fill:'forwards'}).onfinish = function(){ ring.remove(); };
         quake();
@@ -1805,8 +1814,8 @@ html[data-story], html[data-story] body{overflow:hidden}
         }
       };
     });
-    at(1350, function(){ html.dataset.intro = 'ptrainer'; frog.classList.remove('hop'); void frog.offsetWidth; frog.classList.add('hop'); });
-    at(2100, function(){ html.dataset.intro = 'pparty'; heroParty(); });
+    at(1500, function(){ html.dataset.intro = 'ptrainer'; frog.classList.remove('hop'); void frog.offsetWidth; frog.classList.add('hop'); });
+    at(2250, function(){ html.dataset.intro = 'pparty'; heroParty(); });
     at(3900, done);
   }
   heroCrew();
@@ -1814,6 +1823,15 @@ html[data-story], html[data-story] body{overflow:hidden}
   function start(){ if (html.dataset.intro === 'pcalm') intro(); else { heroMons.forEach(function(m){ meet(m._id); m.classList.add('on'); }); perch(); } }
   if (html.hasAttribute('data-story')) addEventListener('story:closed', function(){ setTimeout(start, 350); }, {once:true});
   else start();
+})();
+</script>
+<script>
+// 팝업 뒤 배경용(?nf): 나이트폴 시절 첫 화면 그대로, 누를 수 없게
+(function(){
+  var d = document.documentElement; if (!d.hasAttribute('data-frame')) return;
+  d.style.pointerEvents = 'none';
+  var k = document.querySelector('.now-k'), v = document.querySelector('.now-v'), n = document.querySelector('.notice span');
+  if (k) k.textContent = '현재 진행 중!!'; if (v) v.textContent = 'Nightfallcraft'; if (n) n.textContent = '서버 열렸어요! 🎉 모드 받고 바로 들어오세요';
 })();
 </script>
 </body>
