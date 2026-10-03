@@ -836,6 +836,11 @@ html[data-story], html[data-story] body{overflow:hidden}
 .pk-throw.fixed{position:fixed; z-index:10001; filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
 .pk-throw svg, .mon-ball svg{width:100%; height:100%; display:block}
 .pk-poof{position:absolute; z-index:5; pointer-events:none; width:12px; height:12px; background:#fff; border-radius:2px; box-shadow:0 0 0 2px rgba(255,255,255,.6)}
+.frog .shoulder{display:none; position:absolute; pointer-events:none; z-index:2}
+[data-mood="poke"]:not([data-intro="pcalm"]):not([data-intro="pthrow"]) .frog .shoulder{display:block}
+[data-intro="ptrainer"] .frog .shoulder{animation:tPop .5s cubic-bezier(.2,1.6,.5,1) .15s both}
+.cobble-credit{margin:4px 0 0; text-align:center; font-size:11px; color:var(--text-tertiary)}
+.cobble-credit a{color:inherit}
 .pk-ring{position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; border:3px solid #FF5A4E; pointer-events:none}
 [data-intro^="p"] .now{opacity:0}
 [data-intro="pparty"] .now{opacity:1; animation:nowPop .6s cubic-bezier(.2,1.5,.5,1) both}
@@ -845,18 +850,21 @@ html[data-story], html[data-story] body{overflow:hidden}
 .has-mon > .mon:not(.win-bg):not(.card-rift){position:absolute; z-index:6}
 .mon{position:absolute; z-index:6; display:flex; align-items:flex-end; justify-content:center; width:60px; height:60px; padding:0; border:0; background:none; cursor:pointer; opacity:0; pointer-events:none; -webkit-tap-highlight-color:transparent}
 .mon.perch{bottom:calc(100% - 14px); width:54px; height:54px}
-.mon.perch img{max-width:54px; max-height:54px}
+
 .mon.on{opacity:1; pointer-events:auto; animation:monIn .5s cubic-bezier(.2,1.6,.5,1) both}
-.mon img{display:block; max-width:60px; max-height:60px; width:auto; height:auto; transform-origin:50% 100%; animation:monBob 2.6s ease-in-out infinite; animation-delay:var(--bob, 0s); filter:drop-shadow(0 3px 0 rgba(0,0,0,.12))}
-.mon.flip img{scale:-1 1}
-.mon.hop img{animation:monHop .55s cubic-bezier(.3,.7,.4,1)}
-.mon.wave img{animation:monWave .9s ease-in-out}
+.mon .cbw{display:block; transform-origin:50% 100%; animation:monBob 2.6s ease-in-out infinite; animation-delay:var(--bob, 0s); filter:drop-shadow(0 3px 0 rgba(0,0,0,.12))}
+.cbw{display:block; line-height:0}
+.cb{display:block; background-repeat:no-repeat; background-size:var(--sw) 100%; background-position:0 0; animation:cbPlay 2s steps(12) infinite}
+@keyframes cbPlay{to{background-position-x:calc(-1 * var(--sw))}}
+.mon.flip .cbw{scale:-1 1}
+.mon.hop .cbw{animation:monHop .55s cubic-bezier(.3,.7,.4,1)}
+.mon.wave .cbw{animation:monWave .9s ease-in-out}
 .mon:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px}
 .mon-heart{position:absolute; z-index:8; width:14px; height:12px; pointer-events:none}
 .mon-ball{position:absolute; z-index:6; width:16px; height:16px; pointer-events:none}
 .mon-flash{position:absolute; z-index:7; width:52px; height:52px; border-radius:50%; pointer-events:none; background:radial-gradient(circle, #fff 0%, rgba(255,255,255,.8) 40%, transparent 70%)}
 .hero .mon{bottom:18px; width:52px; height:52px}
-.hero .mon img{max-width:52px; max-height:52px}
+
 @keyframes monIn{0%{transform:scale(0) translateY(10px)} 100%{transform:none}}
 @keyframes monBob{0%,100%{transform:none} 50%{transform:translateY(-2px) scaleY(.97)}}
 @keyframes monHop{30%{transform:translateY(-16px) scaleY(1.06)} 60%{transform:translateY(0) scaleY(.9)} 100%{transform:none}}
@@ -865,14 +873,14 @@ html[data-story], html[data-story] body{overflow:hidden}
 .parade{position:relative; height:84px; margin:0; border-radius:var(--r-lg); overflow:hidden; background:linear-gradient(180deg, #BFE6FF 0%, #E6F6FF 62%, transparent 62%), repeating-linear-gradient(90deg, #5DB13C 0 16px, #4E9A31 16px 32px); background-size:100% 100%, 100% 24px; background-position:0 0, 0 100%; background-repeat:no-repeat; box-shadow:var(--shadow-raised)}
 :root[data-theme="dark"] .parade{background:linear-gradient(180deg, #1B2A3E 0%, #22364F 62%, transparent 62%), repeating-linear-gradient(90deg, #3E7F2A 0 16px, #346E23 16px 32px); background-size:100% 100%, 100% 24px; background-position:0 0, 0 100%; background-repeat:no-repeat}
 .parade-walk{position:absolute; left:0; bottom:18px; height:60px; display:flex; align-items:flex-end; will-change:transform; pointer-events:none}
-.parade-walk img{display:block; max-height:58px; max-width:72px; width:auto; height:auto; animation:paradeStep .5s ease-in-out infinite alternate}
-.parade-walk.right img{scale:-1 1}
+.parade-walk .cbw{animation:paradeStep .5s ease-in-out infinite alternate}
+.parade-walk.right .cbw{scale:-1 1}
 .parade-dex{position:absolute; z-index:2; top:8px; right:10px; display:inline-flex; align-items:center; gap:6px; padding:4px 9px 3px; border-radius:var(--r-full); background:rgba(255,255,255,.85); color:#22364D; font:400 11px/1 var(--pixel); box-shadow:0 1px 0 rgba(0,0,0,.08)}
 :root[data-theme="dark"] .parade-dex{background:rgba(0,0,0,.45); color:#E8F1FF}
 .parade-dex svg{width:12px; height:12px}
 @keyframes paradeStep{to{transform:translateY(-3px)}}
-@media (max-width:600px){ .mon{width:48px; height:48px} .mon img{max-width:48px; max-height:48px} .hero .mon{width:42px; height:42px} .hero .mon img{max-width:42px; max-height:42px} .hero .mon.far{display:none} .hero .mon.m1{left:44% !important} .hero .mon.m2{left:57% !important} .parade{height:72px} .parade-walk img{max-height:48px; max-width:60px} }
-@media (prefers-reduced-motion:reduce){ .mon img, .parade-walk img, [data-mood="poke"] .frog .trainer .held{animation:none !important} .mon.on{animation:none} }
+@media (max-width:600px){ .mon{width:48px; height:48px} .hero .mon{width:42px; height:42px} .hero .mon.far{display:none} .hero .mon.m1{left:44% !important} .hero .mon.m2{left:57% !important} .parade{height:72px} }
+@media (prefers-reduced-motion:reduce){ .mon .cbw, .parade-walk .cbw, [data-mood="poke"] .frog .trainer .held{animation:none !important} .mon.on{animation:none} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -919,7 +927,7 @@ html[data-story], html[data-story] body{overflow:hidden}
         <div class="story-card">
           <span class="story-kicker"><b aria-hidden="true"></b>시즌 2 · 나이트폴 공지</span>
           <h2 class="story-h" id="storyH">나이트폴 모드를<br>여기서 멈춥니다</h2>
-          <p class="story-p">나이트폴 모드가 기대만큼 재밌지 못했어요.<br>난이도는 생각보다 너무 높았고, 서버 안정성은 너무 낮았어요.<br>고민 끝에 포기하는 게 맞다고 <span class="k">결단</span>을 내렸습니다.</p>
+          <p class="story-p">나이트폴 모드가 기대만큼 재밌지 못했어요.<br>난이도는 생각보다 너무 높았고, 서버 안정성은 너무 낮았어요.<br>고민 끝에 특수한 <span class="k">결단</span>을 내렸습니다.</p>
           <button class="story-go" type="button">그래서<svg viewBox="0 0 6 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="2" height="8" fill="currentColor"/><rect x="2" y="1" width="2" height="6" fill="currentColor"/><rect x="4" y="3" width="2" height="2" fill="currentColor"/></svg></button>
         </div>
       </div>
@@ -1149,6 +1157,7 @@ html[data-story], html[data-story] body{overflow:hidden}
   </section>
 
   <footer><span class="bye"><svg class="px " viewBox="0 0 12 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="3" y="0" width="6" height="1" fill="var(--skin-l)"/><rect x="9" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="2" y="1" width="2" height="1" fill="var(--skin-g)"/><rect x="4" y="1" width="2" height="1" fill="var(--skin-l)"/><rect x="6" y="1" width="4" height="1" fill="var(--skin-g)"/><rect x="2" y="2" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="4" y="3" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="2" y="4" width="1" height="1" fill="#111111"/><rect x="3" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="4" y="4" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="9" y="4" width="1" height="1" fill="#111111"/><rect x="2" y="5" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="3" y="6" width="6" height="1" fill="var(--skin-g)"/><rect x="9" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="2" y="7" width="2" height="1" fill="var(--skin-m)"/><rect x="4" y="7" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="7" width="2" height="1" fill="var(--skin-m)"/></svg>오늘도 즐겜해요</span><span>{{UPDATED}} 업데이트</span><span>모드 {{TOTAL}}개</span><a class="xlink" href="{{NOTION_URL}}" target="_blank" rel="noopener" {{NOTION_HIDDEN}}>노션<svg class="i"><use href="#i-ext"/></svg></a><a class="xlink" href="{{DISCORD_URL}}" target="_blank" rel="noopener" {{DISCORD_HIDDEN}}>문의 (디스코드)<svg class="i"><use href="#i-ext"/></svg></a></footer>
+  <p class="cobble-credit">포켓몬 모델·애니메이션: <a href="https://gitlab.com/cable-mc/cobblemon" target="_blank" rel="noopener">Cobblemon</a> (MPL-2.0 / CC BY-NC, 사이트용 그림으로 렌더) · Pokémon © Nintendo / Creatures / GAME FREAK</p>
   <p class="foot-replay"><button class="story-replay" type="button" data-story-replay>시즌 2 종료 · 포켓몬 부활 이야기 다시 보기</button></p>
 </main>
 
@@ -1652,9 +1661,8 @@ html[data-story], html[data-story] body{overflow:hidden}
   var html = document.documentElement;
   if (html.dataset.mood !== 'poke') return;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var MAX = 1025;
-  var ANI = 'https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/showdown/';
-  var STILL = 'https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/';
+  // 코블몬 실제 모델을 렌더한 그림 (Cobblemon, MPL-2.0 / CC BY-NC — 그림으로 렌더해 사용)
+  var CB = './assets/cobble/', LIST = [], BYID = {}, MAX = 0, SMALL = innerWidth < 600;
   var BALL = ['....KKKK....','..KKRRRRKK..','.KRrRRRRRRK.','.KrRRRRRRRK.','KRRRRKKRRRRK','KKKKKWWKKKKK','KWWWWKKWWWWK','KWWWWWWWWWWK','.KWWWWWWWWwK','.KwWWWWWWwwK','..KKwwwwKK..','....KKKK....'];
   var BALLC = {K:'#1D1D25', R:'#E3403A', r:'#FF8A7E', W:'#F6F6F6', w:'#D3D7DE'};
   function px(rows, col){
@@ -1671,31 +1679,37 @@ html[data-story], html[data-story] body{overflow:hidden}
   function meet(id){
     if (met[id]) return; met[id] = 1;
     try { localStorage.setItem('pk-met', Object.keys(met).join(',')); } catch(e){}
-    if (dexEl) dexEl.textContent = Object.keys(met).length;
+    if (dexEl) dexEl.textContent = metCount();
   }
-  // 덱: 1~1025를 섞어서 차례로 꺼낸다 (아직 못 만난 포켓몬 먼저)
+  function metCount(){ var n = 0; LIST.forEach(function(x){ if (met[x[0]]) n++; }); return n; }
+  // 덱: 코블몬 포켓몬 전체를 섞어서 차례로 꺼낸다 (아직 못 만난 포켓몬 먼저)
   var deck = [];
   function draw(){
     if (!deck.length) {
       var fresh = [], seen = [];
-      for (var i = 1; i <= MAX; i++) (met[i] ? seen : fresh).push(i);
+      LIST.forEach(function(x){ (met[x[0]] ? seen : fresh).push(x[0]); });
       [fresh, seen].forEach(function(a){ for (var j = a.length - 1; j > 0; j--) { var k = Math.floor(Math.random() * (j + 1)), t = a[j]; a[j] = a[k]; a[k] = t; } });
       deck = fresh.concat(seen);
     }
     return deck.shift();
   }
-  function sprite(id, lazy){
-    var img = new Image(); img.alt = ''; img.decoding = 'async'; if (lazy) img.loading = 'lazy'; img.draggable = false;
-    img.src = ANI + id + '.gif';
-    img.onerror = function(){ if (img.src.indexOf(STILL) < 0) img.src = STILL + id + '.png'; };
-    return img;
+  function sprite(id, cap){
+    var info = BYID[id] || [id, 2, 0, 20, ''], f = SMALL ? .82 : 1;
+    var s = Math.round(Math.max(30, Math.min(cap || 70, 24 + info[3] * .9)) * f);
+    var w = document.createElement('span'), d = document.createElement('span');
+    w.className = 'cbw'; d.className = 'cb'; d.style.width = d.style.height = s + 'px';
+    d.style.setProperty('--sw', (s * 12) + 'px'); d.style.animationDuration = Math.max(1.2, info[1] || 2) + 's';
+    d.style.backgroundImage = 'url(' + CB + id + '.webp)';
+    d.setAttribute('role', 'img'); d.setAttribute('aria-label', info[4] || ('포켓몬 ' + id));
+    w.appendChild(d);
+    return w;
   }
   var seq = 0;
-  function makeMon(host, style, extra){
+  function makeMon(host, style, extra, cap){
     var id = draw(), b = document.createElement('button');
     b.type = 'button'; b.className = 'mon' + (extra ? ' ' + extra : '') + (Math.random() < .5 ? ' flip' : '');
-    b.setAttribute('aria-label', '포켓몬 도감 ' + id + '번 쓰다듬기');
-    var img = sprite(id, true); img.style.setProperty('--bob', (-(seq++ * .43) % 2.6) + 's'); b.appendChild(img);
+    b.setAttribute('aria-label', ((BYID[id] || [])[4] || '포켓몬') + ' 쓰다듬기');
+    var img = sprite(id, cap); img.style.setProperty('--bob', (-(seq++ * .43) % 2.6) + 's'); b.appendChild(img);
     Object.keys(style).forEach(function(k){ b.style[k] = style[k]; });
     b.addEventListener('click', function(e){
       e.preventDefault(); e.stopPropagation();
@@ -1753,7 +1767,7 @@ html[data-story], html[data-story] body{overflow:hidden}
     PERCH.forEach(function(p){
       var host = document.querySelector(p[0]); if (!host) return;
       host.classList.add('has-mon');
-      var m = makeMon(host, p[1], p[2]);
+      var m = makeMon(host, p[1], p[2], 70);
       if (!host._mons) { host._mons = []; if (io) io.observe(host); }
       host._mons.push(m);
       if (!io) release(m, host, 0);
@@ -1763,15 +1777,15 @@ html[data-story], html[data-story] body{overflow:hidden}
   function parade(){
     var hero = document.querySelector('.hero'); if (!hero) return;
     var box = document.createElement('div'); box.className = 'parade'; box.setAttribute('aria-hidden', 'true');
-    box.innerHTML = '<span class="parade-dex">' + ballSvg + '만난 포켓몬 <b>0</b> / ' + MAX + '</span>';
+    box.innerHTML = '<span class="parade-dex">' + ballSvg + '만난 코블몬 <b>0</b> / ' + MAX + '</span>';
     hero.insertAdjacentElement('afterend', box);
-    dexEl = box.querySelector('b'); dexEl.textContent = Object.keys(met).length;
-    if (reduce) { for (var r = 0; r < 7; r++) { var w0 = document.createElement('div'), id0 = draw(); w0.className = 'parade-walk'; w0.style.transform = 'translateX(' + (r * 14 + 3) + '%)'; w0.style.left = '0'; w0.appendChild(sprite(id0)); box.appendChild(w0); meet(id0); } return; }
+    dexEl = box.querySelector('b'); dexEl.textContent = metCount();
+    if (reduce) { for (var r = 0; r < 7; r++) { var w0 = document.createElement('div'), id0 = draw(); w0.className = 'parade-walk'; w0.style.transform = 'translateX(' + (r * 14 + 3) + '%)'; w0.style.left = '0'; w0.appendChild(sprite(id0, 62)); box.appendChild(w0); meet(id0); } return; }
     var visible = true, timer = null;
     function spawn(){
       if (!visible || document.hidden) return;
       var W = box.clientWidth, right = Math.random() < .5, id = draw(), w = document.createElement('div');
-      w.className = 'parade-walk' + (right ? ' right' : ''); w.appendChild(sprite(id)); box.appendChild(w); meet(id);
+      w.className = 'parade-walk' + (right ? ' right' : ''); w.appendChild(sprite(id, 62)); box.appendChild(w); meet(id);
       var from = right ? -90 : W + 20, to = right ? W + 20 : -90, ms = (W + 110) / (38 + Math.random() * 30) * 1000;
       w.animate([{transform:'translateX(' + from + 'px)'}, {transform:'translateX(' + to + 'px)'}], {duration:ms, easing:'linear'}).onfinish = function(){ w.remove(); };
     }
@@ -1785,7 +1799,7 @@ html[data-story], html[data-story] body{overflow:hidden}
   function heroCrew(){
     if (!hero) return;
     hero.classList.add('has-mon');
-    [['31%', 'm1'], ['40%', 'm2'], ['49%', 'far'], ['58%', 'far']].forEach(function(m){ heroMons.push(makeMon(hero, {left:m[0]}, m[1])); });
+    [['31%', 'm1'], ['40%', 'm2'], ['49%', 'far'], ['58%', 'far']].forEach(function(m){ heroMons.push(makeMon(hero, {left:m[0]}, m[1], 56)); });
   }
   function heroParty(){ heroMons.forEach(function(m, i){ release(m, hero, i * 260); }); }
   // 트레이너 변신 장면
@@ -1830,11 +1844,21 @@ html[data-story], html[data-story] body{overflow:hidden}
     at(T0 + FLY + 900, function(){ html.dataset.intro = 'pparty'; heroParty(); });
     at(T0 + FLY + 2600, done);
   }
-  heroCrew();
-  parade();
+  function shoulder(){
+    var fr = document.getElementById('frog'), sk = fr && fr.querySelector('svg.skin'); if (!sk || !BYID[133]) return;
+    var u = sk.getBoundingClientRect().width / 18 || (SMALL ? 52 : 84) / 18, s = Math.round(u * 10);
+    var w = sprite(133, 200); w.className = 'cbw shoulder';
+    var d = w.firstChild; d.style.width = d.style.height = s + 'px'; d.style.setProperty('--sw', (s * 12) + 'px'); d.removeAttribute('role'); d.removeAttribute('aria-label');
+    w.setAttribute('aria-hidden', 'true'); w.style.left = (u * 10.5) + 'px'; w.style.top = (u * 9 - s * .92) + 'px';
+    fr.appendChild(w);
+  }
+  var ready = fetch(CB + 'index.json').then(function(r){ return r.json(); }).then(function(j){
+    LIST = j.list || []; LIST.forEach(function(x){ BYID[x[0]] = x; }); MAX = LIST.length;
+    heroCrew(); parade(); shoulder();
+  });
   function start(){ if (html.dataset.intro === 'pcalm') intro(); else { heroMons.forEach(function(m){ meet(m._id); m.classList.add('on'); }); perch(); } }
-  if (html.hasAttribute('data-story')) addEventListener('story:leaving', function(e){ html.dataset.intro = 'pcalm'; intro(e.detail && e.detail.rect); }, {once:true});
-  else start();
+  if (html.hasAttribute('data-story')) addEventListener('story:leaving', function(e){ html.dataset.intro = 'pcalm'; var r = e.detail && e.detail.rect; ready.then(function(){ intro(r); }); }, {once:true});
+  else ready.then(start);
 })();
 </script>
 <script>

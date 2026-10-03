@@ -1,0 +1,4 @@
+이 폴더의 포켓몬 그림은 Cobblemon(https://gitlab.com/cable-mc/cobblemon)의 3D 모델·텍스처·애니메이션을
+사이트용 2D 스프라이트(12프레임 대기 동작)로 렌더한 것입니다. (변경 사항: 3D 모델을 정지/연속 그림으로 렌더함)
+라이선스: 저장소 기본 MPL-2.0, 일부 모델은 폴더별 license 파일의 Creative Commons 비영리(CC BY-NC) 조건을 따릅니다.
+비영리 팬 사이트 용도로만 사용합니다. Pokémon © Nintendo / Creatures Inc. / GAME FREAK inc.
