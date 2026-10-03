@@ -19,15 +19,6 @@
       "size": 94448
     },
     {
-      "file": "ATi.Structures.Default.V1.4.2.1.20+.jar",
-      "id": "atistructures",
-      "name": "atistructures",
-      "version": "1.4.0",
-      "desc": "A collection of custom structures and dungeons",
-      "env": "",
-      "size": 3149756
-    },
-    {
       "file": "AttributeFix-Forge-1.20.1-21.0.5.jar",
       "id": "attributefix",
       "name": "AttributeFix",
