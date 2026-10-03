@@ -19,15 +19,6 @@
       "size": 5904485
     },
     {
-      "file": "artifacts-forge-9.5.19.jar",
-      "id": "artifacts",
-      "name": "Artifacts",
-      "version": "9.5.19",
-      "desc": "Adds various new powerful uncraftable items to make exploration a bit more interesting",
-      "env": "",
-      "size": 850974
-    },
-    {
       "file": "Ash.Of.Sin-Custom.Anti.Seat.Entity-1.20.1-1.0.1.jar",
       "id": "ash_of_sin_custom_anti_seat_entity",
       "name": "Ash Of Sin: Custom Anti Seat Entity",
