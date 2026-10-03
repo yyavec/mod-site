@@ -17,6 +17,9 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20class%3D%22px%20%22%20viewBox%3D%220%200%2012%208%22%20shape-rendering%3D%22crispEdges%22%20aria-hidden%3D%22true%22%3E%3Crect%20x%3D%222%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%223%22%20y%3D%220%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%235EA646%22/%3E%3Crect%20x%3D%229%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%222%22%20y%3D%221%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%224%22%20y%3D%221%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%235EA646%22/%3E%3Crect%20x%3D%226%22%20y%3D%221%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%228%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23EEEEEE%22/%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%228%22%20y%3D%223%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%23EEEEEE%22/%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23111111%22/%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23EEEEEE%22/%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%228%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23EEEEEE%22/%3E%3Crect%20x%3D%229%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23111111%22/%3E%3Crect%20x%3D%222%22%20y%3D%225%22%20width%3D%228%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%222%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%233A722A%22/%3E%3Crect%20x%3D%223%22%20y%3D%226%22%20width%3D%226%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%229%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%233A722A%22/%3E%3Crect%20x%3D%222%22%20y%3D%227%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%233A722A%22/%3E%3Crect%20x%3D%224%22%20y%3D%227%22%20width%3D%224%22%20height%3D%221%22%20fill%3D%22%23529A3A%22/%3E%3Crect%20x%3D%228%22%20y%3D%227%22%20width%3D%222%22%20height%3D%221%22%20fill%3D%22%233A722A%22/%3E%3C/svg%3E">
 <style>
 :root{
@@ -881,6 +884,76 @@ html[data-story], html[data-story] body{overflow:hidden}
 @keyframes paradeStep{to{transform:translateY(-3px)}}
 @media (max-width:600px){ .mon{width:48px; height:48px} .hero .mon{width:42px; height:42px} .hero .mon.far{display:none} .hero .mon.m1{left:44% !important} .hero .mon.m2{left:57% !important} .parade{height:72px} }
 @media (prefers-reduced-motion:reduce){ .mon .cbw, .parade-walk .cbw, [data-mood="poke"] .frog .trainer .held{animation:none !important} .mon.on{animation:none} }
+/* ---------- 코블몬 느낌 테마 (포켓몬 분위기 전용) ---------- */
+:root[data-mood="poke"]{
+  --bg-canvas:#DADCE1; --bg-surface:#F9F9FB; --bg-raised:#F1F2F5; --bg-sunken:#E6E8EE;
+  --text-primary:#2B2A33; --text-secondary:#55545F; --text-tertiary:#7E7D88; --text-disabled:#B4B3BC;
+  --border-subtle:#E3E5EA; --border-standard:#CDD0D8; --border-strong:#A8ACB7;
+  --accent:#3682E6; --accent-hover:#2C73D4; --accent-pressed:#2362BD; --accent-soft:#E2EDFC; --accent-edge:#1E5BB2; --on-accent:#FFFFFF;
+  --sky-top:#2B82E8; --sky-bottom:#A9DBFF; --cloud:#FFFFFF;
+  --shadow-raised:0 1px 2px rgba(33,32,53,.06), 0 10px 26px rgba(33,32,53,.09);
+  --font:"Lexend", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", sans-serif;
+  --cb-head:"Lexend", "Pretendard Variable", Pretendard, sans-serif;
+  --cb-navy:#212035; --cb-navy-2:#2E2C4C;
+}
+:root[data-mood="poke"][data-theme="dark"]{
+  --bg-canvas:#15141E; --bg-surface:#212035; --bg-raised:#29283F; --bg-sunken:#100F17;
+  --text-primary:#F2F2F7; --text-secondary:#BBBACB; --text-tertiary:#8C8BA2; --text-disabled:#55546C;
+  --border-subtle:#2C2B44; --border-standard:#3A3958; --border-strong:#55547A;
+  --accent:#5B9CF0; --accent-hover:#74ACF3; --accent-pressed:#4A8AE0; --accent-soft:#1A2A45; --accent-edge:#2F66B8; --on-accent:#0B1424;
+  --sky-top:#0F2D63; --sky-bottom:#2C5FA8; --cloud:#4E6FA6;
+  --shadow-raised:0 0 0 1px rgba(255,255,255,.03), 0 10px 26px rgba(0,0,0,.35);
+  --cb-navy:#0F0E18; --cb-navy-2:#1B1A2C;
+}
+/* 위쪽 파란 하늘 띠 + 물결 */
+:root[data-mood="poke"] body{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath fill='%23DADCE1' d='M0 46 C150 10 300 10 450 34 S750 70 900 40 S1100 8 1200 30 V80 H0Z'/%3E%3C/svg%3E") center 400px / 100% 80px no-repeat,
+  radial-gradient(60% 40% at 80% 6%, rgba(255,255,255,.35), transparent 70%) top / 100% 480px no-repeat,
+  linear-gradient(180deg, #1B66D2 0, #3B91EE 200px, #86CCFF 470px) top / 100% 480px no-repeat,
+  var(--bg-canvas)}
+:root[data-mood="poke"][data-theme="dark"] body{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath fill='%2315141E' d='M0 46 C150 10 300 10 450 34 S750 70 900 40 S1100 8 1200 30 V80 H0Z'/%3E%3C/svg%3E") center 400px / 100% 80px no-repeat,
+  linear-gradient(180deg, #0A1E45 0, #12336E 220px, #1F4F94 470px) top / 100% 480px no-repeat,
+  var(--bg-canvas)}
+/* 글씨 */
+[data-mood="poke"] h1{font:800 34px/1.15 var(--cb-head); letter-spacing:-.01em; color:#FFFFFF;
+  text-shadow:2px 0 0 #24233A, -2px 0 0 #24233A, 0 2px 0 #24233A, 0 -2px 0 #24233A, 2px 2px 0 #24233A, -2px 2px 0 #24233A, 2px -2px 0 #24233A, -2px -2px 0 #24233A, 0 5px 0 #24233A}
+[data-mood="poke"] .sec-head h2, [data-mood="poke"] h2{font-family:var(--cb-head); font-weight:700; font-size:20px; letter-spacing:-.01em}
+[data-mood="poke"] .guide-t b, [data-mood="poke"] .dl-t, [data-mood="poke"] #dlTitle{font-family:var(--cb-head); font-weight:700; letter-spacing:-.01em}
+[data-mood="poke"] .eyebrow{background:rgba(255,255,255,.9); color:#2B2A33; font-family:var(--cb-head); font-weight:600}
+:root[data-mood="poke"][data-theme="dark"] .eyebrow{background:rgba(255,255,255,.9); color:#2B2A33}
+[data-mood="poke"] h1{word-break:keep-all}
+/* 첫 화면 */
+[data-mood="poke"] .hero{background:radial-gradient(70% 60% at 85% 0%, rgba(255,255,255,.55), transparent 60%), linear-gradient(180deg, var(--sky-top), var(--sky-bottom)); box-shadow:0 0 0 3px rgba(255,255,255,.55), 0 16px 40px rgba(16,40,90,.28); border-radius:20px}
+[data-mood="poke"] .now{background:var(--cb-navy); color:#fff; font-family:var(--cb-head); font-weight:600}
+/* 버튼 */
+[data-mood="poke"] .btn-dl{border:0; border-radius:12px; background:var(--accent); color:var(--on-accent); font:700 17px/1 var(--cb-head); box-shadow:0 4px 0 var(--accent-edge), 0 8px 18px rgba(54,130,230,.3)}
+[data-mood="poke"] .btn-dl:hover{background:var(--accent-hover); transform:translateY(-1px)}
+[data-mood="poke"] .btn-dl:active{transform:translateY(3px); box-shadow:0 1px 0 var(--accent-edge)}
+[data-mood="poke"] .inst-dl{border:0; border-radius:12px; box-shadow:0 4px 0 var(--accent-edge)}
+[data-mood="poke"] .inst-dl b{font-family:var(--cb-head)}
+[data-mood="poke"] .rec-send{border:0; border-radius:12px; font:700 16px/1 var(--cb-head); box-shadow:0 4px 0 var(--accent-edge)}
+/* 카드 */
+[data-mood="poke"] .dl-card, [data-mood="poke"] .guide, [data-mood="poke"] .rec-card, [data-mood="poke"] .rec-list, [data-mood="poke"] .mods{border-radius:18px; border-color:transparent}
+[data-mood="poke"] .guide{animation:none; border:1px solid transparent; box-shadow:var(--shadow-raised)}
+[data-mood="poke"] .notice{border:0; border-radius:14px; background:var(--accent-soft); color:var(--text-primary)}
+[data-mood="poke"] .notice svg{color:var(--accent)}
+[data-mood="poke"] .helpme{border-radius:18px}
+/* 시즌 카드: 코블몬처럼 짙은 남색 카드 */
+[data-mood="poke"] .win-card{background:radial-gradient(80% 120% at 100% 0%, rgba(91,156,240,.35), transparent 60%), linear-gradient(135deg, var(--cb-navy), var(--cb-navy-2)); border:0; border-radius:18px; color:#fff; box-shadow:0 14px 34px rgba(20,18,40,.35)}
+[data-mood="poke"] .win-card .win-n{font:800 28px/1.15 var(--cb-head); color:#fff}
+[data-mood="poke"] .win-card .cand-p{color:#B9B8CF}
+[data-mood="poke"] .win-card .tag{background:rgba(255,255,255,.1); color:#E3E2F0}
+[data-mood="poke"] .win-card .weeks{color:#B9B8CF}
+[data-mood="poke"] .win-badge{background:var(--accent); color:#fff; box-shadow:none; font-family:var(--cb-head)}
+[data-mood="poke"] .badge-live{background:var(--accent); font-family:var(--cb-head)}
+/* 퍼레이드: 하늘 + 바다 + 모래톱 */
+[data-mood="poke"] .parade{border-radius:18px; background:linear-gradient(180deg, #4C9DF0 0%, #9BD6FF 44%, #4FB3E8 44%, #2E8FD6 64%, transparent 64%), repeating-linear-gradient(90deg, #5DB13C 0 16px, #4E9A31 16px 32px); background-size:100% 100%, 100% 24px; background-position:0 0, 0 100%; background-repeat:no-repeat}
+[data-mood="poke"] .parade-dex{font-family:var(--cb-head); font-weight:600}
+/* 아래 */
+[data-mood="poke"] footer{border-top:1px solid var(--border-standard)}
+[data-mood="poke"] .past-row{border-style:solid; border-color:var(--border-subtle); border-radius:14px}
+@media (max-width:600px){ [data-mood="poke"] h1{font-size:26px} :root[data-mood="poke"] body{background-position:center 330px, top, top, 0 0} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
