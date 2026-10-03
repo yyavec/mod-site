@@ -73,15 +73,6 @@
       "size": 1141295
     },
     {
-      "file": "chatplus-forge-2.8.1.jar",
-      "id": "chatplus",
-      "name": "ChatPlus",
-      "version": "2.8.1",
-      "desc": "Minecraft chat improved.",
-      "env": "",
-      "size": 27070339
-    },
-    {
       "file": "chloride-FORGE-mc1.20.1-v1.7.5.jar",
       "id": "chloride",
       "name": "Chloride",
