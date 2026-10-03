@@ -426,6 +426,28 @@ def main():
     else:
         rep["G_CONFIG_DL"], rep["G_CONFIG_HIDDEN"] = "", "hidden"
 
+    # Windows 설치 프로그램: install.json(서버 정보) + nochen-setup.zip(설치 파일)
+    theme = load_theme()
+    zip_url = os.environ.get("ZIP_URL", "")
+    if not zip_url.startswith("https://"):
+        zip_url = "https://github.com/" + os.environ.get("GITHUB_REPOSITORY", "yyavec/mod-site") + "/releases/latest/download/mods.zip"
+    install = {
+        "loader": loader, "mc": ver, "mods": zip_url, "config": curl if cfg else "",
+        "server": {"name": conf.get("SERVER_NAME", "") or "노천극장", "address": addr},
+        "profileName": theme.get("profile_name") or ("🐸 " + (conf.get("SERVER_NAME", "") or "노천극장")),
+        "folder": theme.get("game_folder") or "nochen-server",
+        "fabricLoader": theme.get("fabric_loader", ""),
+    }
+    (OUT / "install.json").write_text(json.dumps(install, ensure_ascii=False, indent=2), encoding="utf-8")
+    setup = ROOT / "installer" / "NOCHEN-SETUP.bat"
+    if setup.is_file():
+        bat = setup.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")  # 배치 파일은 CRLF
+        with zipfile.ZipFile(OUT / "nochen-setup.zip", "w", zipfile.ZIP_DEFLATED) as z:
+            z.writestr("NOCHEN-SETUP.bat", bat)
+    rep["G_SETUP_URL"] = "nochen-setup.zip"
+    rep["G_SETUP_PROFILE"] = e(install["profileName"])
+    rep["G_SETUP_HIDDEN"] = "" if loader == "Fabric" and setup.is_file() else "hidden"
+
     # 지난 시즌 (취소선 + 완결 도장)
     past = (load_season() or {}).get("past") or []
     stamps = load_theme().get("past_stamps") or {}

@@ -1,0 +1,168 @@
+@echo off
+chcp 65001 >nul
+title NOCHEN SETUP
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$s = [IO.File]::ReadAllText('%~f0', [Text.Encoding]::UTF8); $i = $s.IndexOf('#PS' + 'START'); Invoke-Expression $s.Substring($i)"
+echo.
+pause
+exit /b
+
+#PSSTART
+# ============================================================
+#  노천극장 서버 설치 프로그램 (Windows)
+#  - Fabric 을 자동으로 설치하고 (Java 필요 없음)
+#  - .minecraft 안에 '노천극장 전용 폴더'를 따로 만들어 모드 · 설정을 넣고
+#  - 런처에 '노천극장' 항목과 서버 주소를 등록한다.
+#  모드가 바뀌면 이 파일을 다시 실행하면 전용 폴더의 모드만 깨끗하게 바뀐다.
+#  기존 .minecraft\mods 는 건드리지 않는다 (원하면 백업 폴더로 옮겨 정리).
+# ============================================================
+$ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'
+try { [Console]::OutputEncoding = [Text.Encoding]::UTF8 } catch {}
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$SITE = if ($env:NOCHEN_SITE) { $env:NOCHEN_SITE } else { 'https://yyavec.github.io/mod-site/' }
+
+function Say([string]$m, [string]$c = 'Gray') { Write-Host $m -ForegroundColor $c }
+function Step([int]$n, [string]$m) { Write-Host ''; Write-Host (' [' + $n + '/7] ' + $m) -ForegroundColor Cyan }
+function Fetch([string]$url, [string]$out) {
+  $curl = Join-Path $env:SystemRoot 'System32\curl.exe'
+  if (Test-Path $curl) {
+    & $curl -L --fail --retry 3 --progress-bar -o $out $url
+    if ($LASTEXITCODE -ne 0) { throw ('파일을 받지 못했어요: ' + $url) }
+  } else {
+    (New-Object Net.WebClient).DownloadFile($url, $out)
+  }
+}
+function WriteJson([string]$path, $obj) {
+  $json = $obj | ConvertTo-Json -Depth 50
+  [IO.File]::WriteAllText($path, $json, (New-Object Text.UTF8Encoding $false))
+}
+# servers.dat (NBT) 만들기: 서버 하나만 들어 있는 목록
+function ServersDat([string]$path, [string]$name, [string]$ip) {
+  $ms = New-Object IO.MemoryStream
+  function B([byte[]]$b) { $ms.Write($b, 0, $b.Length) }
+  function S([string]$s) { $u = [Text.Encoding]::UTF8.GetBytes($s); B @([byte](($u.Length -shr 8) -band 255), [byte]($u.Length -band 255)); B $u }
+  B @(10); S ''                      # 뿌리 묶음
+  B @(9); S 'servers'; B @(10, 0, 0, 0, 1)   # servers 목록 (묶음 1개)
+  B @(8); S 'name'; S $name
+  B @(8); S 'ip'; S $ip
+  B @(0)                             # 서버 묶음 끝
+  B @(0)                             # 뿌리 끝
+  [IO.File]::WriteAllBytes($path, $ms.ToArray())
+}
+
+try {
+  Write-Host ''
+  Say '  ============================================' Green
+  Say '     노천극장 서버 설치 프로그램' Green
+  Say '  ============================================' Green
+  Say '  창을 닫지 말고 끝날 때까지 기다려 주세요.' Gray
+
+  Step 1 '서버 정보 확인'
+  $cfg = Invoke-RestMethod ($SITE + 'install.json?t=' + [DateTime]::Now.Ticks)
+  if ($cfg.loader -ne 'Fabric') { throw ('지금 서버는 ' + $cfg.loader + ' 라서 이 프로그램으로는 설치할 수 없어요. 사이트의 직접 설치 방법을 따라 주세요.') }
+  $mc = [string]$cfg.mc
+  Say ('  마인크래프트 ' + $mc + ' · Fabric · ' + $cfg.server.name)
+
+  $root = Join-Path $env:APPDATA '.minecraft'
+  if (-not (Test-Path $root)) { throw '마인크래프트 폴더(.minecraft)가 없어요. 공식 런처로 게임을 한 번 켜 본 다음 다시 실행해 주세요.' }
+  $warned = $false
+  while (-not $env:NOCHEN_TEST -and (Get-Process -Name 'MinecraftLauncher', 'Minecraft' -ErrorAction SilentlyContinue)) {
+    if (-not $warned) { Say '  마인크래프트 런처가 켜져 있어요. 런처를 닫아 주세요. 닫으면 자동으로 계속돼요...' Yellow; $warned = $true }
+    Start-Sleep -Seconds 2
+  }
+
+  Step 2 'Fabric 설치'
+  $loaders = Invoke-RestMethod ('https://meta.fabricmc.net/v2/versions/loader/' + $mc)
+  $lv = [string]$cfg.fabricLoader
+  if (-not $lv) { $lv = ($loaders | Where-Object { $_.loader.stable } | Select-Object -First 1).loader.version }
+  if (-not $lv) { $lv = $loaders[0].loader.version }
+  $vid = 'fabric-loader-' + $lv + '-' + $mc
+  $vdir = Join-Path $root ('versions\' + $vid)
+  New-Item -ItemType Directory -Force -Path $vdir | Out-Null
+  Fetch ('https://meta.fabricmc.net/v2/versions/loader/' + $mc + '/' + $lv + '/profile/json') (Join-Path $vdir ($vid + '.json'))
+  Say ('  ' + $vid + ' 준비 완료')
+
+  Step 3 '노천극장 전용 폴더 준비'
+  $game = Join-Path $root ([string]$cfg.folder)
+  New-Item -ItemType Directory -Force -Path $game | Out-Null
+  Say ('  ' + $game)
+
+  Step 4 '모드 받기 (시간이 좀 걸려요)'
+  $tmp = Join-Path $env:TEMP 'nochen-setup'
+  if (Test-Path $tmp) { Remove-Item $tmp -Recurse -Force }
+  New-Item -ItemType Directory -Force -Path $tmp | Out-Null
+  $zip = Join-Path $tmp 'mods.zip'
+  Fetch ([string]$cfg.mods) $zip
+  $unz = Join-Path $tmp 'mods'
+  Expand-Archive -LiteralPath $zip -DestinationPath $unz -Force
+  $mods = Join-Path $game 'mods'
+  if (Test-Path $mods) { Remove-Item $mods -Recurse -Force }
+  New-Item -ItemType Directory -Force -Path $mods | Out-Null
+  $jars = Get-ChildItem -LiteralPath $unz -Recurse -Filter '*.jar'
+  foreach ($j in $jars) { Move-Item -LiteralPath $j.FullName -Destination $mods -Force }
+  Say ('  모드 ' + $jars.Count + '개 설치 (예전 모드는 깨끗하게 지움)') Green
+
+  Step 5 '설정 파일'
+  if ($cfg.config) {
+    $cz = Join-Path $tmp 'config.zip'
+    Fetch ([string]$cfg.config) $cz
+    Expand-Archive -LiteralPath $cz -DestinationPath $game -Force
+    Say '  서버와 같은 설정으로 맞췄어요' Green
+  } else { Say '  따로 맞출 설정이 없어요' }
+
+  Step 6 '서버 목록 · 런처 등록'
+  ServersDat (Join-Path $game 'servers.dat') ([string]$cfg.server.name) ([string]$cfg.server.address)
+  $ram = [math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB)
+  $xmx = if ($ram -ge 15) { 6 } elseif ($ram -ge 7) { 4 } else { 3 }
+  $now = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ')
+  $prof = [pscustomobject]@{
+    name          = [string]$cfg.profileName
+    type          = 'custom'
+    lastVersionId = $vid
+    gameDir       = $game
+    icon          = 'Grass'
+    javaArgs      = ('-Xmx' + $xmx + 'G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M')
+    created       = $now
+    lastUsed      = $now
+  }
+  $files = @('launcher_profiles.json', 'launcher_profiles_microsoft_store.json') | ForEach-Object { Join-Path $root $_ } | Where-Object { Test-Path $_ }
+  if (-not $files) { $files = @(Join-Path $root 'launcher_profiles.json'); WriteJson $files[0] ([pscustomobject]@{ profiles = [pscustomobject]@{}; version = 3 }) }
+  foreach ($f in $files) {
+    Copy-Item -LiteralPath $f -Destination ($f + '.nochen-backup') -Force
+    $j = [IO.File]::ReadAllText($f, [Text.Encoding]::UTF8) | ConvertFrom-Json
+    if (-not $j.profiles) { $j | Add-Member -NotePropertyName profiles -NotePropertyValue ([pscustomobject]@{}) -Force }
+    $j.profiles | Add-Member -NotePropertyName 'nochen-server' -NotePropertyValue $prof -Force
+    WriteJson $f $j
+  }
+  Say ('  런처에 "' + $cfg.profileName + '" 추가 (메모리 ' + $xmx + 'GB)') Green
+
+  Step 7 '예전 모드 정리 (선택)'
+  $old = Join-Path $root 'mods'
+  if ((Test-Path $old) -and (Get-ChildItem -LiteralPath $old -Force | Select-Object -First 1)) {
+    Say '  기존 .minecraft\mods 폴더에 예전 모드가 남아 있어요.' Yellow
+    Say '  노천극장은 전용 폴더를 쓰니까 그대로 둬도 괜찮아요.'
+    $a = Read-Host '  깔끔하게 백업 폴더로 옮겨서 정리할까요? (Y/N)'
+    if ($a -match '^[yY]') {
+      $bak = Join-Path $root ('mods_backup_' + (Get-Date -Format 'yyyyMMdd_HHmm'))
+      Move-Item -LiteralPath $old -Destination $bak
+      New-Item -ItemType Directory -Force -Path $old | Out-Null
+      Say ('  정리했어요. 예전 모드는 여기 보관: ' + $bak) Green
+    } else { Say '  그대로 뒀어요.' }
+  } else { Say '  정리할 예전 모드가 없어요.' }
+
+  Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue
+  Write-Host ''
+  Say '  ============================================' Green
+  Say '   설치 끝! 이제 이렇게 하면 돼요' Green
+  Say '  ============================================' Green
+  Say ('   1. 마인크래프트 런처를 켜요')
+  Say ('   2. 플레이 버튼 왼쪽 목록에서  "' + $cfg.profileName + '"  을 골라요')
+  Say ('   3. 플레이! → 멀티플레이에 서버가 이미 들어 있어요')
+  Say ''
+  Say '   모드가 업데이트되면 이 프로그램을 다시 실행하면 돼요.' Gray
+}
+catch {
+  Write-Host ''
+  Say ('  문제가 생겼어요: ' + $_.Exception.Message) Red
+  Say '  이 창을 캡처해서 디스코드로 보내 주세요. 사이트의 "직접 설치하기" 방법도 있어요.' Yellow
+}

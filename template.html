@@ -1005,7 +1005,7 @@ html[data-story], html[data-story] body{overflow:hidden}
   <details class="guide" id="guide">
     <summary class="guide-head">
       <span class="guide-ic"><svg class="px" viewBox="0 0 8 9" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="2" height="1" fill="#F4EBD6"/><rect x="2" y="1" width="4" height="1" fill="#F4EBD6"/><rect x="1" y="2" width="6" height="1" fill="#F4EBD6"/><rect x="1" y="3" width="2" height="1" fill="#F4EBD6"/><rect x="3" y="3" width="1" height="1" fill="#62B23F"/><rect x="4" y="3" width="3" height="1" fill="#F4EBD6"/><rect x="0" y="4" width="5" height="1" fill="#F4EBD6"/><rect x="5" y="4" width="1" height="1" fill="#62B23F"/><rect x="6" y="4" width="2" height="1" fill="#F4EBD6"/><rect x="0" y="5" width="2" height="1" fill="#F4EBD6"/><rect x="2" y="5" width="1" height="1" fill="#62B23F"/><rect x="3" y="5" width="5" height="1" fill="#F4EBD6"/><rect x="0" y="6" width="8" height="1" fill="#E6D8B8"/><rect x="1" y="7" width="6" height="1" fill="#E6D8B8"/><rect x="2" y="8" width="4" height="1" fill="#CDBB94"/></svg></span>
-      <span class="guide-t"><b>처음 왔어요</b><small>차근차근 따라 하면 10분이면 서버에 들어가요</small></span>
+      <span class="guide-t"><b>처음 왔어요</b><small>설치 프로그램으로 5분이면 서버에 들어가요</small></span>
       <span class="guide-prog num" id="guideProg">0 / 6</span>
       <span class="chev" aria-hidden="true"></span>
     </summary>
@@ -1021,66 +1021,59 @@ html[data-story], html[data-story] body{overflow:hidden}
           <p>마인크래프트 <b>공식 런처</b>로 게임을 한 번이라도 켜 본 적이 있으면 준비 끝이에요.</p>
           <button class="btn-ghost gdone" type="button">다 했어요 → 다음</button></div></details></li>
 
-        <li><details class="gstep" data-step="2"><summary><span class="gno"></span><span class="gtt">{{G_LOADER}} 설치<small>모드를 돌려 주는 프로그램 · {{G_VERSION}}</small></span><span class="chev"></span></summary><div class="gbody">
-          <p>모드를 쓰려면 먼저 <b>{{G_LOADER}}</b>을(를) 설치해야 해요. 아래 버튼에서 설치 파일을 받으세요.</p>
-          <div class="glinks">{{G_LOADER_LINKS}}</div>
-          <ol class="gsub">
-            <li><b>Java</b>가 없으면 먼저 설치해요. <a class="hl" href="https://adoptium.net/" target="_blank" rel="noopener">adoptium.net</a>에서 <b>Download</b>를 눌러 받고, 설치는 전부 기본값으로 넘기면 돼요. <span class="gtip">마인크래프트 런처 안의 Java로는 설치 파일이 안 열려요</span></li>
-            <li>받은 설치 파일을 <b>두 번 눌러</b> 실행해요. <span class="warn">마인크래프트가 열려 버리면?</span> <span class="gtip">설치 파일 우클릭 → 연결 프로그램 → 다른 앱 선택 → <b>OpenJDK Platform binary</b>(Java) → <b>항상 이 앱 사용</b> 체크</span></li>
-            <li><b>Minecraft 버전</b>을 <b class="hl">{{G_VERSION}}</b>(으)로 맞춰요. <span class="warn">버전이 다르면 서버에 못 들어와요</span></li>
-            <li><b>클라이언트 설치</b>(Install client)가 선택된 상태로 <b>설치</b>(OK)를 누르고 끝날 때까지 기다려요.</li>
-          </ol>
-          {{G_VERSION_NOTE}}
-          <button class="btn-ghost gdone" type="button">다 했어요 → 다음</button></div></details></li>
-
-        <li><details class="gstep" data-step="3"><summary><span class="gno"></span><span class="gtt">모드 · 설정 넣기<small>mods 폴더에 모드, .minecraft에 설정 덮어쓰기</small></span><span class="chev"></span></summary><div class="gbody">
-          <ol class="gsub">
-            <li>이 안내 바로 아래 <a href="#dlTitle">모드 받기</a> 버튼으로 <code>mods.zip</code>을 받아요.</li>
-            <li><span data-os-show="win"><kbd>Win</kbd> + <kbd>R</kbd>을 누르고 아래 경로를 붙여 넣은 뒤 Enter.</span><span data-os-show="mac" hidden>Finder에서 <kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>G</kbd>를 누르고 아래 경로를 붙여 넣어요.</span> 폴더가 없으면 <b>mods</b>라는 이름으로 새로 만들어요.
-              <div class="path" data-os-show="win"><code>%appdata%\.minecraft\mods</code><button class="btn-ghost" type="button" data-copy="%appdata%\.minecraft\mods" data-toast="경로를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-              <div class="path" data-os-show="mac" hidden><code>~/Library/Application Support/minecraft/mods</code><button class="btn-ghost" type="button" data-copy="~/Library/Application Support/minecraft/mods" data-toast="경로를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div></li>
-            <li>폴더 안에 <b>예전 모드가 있으면 전부 지우고</b>, 받은 zip의 압축을 풀어 나온 <code>.jar</code> 파일을 전부 넣어요.</li>
-          </ol>
-          <div class="cfg" {{G_CONFIG_HIDDEN}}>
-            <div class="cfg-h"><b>설정 파일 덮어쓰기</b><span class="cfg-once">처음 한 번만</span></div>
-            <p>서버와 같은 설정으로 맞추는 파일이에요. 이걸 안 하면 퀘스트, 지도, 몹 설정 등이 서버와 달라질 수 있어요.</p>
-            <div class="glinks">{{G_CONFIG_DL}}</div>
+        <li><details class="gstep" data-step="2"><summary><span class="gno"></span><span class="gtt">설치 프로그램 실행<small>더블클릭 한 번이면 끝 · Windows</small></span><span class="chev"></span></summary><div class="gbody">
+          <div data-os-show="win">
+            <p><b>Fabric 설치, 모드·설정 넣기, 서버 등록</b>까지 프로그램이 알아서 해요. 예전 모드랑 섞이지 않게 <b>노천극장 전용 폴더</b>를 따로 써요.</p>
+            <div class="glinks" {{G_SETUP_HIDDEN}}><a class="inst-dl" href="{{G_SETUP_URL}}" download><svg class="i"><use href="#i-dl"/></svg><span><b>노천극장 설치 프로그램 받기</b><small>Windows · NOCHEN-SETUP</small></span></a></div>
             <ol class="gsub">
-              <li>받은 zip의 <b>압축을 풀면</b> <code>config</code>, <code>defaultconfigs</code> <b>폴더 두 개</b>가 나와요.</li>
-              <li><b>.minecraft 폴더</b>를 열어요. mods 폴더보다 <b>한 칸 위</b>예요.
-                <div class="path" data-os-show="win"><code>%appdata%\.minecraft</code><button class="btn-ghost" type="button" data-copy="%appdata%\.minecraft" data-toast="경로를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
-                <div class="path" data-os-show="mac" hidden><code>~/Library/Application Support/minecraft</code><button class="btn-ghost" type="button" data-copy="~/Library/Application Support/minecraft" data-toast="경로를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div></li>
-              <li>두 폴더를 그대로 <b>붙여 넣고</b>, "이미 있다"고 물어보면 <b>덮어쓰기(모두 바꾸기)</b>를 눌러요.</li>
+              <li><b>마인크래프트 런처를 닫아요.</b> <span class="gtip">켜져 있으면 프로그램이 닫을 때까지 기다려요</span></li>
+              <li>받은 <code>nochen-setup.zip</code>을 <b>압축 풀고</b>, 나온 <code>NOCHEN-SETUP</code>을 <b>두 번 눌러</b> 실행해요.</li>
+              <li>파란 창 <b>"Windows의 PC 보호"</b>가 뜨면 <b>추가 정보</b> → <b>실행</b>을 눌러요. <span class="gtip">직접 만든 프로그램이라 처음 한 번 뜨는 경고예요</span></li>
+              <li>검은 창이 알아서 진행돼요. 마지막에 <b>"예전 모드를 정리할까요?"</b>라고 물으면 <b>Y</b>(정리) 또는 <b>N</b>(그대로)을 누르고 Enter.</li>
             </ol>
-            <pre class="tree" aria-label="다 끝나면 폴더 모양"><b>.minecraft</b>
-├─ mods            <i>← 모드 .jar 파일들</i>
-├─ config          <i>← 덮어쓰기</i>
-└─ defaultconfigs  <i>← 덮어쓰기</i></pre>
+            <p class="gnote">모드가 업데이트되면 <b>같은 프로그램을 다시 실행</b>하면 돼요. 노천극장 폴더의 모드만 깨끗하게 바뀌어요.</p>
+          </div>
+          <div data-os-show="mac" hidden>
+            <p>macOS는 아직 설치 프로그램이 없어요. 아래 <b>5단계 "직접 설치하기"</b>를 따라 해 주세요.</p>
           </div>
           <button class="btn-ghost gdone" type="button">다 했어요 → 다음</button></div></details></li>
 
-        <li><details class="gstep" data-step="4"><summary><span class="gno"></span><span class="gtt">게임 실행<small>런처에서 {{G_LOADER}} 버전 고르기</small></span><span class="chev"></span></summary><div class="gbody">
+        <li><details class="gstep" data-step="3"><summary><span class="gno"></span><span class="gtt">게임 실행<small>런처에서 노천극장 고르기</small></span><span class="chev"></span></summary><div class="gbody">
           <ol class="gsub">
             <li>마인크래프트 런처를 켜요.</li>
-            <li><b>플레이</b> 버튼 왼쪽의 버전 선택을 눌러 <b class="hl">{{G_PROFILE}}</b>을(를) 골라요.
-              <figure class="gshot"><img src="assets/launcher-forge.png" alt="런처 버전 목록에서 맨 위의 forge 1.20.1-forge 항목을 고른 모습" width="282" height="402" loading="lazy">
-              <figcaption>이렇게 <b>forge</b> (<code>1.20.1-forge-…</code>)라고 적힌 걸 고르고 <b>플레이</b>를 누르면 돼요. 다른 항목(최신 릴리스, fabric 등)을 고르면 모드가 안 켜져요.</figcaption></figure></li>
+            <li><b>플레이</b> 버튼 왼쪽 목록에서 <b class="hl">{{G_SETUP_PROFILE}}</b>을(를) 골라요. <span class="gtip">직접 설치했다면 <b>fabric-loader-{{G_VERSION}}</b></span></li>
             <li><b>플레이</b>! 처음에는 이것저것 받느라 시간이 좀 걸려요.</li>
           </ol>
           <details class="gfix"><summary>게임이 안 켜지거나 오류가 나요</summary><ul>
-            <li><b>예전 모드가 남아 있는지</b> mods 폴더를 다시 확인해요. 받은 파일 말고 다른 파일이 있으면 지워요.</li>
-            <li><b>버전이 맞는지</b> 확인해요. 런처에서 고른 버전과 설치한 버전이 같아야 해요.</li>
-            <li>모드팩이 무거워서 <b>메모리가 모자랄 수</b> 있어요. 런처 → <b>설치 설정</b> → 해당 버전 <b>편집</b> → 추가 옵션의 <b>JVM 인수</b> 맨 앞 <code>-Xmx2G</code>를 <code>-Xmx6G</code>로 바꿔요(컴퓨터 램이 16GB 이상일 때).</li>
+            <li>설치 프로그램을 <b>한 번 더 실행</b>해요. 모드를 처음부터 다시 깔아 줘요.</li>
+            <li>런처에서 <b>다른 버전</b>(최신 릴리스 등)을 고르지 않았는지 확인해요.</li>
+            <li>그래도 안 되면 오류 화면을 캡처해서 아래 <b>도움 카드</b>의 디스코드로 보내 주세요.</li>
           </ul></details>
           <button class="btn-ghost gdone" type="button">다 했어요 → 다음</button></div></details></li>
 
-        <li><details class="gstep" data-step="5"><summary><span class="gno"></span><span class="gtt">서버 접속<small>멀티플레이 → 서버 추가</small></span><span class="chev"></span></summary><div class="gbody">
-          <ol class="gsub">
-            <li>게임에서 <b>멀티플레이</b> → <b>서버 추가</b>를 눌러요.</li>
-            <li>서버 이름은 아무거나, <b>서버 주소</b>에 아래 주소를 넣고 <b>완료</b>.</li>
-          </ol>
+        <li><details class="gstep" data-step="4"><summary><span class="gno"></span><span class="gtt">서버 접속<small>멀티플레이에 이미 들어 있어요</small></span><span class="chev"></span></summary><div class="gbody">
+          <p><b>멀티플레이</b>를 누르면 서버가 <b>이미 목록에 있어요.</b> 두 번 누르면 접속!</p>
+          <p class="gnote">목록에 없으면 <b>서버 추가</b>를 눌러 아래 주소를 넣어요.</p>
           {{G_ADDR_ROW}}
-          <p>목록에 생긴 서버를 두 번 누르면 접속! 다음부터는 바로 들어오면 돼요.</p>
+          <button class="btn-ghost gdone" type="button">다 했어요 → 다음</button></div></details></li>
+
+        <li><details class="gstep" data-step="5"><summary><span class="gno"></span><span class="gtt">직접 설치하기<small>프로그램이 안 될 때 · macOS</small></span><span class="chev"></span></summary><div class="gbody">
+          <p>설치 프로그램이 잘 됐다면 <b>건너뛰어도 돼요.</b></p>
+          <ol class="gsub">
+            <li><b>Fabric 설치</b>: 아래 버튼으로 Fabric 설치기를 받아 실행하고, <b>Minecraft 버전</b>을 <b class="hl">{{G_VERSION}}</b>으로 맞춘 뒤 <b>설치</b>. <span class="warn">버전이 다르면 서버에 못 들어와요</span>
+              <div class="glinks">{{G_LOADER_LINKS}}</div>
+              <span class="gtip">설치기가 안 열리면 <a class="hl" href="https://adoptium.net/" target="_blank" rel="noopener">adoptium.net</a>에서 Java를 먼저 설치해요</span></li>
+            <li><b>모드 넣기</b>: 아래 <a href="#dlTitle">모드 받기</a>로 <code>mods.zip</code>을 받아요. mods 폴더를 열어 <b>예전 파일을 전부 지우고</b>, 압축을 푼 <code>.jar</code>를 전부 넣어요.
+              <div class="path" data-os-show="win"><code>%appdata%\.minecraft\mods</code><button class="btn-ghost" type="button" data-copy="%appdata%\.minecraft\mods" data-toast="경로를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
+              <div class="path" data-os-show="mac" hidden><code>~/Library/Application Support/minecraft/mods</code><button class="btn-ghost" type="button" data-copy="~/Library/Application Support/minecraft/mods" data-toast="경로를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>복사</button></div>
+              <span class="gtip" data-os-show="win"><kbd>Win</kbd> + <kbd>R</kbd> → 경로 붙여 넣기 → Enter</span><span class="gtip" data-os-show="mac" hidden>Finder에서 <kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>G</kbd> → 경로 붙여 넣기</span></li>
+            <li {{G_CONFIG_HIDDEN}}><b>설정 넣기</b>: 설정 파일을 받아 압축을 풀고, 나온 폴더들을 <b>.minecraft</b> 폴더(mods 한 칸 위)에 <b>덮어쓰기</b>.
+              <div class="glinks">{{G_CONFIG_DL}}</div></li>
+            <li><b>실행</b>: 런처에서 <b class="hl">fabric-loader-{{G_VERSION}}</b>을 골라 플레이, 멀티플레이 → 서버 추가에 위 주소를 넣어요.</li>
+          </ol>
+          <details class="gfix"><summary>"오류"가 나요 (Fabric 관련)</summary><ul>
+            <li>mods 폴더에 <b>예전 모드나 fabric-api 같은 남은 파일</b>이 섞이면 생겨요. mods 폴더를 <b>싹 비우고</b> 받은 파일만 다시 넣어요.</li>
+          </ul></details>
           <button class="btn-ghost gdone" type="button">다 했어요 → 다음</button></div></details></li>
 
         <li><details class="gstep" data-step="6"><summary><span class="gno"></span><span class="gtt">그래도 막히면<small>사진 설명 · 문의</small></span><span class="chev"></span></summary><div class="gbody">
