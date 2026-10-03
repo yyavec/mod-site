@@ -37,15 +37,6 @@
       "size": 1059994
     },
     {
-      "file": "BEB-Forge-1.20.1-6.0.0.jar",
-      "id": "beb",
-      "name": "Beautiful Enchanted Books",
-      "version": "6.0.0",
-      "desc": "This mod aims to improve the appearance of enchanted books, now each one will be different!",
-      "env": "",
-      "size": 1884205
-    },
-    {
       "file": "betterendcities-1.0.0-1.20.1.jar",
       "id": "betterendcities",
       "name": "Better End Cities Vanilla",
