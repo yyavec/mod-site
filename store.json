@@ -1,15 +1,6 @@
 {
   "mods": [
     {
-      "file": "bookofdragons-1.31-1.20.1.jar",
-      "id": "bookofdragons",
-      "name": "bookofdragons",
-      "version": "1.31-1.20.1",
-      "desc": "A Dreamworks Dragons/ How to Train Your Dragon themed mod that introduces dragons from the movies and shows that you can tame and interact with.",
-      "env": "",
-      "size": 4343370
-    },
-    {
       "file": "BOMD-Forge-1.20.1-1.1.2.jar",
       "id": "bosses_of_mass_destruction",
       "name": "Bosses of Mass Destruction",
