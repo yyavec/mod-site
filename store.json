@@ -46,15 +46,6 @@
       "size": 81018
     },
     {
-      "file": "betterlockon-2.0.11-forge.jar",
-      "id": "betterlockon",
-      "name": "Better Lock On",
-      "version": "2.0.11-forge",
-      "desc": "To make your lock on icon cooler",
-      "env": "",
-      "size": 452022
-    },
-    {
       "file": "better_structure_block-forge1.20.1-2.1.0-all.jar",
       "id": "better_structure_block",
       "name": "Better Structure Block",
