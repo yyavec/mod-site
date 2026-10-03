@@ -1,15 +1,6 @@
 {
   "mods": [
     {
-      "file": "aaa_particles_world-forge-1.20.1-2.0.0.jar",
-      "id": "aaa_particles_world",
-      "name": "AAA Particles: World",
-      "version": "2.0.0",
-      "desc": "The lightning is back!",
-      "env": "",
-      "size": 5257257
-    },
-    {
       "file": "acceleratedrendering-1.0.8-1.20.1-alpha.jar",
       "id": "acceleratedrendering",
       "name": "Accelerated Rendering",
