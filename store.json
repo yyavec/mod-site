@@ -1,15 +1,6 @@
 {
   "mods": [
     {
-      "file": "better_structure_block-forge1.20.1-2.1.0-all.jar",
-      "id": "better_structure_block",
-      "name": "Better Structure Block",
-      "version": "2.1.0",
-      "desc": "A better structure block without limited size. (48*48*48 is too small!)",
-      "env": "",
-      "size": 646346
-    },
-    {
       "file": "bookofdragons-1.31-1.20.1.jar",
       "id": "bookofdragons",
       "name": "bookofdragons",
