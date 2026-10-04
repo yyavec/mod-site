@@ -7,6 +7,7 @@
 (function(){var d=document.documentElement,q=location.search;
   if(/[?&]nf\b/.test(q)){d.setAttribute("data-frame","");d.setAttribute("data-mood","nightfall");return;}
   if(/[?&]story\b/.test(q)){d.setAttribute("data-story","");return;}
+  try{var t=new Date();if(localStorage.getItem("story-skip-day")===t.getFullYear()+"-"+(t.getMonth()+1)+"-"+t.getDate())return;}catch(e){}
   var ALWAYS=true; /* 당분간 들어올 때마다 팝업. 처음 3번만 보이게 되돌리려면 false */
   if(ALWAYS){d.setAttribute("data-story","");return;}
   try{if(sessionStorage.getItem("story-shown"))return;var n=+(localStorage.getItem("story-visits")||0);if(n>=3)return;
@@ -802,6 +803,8 @@ html[data-story], html[data-story] body{overflow:hidden}
 .story-chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:18px 0 0; padding:0; list-style:none}
 .story-chips li{padding:8px 12px; border-radius:8px; background:rgba(255,255,255,.85); border:2px solid #fff; font-size:13.5px; font-weight:700; color:#22364D; box-shadow:0 2px 0 rgba(0,0,0,.06)}
 .story-enter{margin-top:24px; display:inline-flex; align-items:center; gap:10px; height:54px; padding:0 28px; border-radius:6px; border:3px solid #23395B; background:#fff; color:#23395B; font:400 18px/1 var(--pixel); cursor:pointer; box-shadow:inset 0 -5px 0 #D9E3EE, 0 4px 0 #23395B; transition:transform .12s}
+.story-skip{margin:24px 0 0 12px; height:34px; padding:0 12px; border:1.5px solid currentColor; border-radius:6px; background:none; color:inherit; opacity:.7; font:600 12.5px/1 var(--font); cursor:pointer; vertical-align:bottom}
+.story-skip:hover{opacity:1}
 .story-enter:hover{transform:translateY(-2px)}
 .story-enter:active{transform:translateY(3px); box-shadow:inset 0 -2px 0 #D9E3EE, 0 1px 0 #23395B}
 .story-enter:focus-visible{outline:3px solid #E3403A; outline-offset:3px}
@@ -1257,7 +1260,7 @@ button.ty.all{--c:#55546F}
       <h2 class="story-h2 story-r" id="storyH2">포켓몬 모드,<br><em>개같이 부활!!</em></h2>
       <p class="story-p2 story-r">그때 그 포켓몬 월드가 다시 열립니다.</p>
       <ul class="story-chips story-r"><li>🎯 누구나 쉽게</li><li>🛡️ 안정성 최우선</li><li>🤝 같이 하는 재미</li><li>🎒 새 모험, 새 도감</li></ul>
-      <div class="story-r"><button class="story-enter" type="button" id="storyEnter">가이드북 보러 가기 <span aria-hidden="true">→</span></button>
+      <div class="story-r"><button class="story-enter" type="button" id="storyEnter">가이드북 보러 가기 <span aria-hidden="true">→</span></button><button class="story-skip" type="button" data-skip>오늘 보지 않기</button>
       <p class="story-note">🟢 지금 서버 열려 있어요! 바로 들어오세요</p></div>
     </div>
     <div class="story-new-in story-diff" aria-labelledby="diffH">
@@ -1281,7 +1284,7 @@ button.ty.all{--c:#55546F}
       </ul>
       <p class="diff-keep-h">시즌 1에서 그대로 이어져요</p>
       <ul class="diff-keep"><li>⚡ 메가진화 · Z기술 · 다이맥스 · 테라스탈</li><li>🏛️ 전설의 유적 탐험</li><li>🏪 경매장(GTS)</li><li>🥚 교배</li><li>⚔️ 트레이너 배틀</li><li>🎰 가챠</li><li>🧸 미니 포켓몬 진열</li><li>💰 코블달러</li><li>🎒 배낭</li><li>🧱 Chipped 장식 블록</li></ul>
-      <div><button class="story-enter" type="button" id="storyLeave">가이드북 보러 가기 <span aria-hidden="true">→</span></button></div>
+      <div><button class="story-enter" type="button" id="storyLeave">가이드북 보러 가기 <span aria-hidden="true">→</span></button><button class="story-skip" type="button" data-skip>오늘 보지 않기</button></div>
       <button class="diff-back" type="button" id="storyBack">← 이전 화면</button>
     </div>
   </div>
@@ -2077,6 +2080,10 @@ button.ty.all{--c:#55546F}
       scrollTo(0, 0);
     }, 450);
   });
+  st.querySelectorAll('[data-skip]').forEach(function(b){ b.addEventListener('click', function(){
+    var t = new Date(); try { localStorage.setItem('story-skip-day', t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate()); } catch(e){}
+    document.getElementById('storyLeave').click();
+  }); });
   addEventListener('keydown', function(e){ if (e.key === 'Escape' && st.classList.contains('done')) document.getElementById('storyLeave').click(); });
   st.focus({preventScroll:true});
 })();
