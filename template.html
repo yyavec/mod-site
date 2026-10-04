@@ -1288,6 +1288,38 @@ button.ty.all{--c:#55546F}
 .gd-faq summary::-webkit-details-marker{display:none}
 .gd-faq summary::before{content:"Q. "; color:var(--accent)}
 .gd-faq p{margin:0; padding:0 14px 12px; font-size:13.5px; line-height:1.65; color:var(--text-secondary)}
+/* 도감 상세 창 */
+.pk-dlg{width:min(400px, calc(100vw - 32px)); max-height:calc(100vh - 32px); padding:0; border:0; border-radius:20px; background:#FFFFFF; color:#1B2A4A; box-shadow:0 24px 60px rgba(0,0,0,.35); overflow:auto; --bg-sunken:#EEF1F5; --text-primary:#1B2A4A; --text-secondary:#4A5568; --text-tertiary:#7A8494}
+:root[data-theme="dark"] .pk-dlg{background:#1C2029; color:#E8EDF5; --bg-sunken:#262B36; --text-primary:#E8EDF5; --text-secondary:#B4BCCB; --text-tertiary:#8A93A5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pk-dlg{background:#1C2029; color:#E8EDF5; --bg-sunken:#262B36; --text-primary:#E8EDF5; --text-secondary:#B4BCCB; --text-tertiary:#8A93A5}}
+.pk-dlg::backdrop{background:rgba(10,14,30,.55); backdrop-filter:blur(2px)}
+.pk-dlg[open]{animation:pkIn .28s cubic-bezier(.2,1.3,.5,1)}
+@keyframes pkIn{from{transform:translateY(16px) scale(.94); opacity:0}}
+.pk-top{position:relative; display:flex; flex-direction:column; align-items:center; gap:6px; padding:18px 16px 16px; background:radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--c) 45%, #fff), color-mix(in srgb, var(--c) 18%, #fff) 70%)}
+.pk-no{position:absolute; left:14px; top:12px; font:400 13px/1 var(--pixel-s, var(--font)); color:rgba(0,0,0,.55)}
+.pk-x{position:absolute; right:10px; top:8px; width:34px; height:34px; border:0; border-radius:50%; background:rgba(255,255,255,.7); color:#23395B; font:700 20px/1 var(--font); cursor:pointer}
+.pk-sp{display:grid; place-items:end center; width:150px; height:150px}
+.pk-sp .cb{width:150px; height:150px; filter:drop-shadow(0 6px 0 rgba(0,0,0,.15))}
+.pk-nm{font:800 24px/1.2 var(--cb-head, var(--font)); color:#1B2A4A}
+.pk-ty{display:flex; gap:6px}
+.pk-crew{margin-top:4px; padding:4px 10px; border-radius:var(--r-full); background:#FFD23F; color:#5A3B00; font:700 12.5px/1.4 var(--font)}
+.pk-body{display:flex; flex-direction:column; gap:8px; padding:14px 16px}
+.pk-body .gd-row{grid-template-columns:84px 1fr}
+.pk-foot{padding:0 16px 16px}
+.pk-go{width:100%; height:42px; border:0; border-radius:var(--r-md); background:var(--accent); color:var(--on-accent); font:700 14px/1 var(--font); cursor:pointer; box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
+.dex-card{cursor:pointer}
+/* 접속 목록 우리끼리 이름 */
+.on-nick{margin-left:2px; padding:1px 6px; border-radius:var(--r-full); background:rgba(255,210,63,.22); color:#FFD86B; font:700 11px/1.5 var(--font)}
+/* 오늘의 팁 */
+.tip-bar{display:flex; align-items:center; gap:10px; margin-top:calc(var(--s12) * -1 + var(--s3)); padding:10px 12px; border-radius:var(--r-lg); background:var(--bg-surface); border:2px dashed var(--border-subtle); cursor:pointer; transition:border-color var(--m-fast)}
+.tip-bar:hover{border-color:var(--accent)}
+.tip-k{flex:none; padding:4px 9px; border-radius:var(--r-full); background:var(--accent); color:var(--on-accent); font:700 11.5px/1.2 var(--font)}
+.tip-ic{flex:none; font-size:18px}
+.tip-tx{flex:1; min-width:0; border:0; padding:0; background:none; text-align:left; color:var(--text-primary); font:600 13.5px/1.45 var(--font); cursor:pointer}
+.tip-bar.in .tip-ic,.tip-bar.in .tip-tx{animation:tipIn .4s ease-out}
+@keyframes tipIn{from{opacity:0; transform:translateY(6px)}}
+.tip-next{flex:none; width:30px; height:30px; border:0; border-radius:50%; background:var(--bg-sunken); color:var(--text-secondary); font:700 18px/1 var(--font); cursor:pointer}
+@media (max-width:520px){ .tip-k{display:none} }
 /* 자유게시판 */
 .bd-form{display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:16px; background:var(--bg-surface); border:2px solid var(--border-standard)}
 .bd-row{display:flex; gap:8px; flex-wrap:wrap}
@@ -1515,6 +1547,7 @@ button.ty.all{--c:#55546F}
     <ul class="on-list" id="onList"></ul>
     <div class="on-foot"><button class="on-copy" type="button" data-copy="{{SERVER_ADDRESS}}" data-toast="서버 주소를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>서버 주소 복사</button><span>1분마다 새로고침돼요</span></div>
   </section>
+  <div class="tip-bar" id="tipBar"><span class="tip-k">오늘의 팁</span><span class="tip-ic" aria-hidden="true"></span><button class="tip-tx" type="button"></button><button class="tip-next" type="button" aria-label="다음 팁">›</button></div>
   <section class="section st-wrap" aria-labelledby="stTitle" id="starters">
     <div class="sec-head"><h2 id="stTitle"><span class="cbk-ic" style="background-image:url(assets/cobble-blocks/pasture.png)" aria-hidden="true"></span>우리들의 스타팅 포켓몬</h2><span class="sec-sub">누가 누구랑 시작했는지 한눈에</span></div>
       <ul class="st-grid">
@@ -3025,6 +3058,99 @@ button.ty.all{--c:#55546F}
     monNote.appendChild(sp); monNote.appendChild(nm); sel.forEach(function(t){ monNote.appendChild(tag(t)); });
     draw();
   });
+})();
+</script>
+<script>
+/* 도감 카드 → 상세 창(약점·반감·무효, 우리 크루 스타팅 표시) / 접속 목록에 우리끼리 이름 / 오늘의 팁 */
+(function(){
+  var TY = {"normal":["노말","#9FA19F"],"fire":["불꽃","#EE5A3B"],"water":["물","#4A90E2"],"grass":["풀","#4FB548"],"electric":["전기","#EDB92A"],"ice":["얼음","#5CC8DE"],"fighting":["격투","#E3712E"],"poison":["독","#A256C4"],"ground":["땅","#BF8645"],"flying":["비행","#7F9BEA"],"psychic":["에스퍼","#EE5A8C"],"bug":["벌레","#94AD24"],"rock":["바위","#B39E5E"],"ghost":["고스트","#6656B0"],"dragon":["드래곤","#6A50DC"],"dark":["악","#5A4A44"],"steel":["강철","#7895A9"],"fairy":["페어리","#E77BC4"]};
+  var K = Object.keys(TY);
+  var E = {normal:{rock:.5,ghost:0,steel:.5},fire:{fire:.5,water:.5,grass:2,ice:2,bug:2,rock:.5,dragon:.5,steel:2},water:{fire:2,water:.5,grass:.5,ground:2,rock:2,dragon:.5},electric:{water:2,electric:.5,grass:.5,ground:0,flying:2,dragon:.5},grass:{fire:.5,water:2,grass:.5,poison:.5,ground:2,flying:.5,bug:.5,rock:2,dragon:.5,steel:.5},ice:{fire:.5,water:.5,grass:2,ice:.5,ground:2,flying:2,dragon:2,steel:.5},fighting:{normal:2,ice:2,poison:.5,flying:.5,psychic:.5,bug:.5,rock:2,ghost:0,dark:2,steel:2,fairy:.5},poison:{grass:2,poison:.5,ground:.5,rock:.5,ghost:.5,steel:0,fairy:2},ground:{fire:2,electric:2,grass:.5,poison:2,flying:0,bug:.5,rock:2,steel:2},flying:{electric:.5,grass:2,fighting:2,bug:2,rock:.5,steel:.5},psychic:{fighting:2,poison:2,psychic:.5,dark:0,steel:.5},bug:{fire:.5,grass:2,fighting:.5,poison:.5,flying:.5,psychic:2,ghost:.5,dark:2,steel:.5,fairy:.5},rock:{fire:2,ice:2,fighting:.5,ground:.5,flying:2,bug:2,steel:.5},ghost:{normal:0,psychic:2,ghost:2,dark:.5},dragon:{dragon:2,steel:.5,fairy:0},dark:{fighting:.5,psychic:2,ghost:2,dark:.5,fairy:.5},steel:{fire:.5,water:.5,electric:.5,ice:2,rock:2,steel:.5,fairy:2},fairy:{fire:.5,fighting:2,poison:.5,dragon:2,dark:2,steel:.5}};
+  var eff = function(a, d){ var v = E[a][d]; return v === undefined ? 1 : v; };
+  var tag = function(k){ var s = document.createElement('span'); s.className = 'gd-tag'; s.style.setProperty('--t', TY[k][1]); s.textContent = TY[k][0]; return s; };
+
+  // 1) 도감 상세 창
+  var grid = document.getElementById('dexGrid');
+  if (grid && window.cobbleReady) {
+    var dlg = document.createElement('dialog'); dlg.className = 'pk-dlg'; dlg.setAttribute('aria-label', '포켓몬 정보');
+    dlg.innerHTML = '<div class="pk-top"><span class="pk-no"></span><button class="pk-x" type="button" aria-label="닫기">×</button><span class="pk-sp"><span class="cb"></span></span><b class="pk-nm"></b><span class="pk-ty"></span><span class="pk-crew"></span></div><div class="pk-body"></div><div class="pk-foot"><button class="pk-go" type="button">⚔️ 상성 계산기에서 보기</button></div>';
+    document.body.appendChild(dlg);
+    var close = function(){ if (dlg.open) dlg.close(); };
+    dlg.querySelector('.pk-x').addEventListener('click', close);
+    dlg.addEventListener('click', function(e){ if (e.target === dlg) close(); });
+    var crew = function(name){ return [].slice.call(document.querySelectorAll('#starters .st-card')).filter(function(c){ var m = c.querySelector('.cb[aria-label]'); return m && m.getAttribute('aria-label') === name; }).map(function(c){ return c.querySelector('.st-who').textContent; }); };
+    var cur = null;
+    dlg.querySelector('.pk-go').addEventListener('click', function(){
+      close(); if (!cur) return;
+      var tab = document.querySelector('#ptabs button[data-p="play"]'); if (tab) tab.click();
+      var m = document.querySelector('.gd-mode [data-m="def"]'); if (m) m.click();
+      var inp = document.getElementById('gdMon'); if (inp) { inp.value = cur[4]; inp.dispatchEvent(new Event('input')); }
+      var t = document.getElementById('gd-type'); if (t) setTimeout(function(){ t.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+    });
+    function row(cls, title, keys){
+      var r = document.createElement('div'); r.className = 'gd-row ' + cls; var h = document.createElement('b'); h.textContent = title; r.appendChild(h);
+      var d = document.createElement('div'); if (keys.length) keys.forEach(function(k){ d.appendChild(tag(k)); }); else { var n = document.createElement('span'); n.className = 'gd-none'; n.textContent = '없음'; d.appendChild(n); } r.appendChild(d); return r;
+    }
+    window.cobbleReady.then(function(D){
+      grid.addEventListener('click', function(e){
+        var c = e.target.closest('.dex-card'); if (!c) return;
+        var no = parseInt(c.getAttribute('aria-label'), 10), x = D.BYID[no]; if (!x) return; cur = x;
+        var types = [x[5], x[6]].filter(function(t){ return t && TY[t]; }), col = (TY[types[0]] || ['', '#888'])[1];
+        dlg.style.setProperty('--c', col);
+        dlg.querySelector('.pk-no').textContent = 'No.' + String(x[0]).padStart(3, '0');
+        var cb = dlg.querySelector('.cb'); cb.style.backgroundImage = 'url(' + D.CB + x[0] + '.webp)'; cb.style.setProperty('--sw', (150 * 12) + 'px'); cb.style.animationDuration = Math.max(1.2, x[1] || 2) + 's'; cb.setAttribute('role', 'img'); cb.setAttribute('aria-label', x[4]);
+        dlg.querySelector('.pk-nm').textContent = x[4];
+        var ty = dlg.querySelector('.pk-ty'); ty.textContent = ''; types.forEach(function(t){ ty.appendChild(tag(t)); });
+        var who = crew(x[4]), cr = dlg.querySelector('.pk-crew'); cr.textContent = who.length ? '⭐ ' + who.join(', ') + '의 스타팅 포켓몬!' : ''; cr.hidden = !who.length;
+        var g = {4:[], 2:[], .5:[], .25:[], 0:[]};
+        K.forEach(function(a){ var m = types.reduce(function(v, d){ return v * eff(a, d); }, 1); if (g[m]) g[m].push(a); });
+        var body = dlg.querySelector('.pk-body'); body.textContent = '';
+        if (g[4].length) body.appendChild(row('x4', '4배 약점', g[4]));
+        body.appendChild(row('x2', '2배 약점', g[2]));
+        body.appendChild(row('', '덜 받아요', g[.5].concat(g[.25])));
+        if (g[0].length) body.appendChild(row('x0', '안 받아요', g[0]));
+        if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+      });
+    });
+  }
+
+  // 2) 접속 목록: 마크 닉네임 옆에 우리끼리 부르는 이름
+  var NICK = {ddalbok:'혜련', h_uun:'면진', daejang09:'연규', handal_:'기철', zizonkookie:'건년', nayojeong:'방울이', mingcho:'민초', jahyeonbalagi:'준현', enderdimaa:'범철', nameisrush:'러시', jookkibbikki:'삐끼', sexyuno:'우노'};
+  var on = document.getElementById('onList');
+  if (on) new MutationObserver(function(){
+    on.querySelectorAll('li > span:not([data-nk])').forEach(function(s){
+      s.dataset.nk = '1'; var k = NICK[s.textContent.trim().toLowerCase()]; if (!k) return;
+      var b = document.createElement('small'); b.className = 'on-nick'; b.textContent = k; s.parentNode.appendChild(b);
+    });
+  }).observe(on, {childList:true});
+
+  // 3) 오늘의 팁
+  var tip = document.getElementById('tipBar');
+  if (tip) {
+    var TIPS = [
+      ['🗺️', '처음이면 신의 길을 따라 북쪽 세계수로! 안에 포켓몬센터가 있어요', 'gd-map'],
+      ['⌨️', 'R 키로 포켓몬을 꺼내요. 친구를 보고 R을 누르면 배틀·교환 신청!', 'gd-keys'],
+      ['🥚', '서로 다른 사람이 잡은 포켓몬끼리 교배하면 이로치 확률이 올라가요', 'gd-rare'],
+      ['🏛️', '웨이스톤 순간이동은 우리 서버에서 공짜예요', 'gd-do'],
+      ['⚔️', '상대가 무슨 타입에 약한지 헷갈리면 상성 계산기를 열어 보세요', 'gd-type'],
+      ['💰', '야생 포켓몬을 쓰러뜨리면 코블달러를 벌어요', 'gd-do'],
+      ['🤖', '채팅에 "건담"을 넣어 말을 걸면 건담로봇이 대답해요', 'gd-rules'],
+      ['🛏️', '멀리 모험 갈 땐 침대를 챙기세요. 안 그러면 태초마을에서 다시 시작해요', 'gd-faq'],
+      ['🔥', '메가진화는 키스톤 광석 → 메가링 + 메가스톤!', 'gd-do'],
+      ['📦', '파티가 6마리로 꽉 차면 새로 잡은 포켓몬은 PC로 가요', 'gd-faq'],
+      ['🌩️', '전설 포켓몬은 아주 드물게 야생에서도 나와요. 어디인지는 비밀!', 'gd-rare'],
+      ['🎰', '유물 금화 5개로 가챠를 돌릴 수 있어요', 'gd-do']
+    ];
+    var i = Math.floor(Math.random() * TIPS.length), ic = tip.querySelector('.tip-ic'), tx = tip.querySelector('.tip-tx');
+    var show = function(){ var t = TIPS[i % TIPS.length]; tip.classList.remove('in'); void tip.offsetWidth; ic.textContent = t[0]; tx.textContent = t[1]; tip.dataset.to = t[2]; tip.classList.add('in'); };
+    show();
+    var timer = setInterval(function(){ if (!document.hidden) { i++; show(); } }, 7000);
+    tip.querySelector('.tip-next').addEventListener('click', function(e){ e.stopPropagation(); i++; show(); clearInterval(timer); timer = setInterval(function(){ if (!document.hidden) { i++; show(); } }, 7000); });
+    tip.addEventListener('click', function(){
+      var tab = document.querySelector('#ptabs button[data-p="play"]'); if (tab) tab.click();
+      var t = document.getElementById(tip.dataset.to); if (t) setTimeout(function(){ t.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+    });
+  }
 })();
 </script>
 </body>
