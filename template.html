@@ -869,6 +869,11 @@ html[data-story], html[data-story] body{overflow:hidden}
 .pk-ring{position:absolute; z-index:5; width:20px; height:20px; border-radius:50%; border:3px solid #FF5A4E; pointer-events:none}
 [data-intro^="p"] .now{opacity:0}
 [data-intro="pparty"] .now{opacity:1; animation:nowPop .6s cubic-bezier(.2,1.5,.5,1) both}
+[data-intro="pparty"] .now{opacity:0; animation:none}
+[data-intro="pslam"] .now{opacity:1; animation:slam .5s cubic-bezier(.55,0,.9,.45) both}
+[data-mood="poke"]:not([data-intro]) .rift,[data-intro="pslam"] .rift{display:block; animation:none; --rift-glow:#FFC83D; --rift-core:#FFF6D6}
+[data-intro="pslam"] .rift .crk{animation:crackgrow .5s cubic-bezier(.2,.8,.3,1) both; animation-delay:calc(.42s + var(--dd,0s))}
+.pk-bang{position:absolute; z-index:7; pointer-events:none; font:400 22px/1 var(--pixel, var(--font)); color:#FFD23F; -webkit-text-stroke:1.5px #23395B; text-shadow:0 3px 0 #23395B; white-space:nowrap}
 @keyframes nowPop{0%{transform:translateY(16px) scale(.6); opacity:0} 100%{transform:none; opacity:1}}
 /* 포켓몬 친구들 */
 .has-mon{position:relative}
@@ -2252,6 +2257,23 @@ button.ty.all{--c:#55546F}
   // 트레이너 변신 장면
   var frog = document.getElementById('frog');
   function quake(){ hero.classList.remove('quake'); void hero.offsetWidth; hero.classList.add('quake'); }
+  /* 마지막에 '현재 진행 중!!' 이 위에서 쾅! 떨어지며 균열 + 먼지 + 흔들림 */
+  function slamNow(){
+    var pill = document.querySelector('.now');
+    html.dataset.intro = 'pslam';
+    setTimeout(function(){
+      quake(); if (!pill) return;
+      var hr = hero.getBoundingClientRect(), pr = pill.getBoundingClientRect(), y = pr.bottom - hr.top - 4;
+      for (var k = 0; k < 12; k++) {
+        var q = document.createElement('div'), side = k % 2 ? 1 : -1, x = (side > 0 ? pr.right : pr.left) - hr.left; q.className = 'pk-poof';
+        q.style.left = (x - 6) + 'px'; q.style.top = (y - 6) + 'px'; hero.appendChild(q);
+        q.animate([{transform:'translate(0,0) scale(1)', opacity:.95}, {transform:'translate(' + side * (20 + Math.random() * 50) + 'px,' + (-8 - Math.random() * 26) + 'px) scale(2.2)', opacity:0}], {duration:600 + Math.random() * 250, easing:'ease-out', fill:'both'}).onfinish = (function(e){ return function(){ e.remove(); }; })(q);
+      }
+      var bang = document.createElement('div'); bang.className = 'pk-bang'; bang.textContent = '쾅!';
+      bang.style.left = (pr.right - hr.left + 6) + 'px'; bang.style.top = (pr.top - hr.top - 18) + 'px'; hero.appendChild(bang);
+      bang.animate([{transform:'scale(.3) rotate(-12deg)', opacity:0}, {transform:'scale(1.25) rotate(8deg)', opacity:1, offset:.25}, {transform:'scale(1) rotate(6deg)', opacity:1, offset:.7}, {transform:'scale(1) rotate(6deg) translateY(-6px)', opacity:0}], {duration:1100, easing:'ease-out', fill:'both'}).onfinish = function(){ bang.remove(); };
+    }, 420);
+  }
   function intro(from){
     var timers = [], at = function(ms, fn){ timers.push(setTimeout(fn, ms)); };
     var done = function(){ timers.forEach(clearTimeout); delete html.dataset.intro; try { sessionStorage.setItem('intro-seen', '1'); } catch(e){} perch(); };
@@ -2284,13 +2306,14 @@ button.ty.all{--c:#55546F}
             q.style.left = (fx - 6) + 'px'; q.style.top = (fy - 6) + 'px'; hero.appendChild(q);
             q.animate([{transform:'translate(0,0) scale(1)', opacity:1}, {transform:'translate(' + Math.cos(ang) * 46 + 'px,' + Math.sin(ang) * 46 + 'px) scale(2.4)', opacity:0}], {duration:650, easing:'ease-out', fill:'both'}).onfinish = (function(el){ return function(){ el.remove(); }; })(q);
           }
-          html.dataset.intro = 'ptrainer'; frog.classList.remove('hop'); void frog.offsetWidth; frog.classList.add('hop');
+          if (html.dataset.intro === 'pthrow') html.dataset.intro = 'ptrainer'; frog.classList.remove('hop'); void frog.offsetWidth; frog.classList.add('hop');
           setTimeout(function(){ b.remove(); }, 40);
         }, 200);
       };
     });
     at(T0 + FLY + 900, function(){ html.dataset.intro = 'pparty'; heroParty(); });
-    at(T0 + FLY + 2600, done);
+    at(T0 + FLY + 2300, slamNow);
+    at(T0 + FLY + 3700, done);
   }
   function shoulder(){
     if (document.querySelector('#frog .pl')) return;
