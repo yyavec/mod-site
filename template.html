@@ -1151,6 +1151,65 @@ button.ty.all{--c:#55546F}
 .rc-empty{grid-column:1 / -1; padding:24px; text-align:center; color:var(--text-tertiary)}
 .rc-count{font-size:13px; color:var(--text-tertiary)}
 @media (max-width:640px){ .rc-grid{grid-template-columns:1fr} }
+
+/* 자유게시판 */
+.bd-form{display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:16px; background:var(--bg-surface); border:2px solid var(--border-standard)}
+.bd-row{display:flex; gap:8px; flex-wrap:wrap}
+.bd-nick{flex:0 1 180px; min-width:0; height:40px; padding:0 12px; border-radius:10px; border:1.5px solid var(--border-standard); background:var(--bg-page, #fff); color:var(--text-primary); font:500 14px var(--font)}
+.bd-text{width:100%; box-sizing:border-box; min-height:84px; padding:10px 12px; border-radius:10px; border:1.5px solid var(--border-standard); background:var(--bg-page, #fff); color:var(--text-primary); font:500 14.5px/1.55 var(--font); resize:vertical}
+.bd-nick:focus, .bd-text:focus{outline:none; border-color:var(--accent)}
+.bd-foot{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.bd-pic{display:inline-flex; align-items:center; gap:6px; height:40px; padding:0 14px; border-radius:10px; border:1.5px dashed var(--accent); color:var(--accent); background:var(--accent-soft); font:700 13.5px var(--font); cursor:pointer}
+.bd-pic input{display:none}
+.bd-prev{position:relative; display:none; width:64px; height:64px; border-radius:10px; overflow:hidden; background:#000}
+.bd-prev.on{display:block}
+.bd-prev img{width:100%; height:100%; object-fit:cover}
+.bd-prev button{position:absolute; top:2px; right:2px; width:22px; height:22px; border-radius:50%; border:0; background:rgba(0,0,0,.65); color:#fff; font:700 13px/1 var(--font); cursor:pointer}
+.bd-send{margin-left:auto; height:42px; padding:0 22px; border-radius:12px; border:0; background:var(--accent); color:#fff; font:700 14.5px var(--cb-head, var(--font)); cursor:pointer; box-shadow:0 4px 0 var(--accent-edge, rgba(0,0,0,.25))}
+.bd-send:disabled{opacity:.6; cursor:default}
+.bd-msg{font-size:13px; color:var(--text-tertiary)}
+.bd-msg.ok{color:#2F8F3A} .bd-msg.err{color:#D93636}
+.bd-hp{position:absolute; left:-9999px}
+.bd-bar{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+.bd-bar h3{margin:0; font:800 16px var(--cb-head, var(--font)); color:var(--text-primary)}
+.bd-list{display:flex; flex-direction:column; gap:10px; margin:0; padding:0; list-style:none}
+.bd-item{display:flex; gap:12px; padding:14px; border-radius:16px; background:var(--bg-surface); border:1.5px solid var(--border-standard)}
+.bd-item.is-mine{border-color:var(--accent)}
+.bd-face{flex:none; width:40px; height:40px; border-radius:9px; image-rendering:pixelated; background:#D9D6E8}
+.bd-body{flex:1; min-width:0}
+.bd-meta{display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:12.5px; color:var(--text-tertiary)}
+.bd-meta b{font-size:14px; color:var(--text-primary)}
+.bd-txt{margin:6px 0 0; font-size:14.5px; line-height:1.6; color:var(--text-primary); white-space:pre-wrap; word-break:break-word}
+.bd-photo{display:block; margin-top:8px; padding:0; border:0; border-radius:12px; overflow:hidden; background:#EEE; cursor:zoom-in; max-width:min(100%, 420px)}
+.bd-photo img{display:block; width:100%; max-height:420px; object-fit:cover}
+.bd-del{margin-left:auto; padding:2px 8px; border-radius:6px; border:1px solid var(--border-standard); background:none; color:var(--text-tertiary); font:600 12px var(--font); cursor:pointer}
+.bd-del.sure{border-color:#D93636; color:#D93636}
+.bd-gallery{display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:8px; margin:0; padding:0; list-style:none}
+.bd-gallery li button{display:block; width:100%; aspect-ratio:1; padding:0; border:0; border-radius:12px; overflow:hidden; background:#EEE; cursor:zoom-in}
+.bd-gallery img{width:100%; height:100%; object-fit:cover; transition:transform .25s}
+.bd-gallery li button:hover img{transform:scale(1.05)}
+.bd-empty{padding:26px; text-align:center; color:var(--text-tertiary); list-style:none; grid-column:1 / -1}
+.bd-more{align-self:center; height:38px; padding:0 20px; border-radius:10px; border:1.5px solid var(--border-standard); background:var(--bg-surface); color:var(--text-secondary); font:700 13.5px var(--font); cursor:pointer}
+.bd-lb{position:fixed; inset:0; z-index:9000; display:none; place-items:center; padding:20px; background:rgba(10,10,20,.88)}
+.bd-lb.on{display:grid}
+.bd-lb img{max-width:100%; max-height:84vh; border-radius:10px; box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.bd-lb p{margin:10px 0 0; color:#ddd; font-size:14px; text-align:center; max-width:600px; white-space:pre-wrap}
+.bd-lb button{position:absolute; top:14px; right:14px; width:40px; height:40px; border-radius:50%; border:0; background:rgba(255,255,255,.15); color:#fff; font:700 20px/1 var(--font); cursor:pointer}
+
+/* 우리들의 스타팅 포켓몬 */
+.st-wrap{display:flex; flex-direction:column; gap:12px}
+.st-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(132px, 1fr)); gap:10px; margin:0; padding:0; list-style:none}
+.st-card{position:relative; display:flex; flex-direction:column; align-items:center; padding:12px 8px 12px; border-radius:18px; background:linear-gradient(180deg, var(--c2) 0%, #fff 78%); border:2.5px solid var(--c1); box-shadow:0 4px 0 var(--c1); overflow:hidden; text-align:center}
+.st-card::before{content:""; position:absolute; top:-30px; right:-30px; width:90px; height:90px; border-radius:50%; border:12px solid rgba(255,255,255,.45)}
+.st-sp{position:relative; display:grid; place-items:end center; width:96px; height:96px}
+.st-sp .cb{width:92px; height:92px; filter:drop-shadow(0 3px 0 rgba(0,0,0,.14))}
+.st-card:hover .st-sp{animation:monHop .55s cubic-bezier(.3,.7,.4,1)}
+.st-who{margin-top:6px; font:800 17px/1.2 var(--cb-head, var(--font)); color:#1B2A4A}
+.st-mon{margin-top:3px; font:700 13px var(--font); color:var(--c1)}
+.st-types{display:flex; gap:4px; margin-top:6px}
+.st-types span{padding:2px 7px; border-radius:6px; background:var(--t); color:#fff; font:700 10.5px/1.4 var(--font)}
+.st-note{font-size:12.5px; color:var(--text-tertiary)}
+@media (max-width:420px){ .st-grid{grid-template-columns:repeat(2, 1fr)} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -1301,6 +1360,18 @@ button.ty.all{--c:#55546F}
     <ul class="on-list" id="onList"></ul>
     <div class="on-foot"><button class="on-copy" type="button" data-copy="{{SERVER_ADDRESS}}" data-toast="서버 주소를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>서버 주소 복사</button><span>1분마다 새로고침돼요</span></div>
   </section>
+  <section class="section st-wrap" aria-labelledby="stTitle" id="starters">
+    <div class="sec-head"><h2 id="stTitle"><span class="cbk-ic" style="background-image:url(assets/cobble-blocks/pasture.png)" aria-hidden="true"></span>우리들의 스타팅 포켓몬</h2><span class="sec-sub">누가 누구랑 시작했는지 한눈에</span></div>
+      <ul class="st-grid">
+        <li class="st-card" style="--c1:#FF7A3D; --c2:#FFD2A8"><span class="st-sp"><span class="cb" role="img" aria-label="파이리" style="--sw:1104px; background-image:url(assets/cobble/4.webp); animation-duration:4s"></span></span><b class="st-who">러쉬</b><span class="st-mon">파이리</span><span class="st-types"><span style="--t:#FF7A3D">불꽃</span></span></li>
+        <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp"><span class="cb" role="img" aria-label="나오하" style="--sw:1104px; background-image:url(assets/cobble/906.webp); animation-duration:2s"></span></span><b class="st-who">노혜련</b><span class="st-mon">나오하</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
+        <li class="st-card" style="--c1:#FF7A3D; --c2:#FFD2A8"><span class="st-sp"><span class="cb" role="img" aria-label="염버니" style="--sw:1104px; background-image:url(assets/cobble/813.webp); animation-duration:1.2s"></span></span><b class="st-who">삐끼</b><span class="st-mon">염버니</span><span class="st-types"><span style="--t:#FF7A3D">불꽃</span></span></li>
+        <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp"><span class="cb" role="img" aria-label="나무지기" style="--sw:1104px; background-image:url(assets/cobble/252.webp); animation-duration:2s"></span></span><b class="st-who">연규</b><span class="st-mon">나무지기</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
+        <li class="st-card" style="--c1:#3B8CE6; --c2:#BFE0FF"><span class="st-sp"><span class="cb" role="img" aria-label="개굴닌자" style="--sw:1104px; background-image:url(assets/cobble/658.webp); animation-duration:2s"></span></span><b class="st-who">면진</b><span class="st-mon">개굴닌자</span><span class="st-types"><span style="--t:#3B8CE6">물</span><span style="--t:#5A4E66">악</span></span></li>
+        <li class="st-card" style="--c1:#3B8CE6; --c2:#BFE0FF"><span class="st-sp"><span class="cb" role="img" aria-label="개굴닌자" style="--sw:1104px; background-image:url(assets/cobble/658.webp); animation-duration:2s"></span></span><b class="st-who">기철</b><span class="st-mon">개굴닌자</span><span class="st-types"><span style="--t:#3B8CE6">물</span><span style="--t:#5A4E66">악</span></span></li>
+        <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp"><span class="cb" role="img" aria-label="주리비얀" style="--sw:1104px; background-image:url(assets/cobble/495.webp); animation-duration:2s"></span></span><b class="st-who">건년</b><span class="st-mon">주리비얀</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
+      </ul>
+  </section>
   <p class="notice" {{NOTICE_HIDDEN}}><svg class="i"><use href="#i-info"/></svg><span>{{NOTICE}}</span></p>
   <details class="guide" id="guide">
     <summary class="guide-head">
@@ -1422,6 +1493,25 @@ button.ty.all{--c:#55546F}
     <div class="dex-tools"><input class="dex-search" id="dexSearch" type="search" placeholder="이름이나 번호로 찾기 (예: 피카츄, 25)" aria-label="도감 검색"><div class="dex-types" id="dexTypes" role="group" aria-label="타입으로 보기"></div></div>
     <div class="dex-grid" id="dexGrid" aria-live="polite"></div>
     <button class="dex-more" id="dexMore" type="button">더 보기</button>
+  </section>
+
+  <section class="section" aria-labelledby="bdTitle" id="board">
+    <div class="sec-head"><h2 id="bdTitle"><span class="cbk-ic" style="background-image:url(https://cdn.jsdelivr.net/gh/InventivetalentDev/minecraft-assets@1.21.1/assets/minecraft/textures/item/writable_book.png); image-rendering:pixelated" aria-hidden="true"></span>자유게시판</h2><span class="sec-sub">아무 얘기나 · 사진도 올려요 · 로그인 없이</span></div>
+    <form class="bd-form" id="bdForm" novalidate>
+      <div class="bd-row"><input class="bd-nick" name="nick" maxlength="30" placeholder="닉네임 (마크 닉이면 얼굴이 떠요)" autocomplete="nickname"></div>
+      <textarea class="bd-text" name="text" maxlength="1000" placeholder="잡은 포켓몬 자랑, 건축 사진, 같이 할 사람 구하기… 뭐든 좋아요"></textarea>
+      <label class="bd-hp" aria-hidden="true">비워 두세요<input name="hp" tabindex="-1" autocomplete="off"></label>
+      <div class="bd-foot">
+        <label class="bd-pic">📷 사진 올리기<input type="file" name="pic" accept="image/*"></label>
+        <span class="bd-prev" id="bdPrev"><img alt="올릴 사진 미리보기"><button type="button" aria-label="사진 빼기">×</button></span>
+        <span class="bd-msg" id="bdMsg" role="status" aria-live="polite"></span>
+        <button class="bd-send" type="submit">올리기</button>
+      </div>
+    </form>
+    <div class="bd-bar"><h3>글 <span class="sec-sub num" id="bdCount"></span></h3><div class="seg" id="bdTabs" role="tablist" aria-label="보기"><button type="button" role="tab" aria-selected="true" data-v="all">💬 전체</button><button type="button" role="tab" aria-selected="false" data-v="photo">📷 사진만</button></div></div>
+    <ul class="bd-list" id="bdList" aria-live="polite"><li class="bd-empty">글을 불러오는 중…</li></ul>
+    <button class="bd-more" id="bdMore" type="button" hidden>더 보기</button>
+    <div class="bd-lb" id="bdLb" role="dialog" aria-label="사진 크게 보기"><div><img alt=""><p></p></div><button type="button" aria-label="닫기">×</button></div>
   </section>
 
   <section class="section rc" aria-labelledby="rcTitle" id="recipes">
@@ -2326,6 +2416,116 @@ button.ty.all{--c:#55546F}
   q.addEventListener('input', function(){ if (D) { shown = STEP; draw(); } });
   more.addEventListener('click', function(){ shown += STEP; draw(); });
   if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting) { io.disconnect(); start(); } }, {rootMargin:'400px'}); io.observe(sec); } else start();
+})();
+</script>
+<script>
+/* 자유게시판: 주인의 구글 시트(글) + 드라이브(사진)에 쌓는다. 쓴 사람은 이 브라우저에 저장된 열쇠로 자기 글만 지운다. */
+(function(){
+  var f = document.getElementById('bdForm'); if (!f) return;
+  var API = ''; /* board */
+  if (!API) { document.getElementById('board').hidden = true; return; }
+  var F = f.elements, msg = document.getElementById('bdMsg'), btn = f.querySelector('.bd-send'), prev = document.getElementById('bdPrev');
+  var list = document.getElementById('bdList'), count = document.getElementById('bdCount'), more = document.getElementById('bdMore'), tabs = document.querySelectorAll('#bdTabs button'), lb = document.getElementById('bdLb');
+  var items = [], view = 'all', STEP = 15, shown = STEP, image = '', KEY = 'bdTokens';
+  function mine(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ return {}; } }
+  function keep(id, tk){ try { var m = mine(); m[id] = tk; localStorage.setItem(KEY, JSON.stringify(m)); } catch(e){} }
+  function forget(id){ try { var m = mine(); delete m[id]; localStorage.setItem(KEY, JSON.stringify(m)); } catch(e){} }
+  try { F.nick.value = localStorage.getItem('bdNick') || ''; } catch(e){}
+  function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function ago(t){
+    var s = (Date.now() - new Date(t).getTime()) / 1000; if (!(s >= 0)) return '';
+    if (s < 60) return '방금'; if (s < 3600) return Math.floor(s / 60) + '분 전'; if (s < 86400) return Math.floor(s / 3600) + '시간 전'; if (s < 86400 * 30) return Math.floor(s / 86400) + '일 전';
+    var d = new Date(t); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+  }
+  function src(id, w){ return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w' + w; }
+  function img(id, w){ var i = new Image(); i.alt = ''; i.loading = 'lazy'; i.decoding = 'async'; i.referrerPolicy = 'no-referrer'; i.src = src(id, w); i.onerror = function(){ if (i.src.indexOf('lh3') < 0) i.src = 'https://lh3.googleusercontent.com/d/' + encodeURIComponent(id) + '=w' + w; }; return i; }
+  function face(nick){
+    var i = new Image(); i.className = 'bd-face'; i.alt = ''; i.loading = 'lazy'; i.width = i.height = 40;
+    var ok = /^[A-Za-z0-9_]{3,16}$/.test(nick || '');
+    i.src = ok ? 'https://minotar.net/helm/' + nick + '/80' : 'https://minotar.net/helm/MHF_Steve/80';
+    i.onerror = function(){ i.onerror = null; i.src = 'https://mc-heads.net/avatar/MHF_Steve/80'; };
+    return i;
+  }
+  function open(it){ var im = lb.querySelector('img'); im.src = src(it.photo, 1600); im.referrerPolicy = 'no-referrer'; lb.querySelector('p').textContent = (it.nick || '익명') + (it.text ? ' · ' + it.text : ''); lb.classList.add('on'); lb.querySelector('button').focus(); }
+  lb.addEventListener('click', function(e){ if (e.target === lb || e.target.tagName === 'BUTTON') lb.classList.remove('on'); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') lb.classList.remove('on'); });
+  function del(it, b){
+    if (!b.classList.contains('sure')) { b.classList.add('sure'); b.textContent = '정말 지울까요?'; setTimeout(function(){ b.classList.remove('sure'); b.textContent = '지우기'; }, 4000); return; }
+    b.disabled = true; b.textContent = '지우는 중…';
+    post({action:'delete', id:it.id, token:mine()[it.id]}).then(function(r){
+      if (r && (r.ok || r.error === 'notfound')) { forget(it.id); items = items.filter(function(x){ return x.id !== it.id; }); render(); save(); }
+      else { b.disabled = false; b.textContent = '다시 시도'; }
+    }, function(){ b.disabled = false; b.textContent = '다시 시도'; });
+  }
+  function render(){
+    var m = mine(), photos = items.filter(function(x){ return x.photo; }), l = view === 'photo' ? photos : items;
+    count.textContent = items.length ? items.length + '개' + (photos.length ? ' · 사진 ' + photos.length : '') : '';
+    list.textContent = ''; list.className = view === 'photo' ? 'bd-gallery' : 'bd-list';
+    if (!l.length) list.appendChild(el('li', 'bd-empty', view === 'photo' ? '아직 올라온 사진이 없어요. 첫 사진을 올려 보세요!' : '아직 글이 없어요. 첫 글을 남겨 보세요!'));
+    l.slice(0, shown).forEach(function(it){
+      var li = el('li');
+      if (view === 'photo') { var pb = el('button'); pb.type = 'button'; pb.setAttribute('aria-label', (it.nick || '익명') + '의 사진 크게 보기'); pb.appendChild(img(it.photo, 400)); pb.addEventListener('click', function(){ open(it); }); li.appendChild(pb); list.appendChild(li); return; }
+      li.className = 'bd-item' + (m[it.id] ? ' is-mine' : '');
+      li.appendChild(face(it.nick));
+      var body = el('div', 'bd-body'), meta = el('div', 'bd-meta');
+      meta.appendChild(el('b', null, it.nick || '익명')); meta.appendChild(el('span', null, ago(it.time) + (m[it.id] ? ' · 내 글' : '')));
+      if (m[it.id]) { var d = el('button', 'bd-del', '지우기'); d.type = 'button'; d.addEventListener('click', function(){ del(it, d); }); meta.appendChild(d); }
+      body.appendChild(meta);
+      if (it.text) body.appendChild(el('p', 'bd-txt', String(it.text).replace(/^'(?=[=+\-@])/, '')));
+      if (it.photo) { var ph = el('button', 'bd-photo'); ph.type = 'button'; ph.setAttribute('aria-label', '사진 크게 보기'); ph.appendChild(img(it.photo, 900)); ph.addEventListener('click', function(){ open(it); }); body.appendChild(ph); }
+      li.appendChild(body); list.appendChild(li);
+    });
+    more.hidden = l.length <= shown;
+  }
+  function post(o){ return fetch(API, {method:'POST', body:JSON.stringify(o)}).then(function(r){ return r.json(); }); }
+  function save(){ try { localStorage.setItem('bdCache', JSON.stringify(items.slice(0, 100))); } catch(e){} }
+  function load(){
+    try { var c = JSON.parse(localStorage.getItem('bdCache') || 'null'); if (c && c.length) { items = c; render(); } } catch(e){}
+    if (!API) { list.textContent = ''; list.appendChild(el('li', 'bd-empty', '게시판을 준비하고 있어요. 곧 열려요!')); return; }
+    fetch(API).then(function(r){ return r.json(); }).then(function(d){
+      var got = (d && d.list) || [], ids = {}; got.forEach(function(x){ ids[x.id] = 1; });
+      items = items.filter(function(x){ return x._local && !ids[x.id] && Date.now() - new Date(x.time) < 120000; }).concat(got); render(); save();
+    }).catch(function(){ if (items.length) return; list.textContent = ''; list.appendChild(el('li', 'bd-empty', '글을 불러오지 못했어요. 잠시 뒤 새로고침해 주세요')); });
+  }
+  tabs.forEach(function(b){ b.addEventListener('click', function(){ view = b.dataset.v; shown = STEP; tabs.forEach(function(x){ x.setAttribute('aria-selected', x === b ? 'true' : 'false'); }); render(); }); });
+  more.addEventListener('click', function(){ shown += STEP; render(); });
+  function say(t, c){ msg.textContent = t; msg.className = 'bd-msg' + (c ? ' ' + c : ''); }
+  function clearPic(){ image = ''; F.pic.value = ''; prev.classList.remove('on'); }
+  prev.querySelector('button').addEventListener('click', clearPic);
+  // 사진은 올리기 전에 브라우저에서 줄인다 (긴 변 1600px, JPEG)
+  F.pic.addEventListener('change', function(){
+    var file = F.pic.files && F.pic.files[0]; if (!file) return;
+    if (!/^image\//.test(file.type)) { say('사진 파일만 올릴 수 있어요', 'err'); clearPic(); return; }
+    say('사진 준비 중…');
+    var url = URL.createObjectURL(file), im = new Image();
+    im.onload = function(){
+      var k = Math.min(1, 1600 / Math.max(im.width, im.height)), c = document.createElement('canvas');
+      c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+      var g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0, c.width, c.height);
+      var q = .85; image = c.toDataURL('image/jpeg', q); while (image.length > 2.6e6 && q > .4) { q -= .15; image = c.toDataURL('image/jpeg', q); }
+      URL.revokeObjectURL(url); prev.querySelector('img').src = image; prev.classList.add('on'); say('');
+    };
+    im.onerror = function(){ URL.revokeObjectURL(url); clearPic(); say('이 사진은 열 수 없어요. 다른 사진(JPG·PNG)을 골라 주세요', 'err'); };
+    im.src = url;
+  });
+  f.addEventListener('submit', function(ev){
+    ev.preventDefault(); if (F.hp.value) return;
+    var text = F.text.value.trim(), nick = F.nick.value.trim();
+    if (!text && !image) { say('글이나 사진을 넣어 주세요', 'err'); F.text.focus(); return; }
+    if (!API) { say('게시판이 아직 준비 중이에요', 'err'); return; }
+    try { localStorage.setItem('bdNick', nick); } catch(e){}
+    btn.disabled = true; say(image ? '사진 올리는 중… (몇 초 걸려요)' : '올리는 중…');
+    post({action:'add', nick:nick, text:text, image:image})
+      .then(function(r){
+        if (!r || !r.ok) throw 0;
+        keep(r.item.id, r.token); r.item._local = 1; items.unshift(r.item); view = r.item.photo && view === 'photo' ? 'photo' : 'all';
+        tabs.forEach(function(x){ x.setAttribute('aria-selected', x.dataset.v === view ? 'true' : 'false'); });
+        render(); save(); say('올라갔어요! 🎉', 'ok'); F.text.value = ''; clearPic();
+      })
+      .catch(function(){ say('올리지 못했어요. 잠시 뒤에 다시 눌러 주세요', 'err'); })
+      .then(function(){ setTimeout(function(){ btn.disabled = false; }, 3000); });
+  });
+  load();
 })();
 </script>
 </body>
