@@ -1168,10 +1168,126 @@ button.ty.all{--c:#55546F}
 .ptabs button:hover{color:var(--text-primary); background:var(--bg-sunken)}
 .ptabs button[aria-selected="true"]{background:var(--accent); color:var(--on-accent); box-shadow:inset 0 -4px 0 rgba(0,0,0,.2), inset 0 2px 0 rgba(255,255,255,.25)}
 .ptabs .pt-new{font:700 10px/1 var(--font); padding:3px 6px; border-radius:var(--r-full); background:#E5484D; color:#fff}
-.wrap[data-page="home"] > #board, .wrap[data-page="home"] > #recipes{display:none}
+.wrap[data-page="home"] > #board, .wrap[data-page="home"] > #recipes, .wrap[data-page="home"] > #play{display:none}
+.wrap[data-page="play"] > :not(.hero):not(.ptabs):not(#play):not(footer){display:none}
 .wrap[data-page="board"] > :not(.hero):not(.ptabs):not(#board):not(footer){display:none}
 .wrap[data-page="recipes"] > :not(.hero):not(.ptabs):not(#recipes):not(footer){display:none}
 @media (max-width:520px){.ptabs button{font-size:13px; gap:4px; height:44px} .ptabs .pt-new{display:none}}
+/* 코블몬 공략 탭 */
+.gd{gap:var(--s5)}
+.gd-jump{display:flex; flex-wrap:wrap; gap:6px}
+.gd-jump a{display:inline-flex; align-items:center; height:32px; padding:0 12px; border-radius:var(--r-full); background:var(--bg-surface); border:1.5px solid var(--border-subtle); color:var(--text-primary); font:600 13px/1 var(--font); text-decoration:none; box-shadow:0 2px 0 var(--border-subtle); transition:transform var(--m-fast)}
+.gd-jump a:hover{transform:translateY(-2px)}
+.gd-card{scroll-margin-top:84px; padding:var(--s5); border-radius:var(--r-lg); background:var(--bg-surface); border:2px solid var(--border-subtle); box-shadow:0 3px 0 var(--border-subtle), var(--shadow-raised)}
+.gd-h{display:flex; align-items:baseline; flex-wrap:wrap; gap:8px; margin:0 0 var(--s4); font:800 19px/1.3 var(--cb-head, var(--font)); color:var(--text-primary)}
+.gd-h small{font:500 12.5px var(--font); color:var(--text-tertiary)}
+.gd-tip{margin:var(--s4) 0 0; padding:10px 12px; border-radius:var(--r-md); background:var(--bg-sunken); font-size:13.5px; line-height:1.6; color:var(--text-secondary)}
+.gd kbd{display:inline-grid; place-items:center; min-width:30px; height:30px; padding:0 8px; border-radius:7px; background:linear-gradient(#fff, #EEF1F5); border:1.5px solid #B9C2CE; box-shadow:0 3px 0 #9AA5B3; color:#23395B; font:800 13px/1 var(--font); white-space:nowrap}
+:root[data-theme="dark"] .gd kbd{background:linear-gradient(#3A4250, #2C333F); border-color:#555F70; box-shadow:0 3px 0 #1C2129; color:#E8EDF5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gd kbd{background:linear-gradient(#3A4250, #2C333F); border-color:#555F70; box-shadow:0 3px 0 #1C2129; color:#E8EDF5}}
+.gd p kbd,.gd li kbd{min-width:24px; height:24px; font-size:12px; padding:0 6px; box-shadow:0 2px 0 #9AA5B3; vertical-align:1px}
+.gd code{padding:2px 6px; border-radius:6px; background:var(--bg-sunken); font:600 12.5px/1.4 ui-monospace, Menlo, Consolas, monospace; color:var(--text-primary)}
+/* 지도 */
+.gd-map-wrap{display:grid; grid-template-columns:minmax(0, 1.05fr) minmax(0, 1fr); gap:var(--s5); align-items:start}
+.gd-map{width:100%; height:auto; display:block; border-radius:14px; border:3px solid #fff; box-shadow:0 0 0 2px var(--border-subtle), 0 6px 18px rgba(16,40,90,.18); background:#8FCB6B}
+.gd-map .gd-lbl text{font:700 8px/1 var(--font); fill:#23395B; paint-order:stroke; stroke:#fff; stroke-width:2.4px; stroke-linejoin:round}
+.gd-map .gd-sm{font-size:6.5px !important; font-weight:600 !important}
+.gd-map .gd-n{font:900 6px/1 var(--font); fill:#23395B}
+.gd-places{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px}
+.gd-places li{display:grid; grid-template-columns:1fr auto; gap:2px 8px; padding:10px 12px; border-radius:var(--r-md); background:var(--bg-sunken)}
+.gd-places li > b{font-size:14.5px; color:var(--text-primary)}
+.gd-places li > span{grid-column:1 / -1; font-size:13px; line-height:1.55; color:var(--text-secondary)}
+.gd-places li > code{grid-row:1; grid-column:2; align-self:center; font-size:11.5px}
+@media (max-width:640px){ .gd-map-wrap{grid-template-columns:1fr} }
+/* 조작키 */
+.gd-keys{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:8px}
+.gd-keys li{display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:var(--r-md); background:var(--bg-sunken)}
+.gd-keys li > kbd{flex:none}
+.gd-keys li > kbd + kbd{margin-left:-2px}
+.gd-keys li span{display:flex; flex-direction:column; gap:2px; margin-left:4px; font-size:12.5px; line-height:1.45; color:var(--text-secondary)}
+.gd-keys li span b{font-size:14px; color:var(--text-primary)}
+/* 할 수 있는 것 */
+.gd-do{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px; align-items:start}
+.gd-f{border-radius:var(--r-md); background:var(--bg-sunken); border:1.5px solid transparent; transition:border-color var(--m-fast), background var(--m-fast)}
+.gd-f[open]{background:var(--bg-surface); border-color:var(--accent); box-shadow:0 3px 0 var(--accent-edge, var(--accent))}
+.gd-f summary{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:4px 10px; padding:10px 12px; cursor:pointer; list-style:none}
+.gd-f summary::-webkit-details-marker{display:none}
+.gd-f summary::after{content:"▾"; grid-column:3; grid-row:1 / 3; color:var(--text-tertiary); transition:transform var(--m-fast)}
+.gd-f[open] summary::after{transform:rotate(180deg)}
+.gd-f summary img{grid-row:1 / 3; width:32px; height:32px; object-fit:contain; image-rendering:pixelated; filter:drop-shadow(0 2px 0 rgba(0,0,0,.12))}
+.gd-f summary b{font-size:15px; color:var(--text-primary)}
+.gd-f summary small{grid-column:2; font-size:12px; color:var(--text-tertiary)}
+.gd-f ol{margin:0; padding:0 14px 0 34px; display:flex; flex-direction:column; gap:6px; font-size:13.5px; line-height:1.6; color:var(--text-secondary)}
+.gd-f ol b{color:var(--text-primary)}
+.gd-btns{display:flex; flex-wrap:wrap; gap:6px; padding:10px 12px 12px}
+.gd-f > .gd-rc{margin:10px 12px 12px}
+.gd-rc{display:inline-flex; align-items:center; gap:4px; height:30px; padding:0 10px; border-radius:var(--r-sm); border:1.5px solid var(--border-subtle); background:var(--bg-surface); color:var(--text-primary); font:600 12.5px/1 var(--font); cursor:pointer}
+.gd-btns .gd-rc{margin:0}
+.gd-rc:hover{border-color:var(--accent); color:var(--accent)}
+.gd-f:not([open]) .gd-rc,.gd-f:not([open]) .gd-btns{display:none}
+/* 상성 계산기 */
+.gd-mode{margin:0 0 var(--s3)}
+.gd-mode button{height:32px}
+.gd-find input{width:100%; height:42px; padding:0 14px; border-radius:var(--r-md); border:1.5px solid var(--border-subtle); background:var(--bg-sunken); color:var(--text-primary); font:500 14.5px var(--font)}
+.gd-find input:focus{outline:none; border-color:var(--accent)}
+.gd-hint{margin:10px 0 8px; font-size:13px; color:var(--text-tertiary)}
+.gd-types{display:flex; flex-wrap:wrap; gap:6px}
+.gd-t{height:32px; padding:0 12px; border:0; border-radius:8px; background:var(--t); color:#fff; font:700 13.5px/1 var(--font); cursor:pointer; opacity:.45; box-shadow:inset 0 -3px 0 rgba(0,0,0,.18); transition:opacity var(--m-fast), transform var(--m-fast)}
+.gd-t:hover{opacity:.8}
+.gd-t[aria-pressed="true"]{opacity:1; transform:translateY(-2px); box-shadow:inset 0 -3px 0 rgba(0,0,0,.18), 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--t)}
+.gd-tag{display:inline-flex; align-items:center; height:24px; padding:0 9px; border-radius:6px; background:var(--t); color:#fff; font:700 12px/1 var(--font); box-shadow:inset 0 -2px 0 rgba(0,0,0,.15)}
+.gd-out{display:flex; flex-direction:column; gap:8px; margin-top:var(--s4)}
+.gd-out:empty{display:none}
+.gd-row{display:grid; grid-template-columns:96px 1fr; gap:10px; align-items:start; padding:10px 12px; border-radius:var(--r-md); background:var(--bg-sunken)}
+.gd-row > b{font:800 14px/1.3 var(--font); color:var(--text-primary)}
+.gd-row > b small{display:block; font:600 11.5px var(--font); color:var(--text-tertiary)}
+.gd-row > div{display:flex; flex-wrap:wrap; gap:5px}
+.gd-row.x4{background:#FFE3E0} .gd-row.x4 > b{color:#C4291F}
+.gd-row.x2{background:#FFF0DC} .gd-row.x2 > b{color:#C26A0A}
+.gd-row.x0{background:#E6E9EE}
+:root[data-theme="dark"] .gd-row.x4{background:#3A1D1B} :root[data-theme="dark"] .gd-row.x2{background:#3A2B17} :root[data-theme="dark"] .gd-row.x0{background:#272B33}
+:root[data-theme="dark"] .gd-row.x4 > b{color:#FF8A80} :root[data-theme="dark"] .gd-row.x2 > b{color:#FFB65C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gd-row.x4{background:#3A1D1B} :root:not([data-theme="light"]) .gd-row.x2{background:#3A2B17} :root:not([data-theme="light"]) .gd-row.x0{background:#272B33} :root:not([data-theme="light"]) .gd-row.x4 > b{color:#FF8A80} :root:not([data-theme="light"]) .gd-row.x2 > b{color:#FFB65C}}
+.gd-none{font-size:13px; color:var(--text-tertiary)}
+.gd-mon{display:flex; align-items:center; gap:10px; padding:8px 12px; border-radius:var(--r-md); background:var(--bg-sunken)}
+.gd-mon .cb{width:56px; height:56px}
+.gd-mon b{font-size:16px; color:var(--text-primary)}
+@media (max-width:520px){ .gd-row{grid-template-columns:1fr} }
+/* 이로치·전설 */
+.gd-rare{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px}
+@media (max-width:520px){ .gd-rare{grid-template-columns:1fr} }
+.gd-r{display:flex; flex-direction:column; gap:6px; padding:14px; border-radius:var(--r-md); background:linear-gradient(135deg, #FFF8D6, var(--bg-sunken) 70%)}
+:root[data-theme="dark"] .gd-r{background:linear-gradient(135deg, #3A3418, var(--bg-sunken) 70%)}
+.gd-big{font:400 22px/1.1 var(--pixel-s, var(--font)); color:#C98A00}
+.gd-r span{display:flex; flex-direction:column; gap:3px; font-size:13px; line-height:1.55; color:var(--text-secondary)}
+.gd-r span b{font-size:14.5px; color:var(--text-primary)}
+/* 규칙·건담 */
+.gd-rules{display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:var(--s5)}
+.gd-rl{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px}
+.gd-rl li{display:grid; grid-template-columns:34px 1fr; gap:0 8px; padding:10px 12px; border-radius:var(--r-md); background:var(--bg-sunken); font-size:13px; line-height:1.5; color:var(--text-secondary)}
+.gd-rl li span{grid-row:1 / 3; font-size:22px; line-height:1.4}
+.gd-rl li b{font-size:14.5px; color:var(--text-primary)}
+.gd-bot{display:flex; flex-direction:column; gap:10px; padding:14px; border-radius:var(--r-md); background:linear-gradient(160deg, #E4F6FF, #F4FBFF); border:2px solid #7FD3FF}
+:root[data-theme="dark"] .gd-bot{background:linear-gradient(160deg, #12303F, #0E2230); border-color:#2E6F91}
+.gd-bot-h{display:grid; grid-template-columns:auto 1fr; gap:0 10px; align-items:center}
+.gd-bot-ic{grid-row:1 / 3; display:grid; place-items:center; width:44px; height:44px; border-radius:12px; background:#23395B; font-size:24px}
+.gd-bot-h b{font-size:15.5px; color:#0F7FB8}
+:root[data-theme="dark"] .gd-bot-h b{color:#7FD3FF}
+.gd-bot-h small{font-size:12px; color:var(--text-tertiary)}
+.gd-bot > p{margin:0; font-size:13.5px; line-height:1.6; color:var(--text-secondary)}
+.gd-chat{display:flex; flex-direction:column; gap:6px; padding:10px; border-radius:10px; background:#1E1E24; font:500 12.5px/1.5 ui-monospace, Menlo, Consolas, monospace}
+.gd-chat p{margin:0; color:#EDEDED}
+.gd-chat .me b{color:#FFD86B}
+.gd-chat .bot b{color:#55FFFF}
+.gd-sm2{font-size:12.5px !important; color:var(--text-tertiary) !important}
+@media (max-width:640px){ .gd-rules{grid-template-columns:1fr} }
+/* FAQ */
+.gd-faq{display:flex; flex-direction:column; gap:6px}
+.gd-faq details{border-radius:var(--r-md); background:var(--bg-sunken)}
+.gd-faq summary{padding:12px 14px; cursor:pointer; font:700 14.5px var(--font); color:var(--text-primary); list-style:none}
+.gd-faq summary::-webkit-details-marker{display:none}
+.gd-faq summary::before{content:"Q. "; color:var(--accent)}
+.gd-faq p{margin:0; padding:0 14px 12px; font-size:13.5px; line-height:1.65; color:var(--text-secondary)}
 /* 자유게시판 */
 .bd-form{display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:16px; background:var(--bg-surface); border:2px solid var(--border-standard)}
 .bd-row{display:flex; gap:8px; flex-wrap:wrap}
@@ -1390,7 +1506,8 @@ button.ty.all{--c:#55546F}
   </header>
   <nav class="ptabs" id="ptabs" role="tablist" aria-label="페이지">
     <button type="button" role="tab" data-p="home" aria-selected="true">🏠 홈</button>
-    <button type="button" role="tab" data-p="board" aria-selected="false">💬 자유게시판 <span class="pt-new">NEW</span></button>
+    <button type="button" role="tab" data-p="play" aria-selected="false">📘 공략 <span class="pt-new">NEW</span></button>
+    <button type="button" role="tab" data-p="board" aria-selected="false">💬 자유게시판</button>
     <button type="button" role="tab" data-p="recipes" aria-selected="false">🛠️ 조합법</button>
   </nav>
   <section class="online" id="online" aria-live="polite" {{ADDRESS_HIDDEN}}>
@@ -1535,6 +1652,178 @@ button.ty.all{--c:#55546F}
     <div class="dex-tools"><input class="dex-search" id="dexSearch" type="search" placeholder="이름이나 번호로 찾기 (예: 피카츄, 25)" aria-label="도감 검색"><div class="dex-types" id="dexTypes" role="group" aria-label="타입으로 보기"></div></div>
     <div class="dex-grid" id="dexGrid" aria-live="polite"></div>
     <button class="dex-more" id="dexMore" type="button">더 보기</button>
+  </section>
+
+  <section class="section gd" aria-labelledby="gdTitle" id="play">
+    <div class="sec-head"><h2 id="gdTitle"><span class="cbk-ic" style="background-image:url(assets/recipes/tex/cobblemon/item/pokedexes/pokedex_red.png); image-rendering:pixelated" aria-hidden="true"></span>코블몬 공략</h2><span class="sec-sub">우리 서버 기준으로 정리했어요 · 코블몬 1.7.3</span></div>
+    <nav class="gd-jump" aria-label="공략 목차">
+      <a href="#gd-map">🗺️ 태초마을</a><a href="#gd-keys">⌨️ 조작키</a><a href="#gd-do">🎒 할 수 있는 것</a><a href="#gd-type">⚔️ 상성 계산기</a><a href="#gd-rare">✨ 이로치·전설</a><a href="#gd-rules">🤖 규칙·건담</a><a href="#gd-faq">❓ 자주 묻는 것</a>
+    </nav>
+
+    <article class="gd-card" id="gd-map">
+      <h3 class="gd-h">🗺️ 태초마을 지도 <small>모두가 처음 시작하는 마을</small></h3>
+      <div class="gd-map-wrap">
+        <svg class="gd-map" viewBox="-692 4834 240 262" role="img" aria-label="태초마을 지도: 북쪽 끝에 세계수와 포켓몬센터, 가운데 신의 길, 길 중간에 시작 지점, 남쪽에 웨이스톤 신전" shape-rendering="crispEdges">
+          <defs>
+            <pattern id="gdGrass" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#8FCB6B"/><rect x="0" y="0" width="2" height="2" fill="#9BD477"/><rect x="5" y="4" width="2" height="2" fill="#82BE5F"/><rect x="2" y="6" width="1" height="1" fill="#A6DB83"/></pattern>
+            <pattern id="gdFlat" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#A6D77F"/><rect x="1" y="1" width="2" height="2" fill="#B1DE8B"/><rect x="5" y="5" width="2" height="2" fill="#9ACF74"/></pattern>
+            <pattern id="gdRoad" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#B9B4A8"/><rect x="0" y="0" width="2" height="2" fill="#CAC5BA"/><rect x="2" y="2" width="2" height="2" fill="#A9A498"/></pattern>
+          </defs>
+          <rect x="-692" y="4834" width="240" height="262" fill="url(#gdGrass)"/>
+          <rect x="-672" y="4883" width="200" height="200" fill="url(#gdFlat)" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 3" opacity=".95"/>
+          <rect x="-576" y="4897" width="7" height="73" fill="url(#gdRoad)"/>
+          <rect x="-583" y="4973" width="21" height="21" fill="#D9D2C2" stroke="#8C8577" stroke-width="1"/>
+          <rect x="-579" y="4977" width="13" height="13" fill="#EDE7D8"/>
+          <rect x="-575" y="4981" width="5" height="5" fill="#6FC3E8"/>
+          <rect x="-574" y="4970" width="3" height="3" fill="#CAC5BA"/>
+          <g class="gd-tree">
+            <circle cx="-573" cy="4884" r="38" fill="#4E9A58" opacity=".92"/>
+            <circle cx="-585" cy="4872" r="20" fill="#5FAE68"/><circle cx="-560" cy="4874" r="18" fill="#5FAE68"/><circle cx="-573" cy="4862" r="16" fill="#6CBA74"/>
+            <circle cx="-590" cy="4894" r="12" fill="#57A461"/><circle cx="-556" cy="4895" r="12" fill="#57A461"/>
+            <rect x="-579" y="4882" width="13" height="13" fill="#9C7B57"/>
+            <rect x="-575" y="4890" width="5" height="5" fill="#FFE2A0"/>
+            <circle cx="-596" cy="4880" r="1.6" fill="#FFF0B0"/><circle cx="-552" cy="4884" r="1.6" fill="#FFF0B0"/><circle cx="-570" cy="4858" r="1.6" fill="#FFF0B0"/><circle cx="-583" cy="4900" r="1.6" fill="#FFF0B0"/><circle cx="-561" cy="4902" r="1.6" fill="#FFF0B0"/>
+          </g>
+          <g class="gd-spawn"><circle cx="-572.5" cy="4935" r="7" fill="#FFD23F" opacity=".35"><animate attributeName="r" values="4;10;4" dur="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".55;0;.55" dur="2.2s" repeatCount="indefinite"/></circle><path d="M-572.5 4929 l1.8 3.9 4.2.5-3.1 2.9.8 4.2-3.7-2.1-3.7 2.1.8-4.2-3.1-2.9 4.2-.5z" fill="#FFD23F" stroke="#23395B" stroke-width=".8" shape-rendering="geometricPrecision"/></g>
+          <g class="gd-lbl" shape-rendering="geometricPrecision">
+            <line x1="-536" y1="4878" x2="-520" y2="4866" stroke="#23395B" stroke-width=".8"/><text x="-518" y="4864">세계수 · 포켓몬센터</text>
+            <line x1="-568" y1="4952" x2="-540" y2="4952" stroke="#23395B" stroke-width=".8"/><text x="-538" y="4955">신의 길</text>
+            <line x1="-580" y1="4935" x2="-612" y2="4935" stroke="#23395B" stroke-width=".8"/><text x="-614" y="4932" text-anchor="end">처음 시작하는 곳</text><text x="-614" y="4941" text-anchor="end" class="gd-sm">-573, 66, 4935</text>
+            <line x1="-562" y1="4983" x2="-540" y2="4993" stroke="#23395B" stroke-width=".8"/><text x="-538" y="4997">웨이스톤 신전</text>
+            <text x="-668" y="5076" class="gd-sm">마을 평지 200×200</text>
+          </g>
+          <g shape-rendering="geometricPrecision"><circle cx="-670" cy="4852" r="9" fill="#fff" opacity=".85"/><path d="M-670 4845 l4 9 h-8z" fill="#E3403A"/><text x="-670" y="4860" text-anchor="middle" class="gd-n">N</text></g>
+        </svg>
+        <ul class="gd-places">
+          <li><b>🌳 세계수 · 포켓몬센터</b><span>마을 북쪽 끝의 거대한 나무예요. 줄기 아래쪽에 <b>포켓몬센터</b>가 숨어 있어요. 남쪽 문으로 들어가면 <b>간호순</b>과 <b>회복 장치</b>, <b>PC</b>가 있어요.</span><code>-573, 66, 4884</code></li>
+          <li><b>⭐ 처음 시작하는 곳</b><span>신의 길 한가운데예요. 처음 들어오거나, 침대에서 자지 않고 쓰러지면 여기서 다시 시작해요.</span><code>-573, 66, 4935</code></li>
+          <li><b>🛤️ 신의 길</b><span>세계수와 신전을 잇는 돌길이에요. 길만 따라가면 안 헤매요.</span></li>
+          <li><b>🏛️ 웨이스톤 신전</b><span>마을 남쪽 신전이에요. 웨이스톤으로 등록한 장소끼리 <b>무료로 순간이동</b>할 수 있어요.</span><code>-573, 72, 4983</code></li>
+          <li><b>👀 하늘 벽화</b><span>세계수 위 하늘(높이 200 이상)에 우리들 얼굴 벽화와 금빛 "태초마을" 글씨가 떠 있어요. 마을에서 고개를 들어 보세요!</span></li>
+        </ul>
+      </div>
+      <p class="gd-tip">💡 좌표는 <kbd>F3</kbd>를 누르면 화면 왼쪽에 나와요. 오른쪽 위 미니맵에도 보여요.</p>
+    </article>
+
+    <article class="gd-card" id="gd-keys">
+      <h3 class="gd-h">⌨️ 조작키 <small>코블몬 기본 키 기준이에요</small></h3>
+      <ul class="gd-keys">
+        <li><kbd>R</kbd><span><b>포켓몬 꺼내기 · 넣기</b>선택한 포켓몬을 내보내요. 야생 포켓몬을 보고 누르면 배틀이 시작돼요</span></li>
+        <li><kbd>↑</kbd><kbd>↓</kbd><span><b>파티 고르기</b>왼쪽 파티 목록에서 포켓몬을 골라요</span></li>
+        <li><kbd>M</kbd><span><b>상태창</b>레벨, 기술, 개체값, 성격을 봐요</span></li>
+        <li><kbd>R</kbd><span><b>친구와 배틀 · 교환</b>친구를 바라보고 누르면 배틀이나 교환을 신청하는 메뉴가 나와요</span></li>
+        <li><kbd>O</kbd><span><b>파티 숨기기</b>스크린샷 찍을 때 좋아요</span></li>
+        <li><kbd>Shift</kbd><kbd>우클릭</kbd><span><b>상호작용 휠</b>내 포켓몬에게 하면 타기, 아이템 주기 같은 메뉴가 나와요</span></li>
+        <li><kbd>J</kbd><span><b>큰 지도</b>저니맵 전체 지도를 열어요</span></li>
+        <li><kbd>B</kbd><span><b>배낭 열기</b>배낭을 등에 메고 있으면 바로 열려요</span></li>
+      </ul>
+      <p class="gd-tip">💡 키가 안 먹으면 <b>설정 → 조작 → 키 설정</b>에서 "코블몬" 칸을 확인해 보세요. 게임 언어를 <b>한국어</b>로 하면 포켓몬 이름도 한국어로 나와요.</p>
+    </article>
+
+    <article class="gd-card" id="gd-do">
+      <h3 class="gd-h">🎒 우리 서버에서 할 수 있는 것 <small>눌러서 펼쳐 보세요</small></h3>
+      <div class="gd-do">
+        <details class="gd-f" open><summary><img src="assets/recipes/tex/cobblemon/item/poke_balls/poke_ball.png" alt="" width="32" height="32"><b>포켓몬 잡기</b><small>몬스터볼</small></summary>
+          <ol><li>몬스터볼을 손에 들고 야생 포켓몬에게 <b>우클릭으로 던지면</b> 잡기 시작해요.</li><li>잘 안 잡히면 <kbd>R</kbd>로 내 포켓몬을 꺼내 배틀하세요. 체력을 줄이고 던지면 훨씬 잘 잡혀요.</li><li>파티는 6마리까지예요. 그 뒤로 잡은 포켓몬은 <b>PC</b>로 가요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="몬스터볼">🛠️ 몬스터볼 조합법</button></details>
+        <details class="gd-f"><summary><img src="assets/cobble-blocks/healing_machine.png" alt="" width="32" height="32"><b>회복 · 보관</b><small>회복 장치 · PC</small></summary>
+          <ol><li><b>회복 장치</b>를 우클릭하면 파티가 전부 회복돼요.</li><li><b>PC</b>를 우클릭하면 포켓몬을 맡기고 꺼낼 수 있어요. 박스 이름 바꾸기, 정렬도 돼요.</li><li>둘 다 <b>세계수 포켓몬센터</b>에 있어요. 간호순도 기다리고 있어요.</li></ol>
+          <div class="gd-btns"><button class="gd-rc" type="button" data-rc="회복 장치">🛠️ 회복 장치</button><button class="gd-rc" type="button" data-rc="PC">🛠️ PC</button></div></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/cobblemon/item/aprijuice/aprijuice_red.png" alt="" width="32" height="32"><b>포켓몬 타기</b><small>땅 · 물 · 하늘</small></summary>
+          <ol><li><kbd>R</kbd>로 포켓몬을 꺼내고 <kbd>Shift</kbd>+<kbd>우클릭</kbd> → <b>타기</b>를 골라요.</li><li>포켓몬마다 땅을 달리거나, 헤엄치거나, 하늘을 날아요. 탈 수 없는 포켓몬도 있어요.</li><li><b>규드링크</b>를 먹이면 탈 때 능력(속도 등)이 올라가요.</li></ol></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/cobblemon/item/campfire_pots/campfire_pot_red.png" alt="" width="32" height="32"><b>요리</b><small>모닥불 냄비</small></summary>
+          <ol><li><b>모닥불 냄비</b>를 모닥불 위에 올리고 재료를 넣어 요리해요.</li><li>규열매로 <b>규드링크</b>를 만들 수 있어요. 탑승 능력을 키워 줘요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="모닥불 냄비">🛠️ 모닥불 냄비 조합법</button></details>
+        <details class="gd-f"><summary><img src="assets/cobble-blocks/pasture.png" alt="" width="32" height="32"><b>교배 · 알</b><small>목장 블록</small></summary>
+          <ol><li><b>목장 블록</b>을 놓고, 짝이 맞는 포켓몬 두 마리를 풀어 둔 뒤 <b>교배 버튼</b>을 켜요.</li><li>시간이 지나면 목장 블록 아래쪽에 <b>알</b>이 생겨요. 다른 사람 포켓몬과도 돼요.</li><li>알은 <b>인벤토리에 넣고 다녀야</b> 부화해요(보통 10분쯤).</li><li><b>빨간실</b>을 지니게 하면 개체값, <b>변함없는돌</b>은 성격이 잘 이어져요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="목장 블록">🛠️ 목장 블록 조합법</button></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/cobblemon/item/relic_coin.png" alt="" width="32" height="32"><b>가챠</b><small>유물 금화 5개</small></summary>
+          <ol><li><b>포케 가챠 머신</b>을 만들어 놓아요.</li><li><b>유물 금화 5개</b>를 넣으면 캡슐이 나와요. 몬스터·수퍼·하이퍼·마스터, 그리고 가장 귀한 <b>프레셔스 캡슐</b>까지!</li><li>캡슐 안에는 화석, 진화의 돌, 지닌 도구, 규열매 같은 게 들어 있어요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="가챠">🛠️ 가챠 조합법</button></details>
+        <details class="gd-f"><summary><img src="https://cdn.jsdelivr.net/gh/InventivetalentDev/minecraft-assets@1.21.1/assets/minecraft/textures/item/emerald.png" alt="" width="32" height="32"><b>코블달러 · 상인</b><small>돈 벌고 사기</small></summary>
+          <ol><li>야생 포켓몬을 <b>쓰러뜨리면</b> 레벨에 따라 코블달러를 벌어요. 잔액은 화면 구석에 보여요.</li><li><b>코블 상인</b>을 우클릭하면 상점, <kbd>Shift</kbd>+<kbd>우클릭</kbd>하면 은행이에요. 은행에서는 에메랄드 같은 아이템을 돈으로 바꿔 줘요.</li><li>상인은 마을에서 가끔 보여요. 몬스터볼을 들고 있으면 따라와요.</li></ol></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/cobblemon/item/poke_balls/master_ball.png" alt="" width="32" height="32"><b>거래소 (GTS)</b><small>채팅 명령어</small></summary>
+          <ol><li>채팅에 <code>/gts</code>를 치면 거래소가 열려요. 다른 사람이 올린 포켓몬·아이템을 살 수 있어요.</li><li><code>/gts sell</code>로 내 포켓몬이나 아이템을 올려요.</li><li><code>/gts manage</code>는 내가 올린 것 관리, <code>/gts expired</code>는 안 팔린 것 돌려받기, <code>/gts history</code>는 거래 기록이에요.</li></ol></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/cobblenav/item/pokenav_item_base.png" alt="" width="32" height="32"><b>포켓내비</b><small>여기서 뭐가 나와?</small></summary>
+          <ol><li><b>포켓내비</b> 아이템을 만들어 손에 들고 우클릭해요.</li><li>지금 서 있는 곳에서 나올 수 있는 포켓몬과 <b>확률</b>, 나오는 <b>조건</b>(시간, 날씨)을 알려 줘요.</li><li>근처의 좋은 개체 찾기, 낚시로 뭐가 나올지 미리 보기, 3D 화살표 따라가기도 돼요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="pokenav">🛠️ 포켓내비 조합법</button></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/rctmod/item/trainer_card.png" alt="" width="32" height="32"><b>트레이너 배틀</b><small>NPC 1,500명+</small></summary>
+          <ol><li>월드 곳곳에 <b>트레이너 NPC</b>가 나타나요. 말을 걸면 배틀! 이기면 보상을 받아요.</li><li><b>트레이너 카드</b>로 내 진행 상황과 다음에 이길 트레이너를 확인해요.</li><li>우리 서버는 <b>레벨 제한을 풀어 뒀어요</b>. 레벨 100까지 마음껏 키우세요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="Trainer Card">🛠️ 트레이너 카드 조합법</button></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/mega_showdown/item/mega_bracelet.png" alt="" width="32" height="32"><b>메가진화 · Z기술 · 테라스탈</b><small>배틀 기믹</small></summary>
+          <ol><li><b>메가진화</b>: 땅속 <b>키스톤 광석</b>을 캐서 <b>메가링</b>을 만들어 장착하고, 포켓몬에게 <b>메가스톤</b>을 지니게 해요. 한 배틀에 한 마리만 돼요.</li><li><b>Z기술</b>: <b>Z-링</b>을 장착하고 포켓몬에게 <b>Z크리스탈</b>을 지니게 하면, 배틀 중 한 번 강력한 기술을 써요.</li><li><b>테라스탈</b>: <b>테라스탈 오브</b>를 장착하면 배틀 중 포켓몬 타입이 바뀌고 그 타입 기술이 세져요. <b>테라피스</b>로 테라 타입을 바꿔요.</li><li>링·오브 같은 건 <b>장신구 칸</b>에 끼워요.</li></ol>
+          <div class="gd-btns"><button class="gd-rc" type="button" data-rc="메가링">🛠️ 메가링</button><button class="gd-rc" type="button" data-rc="Z-링">🛠️ Z-링</button><button class="gd-rc" type="button" data-rc="테라스탈 오브">🛠️ 테라스탈 오브</button></div></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/mega_showdown/item/dynamax_band.png" alt="" width="32" height="32"><b>다이맥스</b><small>파워스폿 근처에서만</small></summary>
+          <ol><li><b>다이맥스밴드</b>를 장신구 칸에 끼워요.</li><li><b>파워스폿</b> 블록을 놓고, 그 <b>20칸 안</b>에서 배틀할 때만 다이맥스할 수 있어요.</li><li>배틀 기술 화면의 버튼으로 켜면 <b>3턴</b> 동안 거대해져요. 1:1 배틀에서만 돼요.</li></ol>
+          <div class="gd-btns"><button class="gd-rc" type="button" data-rc="다이맥스밴드">🛠️ 다이맥스밴드</button><button class="gd-rc" type="button" data-rc="파워스폿">🛠️ 파워스폿</button></div></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/waystones/item/warp_stone.png" alt="" width="32" height="32"><b>웨이스톤 순간이동</b><small>우리 서버는 무료</small></summary>
+          <ol><li>웨이스톤을 우클릭해서 <b>등록</b>해요.</li><li>다른 웨이스톤에서 등록한 곳을 골라 <b>순간이동</b>해요. 우리 서버는 비용이 없어요!</li><li><b>휴대용 전송석</b>이 있으면 어디서든 웨이스톤으로 갈 수 있어요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="전송석">🛠️ 전송석 조합법</button></details>
+        <details class="gd-f"><summary><img src="assets/cobble-blocks/display_case.png" alt="" width="32" height="32"><b>미니몬 전시</b><small>내 포켓몬 피규어</small></summary>
+          <ol><li><b>미니몬 전시 케이스</b>를 만들어요.</li><li>내 포켓몬을 우클릭해 미니몬으로 만들고, 케이스를 놓으면 작은 피규어가 들어가요. 이로치도 그대로!</li><li>염료를 들고 케이스를 우클릭하면 색이 바뀌어요. 내 포켓몬만 만들 수 있어요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="미니몬">🛠️ 미니몬 조합법</button></details>
+        <details class="gd-f"><summary><img src="assets/cobble-blocks/fossil_analyzer.png" alt="" width="32" height="32"><b>화석 복원</b><small>옛날 포켓몬 되살리기</small></summary>
+          <ol><li>화석 발굴지에서 <b>화석</b>을 캐요.</li><li><b>화석 분석기</b>, <b>복원 탱크</b> 같은 복원 기계를 이어 붙이고 화석을 넣으면 포켓몬이 되살아나요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="화석">🛠️ 화석 기계 조합법</button></details>
+        <details class="gd-f"><summary><img src="assets/recipes/tex/cobblemon/item/fishing/poke_rod.png" alt="" width="32" height="32"><b>낚시</b><small>물가 포켓몬</small></summary>
+          <ol><li><b>포켓몬 낚싯대</b>로 물에서 포켓몬을 낚아요.</li><li>포켓내비의 낚시 화면으로 뭐가 낚일지 미리 볼 수 있어요.</li></ol>
+          <button class="gd-rc" type="button" data-rc="낚싯대">🛠️ 낚싯대 조합법</button></details>
+      </div>
+    </article>
+
+    <article class="gd-card" id="gd-type">
+      <h3 class="gd-h">⚔️ 타입 상성 계산기 <small>배틀 전에 확인!</small></h3>
+      <div class="seg gd-mode" role="tablist" aria-label="계산 방식"><button type="button" role="tab" aria-selected="true" data-m="def">🛡️ 상대 포켓몬 약점</button><button type="button" role="tab" aria-selected="false" data-m="atk">⚔️ 내 기술이 잘 먹히는 상대</button></div>
+      <div class="gd-find"><input id="gdMon" type="search" placeholder="포켓몬 이름으로 찾기 (예: 리자몽, 개굴닌자)" aria-label="포켓몬 이름" list="gdMonList" autocomplete="off"><datalist id="gdMonList"></datalist></div>
+      <p class="gd-hint" id="gdHint">상대 포켓몬의 타입을 골라요 (최대 2개)</p>
+      <div class="gd-types" id="gdTypes"></div>
+      <div class="gd-out" id="gdOut" aria-live="polite"></div>
+    </article>
+
+    <article class="gd-card" id="gd-rare">
+      <h3 class="gd-h">✨ 이로치 · 전설 이야기</h3>
+      <div class="gd-rare">
+        <div class="gd-r"><b class="gd-big">1 / 8192</b><span><b>이로치 확률</b>색이 다른 반짝이는 포켓몬이에요. 아주 드물어요!</span></div>
+        <div class="gd-r"><b class="gd-big">× 4</b><span><b>교배로 이로치 노리기</b>서로 다른 사람이 잡은 포켓몬끼리 교배하면 알에서 이로치가 나올 확률이 올라가요 (기본 설정 기준)</span></div>
+        <div class="gd-r"><b class="gd-big">🌩️</b><span><b>전설은 야생에서도!</b>우리 서버는 전설 포켓몬이 아주아주 드물게 야생에 나와요. 특정 장소·날씨·시간에만 나와요</span></div>
+        <div class="gd-r"><b class="gd-big">🏛️</b><span><b>전설 유적</b>세상 어딘가의 유적에서 특별한 의식을 하면 전설이 나타나요. 유적마다 한 번씩, 이로치 확률 2%!</span></div>
+      </div>
+      <p class="gd-tip">🤫 전설이 어디 나오는지는 <b>비밀</b>이에요. 건담로봇에게 물어봐도 안 알려 줘요. 직접 찾는 게 재미니까요!</p>
+    </article>
+
+    <article class="gd-card" id="gd-rules">
+      <h3 class="gd-h">🤖 서버 규칙 · 건담로봇 <small>다 같이 즐겁게</small></h3>
+      <div class="gd-rules">
+        <ul class="gd-rl">
+          <li><span>🕊️</span><b>항상 평화로움</b>몬스터가 나오지 않아요. 포켓몬에만 집중!</li>
+          <li><span>🌤️</span><b>날씨·시간은 그대로</b>분위기를 위해 날씨와 시간은 바꾸지 않아요</li>
+          <li><span>🎁</span><b>아이템은 직접 모아요</b>공정하게! 건담로봇은 아이템·포켓몬을 주지 않아요</li>
+          <li><span>🏗️</span><b>건축 주문은 삐끼님만</b>건담로봇에게 건축을 부탁할 수는 없어요</li>
+          <li><span>📍</span><b>남의 좌표는 비밀</b>다른 사람이 어디 있는지는 알려 주지 않아요</li>
+          <li><span>🤝</span><b>서로 배려해요</b>남의 집과 포켓몬은 소중히!</li>
+        </ul>
+        <div class="gd-bot">
+          <div class="gd-bot-h"><span class="gd-bot-ic" aria-hidden="true">🤖</span><b>주끼삐끼의 건담로봇 MK.64</b><small>서버를 지키는 AI 도우미</small></div>
+          <p>채팅에 <b>"건담"</b>, <b>"로봇"</b>, <b>"MK64"</b>를 넣어서 말을 걸면 대답해요. 코블몬에 관해 궁금한 건 뭐든 물어보세요!</p>
+          <div class="gd-chat"><p class="me"><b>나</b> 건담아 메가진화 어떻게 해?</p><p class="bot"><b>[건담로봇]</b> 메가링을 끼고, 포켓몬에게 메가스톤을 지니게 하면 돼요! 🔥</p></div>
+          <p class="gd-sm2">서버가 버벅이면 건담로봇이 채팅으로 알려 주고 바로 고쳐요. 렉이 느껴지면 말해 주세요.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="gd-card" id="gd-faq">
+      <h3 class="gd-h">❓ 자주 묻는 것</h3>
+      <div class="gd-faq">
+        <details><summary>서버 주소가 뭐예요?</summary><p><code>{{SERVER_ADDRESS}}</code> 이에요. 멀티플레이 → 서버 추가에 넣어요. <b>설치 프로그램</b>을 쓰면 서버가 자동으로 추가돼요.</p></details>
+        <details><summary>접속하면 "모드가 다르다"며 튕겨요</summary><p>설치 프로그램을 <b>한 번 더</b> 실행하고, 런처에서 <b>🐸 노천극장 놀이터</b> 프로필을 골라 실행해요. 그래도 안 되면 디스코드나 자유게시판에 화면을 찍어 올려 주세요.</p></details>
+        <details><summary>잡은 포켓몬이 사라졌어요!</summary><p>파티(6마리)가 꽉 차면 새로 잡은 포켓몬은 <b>PC</b>로 가요. 세계수 포켓몬센터의 PC를 열어 보세요.</p></details>
+        <details><summary>포켓몬 회복은 어디서 해요?</summary><p>세계수 안 <b>포켓몬센터</b>의 회복 장치나 간호순에게 가요. 회복 장치를 직접 만들어 집에 둬도 돼요.</p></details>
+        <details><summary>쓰러지면 어디서 다시 시작해요?</summary><p>침대에서 잔 적이 있으면 그 침대에서, 아니면 <b>태초마을 시작 지점</b>에서 다시 시작해요. 멀리 갈 땐 침대를 챙기세요!</p></details>
+        <details><summary>포켓몬 이름이 영어로 나와요</summary><p>설정 → 언어 → <b>한국어</b>로 바꾸면 포켓몬, 기술, 아이템 이름이 한국어로 나와요.</p></details>
+        <details><summary>맥(Mac)에서도 할 수 있어요?</summary><p>네! 설치 프로그램은 윈도우용이라, 맥은 위의 <b>처음 왔어요</b>에서 macOS를 골라 차근차근 따라 하면 돼요.</p></details>
+        <details><summary>렉이 심해요</summary><p>채팅으로 건담로봇에게 알려 주세요. 컴퓨터가 느리면 비디오 설정에서 <b>렌더 거리</b>를 8 정도로 낮추면 좋아져요.</p></details>
+      </div>
+    </article>
   </section>
 
   <section class="section" aria-labelledby="bdTitle" id="board">
@@ -2465,7 +2754,7 @@ button.ty.all{--c:#55546F}
     return c;
   }
   function list(){
-    var s = q.value.trim().toLowerCase();
+    var s = q.value.trim().toLowerCase(); if (s === '가챠') s = 'gacha';
     return D.recipes.filter(function(r){ return (!mod || r.m === mod) && (!s || nm(r.o).toLowerCase().indexOf(s) >= 0 || r.o.indexOf(s) >= 0); });
   }
   function draw(){
@@ -2630,8 +2919,112 @@ button.ty.all{--c:#55546F}
     history.replaceState(null, '', location.pathname + location.search + (b.dataset.p === 'home' ? '' : '#' + b.dataset.p));
     show(b.dataset.p, true);
   });
-  function fromHash(){ var h = location.hash.slice(1); show(h === 'board' || h === 'recipes' ? h : 'home', false); }
+  function fromHash(){ var h = location.hash.slice(1); show(h === 'board' || h === 'recipes' || h === 'play' ? h : 'home', false); }
   addEventListener('hashchange', fromHash); fromHash();
+})();
+</script>
+<script>
+/* 코블몬 공략: 목차 이동, 조합법 바로가기, 타입 상성 계산기 */
+(function(){
+  var sec = document.getElementById('play'); if (!sec) return;
+  // 목차: 탭 안에서 부드럽게 이동 (주소는 #play 유지)
+  sec.querySelector('.gd-jump').addEventListener('click', function(e){
+    var a = e.target.closest('a'); if (!a) return; e.preventDefault();
+    var t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  // 조합법 바로가기: 조합법 탭으로 넘어가서 검색
+  sec.addEventListener('click', function(e){
+    var b = e.target.closest('.gd-rc'); if (!b) return;
+    var tab = document.querySelector('#ptabs button[data-p="recipes"]'), q = document.getElementById('rcSearch');
+    if (tab) tab.click();
+    if (q) { q.value = b.dataset.rc; q.dispatchEvent(new Event('input')); setTimeout(function(){ q.scrollIntoView({block:'center', behavior:'smooth'}); }, 60); }
+  });
+  // 타입 상성 (6세대 이후 기준). E[공격][방어] = 배율 (없으면 1배)
+  var TY = {"normal":["노말","#9FA19F"],"fire":["불꽃","#EE5A3B"],"water":["물","#4A90E2"],"grass":["풀","#4FB548"],"electric":["전기","#EDB92A"],"ice":["얼음","#5CC8DE"],"fighting":["격투","#E3712E"],"poison":["독","#A256C4"],"ground":["땅","#BF8645"],"flying":["비행","#7F9BEA"],"psychic":["에스퍼","#EE5A8C"],"bug":["벌레","#94AD24"],"rock":["바위","#B39E5E"],"ghost":["고스트","#6656B0"],"dragon":["드래곤","#6A50DC"],"dark":["악","#5A4A44"],"steel":["강철","#7895A9"],"fairy":["페어리","#E77BC4"]};
+  var K = Object.keys(TY);
+  var E = {
+    normal:{rock:.5, ghost:0, steel:.5},
+    fire:{fire:.5, water:.5, grass:2, ice:2, bug:2, rock:.5, dragon:.5, steel:2},
+    water:{fire:2, water:.5, grass:.5, ground:2, rock:2, dragon:.5},
+    electric:{water:2, electric:.5, grass:.5, ground:0, flying:2, dragon:.5},
+    grass:{fire:.5, water:2, grass:.5, poison:.5, ground:2, flying:.5, bug:.5, rock:2, dragon:.5, steel:.5},
+    ice:{fire:.5, water:.5, grass:2, ice:.5, ground:2, flying:2, dragon:2, steel:.5},
+    fighting:{normal:2, ice:2, poison:.5, flying:.5, psychic:.5, bug:.5, rock:2, ghost:0, dark:2, steel:2, fairy:.5},
+    poison:{grass:2, poison:.5, ground:.5, rock:.5, ghost:.5, steel:0, fairy:2},
+    ground:{fire:2, electric:2, grass:.5, poison:2, flying:0, bug:.5, rock:2, steel:2},
+    flying:{electric:.5, grass:2, fighting:2, bug:2, rock:.5, steel:.5},
+    psychic:{fighting:2, poison:2, psychic:.5, dark:0, steel:.5},
+    bug:{fire:.5, grass:2, fighting:.5, poison:.5, flying:.5, psychic:2, ghost:.5, dark:2, steel:.5, fairy:.5},
+    rock:{fire:2, ice:2, fighting:.5, ground:.5, flying:2, bug:2, steel:.5},
+    ghost:{normal:0, psychic:2, ghost:2, dark:.5},
+    dragon:{dragon:2, steel:.5, fairy:0},
+    dark:{fighting:.5, psychic:2, ghost:2, dark:.5, fairy:.5},
+    steel:{fire:.5, water:.5, electric:.5, ice:2, rock:2, steel:.5, fairy:2},
+    fairy:{fire:.5, fighting:2, poison:.5, dragon:2, dark:2, steel:.5}
+  };
+  var eff = function(a, d){ var v = E[a][d]; return v === undefined ? 1 : v; };
+  var mode = 'def', sel = [], box = document.getElementById('gdTypes'), out = document.getElementById('gdOut'), hint = document.getElementById('gdHint'), inp = document.getElementById('gdMon'), monNote = null;
+  var tag = function(k){ var s = document.createElement('span'); s.className = 'gd-tag'; s.style.setProperty('--t', TY[k][1]); s.textContent = TY[k][0]; return s; };
+  K.forEach(function(k){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'gd-t'; b.dataset.k = k; b.style.setProperty('--t', TY[k][1]); b.textContent = TY[k][0]; b.setAttribute('aria-pressed', 'false'); box.appendChild(b);
+  });
+  function row(cls, title, sub, keys){
+    var r = document.createElement('div'); r.className = 'gd-row ' + cls;
+    var h = document.createElement('b'); h.textContent = title; if (sub) { var s = document.createElement('small'); s.textContent = sub; h.appendChild(s); } r.appendChild(h);
+    var d = document.createElement('div'); if (keys.length) keys.forEach(function(k){ d.appendChild(tag(k)); }); else { var n = document.createElement('span'); n.className = 'gd-none'; n.textContent = '없음'; d.appendChild(n); } r.appendChild(d);
+    return r;
+  }
+  function draw(){
+    box.querySelectorAll('.gd-t').forEach(function(b){ b.setAttribute('aria-pressed', sel.indexOf(b.dataset.k) >= 0 ? 'true' : 'false'); });
+    out.textContent = '';
+    if (monNote) out.appendChild(monNote);
+    if (!sel.length) return;
+    if (mode === 'def') {
+      var g = {4:[], 2:[], .5:[], .25:[], 0:[]};
+      K.forEach(function(a){ var m = sel.reduce(function(x, d){ return x * eff(a, d); }, 1); if (g[m]) g[m].push(a); });
+      if (g[4].length) out.appendChild(row('x4', '4배', '아주 잘 먹혀요', g[4]));
+      out.appendChild(row('x2', '2배', '약점이에요', g[2]));
+      out.appendChild(row('', '½배', '덜 먹혀요', g[.5].concat(g[.25])));
+      if (g[0].length) out.appendChild(row('x0', '0배', '안 먹혀요', g[0]));
+    } else {
+      var a = sel[0], s2 = [], s5 = [], s0 = [];
+      K.forEach(function(d){ var m = eff(a, d); if (m === 2) s2.push(d); else if (m === .5) s5.push(d); else if (m === 0) s0.push(d); });
+      out.appendChild(row('x2', '효과 굉장', '2배로 들어가요', s2));
+      out.appendChild(row('', '효과 별로', '½배만 들어가요', s5));
+      if (s0.length) out.appendChild(row('x0', '효과 없음', '0배', s0));
+    }
+  }
+  box.addEventListener('click', function(e){
+    var b = e.target.closest('.gd-t'); if (!b) return; var k = b.dataset.k, i = sel.indexOf(k);
+    monNote = null; inp.value = '';
+    if (mode === 'atk') sel = i >= 0 ? [] : [k];
+    else if (i >= 0) sel.splice(i, 1); else { sel.push(k); if (sel.length > 2) sel.shift(); }
+    draw();
+  });
+  sec.querySelector('.gd-mode').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return; mode = b.dataset.m;
+    sec.querySelectorAll('.gd-mode button').forEach(function(x){ x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+    hint.textContent = mode === 'def' ? '상대 포켓몬의 타입을 골라요 (최대 2개)' : '내 기술의 타입을 하나 골라요';
+    sec.querySelector('.gd-find').hidden = mode !== 'def';
+    if (mode === 'atk' && sel.length > 1) sel = [sel[0]];
+    monNote = null; draw();
+  });
+  // 포켓몬 이름으로 찾기 (도감 데이터 재사용)
+  var MON = {}, CB = 'assets/cobble/';
+  (window.cobbleReady || Promise.reject()).then(function(r){
+    CB = r.CB || CB; var dl = document.getElementById('gdMonList'), frag = document.createDocumentFragment();
+    r.LIST.forEach(function(x){ if (!x[4]) return; MON[x[4]] = x; var o = document.createElement('option'); o.value = x[4]; frag.appendChild(o); });
+    dl.appendChild(frag);
+  }).catch(function(){ sec.querySelector('.gd-find').hidden = true; });
+  inp.addEventListener('input', function(){
+    var x = MON[inp.value.trim()]; if (!x) return;
+    sel = [x[5], x[6]].filter(function(t){ return t && TY[t]; });
+    monNote = document.createElement('div'); monNote.className = 'gd-mon';
+    var sp = document.createElement('span'); sp.className = 'cb'; sp.setAttribute('aria-hidden', 'true'); sp.style.backgroundImage = 'url(' + CB + x[0] + '.webp)'; sp.style.setProperty('--sw', (56 * 12) + 'px'); sp.style.animationDuration = (x[1] || 2) + 's';
+    var nm = document.createElement('b'); nm.textContent = x[4];
+    monNote.appendChild(sp); monNote.appendChild(nm); sel.forEach(function(t){ monNote.appendChild(tag(t)); });
+    draw();
+  });
 })();
 </script>
 </body>
