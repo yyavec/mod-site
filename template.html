@@ -1152,6 +1152,14 @@ button.ty.all{--c:#55546F}
 .rc-count{font-size:13px; color:var(--text-tertiary)}
 @media (max-width:640px){ .rc-grid{grid-template-columns:1fr} }
 
+/* 페이지 탭: 홈 / 자유게시판 */
+.ptabs{position:sticky; top:8px; z-index:30; display:flex; gap:6px; padding:6px; margin-bottom:calc(var(--s12) * -1 + var(--s4)); background:var(--bg-surface); border:2px solid var(--border-subtle); border-radius:var(--r-lg); box-shadow:0 3px 0 var(--border-subtle), var(--shadow-raised)}
+.ptabs button{flex:1; display:inline-flex; align-items:center; justify-content:center; gap:8px; height:48px; border:0; border-radius:var(--r-md); background:none; color:var(--text-secondary); font:400 16px/1 var(--pixel-s); cursor:pointer; transition:background var(--m-fast), color var(--m-fast)}
+.ptabs button:hover{color:var(--text-primary); background:var(--bg-sunken)}
+.ptabs button[aria-selected="true"]{background:var(--accent); color:var(--on-accent); box-shadow:inset 0 -4px 0 rgba(0,0,0,.2), inset 0 2px 0 rgba(255,255,255,.25)}
+.ptabs .pt-new{font:700 10px/1 var(--font); padding:3px 6px; border-radius:var(--r-full); background:#E5484D; color:#fff}
+.wrap[data-page="home"] > #board{display:none}
+.wrap[data-page="board"] > :not(.hero):not(.ptabs):not(#board):not(footer){display:none}
 /* 자유게시판 */
 .bd-form{display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:16px; background:var(--bg-surface); border:2px solid var(--border-standard)}
 .bd-row{display:flex; gap:8px; flex-wrap:wrap}
@@ -1212,6 +1220,7 @@ button.ty.all{--c:#55546F}
 .st-types{display:flex; gap:4px; margin-top:6px}
 .st-types span{padding:2px 7px; border-radius:6px; background:var(--t); color:#fff; font:700 10.5px/1.4 var(--font)}
 .st-note{font-size:12.5px; color:var(--text-tertiary)}
+.st-dup{position:absolute; top:8px; left:8px; z-index:2; padding:3px 8px; border-radius:6px; background:#E5484D; color:#fff; font:800 11.5px/1.3 var(--font); transform:rotate(-8deg); box-shadow:0 2px 0 #A8282C}
 @media (max-width:420px){ .st-grid{grid-template-columns:repeat(2, 1fr)} }
 </style>
 <script>
@@ -1330,7 +1339,7 @@ button.ty.all{--c:#55546F}
 
 </svg></div>
 <div class="topbar" id="topbar" data-until="{{TOPBAR_UNTIL}}" {{TOPBAR_HIDDEN}}><span class="tb-tag">BETA</span><span class="tb-t">{{TOPBAR}}</span></div>
-<main class="wrap">
+<main class="wrap" data-page="home">
   <header class="hero">
     <span class="nametag" {{OWNER_HIDDEN}}><span class="nt-rank">홈주인</span>{{OWNER}}</span>
     <div class="hero-tools"><button class="theme-btn" id="themeBtn" type="button" aria-pressed="false" aria-label="다크 모드 켜기"><svg class="i ic-moon"><use href="#i-moon"/></svg><svg class="i ic-sun"><use href="#i-sun"/></svg><span class="theme-t">다크</span></button><a class="admin-link" href="admin.html" {{ADMIN_HIDDEN}}><svg class="i"><use href="#i-lock"/></svg>관리자</a></div>
@@ -1358,6 +1367,10 @@ button.ty.all{--c:#55546F}
     </div>
     </div>
   </header>
+  <nav class="ptabs" id="ptabs" role="tablist" aria-label="페이지">
+    <button type="button" role="tab" data-p="home" aria-selected="true">🏠 홈</button>
+    <button type="button" role="tab" data-p="board" aria-selected="false">💬 자유게시판 <span class="pt-new">NEW</span></button>
+  </nav>
   <section class="online" id="online" aria-live="polite" {{ADDRESS_HIDDEN}}>
     <div class="on-head"><span class="on-dot" aria-hidden="true"></span><b class="on-title" id="onTitle">서버 확인 중…</b><span class="on-sub" id="onSub"></span></div>
     <ul class="on-list" id="onList"></ul>
@@ -1366,12 +1379,12 @@ button.ty.all{--c:#55546F}
   <section class="section st-wrap" aria-labelledby="stTitle" id="starters">
     <div class="sec-head"><h2 id="stTitle"><span class="cbk-ic" style="background-image:url(assets/cobble-blocks/pasture.png)" aria-hidden="true"></span>우리들의 스타팅 포켓몬</h2><span class="sec-sub">누가 누구랑 시작했는지 한눈에</span></div>
       <ul class="st-grid">
-        <li class="st-card" style="--c1:#FF7A3D; --c2:#FFD2A8"><span class="st-sp"><span class="cb" role="img" aria-label="파이리" style="--sw:1104px; background-image:url(assets/cobble/4.webp); animation-duration:4s"></span></span><b class="st-who">러쉬</b><span class="st-mon">파이리</span><span class="st-types"><span style="--t:#FF7A3D">불꽃</span></span></li>
-        <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp"><span class="cb" role="img" aria-label="나오하" style="--sw:1104px; background-image:url(assets/cobble/906.webp); animation-duration:2s"></span></span><b class="st-who">노혜련</b><span class="st-mon">나오하</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
+        <li class="st-card" style="--c1:#FF7A3D; --c2:#FFD2A8"><span class="st-sp"><span class="cb" role="img" aria-label="파이리" style="--sw:1104px; background-image:url(assets/cobble/4.webp); animation-duration:4s"></span></span><b class="st-who">러시</b><span class="st-mon">파이리</span><span class="st-types"><span style="--t:#FF7A3D">불꽃</span></span></li>
+        <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp"><span class="cb" role="img" aria-label="나오하" style="--sw:1104px; background-image:url(assets/cobble/906.webp); animation-duration:2s"></span></span><b class="st-who">혜련이</b><span class="st-mon">나오하</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
         <li class="st-card" style="--c1:#FF7A3D; --c2:#FFD2A8"><span class="st-sp"><span class="cb" role="img" aria-label="염버니" style="--sw:1104px; background-image:url(assets/cobble/813.webp); animation-duration:1.2s"></span></span><b class="st-who">삐끼</b><span class="st-mon">염버니</span><span class="st-types"><span style="--t:#FF7A3D">불꽃</span></span></li>
         <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp"><span class="cb" role="img" aria-label="나무지기" style="--sw:1104px; background-image:url(assets/cobble/252.webp); animation-duration:2s"></span></span><b class="st-who">연규</b><span class="st-mon">나무지기</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
-        <li class="st-card" style="--c1:#3B8CE6; --c2:#BFE0FF"><span class="st-sp"><span class="cb" role="img" aria-label="개굴닌자" style="--sw:1104px; background-image:url(assets/cobble/658.webp); animation-duration:2s"></span></span><b class="st-who">면진</b><span class="st-mon">개굴닌자</span><span class="st-types"><span style="--t:#3B8CE6">물</span><span style="--t:#5A4E66">악</span></span></li>
-        <li class="st-card" style="--c1:#3B8CE6; --c2:#BFE0FF"><span class="st-sp"><span class="cb" role="img" aria-label="개굴닌자" style="--sw:1104px; background-image:url(assets/cobble/658.webp); animation-duration:2s"></span></span><b class="st-who">기철</b><span class="st-mon">개굴닌자</span><span class="st-types"><span style="--t:#3B8CE6">물</span><span style="--t:#5A4E66">악</span></span></li>
+        <li class="st-card" style="--c1:#3B8CE6; --c2:#BFE0FF"><span class="st-dup">중복</span><span class="st-sp"><span class="cb" role="img" aria-label="개굴닌자" style="--sw:1104px; background-image:url(assets/cobble/658.webp); animation-duration:2s"></span></span><b class="st-who">면진</b><span class="st-mon">개굴닌자</span><span class="st-types"><span style="--t:#3B8CE6">물</span><span style="--t:#5A4E66">악</span></span></li>
+        <li class="st-card" style="--c1:#3B8CE6; --c2:#BFE0FF"><span class="st-dup">중복</span><span class="st-sp"><span class="cb" role="img" aria-label="개굴닌자" style="--sw:1104px; background-image:url(assets/cobble/658.webp); animation-duration:2s"></span></span><b class="st-who">기철</b><span class="st-mon">개굴닌자</span><span class="st-types"><span style="--t:#3B8CE6">물</span><span style="--t:#5A4E66">악</span></span></li>
         <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp"><span class="cb" role="img" aria-label="주리비얀" style="--sw:1104px; background-image:url(assets/cobble/495.webp); animation-duration:2s"></span></span><b class="st-who">건년</b><span class="st-mon">주리비얀</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
       </ul>
   </section>
@@ -2542,6 +2555,25 @@ button.ty.all{--c:#55546F}
       .then(function(){ setTimeout(function(){ btn.disabled = false; }, 3000); });
   });
   load();
+})();
+</script>
+<script>
+/* 페이지 탭: #board 이면 자유게시판만, 아니면 홈 */
+(function(){
+  var wrap = document.querySelector('main.wrap'), bar = document.getElementById('ptabs');
+  if (!wrap || !bar) return;
+  function show(pg, scroll){
+    wrap.dataset.page = pg;
+    bar.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-selected', b.dataset.p === pg ? 'true' : 'false'); });
+    if (scroll) { var y = bar.getBoundingClientRect().top + scrollY - 8; if (scrollY > y) scrollTo({top:y}); }
+  }
+  bar.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    history.replaceState(null, '', location.pathname + location.search + (b.dataset.p === 'board' ? '#board' : ''));
+    show(b.dataset.p, true);
+  });
+  function fromHash(){ show(location.hash === '#board' ? 'board' : 'home', false); }
+  addEventListener('hashchange', fromHash); fromHash();
 })();
 </script>
 </body>
