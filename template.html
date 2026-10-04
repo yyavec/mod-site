@@ -1172,7 +1172,8 @@ button.ty.all{--c:#55546F}
 .wrap[data-page="play"] > :not(.hero):not(.ptabs):not(#play):not(footer){display:none}
 .wrap[data-page="board"] > :not(.hero):not(.ptabs):not(#board):not(footer){display:none}
 .wrap[data-page="recipes"] > :not(.hero):not(.ptabs):not(#recipes):not(footer){display:none}
-@media (max-width:520px){.ptabs button{font-size:13px; gap:4px; height:44px} .ptabs .pt-new{display:none}}
+.ptabs button{white-space:nowrap}
+@media (max-width:520px){.ptabs button{font-size:13px; gap:4px; height:44px} .ptabs .pt-new,.ptabs .pt-long{display:none}}
 /* 코블몬 공략 탭 */
 .gd{gap:var(--s5)}
 .gd-jump{display:flex; flex-wrap:wrap; gap:6px}
@@ -1311,7 +1312,7 @@ button.ty.all{--c:#55546F}
 /* 접속 목록 우리끼리 이름 */
 .on-nick{margin-left:2px; padding:1px 6px; border-radius:var(--r-full); background:rgba(255,210,63,.22); color:#FFD86B; font:700 11px/1.5 var(--font)}
 /* 오늘의 팁 */
-.tip-bar{display:flex; align-items:center; gap:10px; margin-top:calc(var(--s12) * -1 + var(--s3)); padding:10px 12px; border-radius:var(--r-lg); background:var(--bg-surface); border:2px dashed var(--border-subtle); cursor:pointer; transition:border-color var(--m-fast)}
+.tip-bar{display:flex; align-items:center; gap:10px; margin-top:calc(var(--s12) * -.5); padding:10px 12px; border-radius:var(--r-lg); background:var(--bg-surface); border:2px dashed var(--border-subtle); cursor:pointer; transition:border-color var(--m-fast)}
 .tip-bar:hover{border-color:var(--accent)}
 .tip-k{flex:none; padding:4px 9px; border-radius:var(--r-full); background:var(--accent); color:var(--on-accent); font:700 11.5px/1.2 var(--font)}
 .tip-ic{flex:none; font-size:18px}
@@ -1539,7 +1540,7 @@ button.ty.all{--c:#55546F}
   <nav class="ptabs" id="ptabs" role="tablist" aria-label="페이지">
     <button type="button" role="tab" data-p="home" aria-selected="true">🏠 홈</button>
     <button type="button" role="tab" data-p="play" aria-selected="false">📘 공략 <span class="pt-new">NEW</span></button>
-    <button type="button" role="tab" data-p="board" aria-selected="false">💬 자유게시판</button>
+    <button type="button" role="tab" data-p="board" aria-selected="false">💬 <span class="pt-long">자유</span>게시판</button>
     <button type="button" role="tab" data-p="recipes" aria-selected="false">🛠️ 조합법</button>
   </nav>
   <section class="online" id="online" aria-live="polite" {{ADDRESS_HIDDEN}}>
