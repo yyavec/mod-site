@@ -1224,6 +1224,11 @@ button.ty.all{--c:#55546F}
 .st-sp.has-skin .cb{width:80px; height:80px; margin-right:-6px; position:relative; z-index:1}
 .st-skin{position:absolute; left:2px; bottom:0; width:auto; height:112px; filter:drop-shadow(0 3px 0 rgba(0,0,0,.14))}
 .st-card:hover .st-skin{animation:monHop .55s cubic-bezier(.3,.7,.4,1) .08s}
+.st-ball{position:relative; z-index:1; display:grid; place-items:center; width:54px; height:54px; margin:0 6px 4px 0; border-radius:50%; border:3px solid #23272E; background:linear-gradient(#E3403A 0 44%, #23272E 44% 56%, #F4F4F4 56%); box-shadow:0 3px 0 rgba(0,0,0,.18); animation:stWobble 2.4s ease-in-out infinite; transform-origin:50% 100%}
+.st-ball b{display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:#fff; border:3px solid #23272E; font:900 11px/1 var(--font); color:#23272E}
+.st-pending .st-mon{color:#6B7480}
+@keyframes stWobble{0%,60%,100%{transform:rotate(0)} 68%{transform:rotate(-14deg)} 76%{transform:rotate(12deg)} 84%{transform:rotate(-6deg)} 92%{transform:rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.st-ball{animation:none}}
 .st-who{margin-top:6px; font:800 17px/1.2 var(--cb-head, var(--font)); color:#1B2A4A}
 .st-mon{margin-top:3px; font:700 13px var(--font); color:var(--c1)}
 .st-types{display:flex; gap:4px; margin-top:6px}
@@ -1397,6 +1402,8 @@ button.ty.all{--c:#55546F}
         <li class="st-card" style="--c1:#3B8CE6; --c2:#BFE0FF"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/handal_.png" alt="기철 마크 스킨" title="handal_" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="개굴닌자" style="--sw:1104px; background-image:url(assets/cobble/658.webp); animation-duration:2s"></span></span><b class="st-who">기철</b><span class="st-mon">개굴닌자</span><span class="st-types"><span style="--t:#3B8CE6">물</span><span style="--t:#5A4E66">악</span></span></li>
         <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/Zizonkookie.png" alt="건년 마크 스킨" title="Zizonkookie" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="주리비얀" style="--sw:1104px; background-image:url(assets/cobble/495.webp); animation-duration:2s"></span></span><b class="st-who">건년</b><span class="st-mon">주리비얀</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
         <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/JahyeonBaLaGi.png" alt="준현 마크 스킨" title="JahyeonBaLaGi" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="이상해씨" style="--sw:1104px; background-image:url(assets/cobble/1.webp); animation-duration:2s"></span></span><b class="st-who">준현</b><span class="st-mon">이상해씨</span><span class="st-types"><span style="--t:#3FAE4A">풀</span><span style="--t:#A256C4">독</span></span></li>
+        <li class="st-card st-pending" style="--c1:#8C96A3; --c2:#E3E8EE"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/Nayojeong.png" alt="방울이 마크 스킨" title="Nayojeong" loading="lazy" width="172" height="320"><span class="st-ball" role="img" aria-label="아직 안 골랐어요"><b>?</b></span></span><b class="st-who">방울이</b><span class="st-mon">아직 고르는 중…</span><span class="st-types"><span style="--t:#8C96A3">두근두근</span></span></li>
+        <li class="st-card st-pending" style="--c1:#8C96A3; --c2:#E3E8EE"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/mingcho.png" alt="민초 마크 스킨" title="mingcho" loading="lazy" width="154" height="320"><span class="st-ball" role="img" aria-label="아직 안 골랐어요"><b>?</b></span></span><b class="st-who">민초</b><span class="st-mon">아직 고르는 중…</span><span class="st-types"><span style="--t:#8C96A3">두근두근</span></span></li>
       </ul>
   </section>
   <p class="notice" {{NOTICE_HIDDEN}}><svg class="i"><use href="#i-info"/></svg><span>{{NOTICE}}</span></p>
