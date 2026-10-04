@@ -1182,6 +1182,9 @@ button.ty.all{--c:#55546F}
 .bd-txt{margin:6px 0 0; font-size:14.5px; line-height:1.6; color:var(--text-primary); white-space:pre-wrap; word-break:break-word}
 .bd-photo{display:block; margin-top:8px; padding:0; border:0; border-radius:12px; overflow:hidden; background:#EEE; cursor:zoom-in; max-width:min(100%, 420px)}
 .bd-photo img{display:block; width:100%; max-height:420px; object-fit:cover}
+.bd-photo img.bd-load{height:220px; background:linear-gradient(90deg, #EEE 25%, #F8F8F8 50%, #EEE 75%) 0 0 / 200% 100%; animation:bdShim 1.2s linear infinite}
+.bd-gallery img.bd-load{background:linear-gradient(90deg, #EEE 25%, #F8F8F8 50%, #EEE 75%) 0 0 / 200% 100%; animation:bdShim 1.2s linear infinite}
+@keyframes bdShim{to{background-position:-200% 0}}
 .bd-del{margin-left:auto; padding:2px 8px; border-radius:6px; border:1px solid var(--border-standard); background:none; color:var(--text-tertiary); font:600 12px var(--font); cursor:pointer}
 .bd-del.sure{border-color:#D93636; color:#D93636}
 .bd-gallery{display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:8px; margin:0; padding:0; list-style:none}
@@ -1945,7 +1948,7 @@ button.ty.all{--c:#55546F}
     post({action:'add', server:server, name:name, link:F.link.value.trim(), why:F.why.value.trim(), nick:F.nick.value.trim()})
       .then(function(r){
         if (!r || !r.ok) throw 0;
-        keep(r.item.id, r.token); r.item._local = 1; items.unshift(r.item); render(); save();
+        keep(r.item.id, r.token); r.item._local = 1; if (r.item.photo) { PICS['t' + r.item.id] = Promise.resolve(sentThumb); PICS['f' + r.item.id] = Promise.resolve(sentImage); } items.unshift(r.item); render(); save();
         say('추천 고마워요! 🎉 아래 기록에 올라갔어요', 'ok');
         F.name.value = ''; F.link.value = ''; F.why.value = '';
       })
@@ -2419,14 +2422,13 @@ button.ty.all{--c:#55546F}
 })();
 </script>
 <script>
-/* 자유게시판: 주인의 구글 시트(글) + 드라이브(사진)에 쌓는다. 쓴 사람은 이 브라우저에 저장된 열쇠로 자기 글만 지운다. */
+/* 자유게시판: 주인의 구글 시트에 글과 사진(작은 그림 + 큰 그림)을 쌓는다. 쓴 사람은 이 브라우저에 저장된 열쇠로 자기 글만 지운다. */
 (function(){
   var f = document.getElementById('bdForm'); if (!f) return;
-  var API = ''; /* board */
-  if (!API) { document.getElementById('board').hidden = true; return; }
+  var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec'; /* board */
   var F = f.elements, msg = document.getElementById('bdMsg'), btn = f.querySelector('.bd-send'), prev = document.getElementById('bdPrev');
   var list = document.getElementById('bdList'), count = document.getElementById('bdCount'), more = document.getElementById('bdMore'), tabs = document.querySelectorAll('#bdTabs button'), lb = document.getElementById('bdLb');
-  var items = [], view = 'all', STEP = 15, shown = STEP, image = '', KEY = 'bdTokens';
+  var items = [], view = 'all', STEP = 15, shown = STEP, image = '', thumb = '', KEY = 'bdTokens', PICS = {};
   function mine(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ return {}; } }
   function keep(id, tk){ try { var m = mine(); m[id] = tk; localStorage.setItem(KEY, JSON.stringify(m)); } catch(e){} }
   function forget(id){ try { var m = mine(); delete m[id]; localStorage.setItem(KEY, JSON.stringify(m)); } catch(e){} }
@@ -2437,8 +2439,17 @@ button.ty.all{--c:#55546F}
     if (s < 60) return '방금'; if (s < 3600) return Math.floor(s / 60) + '분 전'; if (s < 86400) return Math.floor(s / 3600) + '시간 전'; if (s < 86400 * 30) return Math.floor(s / 86400) + '일 전';
     var d = new Date(t); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
   }
-  function src(id, w){ return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w' + w; }
-  function img(id, w){ var i = new Image(); i.alt = ''; i.loading = 'lazy'; i.decoding = 'async'; i.referrerPolicy = 'no-referrer'; i.src = src(id, w); i.onerror = function(){ if (i.src.indexOf('lh3') < 0) i.src = 'https://lh3.googleusercontent.com/d/' + encodeURIComponent(id) + '=w' + w; }; return i; }
+  function pic(id, size){
+    var k = size + id;
+    if (!PICS[k]) PICS[k] = fetch(API + '?img=' + encodeURIComponent(id) + '&size=' + size).then(function(r){ return r.json(); }).then(function(d){ if (!d || !d.ok) throw 0; return d.data; });
+    PICS[k].catch(function(){ delete PICS[k]; });
+    return PICS[k];
+  }
+  function img(id, size){
+    var i = new Image(); i.alt = ''; i.decoding = 'async'; i.className = 'bd-load';
+    pic(id, size || 't').then(function(u){ i.src = u; i.classList.remove('bd-load'); }, function(){ i.classList.remove('bd-load'); i.alt = '사진을 불러오지 못했어요'; });
+    return i;
+  }
   function face(nick){
     var i = new Image(); i.className = 'bd-face'; i.alt = ''; i.loading = 'lazy'; i.width = i.height = 40;
     var ok = /^[A-Za-z0-9_]{3,16}$/.test(nick || '');
@@ -2446,13 +2457,13 @@ button.ty.all{--c:#55546F}
     i.onerror = function(){ i.onerror = null; i.src = 'https://mc-heads.net/avatar/MHF_Steve/80'; };
     return i;
   }
-  function open(it){ var im = lb.querySelector('img'); im.src = src(it.photo, 1600); im.referrerPolicy = 'no-referrer'; lb.querySelector('p').textContent = (it.nick || '익명') + (it.text ? ' · ' + it.text : ''); lb.classList.add('on'); lb.querySelector('button').focus(); }
+  function open(it){ var im = lb.querySelector('img'); im.removeAttribute('src'); pic(it.id, 't').then(function(u){ if (!im.src) im.src = u; }); pic(it.id, 'f').then(function(u){ im.src = u; }); lb.querySelector('p').textContent = (it.nick || '익명') + (it.text ? ' · ' + it.text : ''); lb.classList.add('on'); lb.querySelector('button').focus(); }
   lb.addEventListener('click', function(e){ if (e.target === lb || e.target.tagName === 'BUTTON') lb.classList.remove('on'); });
   addEventListener('keydown', function(e){ if (e.key === 'Escape') lb.classList.remove('on'); });
   function del(it, b){
     if (!b.classList.contains('sure')) { b.classList.add('sure'); b.textContent = '정말 지울까요?'; setTimeout(function(){ b.classList.remove('sure'); b.textContent = '지우기'; }, 4000); return; }
     b.disabled = true; b.textContent = '지우는 중…';
-    post({action:'delete', id:it.id, token:mine()[it.id]}).then(function(r){
+    post({action:'bdel', id:it.id, token:mine()[it.id]}).then(function(r){
       if (r && (r.ok || r.error === 'notfound')) { forget(it.id); items = items.filter(function(x){ return x.id !== it.id; }); render(); save(); }
       else { b.disabled = false; b.textContent = '다시 시도'; }
     }, function(){ b.disabled = false; b.textContent = '다시 시도'; });
@@ -2464,7 +2475,7 @@ button.ty.all{--c:#55546F}
     if (!l.length) list.appendChild(el('li', 'bd-empty', view === 'photo' ? '아직 올라온 사진이 없어요. 첫 사진을 올려 보세요!' : '아직 글이 없어요. 첫 글을 남겨 보세요!'));
     l.slice(0, shown).forEach(function(it){
       var li = el('li');
-      if (view === 'photo') { var pb = el('button'); pb.type = 'button'; pb.setAttribute('aria-label', (it.nick || '익명') + '의 사진 크게 보기'); pb.appendChild(img(it.photo, 400)); pb.addEventListener('click', function(){ open(it); }); li.appendChild(pb); list.appendChild(li); return; }
+      if (view === 'photo') { var pb = el('button'); pb.type = 'button'; pb.setAttribute('aria-label', (it.nick || '익명') + '의 사진 크게 보기'); pb.appendChild(img(it.id, 't')); pb.addEventListener('click', function(){ open(it); }); li.appendChild(pb); list.appendChild(li); return; }
       li.className = 'bd-item' + (m[it.id] ? ' is-mine' : '');
       li.appendChild(face(it.nick));
       var body = el('div', 'bd-body'), meta = el('div', 'bd-meta');
@@ -2472,7 +2483,7 @@ button.ty.all{--c:#55546F}
       if (m[it.id]) { var d = el('button', 'bd-del', '지우기'); d.type = 'button'; d.addEventListener('click', function(){ del(it, d); }); meta.appendChild(d); }
       body.appendChild(meta);
       if (it.text) body.appendChild(el('p', 'bd-txt', String(it.text).replace(/^'(?=[=+\-@])/, '')));
-      if (it.photo) { var ph = el('button', 'bd-photo'); ph.type = 'button'; ph.setAttribute('aria-label', '사진 크게 보기'); ph.appendChild(img(it.photo, 900)); ph.addEventListener('click', function(){ open(it); }); body.appendChild(ph); }
+      if (it.photo) { var ph = el('button', 'bd-photo'); ph.type = 'button'; ph.setAttribute('aria-label', '사진 크게 보기'); ph.appendChild(img(it.id, 't')); ph.addEventListener('click', function(){ open(it); }); body.appendChild(ph); }
       li.appendChild(body); list.appendChild(li);
     });
     more.hidden = l.length <= shown;
@@ -2482,7 +2493,7 @@ button.ty.all{--c:#55546F}
   function load(){
     try { var c = JSON.parse(localStorage.getItem('bdCache') || 'null'); if (c && c.length) { items = c; render(); } } catch(e){}
     if (!API) { list.textContent = ''; list.appendChild(el('li', 'bd-empty', '게시판을 준비하고 있어요. 곧 열려요!')); return; }
-    fetch(API).then(function(r){ return r.json(); }).then(function(d){
+    fetch(API + '?board=1').then(function(r){ return r.json(); }).then(function(d){
       var got = (d && d.list) || [], ids = {}; got.forEach(function(x){ ids[x.id] = 1; });
       items = items.filter(function(x){ return x._local && !ids[x.id] && Date.now() - new Date(x.time) < 120000; }).concat(got); render(); save();
     }).catch(function(){ if (items.length) return; list.textContent = ''; list.appendChild(el('li', 'bd-empty', '글을 불러오지 못했어요. 잠시 뒤 새로고침해 주세요')); });
@@ -2490,7 +2501,7 @@ button.ty.all{--c:#55546F}
   tabs.forEach(function(b){ b.addEventListener('click', function(){ view = b.dataset.v; shown = STEP; tabs.forEach(function(x){ x.setAttribute('aria-selected', x === b ? 'true' : 'false'); }); render(); }); });
   more.addEventListener('click', function(){ shown += STEP; render(); });
   function say(t, c){ msg.textContent = t; msg.className = 'bd-msg' + (c ? ' ' + c : ''); }
-  function clearPic(){ image = ''; F.pic.value = ''; prev.classList.remove('on'); }
+  function clearPic(){ image = ''; thumb = ''; F.pic.value = ''; prev.classList.remove('on'); }
   prev.querySelector('button').addEventListener('click', clearPic);
   // 사진은 올리기 전에 브라우저에서 줄인다 (긴 변 1600px, JPEG)
   F.pic.addEventListener('change', function(){
@@ -2499,10 +2510,14 @@ button.ty.all{--c:#55546F}
     say('사진 준비 중…');
     var url = URL.createObjectURL(file), im = new Image();
     im.onload = function(){
-      var k = Math.min(1, 1600 / Math.max(im.width, im.height)), c = document.createElement('canvas');
-      c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
-      var g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0, c.width, c.height);
-      var q = .85; image = c.toDataURL('image/jpeg', q); while (image.length > 2.6e6 && q > .4) { q -= .15; image = c.toDataURL('image/jpeg', q); }
+      function shrink(max, limit){
+        var k = Math.min(1, max / Math.max(im.width, im.height)), c = document.createElement('canvas');
+        c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+        var g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0, c.width, c.height);
+        var q = .82, u = c.toDataURL('image/jpeg', q); while (u.length > limit && q > .3) { q -= .12; u = c.toDataURL('image/jpeg', q); }
+        return u;
+      }
+      image = shrink(1280, 900000); thumb = shrink(480, 90000);
       URL.revokeObjectURL(url); prev.querySelector('img').src = image; prev.classList.add('on'); say('');
     };
     im.onerror = function(){ URL.revokeObjectURL(url); clearPic(); say('이 사진은 열 수 없어요. 다른 사진(JPG·PNG)을 골라 주세요', 'err'); };
@@ -2515,7 +2530,8 @@ button.ty.all{--c:#55546F}
     if (!API) { say('게시판이 아직 준비 중이에요', 'err'); return; }
     try { localStorage.setItem('bdNick', nick); } catch(e){}
     btn.disabled = true; say(image ? '사진 올리는 중… (몇 초 걸려요)' : '올리는 중…');
-    post({action:'add', nick:nick, text:text, image:image})
+    var sentThumb = thumb, sentImage = image;
+    post({action:'badd', nick:nick, text:text, image:image, thumb:thumb})
       .then(function(r){
         if (!r || !r.ok) throw 0;
         keep(r.item.id, r.token); r.item._local = 1; items.unshift(r.item); view = r.item.photo && view === 'photo' ? 'photo' : 'all';
