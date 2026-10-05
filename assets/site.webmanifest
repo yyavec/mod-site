@@ -1,0 +1,17 @@
+{
+  "name": "마인크래프트 서버 가이드북",
+  "short_name": "가이드북",
+  "description": "노천극장 어르신들의 놀이터 · 모드 받기와 공략",
+  "id": "../",
+  "start_url": "../",
+  "scope": "../",
+  "display": "standalone",
+  "background_color": "#EAF4FF",
+  "theme_color": "#3682E6",
+  "lang": "ko",
+  "icons": [
+    { "src": "app-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "app-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "app-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
