@@ -1325,6 +1325,27 @@ button.ty.all{--c:#55546F}
 @keyframes tipIn{from{opacity:0; transform:translateY(6px)}}
 .tip-next{flex:none; width:30px; height:30px; border:0; border-radius:50%; background:var(--bg-sunken); color:var(--text-secondary); font:700 18px/1 var(--font); cursor:pointer}
 @media (max-width:520px){ .tip-k{display:none} }
+/* 플레이타임 순위 */
+.pt-sort{margin:0}
+.pt-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px}
+.pt-row{display:grid; grid-template-columns:34px 36px minmax(0, 1fr) auto; align-items:center; gap:10px; padding:8px 12px; border-radius:var(--r-md); background:var(--bg-surface); border:1.5px solid var(--border-subtle); animation:ptIn .35s ease-out both}
+@keyframes ptIn{from{opacity:0; transform:translateY(6px)}}
+.pt-row.top1{border-color:#E8B923; background:linear-gradient(90deg, rgba(255,214,90,.28), var(--bg-surface) 60%)}
+.pt-row.top2{border-color:#B8C2CC}
+.pt-row.top3{border-color:#D9965B}
+.pt-rk{display:grid; place-items:center; font:400 15px/1 var(--pixel-s, var(--font)); color:var(--text-tertiary)}
+.pt-rk.m{font-size:24px}
+.pt-face{width:36px; height:36px; border-radius:8px; image-rendering:pixelated; box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.pt-mid{display:flex; flex-direction:column; gap:5px; min-width:0}
+.pt-nm{display:flex; align-items:baseline; gap:6px; min-width:0; font-weight:700; font-size:14.5px; color:var(--text-primary)}
+.pt-nm span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pt-nm small{flex:none; padding:1px 7px; border-radius:var(--r-full); background:var(--bg-sunken); color:var(--text-secondary); font:700 11.5px/1.5 var(--font)}
+.pt-bar{height:8px; border-radius:var(--r-full); background:var(--bg-sunken); overflow:hidden}
+.pt-bar i{display:block; height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg, var(--accent), #7FD3FF); transition:width .7s cubic-bezier(.2,.8,.3,1)}
+.pt-val{text-align:right; font:800 15px/1.2 var(--font); color:var(--text-primary); white-space:nowrap}
+.pt-val small{display:block; margin-top:2px; font:600 11px var(--font); color:var(--text-tertiary)}
+.pt-note{margin:0; font-size:12.5px; color:var(--text-tertiary)}
+@media (max-width:520px){ .pt-row{grid-template-columns:26px 32px minmax(0, 1fr) auto; gap:8px; padding:8px 10px} .pt-face{width:32px; height:32px} .pt-sort button{padding:0 8px; font-size:12px} }
 /* 자유게시판 */
 .bd-form{display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:16px; background:var(--bg-surface); border:2px solid var(--border-standard)}
 .bd-row{display:flex; gap:8px; flex-wrap:wrap}
@@ -1565,7 +1586,7 @@ button.ty.all{--c:#55546F}
         <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/Zizonkookie.png" alt="건년 마크 스킨" title="Zizonkookie" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="주리비얀" style="--sw:1104px; background-image:url(assets/cobble/495.webp); animation-duration:2s"></span></span><b class="st-who">건년</b><span class="st-mon">주리비얀</span><span class="st-types"><span style="--t:#3FAE4A">풀</span></span></li>
         <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/JahyeonBaLaGi.png" alt="준현 마크 스킨" title="JahyeonBaLaGi" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="이상해씨" style="--sw:1104px; background-image:url(assets/cobble/1.webp); animation-duration:2s"></span></span><b class="st-who">준현</b><span class="st-mon">이상해씨</span><span class="st-types"><span style="--t:#3FAE4A">풀</span><span style="--t:#A256C4">독</span></span></li>
         <li class="st-card" style="--c1:#B98A4E; --c2:#F3E2C6"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/Nayojeong.png" alt="방울이 마크 스킨" title="Nayojeong" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="이브이" style="--sw:1104px; background-image:url(assets/cobble/133.webp); animation-duration:2s"></span></span><b class="st-who">방울이</b><span class="st-mon">이브이</span><span class="st-types"><span style="--t:#9FA19F">노말</span></span></li>
-        <li class="st-card st-pending" style="--c1:#8C96A3; --c2:#E3E8EE"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/mingcho.png" alt="민초 마크 스킨" title="mingcho" loading="lazy" width="154" height="320"><span class="st-ball" role="img" aria-label="아직 안 골랐어요"><b>?</b></span></span><b class="st-who">민초</b><span class="st-mon">아직 고르는 중…</span><span class="st-types"><span style="--t:#8C96A3">두근두근</span></span></li>
+        <li class="st-card st-pending" style="--c1:#8C96A3; --c2:#E3E8EE"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/mingchoo.png" alt="민초 마크 스킨" title="mingchoo" loading="lazy" width="172" height="320"><span class="st-ball" role="img" aria-label="아직 안 골랐어요"><b>?</b></span></span><b class="st-who">민초</b><span class="st-mon">아직 고르는 중…</span><span class="st-types"><span style="--t:#8C96A3">두근두근</span></span></li>
         <li class="st-card st-pending" style="--c1:#8C96A3; --c2:#E3E8EE"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/SexyUno.png" alt="우노 마크 스킨" title="SexyUno" loading="lazy" width="172" height="320"><span class="st-ball" role="img" aria-label="아직 안 골랐어요"><b>?</b></span></span><b class="st-who">우노</b><span class="st-mon">아직 고르는 중…</span><span class="st-types"><span style="--t:#8C96A3">두근두근</span></span></li>
       </ul>
   </section>
@@ -1652,6 +1673,12 @@ button.ty.all{--c:#55546F}
       <button class="greset" type="button" id="guideReset">처음부터 다시 보기</button>
     </div>
   </details>
+  <section class="section pt" aria-labelledby="ptTitle" id="playtime">
+    <div class="sec-head"><h2 id="ptTitle"><span class="cbk-ic" style="background-image:url(https://cdn.jsdelivr.net/gh/InventivetalentDev/minecraft-assets@1.21.1/assets/minecraft/textures/item/clock_00.png); image-rendering:pixelated" aria-hidden="true"></span>플레이타임 순위</h2><span class="sec-sub" id="ptUpd">불러오는 중…</span></div>
+    <div class="seg pt-sort" id="ptSort" role="tablist" aria-label="순위 기준"><button type="button" role="tab" aria-selected="true" data-k="hours">⏱️ 플레이타임</button><button type="button" role="tab" aria-selected="false" data-k="caught">🔴 잡은 포켓몬</button><button type="button" role="tab" aria-selected="false" data-k="wins">⚔️ 배틀 승리</button><button type="button" role="tab" aria-selected="false" data-k="shiny">✨ 이로치</button></div>
+    <ol class="pt-list" id="ptList"></ol>
+    <p class="pt-note">서버 기록에서 가져온 숫자예요. 아직 한 번도 안 들어온 친구는 처음 접속하면 생겨요.</p>
+  </section>
 
   <section class="dl-card" aria-labelledby="dlTitle">
     <div class="dl-block"><svg class="px " viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="1" height="1" fill="#62B23F"/><rect x="1" y="0" width="1" height="1" fill="#4E9A31"/><rect x="2" y="0" width="2" height="1" fill="#62B23F"/><rect x="4" y="0" width="1" height="1" fill="#4E9A31"/><rect x="5" y="0" width="3" height="1" fill="#62B23F"/><rect x="0" y="1" width="2" height="1" fill="#62B23F"/><rect x="2" y="1" width="1" height="1" fill="#4E9A31"/><rect x="3" y="1" width="3" height="1" fill="#62B23F"/><rect x="6" y="1" width="1" height="1" fill="#4E9A31"/><rect x="7" y="1" width="1" height="1" fill="#62B23F"/><rect x="0" y="2" width="1" height="1" fill="#4E9A31"/><rect x="1" y="2" width="1" height="1" fill="#62B23F"/><rect x="2" y="2" width="1" height="1" fill="#8B5A2B"/><rect x="3" y="2" width="2" height="1" fill="#62B23F"/><rect x="5" y="2" width="1" height="1" fill="#8B5A2B"/><rect x="6" y="2" width="1" height="1" fill="#62B23F"/><rect x="7" y="2" width="1" height="1" fill="#4E9A31"/><rect x="0" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="1" y="3" width="1" height="1" fill="#6E4520"/><rect x="2" y="3" width="2" height="1" fill="#8B5A2B"/><rect x="4" y="3" width="1" height="1" fill="#6E4520"/><rect x="5" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="6" y="3" width="1" height="1" fill="#A87445"/><rect x="7" y="3" width="1" height="1" fill="#8B5A2B"/><rect x="0" y="4" width="2" height="1" fill="#8B5A2B"/><rect x="2" y="4" width="1" height="1" fill="#A87445"/><rect x="3" y="4" width="3" height="1" fill="#8B5A2B"/><rect x="6" y="4" width="1" height="1" fill="#6E4520"/><rect x="7" y="4" width="1" height="1" fill="#8B5A2B"/><rect x="0" y="5" width="1" height="1" fill="#8B5A2B"/><rect x="1" y="5" width="1" height="1" fill="#6E4520"/><rect x="2" y="5" width="2" height="1" fill="#8B5A2B"/><rect x="4" y="5" width="1" height="1" fill="#A87445"/><rect x="5" y="5" width="3" height="1" fill="#8B5A2B"/><rect x="0" y="6" width="2" height="1" fill="#8B5A2B"/><rect x="2" y="6" width="1" height="1" fill="#6E4520"/><rect x="3" y="6" width="4" height="1" fill="#8B5A2B"/><rect x="7" y="6" width="1" height="1" fill="#A87445"/><rect x="0" y="7" width="1" height="1" fill="#A87445"/><rect x="1" y="7" width="3" height="1" fill="#8B5A2B"/><rect x="4" y="7" width="1" height="1" fill="#6E4520"/><rect x="5" y="7" width="3" height="1" fill="#8B5A2B"/></svg></div>
@@ -3155,6 +3182,44 @@ button.ty.all{--c:#55546F}
       var t = document.getElementById(tip.dataset.to); if (t) setTimeout(function(){ t.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
     });
   }
+})();
+</script>
+<script>
+/* 플레이타임 순위: assets/playtime.json (서버 world/stats에서 뽑은 숫자) */
+(function(){
+  var list = document.getElementById('ptList'); if (!list) return;
+  var NICK = {ddalbok:'혜련', h_uun:'면진', daejang09:'연규', handal_:'기철', zizonkookie:'건년', nayojeong:'방울이', mingcho:'민초', mingchoo:'민초', jahyeonbalagi:'준현', enderdimaa:'범철', nameisrush:'러시', jookkibbikki:'삐끼', sexyuno:'우노'};
+  var UNIT = {hours:'', caught:'마리', wins:'번', shiny:'마리'}, data = null, key = 'hours';
+  function hm(h){ var m = Math.round(h * 60); return m < 60 ? m + '분' : Math.floor(m / 60) + '시간' + (m % 60 ? ' ' + (m % 60) + '분' : ''); }
+  function draw(){
+    var ps = data.players.slice().sort(function(a, b){ return (b[key] - a[key]) || (b.hours - a.hours); });
+    var max = Math.max.apply(null, ps.map(function(p){ return p[key]; })) || 1;
+    list.textContent = '';
+    ps.forEach(function(p, i){
+      var li = document.createElement('li'); li.className = 'pt-row' + (i < 3 && p[key] > 0 ? ' top' + (i + 1) : ''); li.style.animationDelay = (i * 40) + 'ms';
+      var rk = document.createElement('span'); rk.className = 'pt-rk' + (i < 3 && p[key] > 0 ? ' m' : ''); rk.textContent = i < 3 && p[key] > 0 ? ['🥇', '🥈', '🥉'][i] : (i + 1);
+      var img = new Image(); img.className = 'pt-face'; img.alt = ''; img.loading = 'lazy'; img.width = img.height = 36; img.src = 'https://minotar.net/helm/' + encodeURIComponent(p.name) + '/72';
+      img.onerror = function(){ if (img.src.indexOf('mc-heads') < 0) img.src = 'https://mc-heads.net/avatar/' + encodeURIComponent(p.name) + '/72'; };
+      var mid = document.createElement('div'); mid.className = 'pt-mid';
+      var nm = document.createElement('div'); nm.className = 'pt-nm'; var a = document.createElement('span'); a.textContent = p.name; nm.appendChild(a);
+      var k = NICK[p.name.toLowerCase()]; if (k) { var b = document.createElement('small'); b.textContent = k; nm.appendChild(b); }
+      var bar = document.createElement('div'); bar.className = 'pt-bar'; var fill = document.createElement('i'); bar.appendChild(fill);
+      mid.appendChild(nm); mid.appendChild(bar);
+      var val = document.createElement('div'); val.className = 'pt-val'; val.textContent = key === 'hours' ? hm(p.hours) : p[key].toLocaleString() + UNIT[key];
+      var sub = document.createElement('small'); sub.textContent = key === 'hours' ? '잡은 포켓몬 ' + p.caught + ' · 승리 ' + p.wins : hm(p.hours) + ' 플레이'; val.appendChild(sub);
+      li.appendChild(rk); li.appendChild(img); li.appendChild(mid); li.appendChild(val); list.appendChild(li);
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ fill.style.width = Math.max(2, p[key] / max * 100) + '%'; }); });
+    });
+  }
+  document.getElementById('ptSort').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b || !data) return; key = b.dataset.k;
+    this.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-selected', x === b ? 'true' : 'false'); }); draw();
+  });
+  fetch('assets/playtime.json?v=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+    data = d; var t = new Date(d.updated);
+    document.getElementById('ptUpd').textContent = (t.getMonth() + 1) + '월 ' + t.getDate() + '일 ' + t.toLocaleTimeString('ko-KR', {hour:'numeric', minute:'2-digit'}) + ' 기준';
+    draw();
+  }).catch(function(){ document.getElementById('ptUpd').textContent = '기록을 불러오지 못했어요'; });
 })();
 </script>
 </body>
