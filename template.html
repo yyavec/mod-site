@@ -3304,7 +3304,7 @@ button.ty.all{--c:#55546F}
     var c = d && d.cur; box.classList.remove('warn', 'bad', 'off');
     if (!c) { box.classList.add('off'); $('srvMsg').textContent = '아직 측정값이 없어요'; return; }
     last = c.at || Date.parse(c.t);
-    var stale = Date.now() - last > 5 * 60e3;
+    var stale = Date.now() - last > 12 * 60e3;
     if (c.online === false || stale) { box.classList.add('off'); $('srvMsg').textContent = c.online === false ? '서버가 쉬는 중이에요' : '측정이 잠시 멈췄어요'; }
     var tps = c.tps, mspt = c.mspt;
     if (!box.classList.contains('off')) {
