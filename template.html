@@ -1587,6 +1587,7 @@ button.ty.all{--c:#55546F}
         <li class="st-card" style="--c1:#3FAE4A; --c2:#C9F0B8"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/JahyeonBaLaGi.png" alt="준현 마크 스킨" title="JahyeonBaLaGi" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="이상해씨" style="--sw:1104px; background-image:url(assets/cobble/1.webp); animation-duration:2s"></span></span><b class="st-who">준현</b><span class="st-mon">이상해씨</span><span class="st-types"><span style="--t:#3FAE4A">풀</span><span style="--t:#A256C4">독</span></span></li>
         <li class="st-card" style="--c1:#FF7A3D; --c2:#FFD2A8"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/mingchoo.png" alt="민초 마크 스킨" title="mingchoo" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="푸호꼬" style="--sw:1104px; background-image:url(assets/cobble/653.webp); animation-duration:2s"></span></span><b class="st-who">민초</b><span class="st-mon">푸호꼬</span><span class="st-types"><span style="--t:#FF7A3D">불꽃</span></span></li>
         <li class="st-card" style="--c1:#3B8CE6; --c2:#BFE0FF"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/EnderDimaa.png" alt="범철 마크 스킨" title="EnderDimaa" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="팽도리" style="--sw:1104px; background-image:url(assets/cobble/393.webp); animation-duration:2s"></span></span><b class="st-who">범철</b><span class="st-mon">팽도리</span><span class="st-types"><span style="--t:#3B8CE6">물</span></span></li>
+        <li class="st-card" style="--c1:#FF7A3D; --c2:#FFD2A8"><span class="st-dup">중복</span><span class="st-sp has-skin"><img class="st-skin" src="assets/players/HanKug_SALAM.png" alt="한민 마크 스킨" title="HanKug_SALAM" loading="lazy" width="172" height="320"><span class="cb" role="img" aria-label="파이리" style="--sw:1104px; background-image:url(assets/cobble/4.webp); animation-duration:4s"></span></span><b class="st-who">한민</b><span class="st-mon">파이리</span><span class="st-types"><span style="--t:#FF7A3D">불꽃</span></span></li>
         <li class="st-card st-pending" style="--c1:#8C96A3; --c2:#E3E8EE"><span class="st-sp has-skin"><img class="st-skin" src="assets/players/SexyUno.png" alt="우노 마크 스킨" title="SexyUno" loading="lazy" width="172" height="320"><span class="st-ball" role="img" aria-label="아직 안 골랐어요"><b>?</b></span></span><b class="st-who">우노</b><span class="st-mon">아직 고르는 중…</span><span class="st-types"><span style="--t:#8C96A3">두근두근</span></span></li>
       </ul>
   </section>
@@ -3146,7 +3147,7 @@ button.ty.all{--c:#55546F}
   }
 
   // 2) 접속 목록: 마크 닉네임 옆에 우리끼리 부르는 이름
-  var NICK = {ddalbok:'혜련', h_uun:'면진', daejang09:'연규', handal_:'기철', zizonkookie:'건년', nayojeong:'방울이', mingcho:'민초', jahyeonbalagi:'준현', enderdimaa:'범철', nameisrush:'러시', jookkibbikki:'삐끼', sexyuno:'우노'};
+  var NICK = {ddalbok:'혜련', h_uun:'면진', daejang09:'연규', handal_:'기철', zizonkookie:'건년', nayojeong:'방울이', mingcho:'민초', jahyeonbalagi:'준현', enderdimaa:'범철', nameisrush:'러시', jookkibbikki:'삐끼', sexyuno:'우노', hankug_salam:'한민'};
   var on = document.getElementById('onList');
   if (on) new MutationObserver(function(){
     on.querySelectorAll('li > span:not([data-nk])').forEach(function(s){
@@ -3188,7 +3189,7 @@ button.ty.all{--c:#55546F}
 /* 플레이타임 순위: assets/playtime.json (서버 world/stats에서 뽑은 숫자) */
 (function(){
   var list = document.getElementById('ptList'); if (!list) return;
-  var NICK = {ddalbok:'혜련', h_uun:'면진', daejang09:'연규', handal_:'기철', zizonkookie:'건년', nayojeong:'방울이', mingcho:'민초', mingchoo:'민초', jahyeonbalagi:'준현', enderdimaa:'범철', nameisrush:'러시', jookkibbikki:'삐끼', sexyuno:'우노'};
+  var NICK = {ddalbok:'혜련', h_uun:'면진', daejang09:'연규', handal_:'기철', zizonkookie:'건년', nayojeong:'방울이', mingcho:'민초', mingchoo:'민초', jahyeonbalagi:'준현', enderdimaa:'범철', nameisrush:'러시', jookkibbikki:'삐끼', sexyuno:'우노', hankug_salam:'한민'};
   var UNIT = {hours:'', caught:'마리', wins:'번', shiny:'마리'}, data = null, key = 'hours';
   function hm(h){ var m = Math.round(h * 60); return m < 60 ? m + '분' : Math.floor(m / 60) + '시간' + (m % 60 ? ' ' + (m % 60) + '분' : ''); }
   function draw(){
