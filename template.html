@@ -1356,6 +1356,44 @@ button.ty.all{--c:#55546F}
 .pt-row.is-up{border-color:#E5484D !important; box-shadow:0 0 0 2px rgba(229,72,77,.18)}
 .pt-note{margin:0; font-size:12.5px; color:var(--text-tertiary)}
 @media (max-width:520px){ .pt-row{grid-template-columns:26px 32px minmax(0, 1fr) auto; gap:8px; padding:8px 10px} .pt-face{width:32px; height:32px} .pt-sort button{padding:0 8px; font-size:12px} }
+/* 서버 상태 실시간 */
+.srv{position:relative; overflow:hidden; margin-top:calc(var(--s12) * -.5); padding:16px; border-radius:var(--r-lg); background:radial-gradient(120% 140% at 100% 0%, #1D3A5F 0%, #121826 55%); color:#E8EDF5; border:2px solid #2A3A55; box-shadow:0 4px 0 #0B1220, 0 12px 30px rgba(10,20,40,.35)}
+.srv::after{content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px)}
+.srv-head{display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px}
+.srv-head b{font:800 15px/1 var(--font)}
+.srv-dot{width:10px; height:10px; border-radius:50%; background:#3DDC84; box-shadow:0 0 0 0 rgba(61,220,132,.7); animation:srvPulse 1.8s infinite}
+.srv.bad .srv-dot{background:#FF5A4E; box-shadow:0 0 0 0 rgba(255,90,78,.7)}
+.srv.off .srv-dot{background:#7A8494; animation:none}
+@keyframes srvPulse{70%{box-shadow:0 0 0 9px rgba(61,220,132,0)} 100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+.srv-live{padding:2px 7px; border-radius:5px; background:#E5484D; color:#fff; font:800 10px/1.4 var(--font); letter-spacing:.08em}
+.srv.off .srv-live{background:#4A5568}
+.srv-msg{font:600 13px var(--font); color:#9FE6BD}
+.srv.warn .srv-msg{color:#FFD86B} .srv.bad .srv-msg{color:#FF8A80} .srv.off .srv-msg{color:#A0AEC0}
+.srv-ago{margin-left:auto; font:500 11.5px var(--font); color:#8A9BB5}
+.srv-grid{display:grid; grid-template-columns:1.1fr 1.3fr 1fr 1fr; gap:10px}
+.srv-g{position:relative; z-index:1; display:flex; flex-direction:column; justify-content:center; min-height:96px; padding:10px 12px; border-radius:12px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08)}
+.srv-k{font:700 11.5px var(--font); color:#8A9BB5}
+.srv-big{display:flex; align-items:baseline; gap:4px; margin-top:4px}
+.srv-big b{font:400 30px/1 var(--pixel-s, var(--font)); color:#fff}
+.srv-big small{font:600 12px var(--font); color:#8A9BB5}
+.srv-sub{margin-top:6px; font:500 11.5px var(--font); color:#8A9BB5}
+.srv-tps{align-items:center; text-align:center}
+.srv-tps svg{width:100%; max-width:130px; height:auto}
+.srv-tps .trk,.srv-tps .val{fill:none; stroke-width:10; stroke-linecap:round}
+.srv-tps .trk{stroke:rgba(255,255,255,.1)}
+.srv-tps .val{stroke:#3DDC84; stroke-dasharray:157; stroke-dashoffset:157; transition:stroke-dashoffset 1s cubic-bezier(.2,.8,.3,1), stroke .4s; filter:drop-shadow(0 0 6px currentColor)}
+.srv-tps b{margin-top:-30px; font:400 26px/1 var(--pixel-s, var(--font)); color:#fff}
+.srv-tps small{font:700 11.5px var(--font); color:#8A9BB5}
+.srv-tps small i{font-style:normal; opacity:.7}
+.srv-bar{height:10px; margin-top:10px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden}
+.srv-bar i{display:block; height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg, #3DDC84, #7FD3FF); transition:width 1s cubic-bezier(.2,.8,.3,1)}
+.srv-bar i.hi{background:linear-gradient(90deg, #FFD86B, #FF8A3D)}
+.srv-charts{position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
+.srv-charts > div{padding:8px 10px 4px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07)}
+.srv-charts span{font:700 11px var(--font); color:#8A9BB5}
+.srv-charts svg{display:block; width:100%; height:54px}
+.srv-charts .ln{fill:none; stroke-width:2; vector-effect:non-scaling-stroke}
+@media (max-width:640px){ .srv-grid{grid-template-columns:1fr 1fr} .srv-charts{grid-template-columns:1fr} .srv-ago{margin-left:0; width:100%} }
 /* 자유게시판 */
 .bd-form{display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:16px; background:var(--bg-surface); border:2px solid var(--border-standard)}
 .bd-row{display:flex; gap:8px; flex-wrap:wrap}
@@ -1582,6 +1620,16 @@ button.ty.all{--c:#55546F}
     <div class="on-head"><span class="on-dot" aria-hidden="true"></span><b class="on-title" id="onTitle">서버 확인 중…</b><span class="on-sub" id="onSub"></span></div>
     <ul class="on-list" id="onList"></ul>
     <div class="on-foot"><button class="on-copy" type="button" data-copy="{{SERVER_ADDRESS}}" data-toast="서버 주소를 복사했어요"><svg class="i"><use href="#i-copy"/></svg>서버 주소 복사</button><span>1분마다 새로고침돼요</span></div>
+  </section>
+  <section class="srv" id="srvStat" aria-label="서버 상태 실시간">
+    <div class="srv-head"><span class="srv-dot" aria-hidden="true"></span><b>서버 상태</b><span class="srv-live">LIVE</span><span class="srv-msg" id="srvMsg">불러오는 중…</span><span class="srv-ago" id="srvAgo"></span></div>
+    <div class="srv-grid">
+      <div class="srv-g srv-tps"><svg viewBox="0 0 120 70" aria-hidden="true"><path class="trk" d="M10 64 A50 50 0 0 1 110 64"/><path class="val" id="srvTpsArc" d="M10 64 A50 50 0 0 1 110 64"/></svg><b id="srvTps">–</b><small>TPS <i>/ 20</i></small></div>
+      <div class="srv-g srv-ram"><div class="srv-k">램 사용량</div><div class="srv-big"><b id="srvRam">–</b><small id="srvRamMax"></small></div><div class="srv-bar"><i id="srvRamBar"></i></div></div>
+      <div class="srv-g"><div class="srv-k">한 틱 처리</div><div class="srv-big"><b id="srvMspt">–</b><small>ms</small></div><div class="srv-sub">50ms 아래면 정상</div></div>
+      <div class="srv-g"><div class="srv-k">CPU</div><div class="srv-big"><b id="srvCpu">–</b><small>%</small></div><div class="srv-sub" id="srvPl">접속 –명</div></div>
+    </div>
+    <div class="srv-charts"><div><span>TPS · 최근 3시간</span><svg id="srvChTps" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"></svg></div><div><span>램 · 최근 3시간</span><svg id="srvChRam" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"></svg></div></div>
   </section>
   <div class="tip-bar" id="tipBar"><span class="tip-k">오늘의 팁</span><span class="tip-ic" aria-hidden="true"></span><button class="tip-tx" type="button"></button><button class="tip-next" type="button" aria-label="다음 팁">›</button></div>
   <section class="section st-wrap" aria-labelledby="stTitle" id="starters">
@@ -3236,6 +3284,54 @@ button.ty.all{--c:#55546F}
     if (d.comment) { var sy = document.getElementById('ptSay'); document.getElementById('ptSayT').textContent = d.comment; sy.hidden = false; sy.classList.add('pop'); }
     draw();
   }).catch(function(){ document.getElementById('ptUpd').textContent = '기록을 불러오지 못했어요'; });
+})();
+</script>
+<script>
+/* 서버 상태 실시간: 옆 세션이 spark로 1분마다 읽어 Apps Script에 올린 값 (?stat=1) */
+(function(){
+  var box = document.getElementById('srvStat'); if (!box) return;
+  var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
+  var $ = function(id){ return document.getElementById(id); }, last = null;
+  function ago(ms){ var s = Math.round(ms / 1000); return s < 60 ? s + '초 전' : s < 3600 ? Math.round(s / 60) + '분 전' : Math.round(s / 3600) + '시간 전'; }
+  function line(svg, pts, min, max, color){
+    if (pts.length < 2) { svg.innerHTML = ''; return; }
+    var t0 = pts[0][0], t1 = pts[pts.length - 1][0] || t0 + 1, W = 300, Hh = 60;
+    var d = pts.map(function(p, i){ var x = (p[0] - t0) / Math.max(1, t1 - t0) * W, y = Hh - 4 - (Math.min(max, Math.max(min, p[1])) - min) / (max - min) * (Hh - 8); return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); }).join(' ');
+    svg.innerHTML = '<defs><linearGradient id="g' + svg.id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + color + '" stop-opacity=".35"/><stop offset="1" stop-color="' + color + '" stop-opacity="0"/></linearGradient></defs>' +
+      '<path d="' + d + ' L' + W + ' ' + Hh + ' L0 ' + Hh + 'Z" fill="url(#g' + svg.id + ')"/><path class="ln" d="' + d + '" stroke="' + color + '"/>';
+  }
+  function show(d){
+    var c = d && d.cur; box.classList.remove('warn', 'bad', 'off');
+    if (!c) { box.classList.add('off'); $('srvMsg').textContent = '아직 측정값이 없어요'; return; }
+    last = c.at || Date.parse(c.t);
+    var stale = Date.now() - last > 5 * 60e3;
+    if (c.online === false || stale) { box.classList.add('off'); $('srvMsg').textContent = c.online === false ? '서버가 쉬는 중이에요' : '측정이 잠시 멈췄어요'; }
+    var tps = c.tps, mspt = c.mspt;
+    if (!box.classList.contains('off')) {
+      if (tps < 15 || mspt > 50) { box.classList.add('bad'); $('srvMsg').textContent = '렉 주의! 건담이 살펴보는 중이에요'; }
+      else if (tps < 19 || mspt > 40) { box.classList.add('warn'); $('srvMsg').textContent = '살짝 버벅여요'; }
+      else $('srvMsg').textContent = '쾌적해요 ✨';
+    }
+    $('srvTps').textContent = tps == null ? '–' : (+tps).toFixed(1);
+    var arc = $('srvTpsArc'), f = Math.max(0, Math.min(1, (tps || 0) / 20));
+    arc.style.strokeDashoffset = (157 * (1 - f)).toFixed(1);
+    arc.style.stroke = tps >= 19 ? '#3DDC84' : tps >= 15 ? '#FFD86B' : '#FF5A4E'; arc.style.color = arc.style.stroke;
+    $('srvRam').textContent = c.heapUsedGB == null ? '–' : (+c.heapUsedGB).toFixed(1);
+    $('srvRamMax').textContent = c.heapMaxGB ? '/ ' + (+c.heapMaxGB).toFixed(1) + ' GB' : 'GB';
+    var pct = c.heapMaxGB ? c.heapUsedGB / c.heapMaxGB * 100 : 0, bar = $('srvRamBar');
+    bar.style.width = Math.max(2, Math.min(100, pct)).toFixed(0) + '%'; bar.classList.toggle('hi', pct > 80);
+    $('srvMspt').textContent = mspt == null ? '–' : (+mspt).toFixed(1);
+    $('srvCpu').textContent = c.cpu == null ? '–' : Math.round(c.cpu);
+    $('srvPl').textContent = '접속 ' + (c.players == null ? '–' : c.players) + '명';
+    var h = (d.hist || []).filter(function(p){ return Date.now() - p[0] < 3 * 3600e3; });
+    line($('srvChTps'), h.filter(function(p){ return p[1] != null; }).map(function(p){ return [p[0], p[1]]; }), 0, 20, '#3DDC84');
+    line($('srvChRam'), h.filter(function(p){ return p[4] != null; }).map(function(p){ return [p[0], p[4]]; }), 0, c.heapMaxGB || 12, '#7FD3FF');
+    tick();
+  }
+  function tick(){ if (last) $('srvAgo').textContent = '마지막 측정 ' + ago(Date.now() - last); }
+  function load(){ if (document.hidden) return; fetch(API + '?stat=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(show).catch(function(){ $('srvMsg').textContent = '상태를 불러오지 못했어요'; }); }
+  load(); setInterval(load, 30000); setInterval(tick, 5000);
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) load(); });
 })();
 </script>
 </body>
