@@ -1,6 +1,6 @@
-{"updated":"2026-10-07T18:35:33Z","players":[
-{"name":"EnderDimaa","hours":49.51,"caught":37,"shiny":1,"wins":193,"evolved":15,"rides":494,"fish":1,"km":101},
-{"name":"h_uun","hours":48.86,"caught":75,"shiny":0,"wins":450,"evolved":12,"rides":174,"fish":482,"km":141},
+{"updated":"2026-10-07T18:35:33Z","comment":"👑 디스코드 서버장도 순위표 앞에선 평등합니다. 범철, 서버장을 끌어내리고 1위!","commentAt":"2026-10-07T18:35:33Z","players":[
+{"name":"EnderDimaa","hours":49.51,"caught":37,"shiny":1,"wins":193,"evolved":15,"rides":494,"fish":1,"km":101,"up":"2026-10-07T18:35:33Z","upBy":1},
+{"name":"h_uun","hours":48.86,"caught":75,"shiny":0,"wins":450,"evolved":12,"rides":174,"fish":482,"km":141,"down":"2026-10-07T18:35:33Z"},
 {"name":"JahyeonBaLaGi","hours":46.12,"caught":71,"shiny":1,"wins":432,"evolved":11,"rides":337,"fish":237,"km":157},
 {"name":"ddalbok","hours":43.37,"caught":36,"shiny":1,"wins":39,"evolved":0,"rides":248,"fish":0,"km":104},
 {"name":"DaeJang09","hours":35.11,"caught":38,"shiny":0,"wins":191,"evolved":7,"rides":356,"fish":0,"km":69},
@@ -8,7 +8,7 @@
 {"name":"handal_","hours":28.65,"caught":87,"shiny":1,"wins":107,"evolved":8,"rides":299,"fish":31,"km":82},
 {"name":"JOOKKIBBIKKI","hours":17.78,"caught":6,"shiny":1,"wins":16,"evolved":4,"rides":42,"fish":0,"km":29},
 {"name":"zizonkookie","hours":8.69,"caught":29,"shiny":1,"wins":85,"evolved":2,"rides":68,"fish":59,"km":24},
-{"name":"HanKug_SALAM","hours":1.87,"caught":1,"shiny":0,"wins":2,"evolved":0,"rides":0,"fish":0,"km":9},
-{"name":"SexyUno","hours":1.14,"caught":0,"shiny":0,"wins":34,"evolved":1,"rides":0,"fish":0,"km":4},
-{"name":"mingchoo","hours":1.14,"caught":0,"shiny":0,"wins":1,"evolved":0,"rides":0,"fish":0,"km":6}
+{"name":"HanKug_SALAM","hours":1.87,"caught":1,"shiny":0,"wins":2,"evolved":0,"rides":0,"fish":0,"km":9,"up":"2026-10-07T18:35:33Z","upBy":2},
+{"name":"SexyUno","hours":1.14,"caught":0,"shiny":0,"wins":34,"evolved":1,"rides":0,"fish":0,"km":4,"down":"2026-10-07T18:35:33Z"},
+{"name":"mingchoo","hours":1.14,"caught":0,"shiny":0,"wins":1,"evolved":0,"rides":0,"fish":0,"km":6,"down":"2026-10-07T18:35:33Z"}
 ]}
