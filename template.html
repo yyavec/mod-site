@@ -3329,7 +3329,7 @@ button.ty.all{--c:#55546F}
     tick();
   }
   function tick(){ if (last) $('srvAgo').textContent = '마지막 측정 ' + ago(Date.now() - last); }
-  function load(){ if (document.hidden) return; fetch(API + '?stat=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(show).catch(function(){ $('srvMsg').textContent = '상태를 불러오지 못했어요'; }); }
+  function load(force){ if (document.hidden && !force && last) return; fetch(API + '?stat=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(show).catch(function(){ $('srvMsg').textContent = '상태를 불러오지 못했어요'; }); }
   load(); setInterval(load, 30000); setInterval(tick, 5000);
   document.addEventListener('visibilitychange', function(){ if (!document.hidden) load(); });
 })();
