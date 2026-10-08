@@ -1,8 +1,8 @@
-{"updated":"2026-10-08T21:40:07Z","comment":"😱 서버장 면진, 혜련에게 추월당했다… 혜련 3위!","commentAt":"2026-10-08T15:41:12Z","players":[
-{"name":"EnderDimaa","hours":69.35,"caught":49,"shiny":1,"wins":256,"evolved":19,"rides":961,"fish":4,"km":128},
+{"updated":"2026-10-08T22:40:05Z","comment":"🏆 범철, 70시간째 1위 독주 중","commentAt":"2026-10-08T22:40:05Z","players":[
+{"name":"EnderDimaa","hours":70.15,"caught":49,"shiny":1,"wins":256,"evolved":19,"rides":964,"fish":4,"km":128},
 {"name":"JahyeonBaLaGi","hours":61.27,"caught":79,"shiny":1,"wins":459,"evolved":15,"rides":509,"fish":237,"km":191},
-{"name":"ddalbok","hours":61.27,"caught":45,"shiny":2,"wins":230,"evolved":2,"rides":357,"fish":32,"km":139,"up":"2026-10-08T15:41:12Z","upBy":1},
-{"name":"h_uun","hours":55.6,"caught":87,"shiny":0,"wins":461,"evolved":20,"rides":211,"fish":484,"km":153,"down":"2026-10-08T15:41:12Z"},
+{"name":"ddalbok","hours":61.27,"caught":45,"shiny":2,"wins":230,"evolved":2,"rides":357,"fish":32,"km":139},
+{"name":"h_uun","hours":55.6,"caught":87,"shiny":0,"wins":461,"evolved":20,"rides":211,"fish":484,"km":153},
 {"name":"DaeJang09","hours":43.44,"caught":42,"shiny":0,"wins":208,"evolved":9,"rides":480,"fish":73,"km":85},
 {"name":"handal_","hours":41.59,"caught":117,"shiny":1,"wins":124,"evolved":16,"rides":517,"fish":31,"km":108},
 {"name":"nameisrush","hours":41.38,"caught":24,"shiny":0,"wins":56,"evolved":7,"rides":212,"fish":3,"km":116},
@@ -10,6 +10,6 @@
 {"name":"zizonkookie","hours":15.68,"caught":37,"shiny":1,"wins":102,"evolved":5,"rides":114,"fish":59,"km":40},
 {"name":"HanKug_SALAM","hours":6.05,"caught":15,"shiny":0,"wins":6,"evolved":0,"rides":18,"fish":0,"km":19},
 {"name":"dagang04","hours":3.49,"caught":4,"shiny":0,"wins":4,"evolved":2,"rides":0,"fish":17,"km":13},
-{"name":"mingchoo","hours":1.77,"caught":6,"shiny":0,"wins":3,"evolved":0,"rides":0,"fish":0,"km":7,"up":"2026-10-08T15:41:12Z","upBy":1},
-{"name":"SexyUno","hours":1.14,"caught":0,"shiny":0,"wins":34,"evolved":1,"rides":0,"fish":0,"km":4,"down":"2026-10-08T15:41:12Z"}
+{"name":"mingchoo","hours":1.77,"caught":6,"shiny":0,"wins":3,"evolved":0,"rides":0,"fish":0,"km":7},
+{"name":"SexyUno","hours":1.14,"caught":0,"shiny":0,"wins":34,"evolved":1,"rides":0,"fish":0,"km":4}
 ]}
