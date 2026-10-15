@@ -1553,8 +1553,12 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-slot b{font-size:20px; font-weight:800}
 .trb-slot small{font-size:13.5px; color:#B9C3DA}
 .trb-slot .st{margin-top:10px; padding:5px 10px; border-radius:7px; background:rgba(255,255,255,.12); font-size:13.5px; font-weight:700; color:#DDE3F0}
-.trb-slot.done{background:rgba(93,177,60,.18); border-color:#5DB13C}
-.trb-slot.done .st{background:#5DB13C; color:#fff}
+.trb-slot{position:relative}
+.trb-slot.done{background:rgba(227,64,58,.14); border-color:#E3403A}
+.trb-slot.done .st{display:none}
+.trb-stk{position:absolute; top:-14px; right:-10px; z-index:2; padding:11px 16px 10px; border-radius:10px; background:#E3403A; color:#fff; font:400 clamp(22px, 5.4vw, 30px)/1 var(--pixel); letter-spacing:.02em; text-shadow:0 3px 0 #9C211B; white-space:nowrap; transform:rotate(-9deg); box-shadow:0 0 0 4px #fff, 0 7px 0 4px rgba(0,0,0,.28), inset 0 -4px 0 rgba(0,0,0,.18); outline:2px dashed rgba(255,255,255,.55); outline-offset:-6px; animation:trbStk .45s cubic-bezier(.3,1.6,.5,1) both; pointer-events:none}
+.trb-slot.done:hover .trb-stk{transform:rotate(-5deg) scale(1.05)}
+@keyframes trbStk{from{opacity:0; transform:rotate(-30deg) scale(2.4)}}
 .trb-slot.on{border-color:#FFCB05; background:rgba(255,203,5,.14)}
 .trb-form, .trb-admin{margin-top:12px; padding:18px 16px; border-radius:16px; background:#fff; color:#1B2A4A; border:2.5px solid #fff; box-shadow:0 4px 0 #0C1426; text-align:left}
 .trb-form[hidden], .trb-admin[hidden]{display:none}
@@ -1771,7 +1775,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     </section>
     <section class="trb-sec" aria-labelledby="trbDeckH">
       <h3 class="trb-sh" id="trbDeckH">📝 덱 제출 <small>10월 16일(금)까지</small></h3>
-      <p class="trb-dnote">내 이름 칸을 눌러 덱을 적어 주세요.<br>덱은 관리자만 볼 수 있고, 다른 사람에게는 <b>"덱 제출 완료!"</b>만 보여요.</p>
+      <p class="trb-dnote">내 이름 칸을 눌러 덱을 적어 주세요.<br>덱은 관리자만 볼 수 있고, 다른 사람에게는 <b>"제출완료!"</b> 딱지만 보여요.</p>
       <ul class="trb-slots" id="trbSlots"></ul>
       <form class="trb-form" id="trbForm" hidden autocomplete="off">
         <h4><span id="trbWho"></span>의 덱</h4>
@@ -2851,6 +2855,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       b.querySelector('b').textContent = m[0];
       b.querySelector('small').textContent = m[1] ? '스타팅 · ' + m[1] : '스타팅 고르는 중';
       b.querySelector('.st').textContent = m[3] ? '🚫 미참여' : d ? '✅ 덱 제출 완료!' : '⏳ 아직 제출 전';
+      if (d && !m[3]) { var k = document.createElement('span'); k.className = 'trb-stk'; k.textContent = '제출완료!'; b.appendChild(k); }
       if (m[3]) b.disabled = true; else b.addEventListener('click', function(){ openForm(m); });
       li.appendChild(b); slots.appendChild(li);
     });
