@@ -14,6 +14,16 @@
     localStorage.setItem("story-visits",n+1);sessionStorage.setItem("story-shown","1");d.setAttribute("data-story","")}catch(e){}
 })();
 </script>
+<script>
+// 트레이너 배틀 안내: 10/17(토) 대회 끝날 때까지 전체화면으로 (부활 창이 있으면 그다음에). ?battle 로 다시 보기
+(function(){var d=document.documentElement,q=location.search;
+  if(/[?&]nf\b/.test(q))return;
+  if(/[?&]battle\b/.test(q)){d.setAttribute("data-battle","");return;}
+  var t=new Date();if(t>=new Date(2026,9,18))return;
+  try{if(localStorage.getItem("battle-skip-day")===t.getFullYear()+"-"+(t.getMonth()+1)+"-"+t.getDate())return;}catch(e){}
+  d.setAttribute("data-battle","");
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{SITE_TITLE}}</title>
 <meta name="description" content="{{SERVER_NAME}} 접속에 필요한 모드 {{COUNT}}개를 한 번에 받으세요.">
@@ -1465,6 +1475,103 @@ button.ty.all{--c:#55546F}
 .st-note{font-size:12.5px; color:var(--text-tertiary)}
 .st-dup{position:absolute; top:8px; left:8px; z-index:2; padding:3px 8px; border-radius:6px; background:#E5484D; color:#fff; font:800 11.5px/1.3 var(--font); transform:rotate(-8deg); box-shadow:0 2px 0 #A8282C}
 @media (max-width:420px){ .st-grid{grid-template-columns:repeat(2, 1fr)} }
+/* 트레이너 배틀 안내 (전체화면) */
+.trb{display:none; position:fixed; inset:0; z-index:9998; overflow-y:auto; overscroll-behavior:contain; padding:32px 16px 48px; color:#fff; font-family:var(--font); -webkit-font-smoothing:antialiased; word-break:keep-all; overflow-wrap:anywhere; background:radial-gradient(70% 45% at 50% 0%, rgba(255,203,5,.22), transparent 70%), radial-gradient(60% 40% at 50% 100%, rgba(227,64,58,.35), transparent 70%), linear-gradient(180deg, #14203A 0%, #1B2A4A 55%, #2A1F3D 100%)}
+html[data-battle]:not([data-story]) .trb{display:block; animation:tbIn .5s ease-out}
+html[data-battle], html[data-battle] body{overflow:hidden}
+.trb-lines{position:fixed; inset:0; pointer-events:none; overflow:hidden}
+.trb-lines i{position:absolute; left:-40%; height:3px; width:40%; background:linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent); animation:tbLine linear infinite}
+.trb-in{position:relative; z-index:1; width:min(640px, 100%); margin:0 auto; text-align:center}
+.trb-tag{display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px; background:#FFCB05; color:#1B2A4A; font:400 12px/1 var(--pixel-s); letter-spacing:.06em; box-shadow:0 3px 0 #B88F00}
+.trb-tag b{width:8px; height:8px; background:#E3403A; animation:sBlink 1.2s steps(2) infinite}
+.trb-vs{display:flex; align-items:center; justify-content:center; gap:14px; margin:26px 0 0}
+.trb-ball{width:76px; height:76px; animation:tbWob 2.4s ease-in-out infinite; transform-origin:50% 100%}
+.trb-ball:last-child{animation-delay:-1.2s}
+.trb-ball svg{width:100%; height:100%; image-rendering:pixelated; filter:drop-shadow(0 5px 0 rgba(0,0,0,.3))}
+.trb-vs span{font:400 34px/1 var(--pixel); color:#FFCB05; text-shadow:0 3px 0 #B3261E, 0 0 18px rgba(255,203,5,.5); transform:rotate(-8deg)}
+.trb h2.trb-h{display:block; margin:20px 0 0; font:400 clamp(28px, 7.4vw, 46px)/1.22 var(--pixel); color:#fff; text-shadow:0 3px 0 rgba(0,0,0,.45), 0 0 26px rgba(255,120,90,.35)}
+.trb h2.trb-h small{display:block; margin-bottom:8px; font:400 clamp(15px, 3.8vw, 19px)/1 var(--pixel-s); color:#FFCB05; text-shadow:none}
+.trb h2.trb-h em{font-style:normal; color:#FF6F64}
+.trb-when{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:18px 0 0; padding:0; list-style:none}
+.trb-when li{padding:9px 14px; border-radius:10px; background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.22); font-size:14.5px; font-weight:700}
+.trb-when li span{color:#B9C3DA; font-weight:500}
+.trb-sec{margin:30px 0 0; text-align:left}
+.trb h3.trb-sh{display:flex; align-items:center; justify-content:center; gap:8px; margin:0 0 12px; font:400 17px/1.2 var(--pixel-s); color:#FFCB05; letter-spacing:.02em}
+.trb-rules{display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin:0; padding:0; list-style:none}
+.trb-rules li{display:flex; gap:12px; align-items:flex-start; padding:14px; border-radius:14px; background:#fff; color:#1B2A4A; border:2.5px solid #fff; box-shadow:0 4px 0 #0C1426}
+.trb-n{flex:none; display:grid; place-items:center; width:30px; height:30px; border-radius:8px; background:#E3403A; color:#fff; font:400 15px/1 var(--pixel); box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.trb-rules strong{display:block; font-size:15.5px; font-weight:800; line-height:1.4}
+.trb-rules small{display:block; margin-top:3px; font-size:13px; line-height:1.5; color:#55667E}
+.trb-prize{display:grid; grid-template-columns:1.4fr 1fr; gap:10px}
+.trb-p{position:relative; padding:18px 16px 16px; border-radius:16px; color:#1B2A4A; text-align:center; overflow:hidden}
+.trb-p.gold{background:linear-gradient(180deg, #FFE27A 0%, #FFF6D6 80%); border:2.5px solid #E0A800; box-shadow:0 4px 0 #A87E00}
+.trb-p.last{background:linear-gradient(180deg, #D9D3E6 0%, #F2F0F6 80%); border:2.5px solid #8E86A3; box-shadow:0 4px 0 #5E5772}
+.trb-medal{display:inline-block; padding:6px 14px; border-radius:8px; font:400 16px/1 var(--pixel); color:#fff}
+.gold .trb-medal{background:#D99A00; box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
+.last .trb-medal{background:#6E6685; box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
+.trb-p ul{margin:12px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
+.trb-p li{font-size:14.5px; font-weight:800}
+.trb-p small{display:block; margin-top:8px; font-size:12.5px; color:#5E5772}
+.trb-sh small{padding:3px 8px; border-radius:6px; background:#FFCB05; color:#1B2A4A; font:800 11.5px/1.2 var(--font)}
+.trb-dnote{margin:-2px 0 12px; text-align:center; font-size:13.5px; line-height:1.6; color:#C9D2E6}
+.trb-slots{display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px; margin:0; padding:0; list-style:none}
+.trb-slot{width:100%; display:flex; flex-direction:column; align-items:flex-start; gap:2px; padding:11px 12px; border-radius:12px; border:2px solid rgba(255,255,255,.22); background:rgba(255,255,255,.08); color:#fff; font-family:var(--font); text-align:left; cursor:pointer; transition:transform .12s, border-color .12s, background .12s}
+.trb-slot:hover{transform:translateY(-2px); border-color:#FFCB05}
+.trb-slot:focus-visible{outline:3px solid #FFCB05; outline-offset:2px}
+.trb-slot b{font-size:15.5px; font-weight:800}
+.trb-slot small{font-size:12px; color:#B9C3DA}
+.trb-slot .st{margin-top:6px; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,.12); font-size:12px; font-weight:700; color:#DDE3F0}
+.trb-slot.done{background:rgba(93,177,60,.18); border-color:#5DB13C}
+.trb-slot.done .st{background:#5DB13C; color:#fff}
+.trb-slot.on{border-color:#FFCB05; background:rgba(255,203,5,.14)}
+.trb-form, .trb-admin{margin-top:12px; padding:18px 16px; border-radius:16px; background:#fff; color:#1B2A4A; border:2.5px solid #fff; box-shadow:0 4px 0 #0C1426; text-align:left}
+.trb-form[hidden], .trb-admin[hidden]{display:none}
+.trb-form h4, .trb-admin h4{margin:0; font:800 17px/1.3 var(--font)}
+.trb-hint{margin:4px 0 0; font-size:13px; line-height:1.55; color:#55667E}
+.trb-hint b{color:#E3403A}
+.trb-mons{display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin:14px 0 0}
+.trb-in-f{width:100%; box-sizing:border-box; height:42px; padding:0 11px; border-radius:10px; border:1.5px solid #CBD3E1; background:#F7F9FC; color:#1B2A4A; font:600 14.5px var(--font)}
+.trb-in-f:focus{outline:none; border-color:#E3403A; background:#fff}
+.trb-in-f.bad{border-color:#E3403A; background:#FFF1F0}
+.trb-in-f.leg{border-color:#D99A00; background:#FFF8E1}
+textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px; resize:vertical; line-height:1.5}
+.trb-pin{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:10px}
+.trb-pin .trb-in-f{width:170px; letter-spacing:.2em}
+.trb-pin small{font-size:12.5px; color:#55667E}
+.trb-row{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:14px}
+.trb-send{height:46px; padding:0 22px; border-radius:10px; border:0; background:#E3403A; color:#fff; font:800 15px var(--font); cursor:pointer; box-shadow:0 4px 0 #9C211B}
+.trb-send:disabled{opacity:.6; cursor:default}
+.trb-cancel{height:40px; padding:0 14px; border-radius:10px; border:1.5px solid #CBD3E1; background:none; color:#55667E; font:700 13.5px var(--font); cursor:pointer}
+.trb-msg{font-size:13.5px; font-weight:700; color:#55667E}
+.trb-msg.ok{color:#2F8F3A} .trb-msg.err{color:#D93636}
+.trb-dups{margin:10px 0 0; padding:10px 12px; border-radius:10px; background:#FFF1F0; color:#B3261E; font-size:13.5px; font-weight:700; line-height:1.6}
+.trb-dups.none{background:#EEF8EA; color:#2F7A2A}
+.trb-tbl{margin:12px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px}
+.trb-tbl li{padding:10px 12px; border-radius:12px; background:#F4F6FA}
+.trb-tbl .hd{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:12.5px; color:#55667E}
+.trb-tbl .hd b{font-size:15px; color:#1B2A4A}
+.trb-tbl .ms{display:flex; flex-wrap:wrap; gap:5px; margin-top:7px}
+.trb-tbl .ms span{padding:3px 9px; border-radius:7px; background:#fff; border:1.5px solid #CBD3E1; font-size:13px; font-weight:700}
+.trb-tbl .ms span.dup{border-color:#E3403A; background:#FFE3E0; color:#B3261E}
+.trb-tbl .ms span.leg{border-color:#D99A00}
+.trb-tbl .memo{margin:6px 0 0; font-size:12.5px; color:#55667E; white-space:pre-wrap}
+.trb-tbl .rs{margin-left:auto; padding:2px 8px; border-radius:6px; border:1px solid #CBD3E1; background:#fff; color:#55667E; font:600 12px var(--font); cursor:pointer}
+.trb-tbl .rs.sure{border-color:#D93636; color:#D93636}
+.trb-adm-btn{margin-top:12px; height:36px; padding:0 14px; border-radius:8px; border:1.5px dashed rgba(255,255,255,.4); background:none; color:#DDE3F0; font:700 13px var(--font); cursor:pointer}
+.trb-adm-key{display:flex; gap:8px; margin-top:10px}
+@media (max-width:520px){ .trb-mons{grid-template-columns:repeat(2, 1fr)} }
+.trb-foot{margin-top:22px}
+.trb-go{display:inline-flex; align-items:center; gap:10px; height:56px; padding:0 30px; border-radius:6px; border:3px solid #7E1610; background:#E2352B; color:#fff; font:400 20px/1 var(--pixel); cursor:pointer; box-shadow:inset 0 -6px 0 rgba(0,0,0,.25), inset 0 3px 0 rgba(255,255,255,.28); transition:transform .12s, background .12s}
+.trb-go:hover{background:#F2453A; transform:translateY(-2px)}
+.trb-go:active{transform:translateY(3px)}
+.trb-go:focus-visible, .trb-skip:focus-visible{outline:3px solid #FFCB05; outline-offset:3px}
+.trb-skip{margin:0 0 0 12px; height:34px; padding:0 12px; border:1.5px solid currentColor; border-radius:6px; background:none; color:#DDE3F0; opacity:.75; font:600 12.5px/1 var(--font); cursor:pointer; vertical-align:middle}
+.trb-skip:hover{opacity:1}
+@keyframes tbIn{from{opacity:0; transform:scale(1.03)}}
+@keyframes tbLine{to{transform:translateX(360%)}}
+@keyframes tbWob{0%,60%,100%{transform:rotate(0)} 68%{transform:rotate(-14deg)} 76%{transform:rotate(12deg)} 84%{transform:rotate(-6deg)}}
+@media (max-width:520px){ .trb-rules, .trb-prize{grid-template-columns:1fr} .trb-ball{width:60px; height:60px} .trb-skip{display:block; margin:14px auto 0} }
+@media (prefers-reduced-motion:reduce){ .trb, .trb-lines i, .trb-ball, .trb-tag b{animation:none !important} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -1544,6 +1651,55 @@ button.ty.all{--c:#55546F}
     <svg class="story-crack" id="storyCrack" aria-hidden="true"></svg>
   </div>
   <div class="story-light" aria-hidden="true"></div><div class="story-confetti" id="storyConfetti" aria-hidden="true"></div>
+</div>
+<div class="trb" id="trb" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="tbH">
+  <div class="trb-lines" id="tbLines" aria-hidden="true"></div>
+  <div class="trb-in">
+    <span class="trb-tag"><b aria-hidden="true"></b>TRAINER BATTLE · 10.17 SAT</span>
+    <div class="trb-vs" aria-hidden="true"><div class="trb-ball"></div><span>VS</span><div class="trb-ball"></div></div>
+    <h2 class="trb-h" id="tbH"><small>노천극장</small>최고의 트레이너를<br><em>뽑습니다!</em></h2>
+    <ul class="trb-when"><li>📅 10월 17일 (토)</li><li>⏰ 시간 <span>미정 · 곧 알려 드려요</span></li></ul>
+    <section class="trb-sec" aria-labelledby="tbRulesH">
+      <h3 class="trb-sh" id="tbRulesH">📜 대회 규칙</h3>
+      <ol class="trb-rules">
+        <li><b class="trb-n">1</b><div><strong>전설 포켓몬 최대 2마리</strong><small>전설 · 준전설 · 환상 포켓몬을 합쳐서 2마리까지</small></div></li>
+        <li><b class="trb-n">2</b><div><strong>스타팅 포켓몬 무조건 참가</strong><small>처음 고른 그 친구, 꼭 데려오세요</small></div></li>
+        <li><b class="trb-n">3</b><div><strong>최종 덱은 금요일까지 제출</strong><small>10월 16일(금)까지, 이 사이트에서 제출해요</small></div></li>
+        <li><b class="trb-n">4</b><div><strong>덱은 서로 안 겹치게</strong><small>다른 트레이너와 겹치지 않게 짜 주세요</small></div></li>
+        <li><b class="trb-n">5</b><div><strong>대진표는 피스톤 장치로</strong><small>경기 직전에 피스톤 장치가 정해 줍니다</small></div></li>
+        <li><b class="trb-n">6</b><div><strong>꼴등 결정전 있음</strong><small>꼴찌도 정정당당하게 가립니다</small></div></li>
+      </ol>
+    </section>
+    <section class="trb-sec" aria-labelledby="tbPrizeH">
+      <h3 class="trb-sh" id="tbPrizeH">🏆 보상</h3>
+      <div class="trb-prize">
+        <div class="trb-p gold"><span class="trb-medal">1위</span><ul><li>🎨 원하는 색깔 칭호</li><li>👑 구할 수 없는 치장템</li><li>🗿 마을에 내 동상</li></ul></div>
+        <div class="trb-p last"><span class="trb-medal">꼴찌</span><ul><li>😈 치욕적인 칭호</li></ul><small>어떤 칭호일지는… 현장에서 정해요!</small></div>
+      </div>
+    </section>
+    <section class="trb-sec" aria-labelledby="trbDeckH">
+      <h3 class="trb-sh" id="trbDeckH">📝 덱 제출 <small>10월 16일(금)까지</small></h3>
+      <p class="trb-dnote">내 이름 칸을 눌러 덱을 적어 주세요.<br>덱은 관리자만 볼 수 있고, 다른 사람에게는 <b>"덱 제출 완료!"</b>만 보여요.</p>
+      <ul class="trb-slots" id="trbSlots"></ul>
+      <form class="trb-form" id="trbForm" hidden autocomplete="off">
+        <h4><span id="trbWho"></span>의 덱</h4>
+        <p class="trb-hint" id="trbHint"></p>
+        <div class="trb-mons" id="trbMons"></div>
+        <datalist id="trbDex"></datalist>
+        <textarea class="trb-in-f" id="trbMemo" maxlength="300" placeholder="메모 (기술, 도구 등 · 안 써도 돼요)"></textarea>
+        <div class="trb-pin"><input class="trb-in-f" id="trbPin" type="password" inputmode="numeric" maxlength="8" placeholder="비밀번호 숫자 4자리" aria-label="비밀번호 숫자 4자리"><small>처음 제출할 때 정한 비밀번호로만 덱을 고칠 수 있어요</small></div>
+        <div class="trb-row"><button class="trb-send" type="submit" id="trbSend">덱 제출하기</button><button class="trb-cancel" type="button" id="trbCancel">닫기</button><span class="trb-msg" id="trbMsg" role="status"></span></div>
+      </form>
+      <div class="trb-admin" id="trbAdmin" hidden>
+        <h4>🔒 관리자 · 모든 덱 보기</h4>
+        <div class="trb-adm-key" id="trbKeyBox" hidden><input class="trb-in-f" id="trbKey" type="password" placeholder="관리자 키" aria-label="관리자 키"><button class="trb-send" type="button" id="trbKeyGo">열기</button></div>
+        <p class="trb-msg" id="trbAdmMsg" role="status"></p>
+        <div id="trbAdmBody"></div>
+      </div>
+      <div id="trbAdmWrap" hidden><button class="trb-adm-btn" type="button" id="trbAdmBtn">🔒 관리자: 모든 덱 보기</button></div>
+    </section>
+    <div class="trb-foot"><button class="trb-go" type="button" id="tbGo">메인 사이트로 <span aria-hidden="true">→</span></button><button class="trb-skip" type="button" data-tb-skip>오늘 보지 않기</button></div>
+  </div>
 </div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -2015,7 +2171,7 @@ button.ty.all{--c:#55546F}
   <footer><span class="bye"><svg class="px " viewBox="0 0 12 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="3" y="0" width="6" height="1" fill="var(--skin-l)"/><rect x="9" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="2" y="1" width="2" height="1" fill="var(--skin-g)"/><rect x="4" y="1" width="2" height="1" fill="var(--skin-l)"/><rect x="6" y="1" width="4" height="1" fill="var(--skin-g)"/><rect x="2" y="2" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="4" y="3" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="2" y="4" width="1" height="1" fill="#111111"/><rect x="3" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="4" y="4" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="9" y="4" width="1" height="1" fill="#111111"/><rect x="2" y="5" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="3" y="6" width="6" height="1" fill="var(--skin-g)"/><rect x="9" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="2" y="7" width="2" height="1" fill="var(--skin-m)"/><rect x="4" y="7" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="7" width="2" height="1" fill="var(--skin-m)"/></svg>오늘도 즐겜해요</span><span>{{UPDATED}} 업데이트</span><span>모드 {{TOTAL}}개</span><a class="xlink" href="{{NOTION_URL}}" target="_blank" rel="noopener" {{NOTION_HIDDEN}}>노션<svg class="i"><use href="#i-ext"/></svg></a><a class="xlink" href="{{DISCORD_URL}}" target="_blank" rel="noopener" {{DISCORD_HIDDEN}}>문의 (디스코드)<svg class="i"><use href="#i-ext"/></svg></a></footer>
   <div class="pc-row" aria-hidden="true"><img src="assets/cobble-blocks/healing_machine.png" alt="" loading="lazy"><img src="assets/cobble-blocks/pc.png" alt="" loading="lazy"><img src="assets/cobble-blocks/display_case.png" alt="" loading="lazy"><img src="assets/cobble-blocks/restoration_tank.png" alt="" loading="lazy"><img src="assets/cobble-blocks/fossil_analyzer.png" alt="" loading="lazy"><img src="assets/cobble-blocks/tm_machine.png" alt="" loading="lazy"><img src="assets/cobble-blocks/pasture.png" alt="" loading="lazy"><img src="assets/cobble-blocks/gilded_chest.png" alt="" loading="lazy"><img src="assets/cobble-blocks/blue_gilded_chest.png" alt="" loading="lazy"></div>
   <p class="cobble-credit">포켓몬 모델·애니메이션: <a href="https://gitlab.com/cable-mc/cobblemon" target="_blank" rel="noopener">Cobblemon</a> (MPL-2.0 / CC BY-NC, 사이트용 그림으로 렌더) · Pokémon © Nintendo / Creatures / GAME FREAK</p>
-  <p class="foot-replay"><button class="story-replay" type="button" data-story-replay>시즌 2 종료 · 포켓몬 부활 이야기 다시 보기</button></p>
+  <p class="foot-replay"><button class="story-replay" type="button" data-story-replay>시즌 2 종료 · 포켓몬 부활 이야기 다시 보기</button> · <button class="story-replay" type="button" data-battle-replay>트레이너 배틀 안내 다시 보기</button></p>
 </main>
 
 <div class="toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-check"/></svg><span id="toastMsg"></span></div>
@@ -2523,6 +2679,157 @@ button.ty.all{--c:#55546F}
 })();
 </script>
 <script>
+/* 트레이너 배틀 안내: 부활 창이 닫히면 이어서 뜨고, 닫으면 메인 사이트로 */
+(function(){
+  var root = document.documentElement, trb = document.getElementById('trb');
+  document.querySelectorAll('[data-battle-replay]').forEach(function(b){ b.addEventListener('click', function(){ location.href = location.pathname + '?battle'; }); });
+  if (!trb) return;
+  if (!root.hasAttribute('data-battle')) { trb.remove(); return; }
+  var ROWS = ['....KKKK....','..KKRRRRKK..','.KRrRRRRRRK.','.KrRRRRRRRK.','KRRRRKKRRRRK','KKKKKWWKKKKK','KWWWWKKWWWWK','KWWWWWWWWWWK','.KWWWWWWWWwK','.KwWWWWWWwwK','..KKwwwwKK..','....KKKK....'];
+  var COL = {K:'#1D1D25', R:'#E3403A', r:'#FF8A7E', W:'#F6F6F6', w:'#D3D7DE'}, svg = '';
+  ROWS.forEach(function(row, y){ for (var x = 0; x < row.length; x++) if (COL[row[x]]) svg += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + COL[row[x]] + '"/>'; });
+  trb.querySelectorAll('.trb-ball').forEach(function(b){ b.innerHTML = '<svg viewBox="0 0 12 12" shape-rendering="crispEdges">' + svg + '</svg>'; });
+  var lines = document.getElementById('tbLines');
+  for (var i = 0; i < 14; i++) { var l = document.createElement('i'), r = Math.sin(i * 7.31 + 2) * 9999; r -= Math.floor(r); l.style.top = (r * 100) + '%'; l.style.animationDuration = (1.6 + r * 2.2) + 's'; l.style.animationDelay = (-r * 4) + 's'; l.style.opacity = .25 + r * .5; lines.appendChild(l); }
+  function open(){ trb.focus({preventScroll:true}); }
+  if (root.hasAttribute('data-story')) addEventListener('story:closed', open, {once:true}); else open();
+  var closing = false;
+  function close(){
+    if (closing) return; closing = true;
+    var b = trb.querySelector('.trb-ball'), r = b.getBoundingClientRect();
+    dispatchEvent(new CustomEvent('battle:leaving', {detail:{rect:{left:r.left, top:r.top, width:r.width, height:r.height}}}));
+    trb.style.transition = 'opacity .45s'; trb.style.opacity = 0;
+    setTimeout(function(){
+      root.removeAttribute('data-battle'); trb.remove(); dispatchEvent(new Event('battle:closed'));
+      if (/[?&]battle\b/.test(location.search)) history.replaceState(null, '', location.pathname + location.hash);
+      scrollTo(0, 0);
+    }, 450);
+  }
+  document.getElementById('tbGo').addEventListener('click', close);
+  trb.querySelector('[data-tb-skip]').addEventListener('click', function(){
+    var t = new Date(); try { localStorage.setItem('battle-skip-day', t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate()); } catch(e){}
+    close();
+  });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !root.hasAttribute('data-story') && root.hasAttribute('data-battle')) close(); });
+  // ---- 덱 제출: 멤버마다 자기 칸, 내용은 관리자만 (Apps Script "덱" 탭) ----
+  var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
+  var MEMBERS = [['러시','파이리'],['혜련이','나오하'],['삐끼','염버니'],['연규','나무지기'],['면진','누리공'],['기철','개구마르'],['건년','주리비얀'],['준현','이상해씨'],['민초','푸호꼬'],['범철','팽도리'],['한민','파이리'],['우노','']];
+  var LINE = {'파이리':['파이리','리자드','리자몽'],'나오하':['나오하','나로테','마스카나'],'염버니':['염버니','래비풋','에이스번'],'나무지기':['나무지기','나무돌이','나무킹'],'누리공':['누리공','키요공','누리레느'],'개구마르':['개구마르','개굴반장','개굴닌자'],'주리비얀':['주리비얀','샤비','샤로다'],'이상해씨':['이상해씨','이상해풀','이상해꽃'],'푸호꼬':['푸호꼬','악뜨거','라우드본'],'팽도리':['팽도리','팽태자','엠페르트']};
+  // 전설 · 준전설 · 환상 (도감 번호)
+  var LEG = [144,145,146,150,151,243,244,245,249,250,251,377,378,379,380,381,382,383,384,385,386,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,638,639,640,641,642,643,644,645,646,647,648,649,716,717,718,719,720,721,772,773,785,786,787,788,789,790,791,792,800,801,802,807,808,809,888,889,890,891,892,893,894,895,896,897,898,1001,1002,1003,1004,1007,1008,1014,1015,1016,1017,1024,1025];
+  var NAMES = {}, LEGN = {}, dexReady = null, done = {}, cur = '', warned = '';
+  var $ = function(id){ return document.getElementById(id); };
+  var slots = $('trbSlots'), form = $('trbForm'), msg = $('trbMsg');
+  function post(o){ return fetch(API, {method:'POST', body:JSON.stringify(o)}).then(function(r){ return r.json(); }); }
+  function norm(s){ return String(s || '').replace(/\s+/g, '').trim(); }
+  function loadDex(){
+    if (!dexReady) dexReady = fetch('assets/cobble/index.json').then(function(r){ return r.json(); }).then(function(j){
+      var dl = $('trbDex'), f = document.createDocumentFragment();
+      (j.list || []).forEach(function(x){ var n = x[4]; if (!n) return; NAMES[norm(n)] = n; if (LEG.indexOf(x[0]) >= 0) LEGN[norm(n)] = 1; var o = document.createElement('option'); o.value = n; f.appendChild(o); });
+      dl.appendChild(f);
+    }).catch(function(){});
+    return dexReady;
+  }
+  function paint(){
+    slots.textContent = '';
+    MEMBERS.forEach(function(m){
+      var li = document.createElement('li'), b = document.createElement('button'), d = done[m[0]];
+      b.type = 'button'; b.className = 'trb-slot' + (d ? ' done' : '') + (cur === m[0] ? ' on' : ''); b.dataset.n = m[0];
+      b.innerHTML = '<b></b><small></small><span class="st"></span>';
+      b.querySelector('b').textContent = m[0];
+      b.querySelector('small').textContent = m[1] ? '스타팅 · ' + m[1] : '스타팅 고르는 중';
+      b.querySelector('.st').textContent = d ? '✅ 덱 제출 완료!' : '⏳ 아직 제출 전';
+      b.addEventListener('click', function(){ openForm(m); });
+      li.appendChild(b); slots.appendChild(li);
+    });
+  }
+  function loadList(){
+    return fetch(API + '?deck=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+      done = {}; (d && d.list || []).forEach(function(x){ done[x.name] = x.time || 1; }); paint();
+    }).catch(function(){ paint(); });
+  }
+  function openForm(m){
+    cur = m[0]; warned = ''; paint(); loadDex();
+    $('trbWho').textContent = m[0];
+    $('trbHint').innerHTML = (m[1] ? '스타팅 <b></b> (진화형도 괜찮아요)는 꼭 넣어 주세요 · ' : '스타팅 포켓몬은 꼭 넣어 주세요 · ') + '전설·준전설·환상은 <b>최대 2마리</b>';
+    if (m[1]) $('trbHint').querySelector('b').textContent = m[1];
+    var box = $('trbMons'); box.textContent = '';
+    for (var i = 0; i < 6; i++) { var inp = document.createElement('input'); inp.className = 'trb-in-f'; inp.setAttribute('list', 'trbDex'); inp.maxLength = 30; inp.placeholder = (i + 1) + '번 포켓몬'; inp.setAttribute('aria-label', (i + 1) + '번 포켓몬'); inp.addEventListener('input', mark); box.appendChild(inp); }
+    $('trbMemo').value = ''; $('trbPin').value = ''; msg.textContent = done[m[0]] ? '이미 제출했어요. 다시 제출하면 새 덱으로 바뀌어요' : ''; msg.className = 'trb-msg';
+    form.hidden = false; form.scrollIntoView({block:'nearest', behavior:'smooth'}); box.firstChild.focus({preventScroll:true});
+  }
+  function mark(){
+    warned = '';
+    form.querySelectorAll('.trb-mons input').forEach(function(inp){ var k = norm(inp.value); inp.classList.toggle('leg', !!LEGN[k]); inp.classList.remove('bad'); });
+  }
+  $('trbCancel').addEventListener('click', function(){ form.hidden = true; cur = ''; paint(); });
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var inps = [].slice.call(form.querySelectorAll('.trb-mons input')), mons = [], seen = {}, legs = 0, unknown = [], err = '';
+    inps.forEach(function(inp){ var v = inp.value.trim(), k = norm(v); if (!v) return; if (seen[k]) { inp.classList.add('bad'); err = '같은 포켓몬을 두 번 넣었어요'; } seen[k] = 1; if (LEGN[k]) legs++; if (!NAMES[k]) unknown.push(v); mons.push(NAMES[k] || v); });
+    if (!mons.length) err = '포켓몬을 한 마리 이상 적어 주세요';
+    if (!err && legs > 2) err = '전설·준전설·환상은 최대 2마리예요 (지금 ' + legs + '마리)';
+    var pin = $('trbPin').value.trim();
+    if (!err && !/^\d{4,8}$/.test(pin)) err = '비밀번호는 숫자 4자리로 적어 주세요';
+    if (err) { msg.textContent = err; msg.className = 'trb-msg err'; return; }
+    var m = MEMBERS.filter(function(x){ return x[0] === cur; })[0], warn = [];
+    if (m && LINE[m[1]] && !LINE[m[1]].some(function(n){ return seen[norm(n)]; })) warn.push('스타팅 포켓몬(' + m[1] + ' 계열)이 없어요');
+    if (unknown.length) warn.push('도감에 없는 이름: ' + unknown.join(', '));
+    var wkey = mons.join('|') + '#' + warn.join('|');
+    if (warn.length && warned !== wkey) { warned = wkey; msg.textContent = warn.join(' · ') + ' — 괜찮으면 한 번 더 눌러 주세요'; msg.className = 'trb-msg err'; return; }
+    var btn = $('trbSend'); btn.disabled = true; msg.textContent = '보내는 중…'; msg.className = 'trb-msg';
+    post({action:'deck', name:cur, pin:pin, mons:mons, memo:$('trbMemo').value}).then(function(d){
+      if (d && d.ok) { done[cur] = 1; msg.textContent = '덱 제출 완료! ✅'; msg.className = 'trb-msg ok'; setTimeout(function(){ form.hidden = true; cur = ''; paint(); }, 1400); return; }
+      var E = {wrongpin:'비밀번호가 달라요. 처음 제출할 때 정한 비밀번호를 적어 주세요', pin:'비밀번호는 숫자 4자리로 적어 주세요', member:'멤버 칸이 아니에요', empty:'포켓몬을 한 마리 이상 적어 주세요'};
+      msg.textContent = E[d && d.error] || '제출이 안 됐어요. 잠시 뒤 다시 해 주세요'; msg.className = 'trb-msg err';
+    }).catch(function(){ msg.textContent = '제출이 안 됐어요. 잠시 뒤 다시 해 주세요'; msg.className = 'trb-msg err'; }).then(function(){ btn.disabled = false; });
+  });
+  // 관리자: 키가 저장된 브라우저(또는 주소 끝 ?deckadmin)에서만 버튼이 보인다
+  var KEYN = 'deck-admin-key', key = '';
+  try { key = localStorage.getItem(KEYN) || ''; } catch(e){}
+  if (key || /[?&]deckadmin\b/.test(location.search)) $('trbAdmWrap').hidden = false;
+  function admin(){
+    var am = $('trbAdmMsg'), body = $('trbAdmBody');
+    if (!key) { $('trbKeyBox').hidden = false; am.textContent = '관리자 키를 넣어 주세요'; return; }
+    am.textContent = '불러오는 중…'; am.className = 'trb-msg';
+    post({action:'deckAdmin', key:key}).then(function(d){
+      if (!d || !d.ok) { am.textContent = d && d.error === 'key' ? '관리자 키가 달라요' : '불러오지 못했어요'; am.className = 'trb-msg err'; if (d && d.error === 'key') { key = ''; try { localStorage.removeItem(KEYN); } catch(e){} $('trbKeyBox').hidden = false; } return; }
+      $('trbKeyBox').hidden = true; am.textContent = '제출 ' + d.list.length + ' / ' + MEMBERS.length + '명'; am.className = 'trb-msg';
+      return loadDex().then(function(){
+        var who = {};
+        d.list.forEach(function(x){ (x.mons || []).forEach(function(n){ var k = norm(n); (who[k] = who[k] || []).push(x.name); }); });
+        var dups = Object.keys(who).filter(function(k){ return who[k].length > 1; });
+        body.textContent = '';
+        var p = document.createElement('p'); p.className = 'trb-dups' + (dups.length ? '' : ' none');
+        p.textContent = dups.length ? '⚠️ 겹치는 포켓몬: ' + dups.map(function(k){ return (NAMES[k] || k) + ' (' + who[k].join(', ') + ')'; }).join(' · ') : '✅ 겹치는 포켓몬 없음';
+        body.appendChild(p);
+        var ul = document.createElement('ul'); ul.className = 'trb-tbl';
+        d.list.forEach(function(x){
+          var li = document.createElement('li'), hd = document.createElement('div'), ms = document.createElement('div');
+          hd.className = 'hd'; ms.className = 'ms';
+          var b = document.createElement('b'); b.textContent = x.name; hd.appendChild(b);
+          var t = document.createElement('span'); var dt = new Date(x.time); t.textContent = isNaN(dt) ? '' : (dt.getMonth() + 1) + '/' + dt.getDate() + ' ' + dt.getHours() + ':' + ('0' + dt.getMinutes()).slice(-2); hd.appendChild(t);
+          var rs = document.createElement('button'); rs.type = 'button'; rs.className = 'rs'; rs.textContent = '칸 비우기';
+          rs.addEventListener('click', function(){
+            if (!rs.classList.contains('sure')) { rs.classList.add('sure'); rs.textContent = '정말 비울까요?'; return; }
+            rs.disabled = true; post({action:'deckReset', key:key, name:x.name}).then(function(){ admin(); loadList(); });
+          });
+          hd.appendChild(rs);
+          (x.mons || []).forEach(function(n){ var s = document.createElement('span'), k = norm(n); s.textContent = n; if (who[k] && who[k].length > 1) s.className = 'dup'; else if (LEGN[k]) s.className = 'leg'; ms.appendChild(s); });
+          li.appendChild(hd); li.appendChild(ms);
+          if (x.memo) { var mm = document.createElement('p'); mm.className = 'memo'; mm.textContent = x.memo; li.appendChild(mm); }
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+      });
+    }).catch(function(){ am.textContent = '불러오지 못했어요'; am.className = 'trb-msg err'; });
+  }
+  $('trbAdmBtn').addEventListener('click', function(){ $('trbAdmin').hidden = false; $('trbAdmWrap').hidden = true; admin(); });
+  $('trbKeyGo').addEventListener('click', function(){ key = $('trbKey').value.trim(); if (!key) return; try { localStorage.setItem(KEYN, key); } catch(e){} admin(); });
+  paint(); loadList();
+})();
+</script>
+<script>
 /* 포켓몬 분위기: 몬스터볼이 날아와 트레이너로 변신 + 도감 전체(1~1025)에서 무작위로 포켓몬 친구들이 나온다 */
 (function(){
   var html = document.documentElement;
@@ -2755,7 +3062,8 @@ button.ty.all{--c:#55546F}
   });
   window.cobbleReady = ready.then(function(){ return {LIST:LIST, BYID:BYID, CB:CB, meet:meet}; });
   function start(){ if (html.dataset.intro === 'pcalm') intro(); else { heroMons.forEach(function(m){ meet(m._id); m.classList.add('on'); }); perch(); } }
-  if (html.hasAttribute('data-story')) addEventListener('story:leaving', function(e){ html.dataset.intro = 'pcalm'; var r = e.detail && e.detail.rect; ready.then(function(){ intro(r); }); }, {once:true});
+  var gate = html.hasAttribute('data-battle') ? 'battle:leaving' : html.hasAttribute('data-story') ? 'story:leaving' : '';  // 팝업이 다 닫힐 때 등장
+  if (gate) addEventListener(gate, function(e){ html.dataset.intro = 'pcalm'; var r = e.detail && e.detail.rect; ready.then(function(){ intro(r); }); }, {once:true});
   else ready.then(start);
 })();
 </script>
