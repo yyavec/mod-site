@@ -1525,6 +1525,7 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-rules{display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin:0; padding:0; list-style:none}
 .trb-rules li{display:flex; gap:12px; align-items:flex-start; padding:14px; border-radius:14px; background:#fff; color:#1B2A4A; border:2.5px solid #fff; box-shadow:0 4px 0 #0C1426}
 .trb-n{flex:none; display:grid; place-items:center; width:30px; height:30px; border-radius:8px; background:#E3403A; color:#fff; font:400 15px/1 var(--pixel); box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.trb-rules .trb-wide{grid-column:1/-1}
 .trb-rules strong{display:block; font-size:15.5px; font-weight:800; line-height:1.4}
 .trb-rules small{display:block; margin-top:3px; font-size:13px; line-height:1.5; color:#55667E}
 .trb-prize{display:grid; grid-template-columns:1.4fr 1fr; gap:10px}
@@ -1608,6 +1609,11 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-pl .x{margin-left:auto; padding:0 6px; border-radius:5px; color:#FF8A7E; font-size:13px}
 .trb-pl .x:hover{background:rgba(255,138,126,.2)}
 .trb-pl.win .x{margin-left:6px}
+.trb-pips{display:flex; gap:4px; margin-left:auto}
+.trb-pips i{width:10px; height:10px; border-radius:50%; background:none; border:2px solid rgba(255,203,5,.55)}
+.trb-pips i.on{background:#FFCB05; border-color:#FFCB05; box-shadow:0 0 8px rgba(255,203,5,.8)}
+.trb-pl.win .trb-pips{margin-left:auto; margin-right:6px}
+.trb-pl.win:has(.trb-pips)::after{margin-left:0}
 .trb-brk-adm{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:14px}
 .trb-brk-adm[hidden], .trb-brk-help[hidden]{display:none}
 .trb-brk-adm .trb-adm-btn{margin:0}
@@ -1872,7 +1878,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
         <div class="trb-brk-adm" id="trbBrkAdm" hidden>
           <button type="button" class="trb-adm-btn" id="trbBrkEdit">✏️ 대진표 편집 켜기</button>
           <span class="trb-msg" id="trbBrkMsg" role="status"></span>
-          <p class="trb-brk-help" id="trbBrkHelp" hidden>위 선수 칸을 마우스로 누르고 8강 칸을 누르면 들어가요(끌어다 놓아도 돼요). ✕는 빼기예요. 이긴 사람 이름을 누르면 다음 칸으로 올라가요. 다시 누르면 취소돼요. <b>LIVE</b> 버튼은 지금 하는 경기 표시예요. 바꾸면 바로 모두에게 보여요.</p>
+          <p class="trb-brk-help" id="trbBrkHelp" hidden>위 선수 칸을 마우스로 누르고 8강 칸을 누르면 들어가요(끌어다 놓아도 돼요). ✕는 빼기예요. 이긴 사람 이름을 누르면 다음 칸으로 올라가요. <b>결승</b>은 이긴 판마다 이름을 한 번씩 누르면 ●이 채워지고, 2개가 되면 우승이에요. 다시 누르면 취소돼요. <b>LIVE</b> 버튼은 지금 하는 경기 표시예요. 바꾸면 바로 모두에게 보여요.</p>
           <button type="button" class="trb-cancel" id="trbBrkRand">🎲 테스트용 무작위 대진</button><button type="button" class="trb-cancel" id="trbBrkReset">🔄 초기화</button>
         </div>
       </div>
@@ -1886,6 +1892,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
         <li><b class="trb-n">4</b><div><strong>덱은 서로 안 겹치게</strong><small>다른 트레이너와 겹치지 않게 짜 주세요</small></div></li>
         <li><b class="trb-n">5</b><div><strong>대진표는 피스톤 장치로</strong><small>경기 직전에 피스톤 장치가 정해 줍니다</small></div></li>
         <li><b class="trb-n">6</b><div><strong>꼴등 결정전 있음</strong><small>꼴찌도 정정당당하게 가립니다</small></div></li>
+        <li class="trb-wide"><b class="trb-n">7</b><div><strong>결승은 3판 2선승</strong><small>나머지 경기는 단판, 결승만 먼저 2판 이기면 우승!</small></div></li>
       </ol>
     </section>
     <section class="trb-sec" aria-labelledby="tbPrizeH">
@@ -3080,10 +3087,10 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     var box = $('trbBrk'); if (!box) return;
     var PL = MEMBERS.filter(function(m){ return !m[3]; }), SKIN = {};
     PL.forEach(function(m){ SKIN[m[0]] = m[2]; });
-    var st = {p:['','','','','','','',''], w:{}, live:''}, edit = false, pick = '', last = 0, busy = false;
+    var st = {p:['','','','','','','',''], w:{}, sc:{}, live:''}, edit = false, pick = '', last = 0, busy = false;
     var W = [['8강', ['q0','q1','q2','q3']], ['4강', ['s0','s1']], ['결승', ['f']]];
     var L = [['1라운드', ['l0','l1']], ['꼴찌 결정전', ['lf']]];
-    var NAME = {q0:'8강 1경기', q1:'8강 2경기', q2:'8강 3경기', q3:'8강 4경기', s0:'4강 1경기', s1:'4강 2경기', f:'결승', l0:'꼴등전 1경기', l1:'꼴등전 2경기', lf:'꼴찌 결정전'};
+    var NAME = {q0:'8강 1경기', q1:'8강 2경기', q2:'8강 3경기', q3:'8강 4경기', s0:'4강 1경기', s1:'4강 2경기', f:'결승 · 3판 2선승', l0:'꼴등전 1경기', l1:'꼴등전 2경기', lf:'꼴찌 결정전'};
     var FROM = {s0:['q0','q1'], s1:['q2','q3'], f:['s0','s1']}, LFROM = {l0:['q0','q1'], l1:['q2','q3'], lf:['l0','l1']};
     function pair(id){
       if (id[0] === 'q') { var i = +id[1]; return [st.p[i * 2] || '', st.p[i * 2 + 1] || '']; }
@@ -3092,7 +3099,8 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     }
     function win(id){ var pr = pair(id), w = st.w[id]; return w && pr[0] && pr[1] && pr.indexOf(w) >= 0 ? w : ''; }
     function lose(id){ var pr = pair(id), w = win(id); return w ? pr[pr[0] === w ? 1 : 0] : ''; }
-    function clean(){ var ids = ['q0','q1','q2','q3','s0','s1','f','l0','l1','lf']; for (var k = 0; k < 2; k++) ids.forEach(function(id){ if (st.w[id] && !win(id)) delete st.w[id]; }); }
+    function sets(n){ return Math.min(2, (st.sc && st.sc[n]) | 0); }
+    function clean(){ var fp = pair('f'); st.sc = st.sc || {}; Object.keys(st.sc).forEach(function(n){ if (fp.indexOf(n) < 0 || !fp[0] || !fp[1]) delete st.sc[n]; }); var ids = ['q0','q1','q2','q3','s0','s1','f','l0','l1','lf']; for (var k = 0; k < 2; k++) ids.forEach(function(id){ if (st.w[id] && !win(id)) delete st.w[id]; }); }
     function head(n){ var i = document.createElement('i'); if (SKIN[n]) i.style.backgroundImage = 'url(assets/players/' + SKIN[n] + '.png)'; return i; }
     function match(id, lo){
       var m = document.createElement('div'), pr = pair(id), w = win(id);
@@ -3119,6 +3127,18 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
           row.addEventListener('dragleave', function(){ row.classList.remove('over'); });
           row.addEventListener('drop', function(e){ e.preventDefault(); place(e.dataTransfer.getData('text/plain'), i); });
           row.addEventListener('click', function(){ if (pick) place(pick, i); else if (n && pr[0] && pr[1]) { if (st.w[id] === n) delete st.w[id]; else st.w[id] = n; clean(); save(); } });
+        } else if (id === 'f' && n && pr[0] && pr[1]) {
+          // 결승은 3판 2선승: 누를 때마다 그 사람 1판 승 추가, 2판이면 우승 (2판에서 다시 누르면 0으로)
+          var pp = document.createElement('span'); pp.className = 'trb-pips'; pp.title = sets(n) + '승';
+          pp.innerHTML = '<i' + (sets(n) > 0 ? ' class="on"' : '') + '></i><i' + (sets(n) > 1 ? ' class="on"' : '') + '></i>';
+          row.appendChild(pp);
+          if (edit) row.addEventListener('click', function(){
+            var o = pr[pr[0] === n ? 1 : 0], v = sets(n) >= 2 ? 0 : sets(n) + 1;
+            if (v && sets(o) >= 2) return;
+            st.sc[n] = v;
+            if (v === 2) st.w.f = n; else if (st.w.f === n) delete st.w.f;
+            clean(); save();
+          });
         } else if (edit && n && pr[0] && pr[1]) row.addEventListener('click', function(){ if (st.w[id] === n) delete st.w[id]; else st.w[id] = n; clean(); save(); });
         m.appendChild(row);
       });
@@ -3170,7 +3190,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     function apply(d){
       if (!d || !d.ok) return;
       var x = d.data || {};
-      st = {p:(Array.isArray(x.p) ? x.p : []).concat(['','','','','','','','']).slice(0, 8).map(function(n){ return SKIN[n] ? n : ''; }), w:(x.w && typeof x.w === 'object') ? x.w : {}, live:typeof x.live === 'string' ? x.live : ''};
+      st = {p:(Array.isArray(x.p) ? x.p : []).concat(['','','','','','','','']).slice(0, 8).map(function(n){ return SKIN[n] ? n : ''; }), w:(x.w && typeof x.w === 'object') ? x.w : {}, sc:(x.sc && typeof x.sc === 'object') ? x.sc : {}, live:typeof x.live === 'string' ? x.live : ''};
       paintB(); setSt(d.time);
     }
     function pull(force){
@@ -3193,12 +3213,12 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     });
     $('trbBrkReset').addEventListener('click', function(){
       if (this.textContent.indexOf('정말') < 0) { this.textContent = '정말 초기화할까요? 한 번 더 누르세요'; return; }
-      this.textContent = '🔄 초기화'; st = {p:['','','','','','','',''], w:{}, live:''}; save();
+      this.textContent = '🔄 초기화'; st = {p:['','','','','','','',''], w:{}, sc:{}, live:''}; save();
     });
     $('trbBrkRand').addEventListener('click', function(){
       var a = PL.map(function(m){ return m[0]; });
       for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
-      st = {p:a.concat(['','','','','','','','']).slice(0, 8), w:{}, live:'q0'}; save();
+      st = {p:a.concat(['','','','','','','','']).slice(0, 8), w:{}, sc:{}, live:'q0'}; save();
     });
     paintB(); setSt(); pull(true);
     box.addEventListener('toggle', function(){ if (box.open) pull(true); });
