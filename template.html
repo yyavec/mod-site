@@ -1584,7 +1584,7 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-sb::before{top:0} .trb-sb::after{bottom:0}
 .trb-sb b{font-weight:400; text-shadow:0 0 8px #3FC6FF, 0 0 2px #3FC6FF; animation:trbSbBlink 1.4s ease-in-out infinite}
 .trb-sb i{position:absolute; top:0; bottom:0; left:-30%; width:24%; background:linear-gradient(90deg, transparent, rgba(150,235,255,.45), transparent); transform:skewX(-20deg); animation:trbSbSweep 2.6s ease-in-out infinite}
-.trb-slot:not(.done):not(.out)::before{content:""; position:absolute; left:14px; bottom:12px; width:142px; height:22px; border-radius:50%; background:radial-gradient(closest-side, rgba(80,210,255,.55), rgba(80,210,255,0)); animation:trbSbGlow 1.4s ease-in-out infinite; pointer-events:none}
+.trb-slot.done::before{content:""; position:absolute; left:14px; bottom:12px; width:142px; height:22px; border-radius:50%; background:radial-gradient(closest-side, rgba(80,210,255,.55), rgba(80,210,255,0)); animation:trbSbGlow 1.4s ease-in-out infinite; pointer-events:none}
 .trb-slot > img, .trb-slot > .trb-mon{position:relative; z-index:1}
 @keyframes trbSbBlink{0%,100%{opacity:1} 50%{opacity:.45}}
 @keyframes trbSbSweep{0%{left:-30%} 60%,100%{left:110%}}
@@ -2894,7 +2894,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       b.querySelector('b').textContent = m[0];
       b.querySelector('small').textContent = m[1] ? '스타팅 · ' + m[1] : '스타팅 고르는 중';
       b.querySelector('.st').textContent = m[3] ? '🚫 미참여' : d ? '✅ 덱 제출 완료!' : '⏳ 아직 제출 전';
-      if (!d && !m[3]) { var sb = document.createElement('span'); sb.className = 'trb-sb'; sb.setAttribute('aria-hidden', 'true'); sb.innerHTML = '<i></i><b>STAND BY</b>'; b.appendChild(sb); }
+      if (d && !m[3]) { var sb = document.createElement('span'); sb.className = 'trb-sb'; sb.setAttribute('aria-hidden', 'true'); sb.innerHTML = '<i></i><b>STAND BY</b>'; b.appendChild(sb); }
       if (d && !m[3]) { var k = document.createElement('span'); k.className = 'trb-stk'; k.setAttribute('role', 'img'); k.setAttribute('aria-label', '덱 제출 완료'); k.innerHTML = STAMP; b.appendChild(k); }
       if (m[3]) b.disabled = true; else b.addEventListener('click', function(){ openForm(m); });
       li.appendChild(b); slots.appendChild(li);
