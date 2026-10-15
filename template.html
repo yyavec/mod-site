@@ -1514,10 +1514,15 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-p small{display:block; margin-top:8px; font-size:12.5px; color:#5E5772}
 .trb-sh small{padding:3px 8px; border-radius:6px; background:#FFCB05; color:#1B2A4A; font:800 11.5px/1.2 var(--font)}
 .trb-dnote{margin:-2px 0 12px; text-align:center; font-size:13.5px; line-height:1.6; color:#C9D2E6}
-.trb-slots{display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px; margin:0; padding:0; list-style:none}
-.trb-slot{width:100%; display:flex; flex-direction:column; align-items:flex-start; gap:2px; padding:11px 12px; border-radius:12px; border:2px solid rgba(255,255,255,.22); background:rgba(255,255,255,.08); color:#fff; font-family:var(--font); text-align:left; cursor:pointer; transition:transform .12s, border-color .12s, background .12s}
+.trb-slots{display:grid; grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); gap:8px; margin:0; padding:0; list-style:none}
+.trb-slot{width:100%; height:100%; display:flex; align-items:flex-end; gap:10px; padding:10px 12px 10px 8px; border-radius:12px; border:2px solid rgba(255,255,255,.22); background:rgba(255,255,255,.08); color:#fff; font-family:var(--font); text-align:left; cursor:pointer; transition:transform .12s, border-color .12s, background .12s}
 .trb-slot:hover{transform:translateY(-2px); border-color:#FFCB05}
 .trb-slot:focus-visible{outline:3px solid #FFCB05; outline-offset:2px}
+.trb-slot img{flex:none; width:auto; height:76px; image-rendering:pixelated; filter:drop-shadow(0 3px 0 rgba(0,0,0,.3))}
+.trb-slot .tx{display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-width:0}
+.trb-slot.out{cursor:default; opacity:.5; border-style:dashed}
+.trb-slot.out:hover{transform:none; border-color:rgba(255,255,255,.22)}
+.trb-slot.out img{filter:grayscale(1)}
 .trb-slot b{font-size:15.5px; font-weight:800}
 .trb-slot small{font-size:12px; color:#B9C3DA}
 .trb-slot .st{margin-top:6px; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,.12); font-size:12px; font-weight:700; color:#DDE3F0}
@@ -2713,7 +2718,9 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   addEventListener('keydown', function(e){ if (e.key === 'Escape' && !root.hasAttribute('data-story') && root.hasAttribute('data-battle')) close(); });
   // ---- 덱 제출: 멤버마다 자기 칸, 내용은 관리자만 (Apps Script "덱" 탭) ----
   var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
-  var MEMBERS = [['러시','파이리'],['혜련이','나오하'],['연규','나무지기'],['면진','누리공'],['기철','개구마르'],['건년','주리비얀'],['준현','이상해씨'],['범철','팽도리']];
+  var MEMBERS = [['면진','누리공','h_uun'],['러시','파이리','NAMEISRUSH'],['혜련이','나오하','ddalbok'],['연규','나무지기','DaeJang09'],['기철','개구마르','handal_'],['건년','주리비얀','Zizonkookie'],['준현','이상해씨','JahyeonBaLaGi'],['범철','팽도리','EnderDimaa'],
+    ['삐끼','염버니','JOOKKIBBIKKI',1],['민초','푸호꼬','mingchoo',1],['한민','파이리','HanKug_SALAM',1],['우노','','SexyUno',1]];  // 네 번째 값 1 = 미참여
+  var JOIN = MEMBERS.filter(function(m){ return !m[3]; }).length;
   var LINE = {'파이리':['파이리','리자드','리자몽'],'나오하':['나오하','나로테','마스카나'],'염버니':['염버니','래비풋','에이스번'],'나무지기':['나무지기','나무돌이','나무킹'],'누리공':['누리공','키요공','누리레느'],'개구마르':['개구마르','개굴반장','개굴닌자'],'주리비얀':['주리비얀','샤비','샤로다'],'이상해씨':['이상해씨','이상해풀','이상해꽃'],'푸호꼬':['푸호꼬','악뜨거','라우드본'],'팽도리':['팽도리','팽태자','엠페르트']};
   // 전설 · 준전설 · 환상 (도감 번호)
   var LEG = [144,145,146,150,151,243,244,245,249,250,251,377,378,379,380,381,382,383,384,385,386,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,638,639,640,641,642,643,644,645,646,647,648,649,716,717,718,719,720,721,772,773,785,786,787,788,789,790,791,792,800,801,802,807,808,809,888,889,890,891,892,893,894,895,896,897,898,1001,1002,1003,1004,1007,1008,1014,1015,1016,1017,1024,1025];
@@ -2734,12 +2741,13 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     slots.textContent = '';
     MEMBERS.forEach(function(m){
       var li = document.createElement('li'), b = document.createElement('button'), d = done[m[0]];
-      b.type = 'button'; b.className = 'trb-slot' + (d ? ' done' : '') + (cur === m[0] ? ' on' : ''); b.dataset.n = m[0];
-      b.innerHTML = '<b></b><small></small><span class="st"></span>';
+      b.type = 'button'; b.className = 'trb-slot' + (m[3] ? ' out' : d ? ' done' : '') + (cur === m[0] ? ' on' : ''); b.dataset.n = m[0];
+      b.innerHTML = '<img alt="" loading="lazy"><span class="tx"><b></b><small></small><span class="st"></span></span>';
+      b.querySelector('img').src = 'assets/players/' + m[2] + '.png';
       b.querySelector('b').textContent = m[0];
       b.querySelector('small').textContent = m[1] ? '스타팅 · ' + m[1] : '스타팅 고르는 중';
-      b.querySelector('.st').textContent = d ? '✅ 덱 제출 완료!' : '⏳ 아직 제출 전';
-      b.addEventListener('click', function(){ openForm(m); });
+      b.querySelector('.st').textContent = m[3] ? '🚫 미참여' : d ? '✅ 덱 제출 완료!' : '⏳ 아직 제출 전';
+      if (m[3]) b.disabled = true; else b.addEventListener('click', function(){ openForm(m); });
       li.appendChild(b); slots.appendChild(li);
     });
   }
@@ -2794,7 +2802,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     am.textContent = '불러오는 중…'; am.className = 'trb-msg';
     post({action:'deckAdmin', key:key}).then(function(d){
       if (!d || !d.ok) { am.textContent = d && d.error === 'key' ? '관리자 키가 달라요' : '불러오지 못했어요'; am.className = 'trb-msg err'; if (d && d.error === 'key') { key = ''; try { localStorage.removeItem(KEYN); } catch(e){} $('trbKeyBox').hidden = false; } return; }
-      $('trbKeyBox').hidden = true; am.textContent = '제출 ' + d.list.length + ' / ' + MEMBERS.length + '명'; am.className = 'trb-msg';
+      $('trbKeyBox').hidden = true; am.textContent = '제출 ' + d.list.length + ' / ' + JOIN + '명'; am.className = 'trb-msg';
       return loadDex().then(function(){
         var who = {};
         d.list.forEach(function(x){ (x.mons || []).forEach(function(n){ var k = norm(n); (who[k] = who[k] || []).push(x.name); }); });
