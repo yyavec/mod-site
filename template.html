@@ -20,7 +20,6 @@
   if(/[?&]nf\b/.test(q))return;
   if(/[?&]battle\b/.test(q)){d.setAttribute("data-battle","");return;}
   var t=new Date();if(t>=new Date(2026,9,18))return;
-  try{if(localStorage.getItem("battle-skip-day")===t.getFullYear()+"-"+(t.getMonth()+1)+"-"+t.getDate())return;}catch(e){}
   d.setAttribute("data-battle","");
 })();
 </script>
@@ -1484,11 +1483,34 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-in{position:relative; z-index:1; width:min(760px, 100%); margin:0 auto; text-align:center}
 .trb-tag{display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px; background:#FFCB05; color:#1B2A4A; font:400 12px/1 var(--pixel-s); letter-spacing:.06em; box-shadow:0 3px 0 #B88F00}
 .trb-tag b{width:8px; height:8px; background:#E3403A; animation:sBlink 1.2s steps(2) infinite}
-.trb-vs{display:flex; align-items:center; justify-content:center; gap:14px; margin:26px 0 0}
-.trb-ball{width:76px; height:76px; animation:tbWob 2.4s ease-in-out infinite; transform-origin:50% 100%}
-.trb-ball:last-child{animation-delay:-1.2s}
-.trb-ball svg{width:100%; height:100%; image-rendering:pixelated; filter:drop-shadow(0 5px 0 rgba(0,0,0,.3))}
-.trb-vs span{font:400 34px/1 var(--pixel); color:#FFCB05; text-shadow:0 3px 0 #B3261E, 0 0 18px rgba(255,203,5,.5); transform:rotate(-8deg)}
+.trb{overflow-x:hidden}
+.trb-arena{position:relative; width:min(1040px, calc(100% + 32px)); margin:18px 0 0 50%; translate:-50% 0; aspect-ratio:760/300; -webkit-mask-image:linear-gradient(#000 70%, transparent 98%), linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); -webkit-mask-composite:source-in; mask-image:linear-gradient(#000 70%, transparent 98%), linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-composite:intersect}
+.trb-stage{position:absolute; inset:0; width:100%; height:100%; display:block}
+.trb-stage .tb-screen{font:400 15px var(--pixel); fill:#FFCB05; letter-spacing:.06em; animation:sBlink 1.6s steps(2) infinite}
+.trb-stage .tb-beams{mix-blend-mode:screen; animation:tbHum 3.2s ease-in-out infinite}
+.trb-stage .tb-search{mix-blend-mode:screen}
+.trb-stage .tb-crowd rect.f{animation:tbCam 4s steps(1) infinite}
+.trb-stage .tb-crowd rect.j{animation:tbJump .9s ease-in-out infinite alternate}
+.trb-stage .tb-stars rect{animation:sBlink 2.4s steps(2) infinite}
+.trb-vs{position:absolute; left:0; right:0; bottom:11%; display:flex; align-items:center; justify-content:center; gap:clamp(10px, 3vw, 22px)}
+.trb-flash{position:fixed; inset:0; z-index:5; background:#fff; opacity:0; pointer-events:none}
+.trb:not(.on) .trb-in{opacity:0}
+.trb.on .trb-in > *{animation:tbUp .6s calc(1.7s + var(--i, 0) * .08s) cubic-bezier(.2,.7,.3,1) both}
+.trb.on .trb-in > .trb-tag{animation:tbDrop .55s .15s cubic-bezier(.3,1.5,.5,1) both}
+.trb.on .trb-in > .trb-arena{animation:tbShake .45s 1.42s linear both}
+.trb.on .trb-stage{animation:tbZoom 1.3s cubic-bezier(.2,.7,.2,1) both}
+.trb.on .tb-beams{animation:tbPower .8s .55s linear both, tbHum 3.2s 1.4s ease-in-out infinite}
+.trb.on .tb-lamps{animation:tbPower .8s .55s linear both}
+.trb.on .tb-glow{animation:tbPower .8s .6s linear both}
+.trb.on .tb-search{animation:tbFade .8s 1s both}
+.trb.on .trb-ball{animation:tbFlyL .6s .85s cubic-bezier(.25,1.25,.5,1) both}
+.trb.on .trb-ball:last-child{animation-name:tbFlyR}
+.trb.on .trb-vs span{animation:tbStamp .4s 1.38s cubic-bezier(.3,1.6,.5,1) both}
+.trb.on .trb-flash{animation:tbFlash .55s 1.4s ease-out both}
+.trb-ball{width:clamp(48px, 11vw, 92px); height:clamp(48px, 11vw, 92px)}
+.trb-ball svg{display:block; width:100%; height:100%; image-rendering:pixelated; filter:drop-shadow(0 5px 0 rgba(0,0,0,.35)); animation:tbWob 2.4s 2.2s ease-in-out infinite; transform-origin:50% 100%}
+.trb-ball:last-child svg{animation-delay:3.4s}
+.trb-vs span{font:400 clamp(26px, 6vw, 44px)/1 var(--pixel); color:#FFCB05; text-shadow:0 3px 0 #B3261E, 0 0 18px rgba(255,203,5,.5); transform:rotate(-8deg)}
 .trb h2.trb-h{display:block; margin:20px 0 0; font:400 clamp(28px, 7.4vw, 46px)/1.22 var(--pixel); color:#fff; text-shadow:0 3px 0 rgba(0,0,0,.45), 0 0 26px rgba(255,120,90,.35)}
 .trb h2.trb-h small{display:block; margin-bottom:8px; font:400 clamp(15px, 3.8vw, 19px)/1 var(--pixel-s); color:#FFCB05; text-shadow:none}
 .trb h2.trb-h em{font-style:normal; color:#FF6F64}
@@ -1574,14 +1596,25 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
 .trb-go{display:inline-flex; align-items:center; gap:10px; height:56px; padding:0 30px; border-radius:6px; border:3px solid #7E1610; background:#E2352B; color:#fff; font:400 20px/1 var(--pixel); cursor:pointer; box-shadow:inset 0 -6px 0 rgba(0,0,0,.25), inset 0 3px 0 rgba(255,255,255,.28); transition:transform .12s, background .12s}
 .trb-go:hover{background:#F2453A; transform:translateY(-2px)}
 .trb-go:active{transform:translateY(3px)}
-.trb-go:focus-visible, .trb-skip:focus-visible{outline:3px solid #FFCB05; outline-offset:3px}
-.trb-skip{margin:0 0 0 12px; height:34px; padding:0 12px; border:1.5px solid currentColor; border-radius:6px; background:none; color:#DDE3F0; opacity:.75; font:600 12.5px/1 var(--font); cursor:pointer; vertical-align:middle}
-.trb-skip:hover{opacity:1}
+.trb-go:focus-visible{outline:3px solid #FFCB05; outline-offset:3px}
 @keyframes tbIn{from{opacity:0; transform:scale(1.03)}}
 @keyframes tbLine{to{transform:translateX(360%)}}
+@keyframes tbZoom{0%{transform:scale(1.9) translateY(14%); filter:brightness(0) blur(6px)} 40%{filter:brightness(.35) blur(2px)} 100%{transform:none; filter:none}}
+@keyframes tbPower{0%{opacity:0} 18%{opacity:.9} 26%{opacity:0} 44%{opacity:1} 52%{opacity:.15} 64%,100%{opacity:1}}
+@keyframes tbHum{0%,100%{opacity:1} 50%{opacity:.72}}
+@keyframes tbFade{from{opacity:0}}
+@keyframes tbFlyL{0%{transform:translateX(-62vw) rotate(-1080deg) scale(.6)} 100%{transform:none}}
+@keyframes tbFlyR{0%{transform:translateX(62vw) rotate(1080deg) scale(.6)} 100%{transform:none}}
+@keyframes tbStamp{0%{opacity:0; transform:scale(5) rotate(-30deg)} 100%{opacity:1; transform:rotate(-8deg)}}
+@keyframes tbFlash{0%{opacity:0} 12%{opacity:.85} 100%{opacity:0}}
+@keyframes tbShake{0%,100%{transform:none} 20%{transform:translate(-7px, 4px)} 40%{transform:translate(6px, -5px)} 60%{transform:translate(-4px, 3px)} 80%{transform:translate(3px, -2px)}}
+@keyframes tbDrop{from{opacity:0; transform:translateY(-36px)}}
+@keyframes tbUp{from{opacity:0; transform:translateY(22px)}}
+@keyframes tbCam{0%,94%,100%{fill:var(--c)} 95%{fill:#fff}}
+@keyframes tbJump{to{transform:translateY(-2.5px)}}
 @keyframes tbWob{0%,60%,100%{transform:rotate(0)} 68%{transform:rotate(-14deg)} 76%{transform:rotate(12deg)} 84%{transform:rotate(-6deg)}}
-@media (max-width:520px){ .trb-rules, .trb-prize{grid-template-columns:1fr} .trb-ball{width:60px; height:60px} .trb-skip{display:block; margin:14px auto 0} }
-@media (prefers-reduced-motion:reduce){ .trb, .trb-lines i, .trb-ball, .trb-tag b{animation:none !important} }
+@media (max-width:520px){ .trb-rules, .trb-prize{grid-template-columns:1fr} .trb-ball{width:60px; height:60px} }
+@media (prefers-reduced-motion:reduce){ .trb, .trb-lines i, .trb-ball, .trb-ball svg, .trb-tag b, .trb-in > *, .trb-stage, .trb-stage *, .trb-vs span, .trb-flash{animation:none !important} .trb:not(.on) .trb-in{opacity:1} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -1666,7 +1699,55 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   <div class="trb-lines" id="tbLines" aria-hidden="true"></div>
   <div class="trb-in">
     <span class="trb-tag"><b aria-hidden="true"></b>TRAINER BATTLE · 10.17 SAT</span>
-    <div class="trb-vs" aria-hidden="true"><div class="trb-ball"></div><span>VS</span><div class="trb-ball"></div></div>
+    <div class="trb-arena" aria-hidden="true">
+      <svg class="trb-stage" viewBox="0 0 760 300">
+        <defs>
+          <linearGradient id="tbBeamG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6C8" stop-opacity=".7"/><stop offset="1" stop-color="#FFF6C8" stop-opacity="0"/></linearGradient>
+          <linearGradient id="tbSearchG" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#9FD4FF" stop-opacity=".3"/><stop offset="1" stop-color="#9FD4FF" stop-opacity="0"/></linearGradient>
+          <linearGradient id="tbGrassG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3C9440"/><stop offset="1" stop-color="#2A7430"/></linearGradient>
+          <radialGradient id="tbGlowG"><stop offset="0" stop-color="#FFE27A" stop-opacity=".55"/><stop offset="1" stop-color="#FFE27A" stop-opacity="0"/></radialGradient>
+          <clipPath id="tbFieldC"><ellipse cx="380" cy="252" rx="292" ry="74"/></clipPath>
+        </defs>
+        <g class="tb-stars" id="tbStars"></g>
+        <g class="tb-search">
+          <g transform="translate(170 92)"><polygon points="-7,0 7,0 70,-230 -70,-230" fill="url(#tbSearchG)"><animateTransform attributeName="transform" type="rotate" values="-28;22;-28" dur="6s" repeatCount="indefinite"/></polygon></g>
+          <g transform="translate(590 92)"><polygon points="-7,0 7,0 70,-230 -70,-230" fill="url(#tbSearchG)"><animateTransform attributeName="transform" type="rotate" values="26;-24;26" dur="7s" repeatCount="indefinite"/></polygon></g>
+        </g>
+        <ellipse cx="380" cy="252" rx="424" ry="204" fill="#1E2E52"/>
+        <ellipse cx="380" cy="252" rx="424" ry="204" fill="none" stroke="#FFCB05" stroke-width="3" stroke-dasharray="14 10" opacity=".6"/>
+        <ellipse cx="380" cy="252" rx="384" ry="168" fill="#26396A"/>
+        <ellipse cx="380" cy="252" rx="346" ry="134" fill="#2F467E"/>
+        <g class="tb-crowd" id="tbCrowd"></g>
+        <ellipse cx="380" cy="252" rx="318" ry="104" fill="#121C33"/>
+        <ellipse cx="380" cy="252" rx="306" ry="94" fill="none" stroke="#E3403A" stroke-width="9" stroke-dasharray="46 8"/>
+        <ellipse cx="380" cy="252" rx="306" ry="94" fill="none" stroke="#FFCB05" stroke-width="9" stroke-dasharray="46 8" stroke-dashoffset="54" opacity=".9"/>
+        <ellipse cx="380" cy="252" rx="292" ry="74" fill="url(#tbGrassG)"/>
+        <g clip-path="url(#tbFieldC)" opacity=".18" fill="#000">
+          <rect x="100" y="170" width="56" height="170"/><rect x="212" y="170" width="56" height="170"/><rect x="324" y="170" width="56" height="170"/><rect x="436" y="170" width="56" height="170"/><rect x="548" y="170" width="56" height="170"/><rect x="660" y="170" width="56" height="170"/>
+        </g>
+        <g fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2.5">
+          <ellipse cx="380" cy="252" rx="268" ry="62"/>
+          <line x1="380" y1="190" x2="380" y2="314"/>
+          <ellipse cx="380" cy="252" rx="52" ry="16"/>
+        </g>
+        <path d="M328 252a52 16 0 0 1 104 0z" fill="#E3403A" opacity=".55"/>
+        <ellipse cx="380" cy="252" rx="230" ry="60" fill="url(#tbGlowG)" class="tb-glow"/>
+        <g class="tb-beams">
+          <polygon points="14,36 46,26 470,292 262,314" fill="url(#tbBeamG)"/>
+          <polygon points="746,36 714,26 290,292 498,314" fill="url(#tbBeamG)"/>
+        </g>
+        <g fill="#0E1730"><rect x="27" y="42" width="6" height="230"/><rect x="727" y="42" width="6" height="230"/><rect x="368" y="44" width="5" height="14"/><rect x="387" y="44" width="5" height="14"/></g>
+        <g><rect x="8" y="16" width="44" height="28" rx="2" fill="#2B3A5C" transform="rotate(-14 30 30)"/><rect x="708" y="16" width="44" height="28" rx="2" fill="#2B3A5C" transform="rotate(14 730 30)"/></g>
+        <g class="tb-lamps" fill="#FFF6C8">
+          <g transform="rotate(-14 30 30)"><rect x="12" y="20" width="10" height="9"/><rect x="25" y="20" width="10" height="9"/><rect x="38" y="20" width="10" height="9"/><rect x="12" y="31" width="10" height="9"/><rect x="25" y="31" width="10" height="9"/><rect x="38" y="31" width="10" height="9"/></g>
+          <g transform="rotate(14 730 30)"><rect x="712" y="20" width="10" height="9"/><rect x="725" y="20" width="10" height="9"/><rect x="738" y="20" width="10" height="9"/><rect x="712" y="31" width="10" height="9"/><rect x="725" y="31" width="10" height="9"/><rect x="738" y="31" width="10" height="9"/></g>
+        </g>
+        <rect x="292" y="6" width="176" height="40" rx="3" fill="#0B1226" stroke="#FFCB05" stroke-width="2.5"/>
+        <text class="tb-screen" x="380" y="32" text-anchor="middle">TRAINER BATTLE</text>
+      </svg>
+      <div class="trb-vs"><div class="trb-ball"></div><span>VS</span><div class="trb-ball"></div></div>
+    </div>
+    <div class="trb-flash" aria-hidden="true"></div>
     <h2 class="trb-h" id="tbH"><small>노천극장</small>최고의 트레이너를<br><em>뽑습니다!</em></h2>
     <ul class="trb-when"><li>📅 10월 17일 (토)</li><li>⏰ 시간 <span>미정 · 곧 알려 드려요</span></li></ul>
     <ul class="trb-when trb-staff"><li>🎙️ 해설 · 캐스터 <span>한달</span></li><li>🎮 진행 <span>주끼삐끼</span></li></ul>
@@ -1709,7 +1790,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       </div>
       <div id="trbAdmWrap" hidden><button class="trb-adm-btn" type="button" id="trbAdmBtn">🔒 관리자: 모든 덱 보기</button></div>
     </section>
-    <div class="trb-foot"><button class="trb-go" type="button" id="tbGo">메인 사이트로 <span aria-hidden="true">→</span></button><button class="trb-skip" type="button" data-tb-skip>오늘 보지 않기</button></div>
+    <div class="trb-foot"><button class="trb-go" type="button" id="tbGo">메인 사이트로 <span aria-hidden="true">→</span></button></div>
   </div>
 </div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2702,7 +2783,27 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   trb.querySelectorAll('.trb-ball').forEach(function(b){ b.innerHTML = '<svg viewBox="0 0 12 12" shape-rendering="crispEdges">' + svg + '</svg>'; });
   var lines = document.getElementById('tbLines');
   for (var i = 0; i < 14; i++) { var l = document.createElement('i'), r = Math.sin(i * 7.31 + 2) * 9999; r -= Math.floor(r); l.style.top = (r * 100) + '%'; l.style.animationDuration = (1.6 + r * 2.2) + 's'; l.style.animationDelay = (-r * 4) + 's'; l.style.opacity = .25 + r * .5; lines.appendChild(l); }
-  function open(){ trb.focus({preventScroll:true}); }
+  var NS = 'http://www.w3.org/2000/svg', crowd = document.getElementById('tbCrowd'), stars = document.getElementById('tbStars'), seed = 7;
+  function rnd(){ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  var SHIRT = ['#E3403A','#FFCB05','#4F8FE6','#5DB13C','#F08A3C','#B57FE0','#F6F6F6','#FF8FB1','#3FC1C9'];
+  for (var k = 0; k < 9; k++) {
+    var ry = 140 + k * 7.6, rx = 352 + k * 8.4, step = 8.5 / rx;
+    for (var a = Math.PI * .9; a < Math.PI * 2.1; a += step) {
+      if (Math.abs(((a / Math.PI * 180) % 30) - 15) < 1.2) continue;  // 통로
+      var x = 380 + rx * Math.cos(a), y = 252 + ry * Math.sin(a);
+      if (y > 296 || rnd() < .08) continue;
+      var c = SHIRT[Math.floor(rnd() * SHIRT.length)], q = document.createElementNS(NS, 'rect');
+      q.setAttribute('x', (x - 2.5).toFixed(1)); q.setAttribute('y', (y - 3).toFixed(1)); q.setAttribute('width', 5); q.setAttribute('height', 6); q.setAttribute('fill', c);
+      q.style.setProperty('--c', c);
+      var r2 = rnd();
+      if (r2 < .1) { q.setAttribute('class', 'f'); q.style.animationDelay = (-rnd() * 4).toFixed(2) + 's'; }
+      else if (r2 < .4) { q.setAttribute('class', 'j'); q.style.animationDelay = (-rnd()).toFixed(2) + 's'; }
+      crowd.appendChild(q);
+    }
+  }
+  for (var j = 0; j < 26; j++) { var st = document.createElementNS(NS, 'rect'), sx = rnd() * 760, sy = rnd() * 70; if (sx > 280 && sx < 480 && sy < 50) continue; st.setAttribute('x', sx.toFixed(0)); st.setAttribute('y', sy.toFixed(0)); st.setAttribute('width', 2); st.setAttribute('height', 2); st.setAttribute('fill', '#fff'); st.setAttribute('opacity', (.3 + rnd() * .6).toFixed(2)); st.style.animationDelay = (-rnd() * 2.4).toFixed(2) + 's'; stars.appendChild(st); }
+  [].forEach.call(trb.querySelector('.trb-in').children, function(c, i){ c.style.setProperty('--i', i); });
+  function open(){ trb.classList.add('on'); trb.focus({preventScroll:true}); }
   if (root.hasAttribute('data-story')) addEventListener('story:closed', open, {once:true}); else open();
   var closing = false;
   function close(){
@@ -2717,15 +2818,11 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     }, 450);
   }
   document.getElementById('tbGo').addEventListener('click', close);
-  trb.querySelector('[data-tb-skip]').addEventListener('click', function(){
-    var t = new Date(); try { localStorage.setItem('battle-skip-day', t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate()); } catch(e){}
-    close();
-  });
   addEventListener('keydown', function(e){ if (e.key === 'Escape' && !root.hasAttribute('data-story') && root.hasAttribute('data-battle')) close(); });
   // ---- 덱 제출: 멤버마다 자기 칸, 내용은 관리자만 (Apps Script "덱" 탭) ----
   var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
   var MEMBERS = [['면진','누리공','h_uun',0,730],['러시','파이리','NAMEISRUSH',0,6],['혜련이','나오하','ddalbok',0,908],['연규','나무지기','DaeJang09',0,254],['기철','개구마르','handal_',0,658],['건년','주리비얀','Zizonkookie',0,497],['준현','이상해씨','JahyeonBaLaGi',0,3],['범철','팽도리','EnderDimaa',0,395],
-    ['삐끼','염버니','JOOKKIBBIKKI',1,815],['민초','푸호꼬','mingchoo',1,911],['한민','파이리','HanKug_SALAM',1,6],['우노','','SexyUno',1,0]];  // [이름, 스타팅, 마크 이름, 1=미참여, 스타팅 최종 진화 도감 번호]
+    ['삐끼','염버니','JOOKKIBBIKKI',1,815],['민초','푸호꼬','mingchoo',1,911],['한민','파이리','HanKug_SALAM',1,6]];  // [이름, 스타팅, 마크 이름, 1=미참여, 스타팅 최종 진화 도감 번호]
   var JOIN = MEMBERS.filter(function(m){ return !m[3]; }).length;
   var LINE = {'파이리':['파이리','리자드','리자몽'],'나오하':['나오하','나로테','마스카나'],'염버니':['염버니','래비풋','에이스번'],'나무지기':['나무지기','나무돌이','나무킹'],'누리공':['누리공','키요공','누리레느'],'개구마르':['개구마르','개굴반장','개굴닌자'],'주리비얀':['주리비얀','샤비','샤로다'],'이상해씨':['이상해씨','이상해풀','이상해꽃'],'푸호꼬':['푸호꼬','악뜨거','라우드본'],'팽도리':['팽도리','팽태자','엠페르트']};
   // 전설 · 준전설 · 환상 (도감 번호)
