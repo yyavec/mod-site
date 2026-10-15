@@ -3130,8 +3130,8 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       st = {p:(Array.isArray(x.p) ? x.p : []).concat(['','','','','','','','']).slice(0, 8).map(function(n){ return SKIN[n] ? n : ''; }), w:(x.w && typeof x.w === 'object') ? x.w : {}, live:typeof x.live === 'string' ? x.live : ''};
       paintB(); setSt(d.time);
     }
-    function pull(){
-      if (busy || document.hidden || !document.contains(box)) return;
+    function pull(force){
+      if (busy || (document.hidden && force !== true) || !document.contains(box)) return;
       fetch(API + '?bracket=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){ if (!busy) apply(d); }).catch(function(){ $('trbBrkSt').textContent = '대진표를 불러오지 못했어요. 잠시 뒤 다시 시도할게요'; });
     }
     function save(){
@@ -3157,7 +3157,8 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
       st = {p:a.concat(['','','','','','','','']).slice(0, 8), w:{}, live:'q0'}; save();
     });
-    paintB(); setSt(); pull();
+    paintB(); setSt(); pull(true);
+    box.addEventListener('toggle', function(){ if (box.open) pull(true); });
     setInterval(pull, 10000);
     document.addEventListener('visibilitychange', pull);
   })();
