@@ -1592,7 +1592,22 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-tree.lo .trb-col:last-child .trb-pl.lose::after{content:"꼴찌"; margin-left:auto; font:800 11px var(--font); color:#FF6F64}
 .trb-brk.edit button.trb-pl:not(.tbd){cursor:pointer}
 .trb-brk.edit button.trb-pl:not(.tbd):hover{background:rgba(255,255,255,.1)}
-.trb-pl select{flex:1; min-width:0; height:28px; border-radius:6px; border:1px solid rgba(255,255,255,.3); background:#0F1830; color:#fff; font:700 13px var(--font)}
+.trb-brk.edit button.trb-pl{cursor:pointer}
+.trb-pick{margin:14px 0 4px; padding:12px; border-radius:12px; background:rgba(111,227,255,.08); border:2px dashed rgba(111,227,255,.45)}
+.trb-pick[hidden]{display:none}
+.trb-pick p{margin:0 0 9px; font-size:13px; color:#C9D2E6}
+.trb-pick p b{color:#6FE3FF}
+.trb-pick > div{display:flex; flex-wrap:wrap; gap:8px}
+.trb-chip{display:flex; align-items:center; gap:7px; padding:6px 12px 6px 6px; border-radius:10px; border:2px solid rgba(255,255,255,.25); background:#18233F; color:#fff; font:800 14px var(--font); cursor:grab; transition:transform .12s, border-color .12s, box-shadow .12s}
+.trb-chip:hover{transform:translateY(-2px); border-color:#6FE3FF}
+.trb-chip.used{opacity:.45}
+.trb-chip.on{border-color:#FFCB05; background:#3A3110; box-shadow:0 0 0 3px rgba(255,203,5,.35), 0 0 16px rgba(255,203,5,.5); opacity:1}
+.trb-chip i, .trb-pl i{flex:none; width:22px; height:22px; border-radius:4px; background:#2A3656 no-repeat 50% 0/44px auto; image-rendering:pixelated}
+.trb-brk.picking .trb-col:first-child .trb-pl{outline:2px dashed rgba(255,203,5,.6); outline-offset:-3px}
+.trb-brk.picking .trb-col:first-child .trb-pl:hover, .trb-pl.over{background:rgba(255,203,5,.22)!important}
+.trb-pl .x{margin-left:auto; padding:0 6px; border-radius:5px; color:#FF8A7E; font-size:13px}
+.trb-pl .x:hover{background:rgba(255,138,126,.2)}
+.trb-pl.win .x{margin-left:6px}
 .trb-brk-adm{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:14px}
 .trb-brk-adm[hidden], .trb-brk-help[hidden]{display:none}
 .trb-brk-adm .trb-adm-btn{margin:0}
@@ -1849,6 +1864,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       <div class="trb-brk-in">
         <p class="trb-brk-st" id="trbBrkSt">불러오는 중…</p>
         <div class="trb-brk-res" id="trbBrkRes"></div>
+        <div class="trb-pick" id="trbPick" hidden></div>
         <h4 class="trb-brk-h">우승 토너먼트</h4>
         <div class="trb-tree" id="trbTreeW"></div>
         <h4 class="trb-brk-h last">😈 꼴등 결정전 <small>8강에서 진 4명끼리</small></h4>
@@ -1856,7 +1872,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
         <div class="trb-brk-adm" id="trbBrkAdm" hidden>
           <button type="button" class="trb-adm-btn" id="trbBrkEdit">✏️ 대진표 편집 켜기</button>
           <span class="trb-msg" id="trbBrkMsg" role="status"></span>
-          <p class="trb-brk-help" id="trbBrkHelp" hidden>8강 칸에서 이름을 고르고, 이긴 사람 이름을 누르면 다음 칸으로 올라가요. 다시 누르면 취소돼요. <b>LIVE</b> 버튼은 지금 하는 경기 표시예요. 바꾸면 바로 모두에게 보여요.</p>
+          <p class="trb-brk-help" id="trbBrkHelp" hidden>위 선수 칸을 마우스로 누르고 8강 칸을 누르면 들어가요(끌어다 놓아도 돼요). ✕는 빼기예요. 이긴 사람 이름을 누르면 다음 칸으로 올라가요. 다시 누르면 취소돼요. <b>LIVE</b> 버튼은 지금 하는 경기 표시예요. 바꾸면 바로 모두에게 보여요.</p>
           <button type="button" class="trb-cancel" id="trbBrkRand">🎲 테스트용 무작위 대진</button><button type="button" class="trb-cancel" id="trbBrkReset">🔄 초기화</button>
         </div>
       </div>
@@ -3064,7 +3080,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     var box = $('trbBrk'); if (!box) return;
     var PL = MEMBERS.filter(function(m){ return !m[3]; }), SKIN = {};
     PL.forEach(function(m){ SKIN[m[0]] = m[2]; });
-    var st = {p:['','','','','','','',''], w:{}, live:''}, edit = false, last = 0, busy = false;
+    var st = {p:['','','','','','','',''], w:{}, live:''}, edit = false, pick = '', last = 0, busy = false;
     var W = [['8강', ['q0','q1','q2','q3']], ['4강', ['s0','s1']], ['결승', ['f']]];
     var L = [['1라운드', ['l0','l1']], ['꼴찌 결정전', ['lf']]];
     var NAME = {q0:'8강 1경기', q1:'8강 2경기', q2:'8강 3경기', q3:'8강 4경기', s0:'4강 1경기', s1:'4강 2경기', f:'결승', l0:'꼴등전 1경기', l1:'꼴등전 2경기', lf:'꼴찌 결정전'};
@@ -3089,17 +3105,21 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
         var row = document.createElement(edit ? 'button' : 'div');
         if (edit) row.type = 'button';
         row.className = 'trb-pl' + (!n ? ' tbd' : w ? (w === n ? ' win' : ' lose') : '');
+        row.appendChild(head(n)); row.appendChild(document.createTextNode(n || (id[0] !== 'q' ? '?' : edit ? (pick ? '여기에 놓기' : '빈 칸') : '피스톤 장치로 결정')));
         if (edit && id[0] === 'q') {
-          var i = +id[1] * 2 + k, sel = document.createElement('select');
-          sel.innerHTML = '<option value="">? 미정</option>';
-          PL.forEach(function(x){ var o = document.createElement('option'); o.value = o.textContent = x[0]; if (x[0] === n) o.selected = true; sel.appendChild(o); });
-          sel.addEventListener('click', function(e){ e.stopPropagation(); });
-          sel.addEventListener('change', function(){ var v = sel.value, j = st.p.indexOf(v); if (v && j >= 0 && j !== i) st.p[j] = ''; st.p[i] = v; clean(); save(); });
-          row.appendChild(head(n)); row.appendChild(sel);
-        } else {
-          row.appendChild(head(n)); row.appendChild(document.createTextNode(n || (id[0] === 'q' ? '피스톤 장치로 결정' : '?')));
-        }
-        if (edit && n && pr[0] && pr[1]) row.addEventListener('click', function(e){ if (e.target.tagName === 'SELECT') return; if (st.w[id] === n) delete st.w[id]; else st.w[id] = n; clean(); save(); });
+          var i = +id[1] * 2 + k;
+          if (n) {
+            row.draggable = true;
+            row.addEventListener('dragstart', function(e){ e.dataTransfer.setData('text/plain', n); });
+            var x = document.createElement('span'); x.className = 'x'; x.textContent = '✕'; x.title = '빼기';
+            x.addEventListener('click', function(e){ e.stopPropagation(); st.p[i] = ''; clean(); save(); });
+            row.appendChild(x);
+          }
+          row.addEventListener('dragover', function(e){ e.preventDefault(); row.classList.add('over'); });
+          row.addEventListener('dragleave', function(){ row.classList.remove('over'); });
+          row.addEventListener('drop', function(e){ e.preventDefault(); place(e.dataTransfer.getData('text/plain'), i); });
+          row.addEventListener('click', function(){ if (pick) place(pick, i); else if (n && pr[0] && pr[1]) { if (st.w[id] === n) delete st.w[id]; else st.w[id] = n; clean(); save(); } });
+        } else if (edit && n && pr[0] && pr[1]) row.addEventListener('click', function(){ if (st.w[id] === n) delete st.w[id]; else st.w[id] = n; clean(); save(); });
         m.appendChild(row);
       });
       return m;
@@ -3113,8 +3133,31 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
         col.appendChild(inner); el.appendChild(col);
       });
     }
+    // 선수 칸을 누르거나 끌어다 8강 칸에 놓기. 이미 다른 칸에 있으면 두 칸을 맞바꾼다
+    function place(n, i){
+      if (!SKIN[n]) return;
+      var j = st.p.indexOf(n); pick = '';
+      if (j !== i) { if (j >= 0) st.p[j] = st.p[i]; st.p[i] = n; }
+      clean(); save();
+    }
+    function palette(){
+      var el = $('trbPick'); el.hidden = !edit; box.classList.toggle('picking', edit && !!pick);
+      if (!edit) return;
+      el.innerHTML = '<p>' + (pick ? '<b>' + pick + '</b> 고름 → 8강 칸을 누르세요 (다시 누르면 취소)' : '선수를 누른 뒤 8강 칸을 누르거나, <b>끌어다 놓으세요</b>. 이긴 사람은 이름을 누르면 돼요.') + '</p>';
+      var row = document.createElement('div');
+      PL.forEach(function(m){
+        var b = document.createElement('button'), n = m[0];
+        b.type = 'button'; b.draggable = true;
+        b.className = 'trb-chip' + (st.p.indexOf(n) >= 0 ? ' used' : '') + (pick === n ? ' on' : '');
+        b.appendChild(head(n)); b.appendChild(document.createTextNode(n));
+        b.addEventListener('click', function(){ pick = pick === n ? '' : n; paintB(); });
+        b.addEventListener('dragstart', function(e){ e.dataTransfer.setData('text/plain', n); });
+        row.appendChild(b);
+      });
+      el.appendChild(row);
+    }
     function paintB(){
-      clean();
+      clean(); palette();
       tree($('trbTreeW'), W); tree($('trbTreeL'), L, true);
       var res = $('trbBrkRes'); res.textContent = '';
       var ch = win('f'), lo = lose('lf');
@@ -3144,7 +3187,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     }
     if (key) $('trbBrkAdm').hidden = false;
     $('trbBrkEdit').addEventListener('click', function(){
-      edit = !edit; box.classList.toggle('edit', edit);
+      edit = !edit; pick = ''; box.classList.toggle('edit', edit);
       this.textContent = edit ? '✅ 편집 끄기' : '✏️ 대진표 편집 켜기';
       $('trbBrkHelp').hidden = !edit; paintB();
     });
