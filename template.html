@@ -1529,7 +1529,26 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-rules small{display:block; margin-top:3px; font-size:13px; line-height:1.5; color:#55667E}
 .trb-prize{display:grid; grid-template-columns:1.4fr 1fr; gap:10px}
 .trb-p{position:relative; padding:18px 16px 16px; border-radius:16px; color:#1B2A4A; text-align:center; overflow:hidden}
-.trb-p.gold{background:linear-gradient(180deg, #FFE27A 0%, #FFF6D6 80%); border:2.5px solid #E0A800; box-shadow:0 4px 0 #A87E00}
+.trb-prize{grid-template-columns:1fr !important; gap:14px}
+.trb-p.gold{padding:22px 18px 20px; background:linear-gradient(135deg, #FFF1A8 0%, #FFD23F 28%, #FFF7D1 48%, #F2B200 72%, #FFE06B 100%); border:3px solid #FFF0A0; box-shadow:0 0 0 3px #B88700, 0 7px 0 3px #6E5000, 0 0 44px 4px rgba(255,203,5,.5); animation:trbGlow 2.4s ease-in-out infinite}
+.trb-p.gold > *{position:relative; z-index:1}
+.trb-p.gold > .trb-rays{position:absolute; z-index:0; left:50%; top:62px; width:900px; height:900px; margin:-450px 0 0 -450px; background:repeating-conic-gradient(rgba(255,255,255,.55) 0deg 7deg, rgba(255,255,255,0) 7deg 18deg); -webkit-mask-image:radial-gradient(circle, #000 0, transparent 60%); mask-image:radial-gradient(circle, #000 0, transparent 60%); animation:trbSpin 24s linear infinite; pointer-events:none}
+.trb-p.gold > .trb-shine{position:absolute; z-index:2; top:0; bottom:0; left:-40%; width:30%; background:linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent); transform:skewX(-22deg); animation:trbShine 3.4s ease-in-out infinite; pointer-events:none}
+.trb-spk{position:absolute; z-index:2; width:14px; height:14px; background:#fff; clip-path:polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); filter:drop-shadow(0 0 4px #fff); animation:trbTwinkle 2.2s ease-in-out infinite; pointer-events:none}
+.trb-cup{width:92px; height:92px; margin:0 auto; animation:trbFloat 2.6s ease-in-out infinite; filter:drop-shadow(0 0 14px rgba(255,255,255,.9)) drop-shadow(0 5px 0 rgba(110,80,0,.45))}
+.trb-cup svg{display:block; width:100%; height:100%}
+.trb-rib{display:inline-block; margin-top:10px; padding:9px 34px 8px; background:#E3403A; color:#fff; font:400 clamp(22px, 6vw, 30px)/1 var(--pixel); letter-spacing:.14em; text-shadow:0 3px 0 #8E1A14; clip-path:polygon(0 0, 100% 0, calc(100% - 14px) 50%, 100% 100%, 0 100%, 14px 50%); box-shadow:inset 0 -5px 0 rgba(0,0,0,.2)}
+.gold .trb-medal{display:block; width:max-content; margin:10px auto 0; padding:5px 12px; border-radius:999px; background:#5A3B00; color:#FFE27A; font:400 14px/1 var(--pixel-s); box-shadow:none}
+.trb-p .trb-loot{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin:16px 0 0}
+.trb-loot li{display:flex; flex-direction:column; align-items:center; gap:6px; padding:14px 8px 12px; border-radius:14px; background:rgba(255,255,255,.82); border:2.5px solid #E0A800; box-shadow:0 4px 0 #B88700, inset 0 2px 0 #fff; color:#4A3000; font-size:15px; font-weight:800; line-height:1.35; word-break:keep-all}
+.trb-loot em{font-style:normal; font-size:34px; line-height:1; filter:drop-shadow(0 3px 0 rgba(0,0,0,.15)); animation:trbFloat 2.6s ease-in-out infinite}
+.trb-loot li:nth-child(2) em{animation-delay:-.9s} .trb-loot li:nth-child(3) em{animation-delay:-1.7s}
+@keyframes trbGlow{0%,100%{box-shadow:0 0 0 3px #B88700, 0 7px 0 3px #6E5000, 0 0 30px 2px rgba(255,203,5,.4)} 50%{box-shadow:0 0 0 3px #B88700, 0 7px 0 3px #6E5000, 0 0 60px 10px rgba(255,203,5,.7)}}
+@keyframes trbSpin{to{transform:rotate(360deg)}}
+@keyframes trbShine{0%{left:-40%} 55%,100%{left:130%}}
+@keyframes trbTwinkle{0%,100%{transform:scale(0) rotate(0); opacity:0} 50%{transform:scale(1) rotate(90deg); opacity:1}}
+@keyframes trbFloat{0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
+@media (max-width:520px){ .trb-p .trb-loot{grid-template-columns:1fr} .trb-loot li{flex-direction:row; justify-content:center} .trb-loot em{font-size:26px} }
 .trb-p.last{background:linear-gradient(180deg, #D9D3E6 0%, #F2F0F6 80%); border:2.5px solid #8E86A3; box-shadow:0 4px 0 #5E5772}
 .trb-medal{display:inline-block; padding:6px 14px; border-radius:8px; font:400 16px/1 var(--pixel); color:#fff}
 .gold .trb-medal{background:#D99A00; box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
@@ -1560,6 +1579,16 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-stk svg{display:block; width:100%; height:100%; overflow:visible}
 .trb-stk .ring{font:700 9.5px var(--font); letter-spacing:.12em}
 .trb-stk .big{font:400 18px var(--pixel)}
+.trb-sb{position:absolute; left:6px; bottom:10px; z-index:2; width:154px; padding:5px 0 4px; overflow:hidden; text-align:center; font:400 13px/1 var(--pixel); letter-spacing:.24em; text-indent:.24em; color:#fff; font-style:italic; background:linear-gradient(90deg, transparent, rgba(8,14,30,.82) 18%, rgba(8,14,30,.82) 82%, transparent); pointer-events:none}
+.trb-sb::before, .trb-sb::after{content:""; position:absolute; left:12%; right:12%; height:1.5px; background:linear-gradient(90deg, transparent, #6FE3FF, transparent)}
+.trb-sb::before{top:0} .trb-sb::after{bottom:0}
+.trb-sb b{font-weight:400; text-shadow:0 0 8px #3FC6FF, 0 0 2px #3FC6FF; animation:trbSbBlink 1.4s ease-in-out infinite}
+.trb-sb i{position:absolute; top:0; bottom:0; left:-30%; width:24%; background:linear-gradient(90deg, transparent, rgba(150,235,255,.45), transparent); transform:skewX(-20deg); animation:trbSbSweep 2.6s ease-in-out infinite}
+.trb-slot:not(.done):not(.out)::before{content:""; position:absolute; left:14px; bottom:12px; width:142px; height:22px; border-radius:50%; background:radial-gradient(closest-side, rgba(80,210,255,.55), rgba(80,210,255,0)); animation:trbSbGlow 1.4s ease-in-out infinite; pointer-events:none}
+.trb-slot > img, .trb-slot > .trb-mon{position:relative; z-index:1}
+@keyframes trbSbBlink{0%,100%{opacity:1} 50%{opacity:.45}}
+@keyframes trbSbSweep{0%{left:-30%} 60%,100%{left:110%}}
+@keyframes trbSbGlow{0%,100%{opacity:.55; transform:scaleX(.9)} 50%{opacity:1; transform:scaleX(1.05)}}
 @keyframes trbStk{0%{opacity:0; transform:rotate(-24deg) scale(1.9)} 70%{opacity:1; transform:rotate(-12deg) scale(.94)} 100%{transform:rotate(-14deg)}}
 .trb-slot.on{border-color:#FFCB05; background:rgba(255,203,5,.14)}
 .trb-form, .trb-admin{margin-top:12px; padding:18px 16px; border-radius:16px; background:#fff; color:#1B2A4A; border:2.5px solid #fff; box-shadow:0 4px 0 #0C1426; text-align:left}
@@ -1620,7 +1649,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
 @keyframes tbJump{to{transform:translateY(-2.5px)}}
 @keyframes tbWob{0%,60%,100%{transform:rotate(0)} 68%{transform:rotate(-14deg)} 76%{transform:rotate(12deg)} 84%{transform:rotate(-6deg)}}
 @media (max-width:520px){ .trb-rules, .trb-prize{grid-template-columns:1fr} .trb-ball{width:60px; height:60px} }
-@media (prefers-reduced-motion:reduce){ .trb, .trb-lines i, .trb-ball, .trb-ball svg, .trb-tag b, .trb-in > *, .trb-stage, .trb-stage *, .trb-vs span, .trb-flash{animation:none !important} .trb:not(.on) .trb-in{opacity:1} }
+@media (prefers-reduced-motion:reduce){ .trb, .trb-lines i, .trb-ball, .trb-ball svg, .trb-tag b, .trb-in > *, .trb-stage, .trb-stage *, .trb-vs span, .trb-flash, .trb-p.gold, .trb-p.gold *, .trb-sb *, .trb-slot::before{animation:none !important} .trb:not(.on) .trb-in{opacity:1} }
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -1771,7 +1800,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     <section class="trb-sec" aria-labelledby="tbPrizeH">
       <h3 class="trb-sh" id="tbPrizeH">🏆 보상</h3>
       <div class="trb-prize">
-        <div class="trb-p gold"><span class="trb-medal">1위</span><ul><li>🎨 원하는 색깔 칭호</li><li>👑 구할 수 없는 치장템</li><li>🗿 마을에 내 동상</li></ul></div>
+        <div class="trb-p gold"><div class="trb-rays" aria-hidden="true"></div><div class="trb-shine" aria-hidden="true"></div><span aria-hidden="true"><i class="trb-spk" style="left:6%;top:14%;animation-delay:0s"></i><i class="trb-spk" style="left:18%;top:62%;animation-delay:-0.7s"></i><i class="trb-spk" style="left:30%;top:8%;animation-delay:-1.3s"></i><i class="trb-spk" style="left:70%;top:10%;animation-delay:-0.4s"></i><i class="trb-spk" style="left:84%;top:56%;animation-delay:-1.6s"></i><i class="trb-spk" style="left:94%;top:18%;animation-delay:-1s"></i><i class="trb-spk" style="left:52%;top:4%;animation-delay:-0.2s"></i><i class="trb-spk" style="left:10%;top:86%;animation-delay:-1.9s"></i><i class="trb-spk" style="left:90%;top:88%;animation-delay:-0.9s"></i></span><div class="trb-cup" aria-hidden="true"></div><div class="trb-rib"><span>CHAMPION</span></div><span class="trb-medal">1위 보상</span><ul class="trb-loot"><li><em aria-hidden="true">🎨</em>원하는 색깔 칭호</li><li><em aria-hidden="true">👑</em>구할 수 없는 치장템</li><li><em aria-hidden="true">🗿</em>마을에 내 동상</li></ul></div>
         <div class="trb-p last"><span class="trb-medal">꼴찌</span><ul><li>😈 치욕적인 칭호</li></ul><small>어떤 칭호일지는… 현장에서 정해요!</small></div>
       </div>
     </section>
@@ -2788,6 +2817,10 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   var COL = {K:'#1D1D25', R:'#E3403A', r:'#FF8A7E', W:'#F6F6F6', w:'#D3D7DE'}, svg = '';
   ROWS.forEach(function(row, y){ for (var x = 0; x < row.length; x++) if (COL[row[x]]) svg += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + COL[row[x]] + '"/>'; });
   trb.querySelectorAll('.trb-ball').forEach(function(b){ b.innerHTML = '<svg viewBox="0 0 12 12" shape-rendering="crispEdges">' + svg + '</svg>'; });
+  var CUP = ['.YYYYYYYYYYYYY.','YYWWYYYYYYYYOYY','Y.YWYYYYYYYYO.Y','Y.YWYYYKYYYYO.Y','Y.YWYYKKKYYYO.Y','.YYYWYYKYYYOYY.','..YYYYYYYYYOY..','...YYYYYYYOY...','....YYYYYOY....','......YOY......','......YOY......','.....YYYOO.....','....OOOOOOO....','...BBBBBBBBB...','...BCCCCCCCB...','...BBBBBBBBB...'];
+  var CC = {Y:'#FFCB05', W:'#FFF6C8', O:'#D99A00', K:'#E3403A', B:'#6B3F1D', C:'#FFE27A'}, cup = '';
+  CUP.forEach(function(row, y){ for (var x = 0; x < row.length; x++) if (CC[row[x]]) cup += '<rect x="' + x + '" y="' + y + '" width="1.05" height="1.05" fill="' + CC[row[x]] + '"/>'; });
+  trb.querySelectorAll('.trb-cup').forEach(function(c){ c.innerHTML = '<svg viewBox="0 0 15 16" shape-rendering="crispEdges">' + cup + '</svg>'; });
   var lines = document.getElementById('tbLines');
   for (var i = 0; i < 14; i++) { var l = document.createElement('i'), r = Math.sin(i * 7.31 + 2) * 9999; r -= Math.floor(r); l.style.top = (r * 100) + '%'; l.style.animationDuration = (1.6 + r * 2.2) + 's'; l.style.animationDelay = (-r * 4) + 's'; l.style.opacity = .25 + r * .5; lines.appendChild(l); }
   var NS = 'http://www.w3.org/2000/svg', crowd = document.getElementById('tbCrowd'), stars = document.getElementById('tbStars'), seed = 7;
@@ -2861,6 +2894,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       b.querySelector('b').textContent = m[0];
       b.querySelector('small').textContent = m[1] ? '스타팅 · ' + m[1] : '스타팅 고르는 중';
       b.querySelector('.st').textContent = m[3] ? '🚫 미참여' : d ? '✅ 덱 제출 완료!' : '⏳ 아직 제출 전';
+      if (!d && !m[3]) { var sb = document.createElement('span'); sb.className = 'trb-sb'; sb.setAttribute('aria-hidden', 'true'); sb.innerHTML = '<i></i><b>STAND BY</b>'; b.appendChild(sb); }
       if (d && !m[3]) { var k = document.createElement('span'); k.className = 'trb-stk'; k.setAttribute('role', 'img'); k.setAttribute('aria-label', '덱 제출 완료'); k.innerHTML = STAMP; b.appendChild(k); }
       if (m[3]) b.disabled = true; else b.addEventListener('click', function(){ openForm(m); });
       li.appendChild(b); slots.appendChild(li);
