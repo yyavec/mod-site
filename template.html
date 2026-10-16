@@ -3127,10 +3127,15 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       li.appendChild(b); slots.appendChild(li);
     });
   }
-  function loadList(){
+  // 구글 서버가 잠깐 실패해도 "미제출"로 보이지 않게: 마지막으로 받은 목록을 쓰고 다시 시도
+  try { var dc = JSON.parse(localStorage.getItem('deck-done') || 'null'); if (dc && typeof dc === 'object') done = dc; } catch(e){}
+  function loadList(n){
+    n = n || 0;
     return fetch(API + '?deck=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
-      done = {}; (d && d.list || []).forEach(function(x){ done[x.name] = x.time || 1; }); paint();
-    }).catch(function(){ paint(); });
+      if (!d || !d.ok || !Array.isArray(d.list)) throw 0;
+      done = {}; d.list.forEach(function(x){ done[x.name] = x.time || 1; }); paint();
+      try { localStorage.setItem('deck-done', JSON.stringify(done)); } catch(e){}
+    }).catch(function(){ paint(); if (n < 6) setTimeout(function(){ loadList(n + 1); }, 3000 + n * 2000); });
   }
   function openForm(m){
     cur = m[0]; warned = ''; paint(); loadDex();
