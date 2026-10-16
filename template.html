@@ -1979,7 +1979,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       <p class="trb-cheer-1">출전을 했다면 당신은 이미 <b>무적급</b>입니다.</p>
       <p class="trb-cheer-2">설령 당신이 꼴등이어도 <b>무너지지 마세요.</b></p>
       <p class="trb-cheer-3">사실 꼴찌도 1등도 모두 비슷한 트레이너입니다.</p>
-      <p class="trb-noangry">🙅 화내기 없음!</p>
+      <p class="trb-noangry">😅 화내기 없음!</p>
     </section>
     <div class="trb-foot"><button class="trb-go" type="button" id="tbGo">메인 사이트로 <span aria-hidden="true">→</span></button></div>
   </div>
@@ -3024,7 +3024,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   function slam(){  // "화내기 없음" 딱지가 꽝! 떨어진다
     if (closing) return;
     var d = document.createElement('div'); d.className = 'trb-slam'; d.setAttribute('aria-hidden', 'true');
-    d.innerHTML = '<i></i><b>🙅 화내기 없음!</b>';
+    d.innerHTML = '<i></i><b>😅 화내기 없음!</b>';
     trb.appendChild(d); trb.classList.add('shake');
     setTimeout(function(){ d.remove(); trb.classList.remove('shake'); }, 3300);
   }
