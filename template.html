@@ -1747,6 +1747,14 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
 .trb-cheer-3{margin-top:14px!important; font-size:14.5px; line-height:1.6; color:#C9D2E6}
 @keyframes trbCheerS{50%{transform:scale(1.25) rotate(20deg); opacity:.7}}
 .trb-noangry{display:inline-block; margin-top:20px; padding:10px 26px; border:4px solid #E3403A; border-radius:14px; font:900 clamp(30px, 8vw, 48px)/1.1 var(--font); color:#fff; letter-spacing:.06em; background:rgba(227,64,58,.22); box-shadow:0 0 24px rgba(227,64,58,.45); transform:rotate(-3deg)}
+.trb-slam{position:fixed; inset:0; z-index:5; display:grid; place-items:center; pointer-events:none}
+.trb-slam b{display:block; padding:16px 34px; border:6px solid #E3403A; border-radius:20px; font:900 clamp(44px, 13vw, 96px)/1.05 var(--font); color:#fff; letter-spacing:.06em; white-space:nowrap; background:rgba(120,20,18,.82); box-shadow:0 0 0 4px rgba(255,255,255,.15) inset, 0 0 60px rgba(227,64,58,.7), 0 18px 40px rgba(0,0,0,.5); text-shadow:0 4px 0 rgba(0,0,0,.4); opacity:0; animation:trbSlam 3.2s cubic-bezier(.2,.9,.3,1.2) both}
+.trb-slam i{position:absolute; width:min(90vw, 620px); aspect-ratio:1; border-radius:50%; border:6px solid rgba(255,203,5,.8); opacity:0; animation:trbRing .7s .38s ease-out both}
+@keyframes trbSlam{0%{opacity:0; transform:translateY(-70vh) scale(2.6) rotate(-18deg)} 12%{opacity:1; transform:translateY(0) scale(1.15) rotate(-6deg)} 16%{transform:scale(.94) rotate(-3deg)} 20%{transform:scale(1) rotate(-4deg)} 82%{opacity:1; transform:scale(1) rotate(-4deg)} 100%{opacity:0; transform:scale(.6) rotate(-4deg)}}
+@keyframes trbRing{0%{opacity:.9; transform:scale(.2)} 100%{opacity:0; transform:scale(1.2)}}
+.trb.shake .trb-in{animation:trbShake .45s .38s}
+@keyframes trbShake{0%,100%{transform:none} 15%{transform:translate(-10px,6px)} 30%{transform:translate(9px,-7px)} 45%{transform:translate(-7px,4px)} 60%{transform:translate(5px,-3px)} 80%{transform:translate(-2px,1px)}}
+@media (prefers-reduced-motion:reduce){.trb-slam b{animation-timing-function:linear} .trb-slam i{display:none} .trb.shake .trb-in{animation:none}}
 @media (prefers-reduced-motion:reduce){.trb-cheer-s{animation:none}}
 .trb-foot{margin-top:22px}
 .trb-go{display:inline-flex; align-items:center; gap:10px; height:56px; padding:0 30px; border-radius:6px; border:3px solid #7E1610; background:#E2352B; color:#fff; font:400 20px/1 var(--pixel); cursor:pointer; box-shadow:inset 0 -6px 0 rgba(0,0,0,.25), inset 0 3px 0 rgba(255,255,255,.28); transition:transform .12s, background .12s}
@@ -3012,7 +3020,14 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   }
   for (var j = 0; j < 26; j++) { var st = document.createElementNS(NS, 'rect'), sx = rnd() * 760, sy = rnd() * 70; if (sx > 280 && sx < 480 && sy < 50) continue; st.setAttribute('x', sx.toFixed(0)); st.setAttribute('y', sy.toFixed(0)); st.setAttribute('width', 2); st.setAttribute('height', 2); st.setAttribute('fill', '#fff'); st.setAttribute('opacity', (.3 + rnd() * .6).toFixed(2)); st.style.animationDelay = (-rnd() * 2.4).toFixed(2) + 's'; stars.appendChild(st); }
   [].forEach.call(trb.querySelector('.trb-in').children, function(c, i){ c.style.setProperty('--i', i); });
-  function open(){ trb.classList.add('on'); trb.focus({preventScroll:true}); }
+  function open(){ trb.classList.add('on'); trb.focus({preventScroll:true}); setTimeout(slam, 1100); }
+  function slam(){  // "화내기 없음" 딱지가 꽝! 떨어진다
+    if (closing) return;
+    var d = document.createElement('div'); d.className = 'trb-slam'; d.setAttribute('aria-hidden', 'true');
+    d.innerHTML = '<i></i><b>🙅 화내기 없음!</b>';
+    trb.appendChild(d); trb.classList.add('shake');
+    setTimeout(function(){ d.remove(); trb.classList.remove('shake'); }, 3300);
+  }
   if (root.hasAttribute('data-story')) addEventListener('story:closed', open, {once:true}); else open();
   var closing = false;
   function close(){
