@@ -1737,6 +1737,16 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
 .trb-adm-btn{margin-top:12px; height:36px; padding:0 14px; border-radius:8px; border:1.5px dashed rgba(255,255,255,.4); background:none; color:#DDE3F0; font:700 13px var(--font); cursor:pointer}
 .trb-adm-key{display:flex; gap:8px; margin-top:10px}
 @media (max-width:520px){ .trb-mons{grid-template-columns:repeat(2, 1fr)} }
+.trb-cheer{position:relative; margin:30px 0 4px; padding:28px 18px 24px; border-radius:18px; text-align:center; background:radial-gradient(120% 140% at 50% 0%, rgba(255,203,5,.22), rgba(255,203,5,0) 60%), rgba(255,255,255,.06); border:2px solid rgba(255,203,5,.5); box-shadow:0 0 30px rgba(255,203,5,.15)}
+.trb-cheer p{margin:0}
+.trb-cheer-s{display:block; font-size:22px; color:#FFCB05; margin-bottom:6px; animation:trbCheerS 2.4s ease-in-out infinite}
+.trb-cheer-1{font:800 clamp(22px, 5.4vw, 34px)/1.35 var(--font); color:#fff; text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.trb-cheer-1 b{color:#FFCB05; text-shadow:0 0 18px rgba(255,203,5,.7), 0 2px 0 rgba(0,0,0,.35)}
+.trb-cheer-2{margin-top:10px!important; font:800 clamp(19px, 4.6vw, 28px)/1.4 var(--font); color:#FFE9A8}
+.trb-cheer-2 b{color:#fff; border-bottom:3px solid #E3403A}
+.trb-cheer-3{margin-top:14px!important; font-size:14.5px; line-height:1.6; color:#C9D2E6}
+@keyframes trbCheerS{50%{transform:scale(1.25) rotate(20deg); opacity:.7}}
+@media (prefers-reduced-motion:reduce){.trb-cheer-s{animation:none}}
 .trb-foot{margin-top:22px}
 .trb-go{display:inline-flex; align-items:center; gap:10px; height:56px; padding:0 30px; border-radius:6px; border:3px solid #7E1610; background:#E2352B; color:#fff; font:400 20px/1 var(--pixel); cursor:pointer; box-shadow:inset 0 -6px 0 rgba(0,0,0,.25), inset 0 3px 0 rgba(255,255,255,.28); transition:transform .12s, background .12s}
 .trb-go:hover{background:#F2453A; transform:translateY(-2px)}
@@ -1954,6 +1964,12 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
         <div id="trbAdmBody"></div>
       </div>
       <div id="trbAdmWrap" hidden><button class="trb-adm-btn" type="button" id="trbAdmBtn">🔒 관리자: 모든 덱 보기</button></div>
+    </section>
+    <section class="trb-cheer" aria-label="응원">
+      <span class="trb-cheer-s" aria-hidden="true">✦</span>
+      <p class="trb-cheer-1">출전한 당신은 이미 <b>무적급</b>입니다.</p>
+      <p class="trb-cheer-2">설령 등수가 낮더라도, <b>무너지지 마세요.</b></p>
+      <p class="trb-cheer-3">꼴찌도 1등도 모두 같은 무대에 선 트레이너예요. 끝까지 함께해 줘서 고마워요 💛</p>
     </section>
     <div class="trb-foot"><button class="trb-go" type="button" id="tbGo">메인 사이트로 <span aria-hidden="true">→</span></button></div>
   </div>
