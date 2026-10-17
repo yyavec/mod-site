@@ -7,6 +7,7 @@
 (function(){var d=document.documentElement,q=location.search;
   if(/[?&]nf\b/.test(q)){d.setAttribute("data-frame","");d.setAttribute("data-mood","nightfall");return;}
   if(/[?&]story\b/.test(q)){d.setAttribute("data-story","");return;}
+  return; /* 10-18 주인님: 시즌 종료·부활 이야기는 숨김 (지우지 말 것). 다시 켜려면 이 줄을 지우기 */
   try{var t=new Date();if(localStorage.getItem("story-skip-day")===t.getFullYear()+"-"+(t.getMonth()+1)+"-"+t.getDate())return;}catch(e){}
   var ALWAYS=true; /* 당분간 들어올 때마다 팝업. 처음 3번만 보이게 되돌리려면 false */
   if(ALWAYS){d.setAttribute("data-story","");return;}
@@ -15,11 +16,10 @@
 })();
 </script>
 <script>
-// 트레이너 배틀 안내: 10/17(토) 대회 끝날 때까지 전체화면으로 (부활 창이 있으면 그다음에). ?battle 로 다시 보기
+// 트레이너 배틀 안내: 들어올 때마다 전체화면으로 (10-18 주인님: 꼭 띄우기). ?battle 로 다시 보기
 (function(){var d=document.documentElement,q=location.search;
   if(/[?&]nf\b/.test(q))return;
   if(/[?&]battle\b/.test(q)){d.setAttribute("data-battle","");return;}
-  var t=new Date();if(t>=new Date(2026,9,19))return;
   d.setAttribute("data-battle","");
 })();
 </script>
@@ -369,6 +369,10 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .gnew-keys kbd{display:inline-block; min-width:22px; padding:1px 6px; margin:0 2px; border-radius:5px; border:1px solid currentColor; border-bottom-width:3px; font:700 13px var(--font, sans-serif); text-align:center}
 .gnew-keys small{opacity:.7}
 .gnew-home{margin:0 0 var(--s4, 16px); background:var(--bg-raised, #fff)}
+.gnew-big .gnew-title{margin:12px 0 6px; font-size:clamp(26px, 6.4vw, 38px); font-weight:900; line-height:1.25; color:var(--text-primary, #1B1F2E); word-break:keep-all}
+.gnew-big .gnew-sub{margin:0 0 12px; font-size:clamp(18px, 4.6vw, 24px); font-weight:800; color:#E3403A}
+.gnew-list{margin:0 0 10px; padding:0; list-style:none; display:grid; gap:4px; font-size:15px}
+.gnew-champ{margin:0; padding:10px 12px; border-radius:10px; background:rgba(255,203,5,.18); border:1.5px solid #E0B000; font-weight:700}
 .wrap:not([data-page="home"]) > .gnew-home{display:none}
 .inst-dl:active{transform:translateY(2px)}
 .inst-dl svg{width:20px; height:20px; stroke-width:2}
@@ -1699,6 +1703,23 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-p small{display:block; margin-top:8px; font-size:12.5px; color:#5E5772}
 .trb-sh small{padding:3px 8px; border-radius:6px; background:#FFCB05; color:#1B2A4A; font:800 11.5px/1.2 var(--font)}
 .trb-dnote{margin:-2px 0 12px; text-align:center; font-size:13.5px; line-height:1.6; color:#C9D2E6}
+.trb-pub{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap:10px; margin:0; padding:0; list-style:none}
+.trb-pc{border:2px solid rgba(255,255,255,.22); background:rgba(255,255,255,.08); border-radius:14px; padding:12px 14px 14px; color:#fff}
+.trb-pc-h{display:flex; align-items:center; gap:10px; margin:0 0 10px}
+.trb-pc-h img{height:60px; width:auto; image-rendering:pixelated; filter:drop-shadow(0 3px 0 rgba(0,0,0,.3))}
+.trb-pc-h b{font-size:20px; font-weight:800}
+.trb-pc-m{display:grid; grid-template-columns:repeat(3, 1fr); gap:6px}
+.trb-pm{display:flex; flex-direction:column; align-items:center; gap:2px; padding:6px 2px 8px; border-radius:10px; background:rgba(0,0,0,.2); min-width:0}
+.trb-pm .cb{width:64px; height:64px; --sw:768px}
+.trb-pm small{font-size:12.5px; font-weight:700; color:#DDE3F0; text-align:center; word-break:keep-all}
+.trb-pm.leg{box-shadow:inset 0 0 0 2px #FFCB05}
+.trb-pm.leg small{color:#FFCB05}
+.trb-champ{display:flex; align-items:center; gap:16px; max-width:560px; margin:18px auto 6px; padding:14px 18px; border-radius:16px; border:2.5px solid #FFCB05; background:linear-gradient(135deg, rgba(255,203,5,.22), rgba(255,203,5,.05)); color:#fff; box-shadow:0 0 28px rgba(255,203,5,.25)}
+.trb-champ img{flex:none; height:110px; width:auto; image-rendering:pixelated; filter:drop-shadow(0 4px 0 rgba(0,0,0,.35))}
+.trb-champ-t{display:inline-block; padding:3px 9px; border-radius:6px; background:#FFCB05; color:#1B1F2E; font:800 12px var(--font); letter-spacing:.08em}
+.trb-champ-n{margin:6px 0 2px; font-size:clamp(24px, 6vw, 32px); font-weight:900}
+.trb-champ-n b{color:#FFCB05}
+.trb-champ-s{margin:0; font-size:14px; color:#DDE3F0; line-height:1.5}
 .trb-slots{display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:10px; margin:0; padding:0; list-style:none}
 .trb-slot{width:100%; height:100%; border-radius:14px !important; display:flex; align-items:flex-end; gap:14px; padding:14px 16px 14px 12px; border-radius:12px; border:2px solid rgba(255,255,255,.22); background:rgba(255,255,255,.08); color:#fff; font-family:var(--font); text-align:left; cursor:pointer; transition:transform .12s, border-color .12s, background .12s}
 .trb-slot:hover{transform:translateY(-2px); border-color:#FFCB05}
@@ -1950,6 +1971,10 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     <h2 class="trb-h" id="tbH"><small>노천극장</small>최고의 트레이너를<br><em>뽑습니다!</em></h2>
     <ul class="trb-when"><li>📅 10월 17일 (토)</li><li>⏰ 시간 <span>오후 11시</span></li></ul>
     <ul class="trb-when trb-staff"><li>🎙️ 해설 · 캐스터 <span>한달</span></li><li>🎮 진행 <span>주끼삐끼</span></li></ul>
+    <section class="trb-champ" aria-label="우승자">
+      <img src="assets/players/DaeJang09.png" alt="이연규 마크 스킨" loading="lazy">
+      <div><span class="trb-champ-t">👑 CHAMPION</span><p class="trb-champ-n">우승 <b>이연규</b>!</p><p class="trb-champ-s">결승 2 : 0 완승! 아르세우스와 함께 노천극장 최고의 트레이너가 됐어요. 축하해요! 🎉</p></div>
+    </section>
     <details class="trb-brk" id="trbBrk">
       <summary><span class="trb-brk-t">🏆 대진표</span><span class="trb-live" id="trbBrkLive" hidden><b></b>LIVE</span><span class="trb-brk-a" aria-hidden="true">▾</span></summary>
       <div class="trb-brk-in">
@@ -1996,9 +2021,10 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       </div>
     </section>
     <section class="trb-sec" aria-labelledby="trbDeckH">
-      <h3 class="trb-sh" id="trbDeckH">📝 덱 제출 <small>10월 16일(금)까지</small></h3>
-      <p class="trb-dnote">내 이름 칸을 눌러 덱을 적어 주세요.<br>덱은 관리자만 볼 수 있고, 다른 사람에게는 <b>"제출완료!"</b> 딱지만 보여요.</p>
-      <ul class="trb-slots" id="trbSlots"></ul>
+      <h3 class="trb-sh" id="trbDeckH">🃏 모두의 덱 공개! <small>대회에 나간 여섯 마리</small></h3>
+      <p class="trb-dnote">대회가 끝나서 모두의 덱을 공개해요. <b>⭐</b>는 전설·준전설·환상이에요.</p>
+      <ul class="trb-pub" id="trbPub"></ul>
+      <ul class="trb-slots" id="trbSlots" hidden></ul>
       <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="tbInk" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.25 1.42"/><feComposite in="SourceGraphic" operator="in"/></filter><path id="tbArc" d="M60 60m-45 0a45 45 0 1 1 90 0a45 45 0 1 1-90 0"/></defs></svg>
       <form class="trb-form" id="trbForm" hidden autocomplete="off">
         <h4><span id="trbWho"></span>의 덱</h4>
@@ -2101,6 +2127,13 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   <section class="rp-must" role="note" aria-labelledby="rpMustH">
     <p class="rp-must-h" id="rpMustH">⚠️ 접속할 때 리소스팩은 <u>무조건 받아야 해요!</u></p>
     <p>서버에 들어갈 때 <b>"서버 리소스팩"</b> 창이 뜨면 꼭 <b class="rp-yes">예 (Yes)</b>를 눌러 주세요.<br>안 받으면 게임이 제대로 안 될 수 있어요.</p>
+  </section>
+  <section class="gnew gnew-home gnew-big" aria-labelledby="gnewBigH">
+    <p class="gnew-h"><span class="gnew-tag">NEW</span>새로운 업데이트!</p>
+    <h2 class="gnew-title" id="gnewBigH">이제 야생에서도 전설 포켓몬이 출현합니다!</h2>
+    <p class="gnew-sub">시즌 2를 준비하라는 뜻이겠죠!!!!</p>
+    <ul class="gnew-list"><li>🐉 야생에서 <b>전설 포켓몬</b>이 나와요</li><li>💿 <b>기술머신</b>이 추가됐어요</li><li>✨ 그 밖에도 이것저것 바뀌었어요</li></ul>
+    <p class="gnew-champ">👑 트레이너 배틀 우승은 <b>이연규</b>! 결승 2 : 0 완승, 축하합니다! 🎉</p>
   </section>
   <section class="gnew gnew-home" aria-labelledby="gnewH">
     <p class="gnew-h" id="gnewH"><span class="gnew-tag">NEW</span>새로운 업데이트!</p>
@@ -2519,7 +2552,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   <footer><span class="bye"><svg class="px " viewBox="0 0 12 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="3" y="0" width="6" height="1" fill="var(--skin-l)"/><rect x="9" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="2" y="1" width="2" height="1" fill="var(--skin-g)"/><rect x="4" y="1" width="2" height="1" fill="var(--skin-l)"/><rect x="6" y="1" width="4" height="1" fill="var(--skin-g)"/><rect x="2" y="2" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="4" y="3" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="2" y="4" width="1" height="1" fill="#111111"/><rect x="3" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="4" y="4" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="9" y="4" width="1" height="1" fill="#111111"/><rect x="2" y="5" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="3" y="6" width="6" height="1" fill="var(--skin-g)"/><rect x="9" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="2" y="7" width="2" height="1" fill="var(--skin-m)"/><rect x="4" y="7" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="7" width="2" height="1" fill="var(--skin-m)"/></svg>오늘도 즐겜해요</span><span>{{UPDATED}} 업데이트</span><span>모드 {{TOTAL}}개</span><a class="xlink" href="{{NOTION_URL}}" target="_blank" rel="noopener" {{NOTION_HIDDEN}}>노션<svg class="i"><use href="#i-ext"/></svg></a><a class="xlink" href="{{DISCORD_URL}}" target="_blank" rel="noopener" {{DISCORD_HIDDEN}}>문의 (디스코드)<svg class="i"><use href="#i-ext"/></svg></a></footer>
   <div class="pc-row" aria-hidden="true"><img src="assets/cobble-blocks/healing_machine.png" alt="" loading="lazy"><img src="assets/cobble-blocks/pc.png" alt="" loading="lazy"><img src="assets/cobble-blocks/display_case.png" alt="" loading="lazy"><img src="assets/cobble-blocks/restoration_tank.png" alt="" loading="lazy"><img src="assets/cobble-blocks/fossil_analyzer.png" alt="" loading="lazy"><img src="assets/cobble-blocks/tm_machine.png" alt="" loading="lazy"><img src="assets/cobble-blocks/pasture.png" alt="" loading="lazy"><img src="assets/cobble-blocks/gilded_chest.png" alt="" loading="lazy"><img src="assets/cobble-blocks/blue_gilded_chest.png" alt="" loading="lazy"></div>
   <p class="cobble-credit">포켓몬 모델·애니메이션: <a href="https://gitlab.com/cable-mc/cobblemon" target="_blank" rel="noopener">Cobblemon</a> (MPL-2.0 / CC BY-NC, 사이트용 그림으로 렌더) · Pokémon © Nintendo / Creatures / GAME FREAK</p>
-  <p class="foot-replay"><button class="story-replay" type="button" data-story-replay>시즌 2 종료 · 포켓몬 부활 이야기 다시 보기</button> · <button class="story-replay" type="button" data-battle-replay>트레이너 배틀 안내 다시 보기</button></p>
+  <p class="foot-replay"><button class="story-replay" type="button" data-story-replay hidden>시즌 2 종료 · 포켓몬 부활 이야기 다시 보기</button><button class="story-replay" type="button" data-battle-replay>트레이너 배틀 안내 다시 보기</button></p>
 </main>
 
 <div class="toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-check"/></svg><span id="toastMsg"></span></div>
@@ -3127,6 +3160,24 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       li.appendChild(b); slots.appendChild(li);
     });
   }
+  // 대회 끝: 모두의 덱 공개 (assets/decks.json, 메모는 빼고 이름·포켓몬만)
+  fetch('assets/decks.json').then(function(r){ return r.json(); }).then(function(j){
+    var by = {}, ul = $('trbPub'); (j.decks || []).forEach(function(x){ by[x.name] = x.mons; });
+    MEMBERS.forEach(function(m){
+      if (!by[m[0]]) return;
+      var li = document.createElement('li'), h = document.createElement('div'), g = document.createElement('div');
+      li.className = 'trb-pc'; h.className = 'trb-pc-h'; g.className = 'trb-pc-m';
+      h.innerHTML = '<img alt="" loading="lazy"><b></b>'; h.querySelector('img').src = 'assets/players/' + m[2] + '.png'; h.querySelector('b').textContent = m[0];
+      by[m[0]].forEach(function(p){
+        var c = document.createElement('span'), sp = document.createElement('span'), t = document.createElement('small'), lg = LEG.indexOf(p[1]) >= 0;
+        c.className = 'trb-pm' + (lg ? ' leg' : '');
+        sp.className = 'cb'; sp.setAttribute('aria-hidden', 'true'); if (p[1]) sp.style.backgroundImage = 'url(assets/cobble/' + p[1] + '.webp)';
+        t.textContent = (lg ? '⭐ ' : '') + p[0];
+        c.appendChild(sp); c.appendChild(t); g.appendChild(c);
+      });
+      li.appendChild(h); li.appendChild(g); ul.appendChild(li);
+    });
+  }).catch(function(){});
   // 구글 서버가 잠깐 실패해도 "미제출"로 보이지 않게: 마지막으로 받은 목록을 쓰고 다시 시도
   try { var dc = JSON.parse(localStorage.getItem('deck-done') || 'null'); if (dc && typeof dc === 'object') done = dc; } catch(e){}
   function loadList(n){
