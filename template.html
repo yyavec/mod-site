@@ -369,10 +369,38 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .gnew-keys kbd{display:inline-block; min-width:22px; padding:1px 6px; margin:0 2px; border-radius:5px; border:1px solid currentColor; border-bottom-width:3px; font:700 13px var(--font, sans-serif); text-align:center}
 .gnew-keys small{opacity:.7}
 .gnew-home{margin:0 0 var(--s4, 16px); background:var(--bg-raised, #fff)}
-.gnew-big .gnew-title{margin:12px 0 6px; font-size:clamp(26px, 6.4vw, 38px); font-weight:900; line-height:1.25; color:var(--text-primary, #1B1F2E); word-break:keep-all}
-.gnew-big .gnew-sub{margin:0 0 12px; font-size:clamp(18px, 4.6vw, 24px); font-weight:800; color:#E3403A}
-.gnew-list{margin:0 0 10px; padding:0; list-style:none; display:grid; gap:4px; font-size:15px}
-.gnew-champ{margin:0; padding:10px 12px; border-radius:10px; background:rgba(255,203,5,.18); border:1.5px solid #E0B000; font-weight:700}
+.lgd{position:relative; overflow:hidden; isolation:isolate; margin:0 0 var(--s4, 16px); padding:22px 22px 20px; border-radius:20px; color:#fff; border:2px solid #FFCB05; background:radial-gradient(110% 90% at 92% 0%, #5B2FA8 0%, rgba(91,47,168,0) 58%), radial-gradient(90% 80% at 0% 100%, #0B5C8C 0%, rgba(11,92,140,0) 62%), linear-gradient(160deg, #141A3C, #070A1C); box-shadow:0 0 0 5px rgba(255,203,5,.14), 0 16px 34px rgba(8,10,36,.35)}
+.wrap:not([data-page="home"]) > .lgd{display:none}
+.lgd-sky{position:absolute; inset:0; z-index:-1; background-image:radial-gradient(1.5px 1.5px at 12% 22%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 34% 70%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 58% 16%, #FFE27A 50%, transparent 51%), radial-gradient(1px 1px at 76% 58%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 90% 86%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 22% 92%, #FFE27A 50%, transparent 51%), radial-gradient(1px 1px at 46% 40%, #fff 50%, transparent 51%); animation:lgdTw 3s ease-in-out infinite alternate}
+.lgd-sky::after{content:""; position:absolute; left:-30%; top:0; width:30%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.12), transparent); animation:lgdShine 5s ease-in-out infinite}
+@keyframes lgdTw{from{opacity:.45}to{opacity:1}}
+@keyframes lgdShine{0%,60%{left:-30%}100%{left:130%}}
+.lgd-mons{position:absolute; right:-8px; top:10px; z-index:-1; width:300px; height:250px; pointer-events:none}
+.lgd-mons .cb{position:absolute; --sw:1536px; width:128px; height:128px; filter:drop-shadow(0 0 14px rgba(255,203,5,.55))}
+.lgd-mons .m1{right:120px; top:0; animation-duration:2.4s}
+.lgd-mons .m2{right:0; top:40px; width:150px; height:150px; --sw:1800px; animation-duration:3s}
+.lgd-mons .m3{right:110px; top:120px; animation-duration:2.2s}
+.lgd-in{position:relative; max-width:64%}
+.lgd-tag{display:inline-flex; align-items:center; gap:8px; margin:0; padding:4px 12px 4px 4px; border-radius:999px; background:rgba(255,203,5,.16); border:1.5px solid rgba(255,203,5,.6); color:#FFE27A; font-size:13.5px; font-weight:800}
+.lgd-tag span{padding:2px 8px; border-radius:999px; background:#E3403A; color:#fff; font-size:11px; letter-spacing:.06em; animation:gnewBlink 1.6s ease-in-out infinite}
+.lgd .lgd-h{display:block; font-family:var(--cb-head, var(--font)); margin:14px 0 8px; font-size:clamp(30px, 7.4vw, 46px); font-weight:900; line-height:1.14; letter-spacing:-.01em; text-shadow:0 3px 0 rgba(0,0,0,.35); word-break:keep-all; color:#fff}
+.lgd-h em{font-style:normal; background:linear-gradient(90deg, #FFF1A8, #FFCB05 45%, #FF8A2C); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 12px rgba(255,203,5,.5))}
+.lgd-sub{margin:0 0 16px; font-size:clamp(18px, 4.6vw, 24px); font-weight:900; color:#FF6F64; text-shadow:0 0 14px rgba(255,80,70,.45); animation:lgdPulse 1.3s ease-in-out infinite; transform-origin:left center}
+@keyframes lgdPulse{50%{transform:scale(1.04)}}
+.lgd-list{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px; padding:0; list-style:none}
+.lgd-list li{padding:7px 13px; border-radius:999px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); font-size:14.5px; font-weight:700; backdrop-filter:blur(2px)}
+.lgd-dl{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px}
+.lgd-dl .inst-dl{background:#E3403A; border-color:#A82520; color:#fff}
+.lgd-dl .inst-dl:hover{background:#F2554F}
+.lgd-dl p{margin:0; font-size:13.5px; line-height:1.55; color:#C9D2E8}
+.lgd-dl p b{color:#fff}
+.lgd-champ{display:flex; align-items:center; gap:12px; margin:18px 0 0; padding:10px 16px 10px 12px; border-radius:14px; background:linear-gradient(90deg, rgba(255,203,5,.3), rgba(255,203,5,.05)); border:1.5px solid rgba(255,203,5,.75); width:max-content; max-width:100%}
+.lgd-champ img{flex:none; height:66px; width:auto; image-rendering:pixelated; filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
+.lgd-champ span{display:block; font-size:12px; font-weight:800; letter-spacing:.04em; color:#FFCB05}
+.lgd-champ b{display:block; font-size:24px; font-weight:900; line-height:1.2}
+.lgd-champ small{display:block; font-size:13px; color:#DDE3F0}
+@media (max-width:640px){.lgd{padding:18px 16px 16px}.lgd-in{max-width:none}.lgd-mons{width:190px; height:170px; right:-24px; top:-6px; opacity:.45}.lgd-mons .cb{width:84px; height:84px; --sw:1008px}.lgd-mons .m1{right:84px}.lgd-mons .m2{width:100px; height:100px; --sw:1200px; top:26px}.lgd-mons .m3{right:76px; top:80px}}
+@media (prefers-reduced-motion:reduce){.lgd-sky, .lgd-sky::after, .lgd-sub, .lgd-tag span, .lgd-mons .cb{animation:none}}
 .wrap:not([data-page="home"]) > .gnew-home{display:none}
 .inst-dl:active{transform:translateY(2px)}
 .inst-dl svg{width:20px; height:20px; stroke-width:2}
@@ -2128,12 +2156,20 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     <p class="rp-must-h" id="rpMustH">⚠️ 접속할 때 리소스팩은 <u>무조건 받아야 해요!</u></p>
     <p>서버에 들어갈 때 <b>"서버 리소스팩"</b> 창이 뜨면 꼭 <b class="rp-yes">예 (Yes)</b>를 눌러 주세요.<br>안 받으면 게임이 제대로 안 될 수 있어요.</p>
   </section>
-  <section class="gnew gnew-home gnew-big" aria-labelledby="gnewBigH">
-    <p class="gnew-h"><span class="gnew-tag">NEW</span>새로운 업데이트!</p>
-    <h2 class="gnew-title" id="gnewBigH">이제 야생에서도 전설 포켓몬이 출현합니다!</h2>
-    <p class="gnew-sub">시즌 2를 준비하라는 뜻이겠죠!!!!</p>
-    <ul class="gnew-list"><li>🐉 야생에서 <b>전설 포켓몬</b>이 나와요</li><li>💿 <b>기술머신</b>이 추가됐어요</li><li>✨ 그 밖에도 이것저것 바뀌었어요</li></ul>
-    <p class="gnew-champ">👑 트레이너 배틀 우승은 <b>이연규</b>! 결승 2 : 0 완승, 축하합니다! 🎉</p>
+  <section class="lgd" aria-labelledby="lgdH">
+    <div class="lgd-sky" aria-hidden="true"></div>
+    <div class="lgd-mons" aria-hidden="true"><span class="cb m1" style="background-image:url(assets/cobble/384.webp)"></span><span class="cb m2" style="background-image:url(assets/cobble/493.webp)"></span><span class="cb m3" style="background-image:url(assets/cobble/249.webp)"></span></div>
+    <div class="lgd-in">
+      <p class="lgd-tag"><span>NEW</span>새로운 업데이트</p>
+      <h2 class="lgd-h" id="lgdH">이제 야생에서도<br><em>전설 포켓몬</em>이<br>출현합니다!</h2>
+      <p class="lgd-sub">시즌 2를 준비하라는 뜻이겠죠!!!!</p>
+      <ul class="lgd-list"><li>🐉 야생 전설 포켓몬 출현</li><li>💿 기술머신 추가</li><li>✨ 그 밖에도 이것저것</li></ul>
+      <div class="lgd-dl">
+        <a class="inst-dl" href="assets/tm/TM-SETUP.exe" download><svg class="i"><use href="#i-dl"/></svg><span><b>기술머신 추가 프로그램 받기</b><small>꼭 받아야 접속돼요 · Windows</small></span></a>
+        <p><b>마인크래프트를 끄고</b> 받은 프로그램을 실행 → <b>추가하기</b>만 누르면 끝!<br>파란 창이 뜨면 <b>추가 정보 → 실행</b>.</p>
+      </div>
+      <div class="lgd-champ"><img src="assets/players/DaeJang09.png" alt="이연규 마크 스킨" loading="lazy"><div><span>👑 트레이너 배틀 우승</span><b>이연규</b><small>결승 2 : 0 완승! 축하합니다 🎉</small></div></div>
+    </div>
   </section>
   <section class="gnew gnew-home" aria-labelledby="gnewH">
     <p class="gnew-h" id="gnewH"><span class="gnew-tag">NEW</span>새로운 업데이트!</p>
@@ -2199,6 +2235,11 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
           <div data-os-show="win">
             <p><b>Fabric 설치, 모드·설정 넣기, 서버 등록</b>까지 프로그램이 알아서 해요. 예전 모드랑 섞이지 않게 <b>노천극장 전용 폴더</b>를 따로 써요.</p>
             <div class="glinks" {{G_SETUP_HIDDEN}}><a class="inst-dl" href="{{G_SETUP_URL}}" download><svg class="i"><use href="#i-dl"/></svg><span><b>노천극장 설치 프로그램 받기</b><small>Windows · NOCHEN-SETUP</small></span></a></div>
+            <div class="gnew">
+              <p class="gnew-h"><span class="gnew-tag">NEW</span>기술머신 추가!</p>
+              <p>노천극장 설치 프로그램을 실행한 다음, 아래 <b>기술머신 추가 프로그램</b>도 꼭 실행해 주세요. 안 하면 서버에 못 들어가요.</p>
+              <div class="glinks"><a class="inst-dl" href="assets/tm/TM-SETUP.exe" download><svg class="i"><use href="#i-dl"/></svg><span><b>기술머신 추가 프로그램 받기</b><small>Windows · TM-SETUP.exe</small></span></a></div>
+            </div>
             <div class="gnew">
               <p class="gnew-h"><span class="gnew-tag">NEW</span>새로운 업데이트!</p>
               <p><b>DAP ur Homies!</b> 친구랑 주먹 인사하는 모드가 추가돼요. 이미 설치한 사람은 아래 프로그램만 받아서 실행하면 <b>쏙 추가</b>돼요. 다른 모드는 그대로예요.</p>
