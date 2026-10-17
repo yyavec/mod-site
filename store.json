@@ -73,15 +73,6 @@
       "size": 369528
     },
     {
-      "file": "cobblemon_minimons-1.2.6.jar",
-      "id": "cobblemon_minimons",
-      "name": "Cobblemon Minimons",
-      "version": "1.2.6",
-      "desc": "Capture and display mini 3D Pokemon models as decorations!",
-      "env": "",
-      "size": 472330
-    },
-    {
       "file": "cobblemon-additions-4.3.0.jar",
       "id": "cobblemon-additions",
       "name": "Cobblemon Additions",
@@ -98,6 +89,15 @@
       "desc": "Adds Pokémon to the world, letting you find, battle, capture, and evolve them.",
       "env": "",
       "size": 135801550
+    },
+    {
+      "file": "cobblemon_minimons-1.2.6.jar",
+      "id": "cobblemon_minimons",
+      "name": "Cobblemon Minimons",
+      "version": "1.2.6",
+      "desc": "Capture and display mini 3D Pokemon models as decorations!",
+      "env": "",
+      "size": 472330
     },
     {
       "file": "cobblenav-fabric-2.3.3.jar",
@@ -260,6 +260,15 @@
       "desc": "A library / shared functionality mod for Sophisticated Storage and Backpacks",
       "env": "",
       "size": 2996065
+    },
+    {
+      "file": "tmcraft-1.4.19+1.7.3.jar",
+      "id": "tmcraft",
+      "name": "TMCraft",
+      "version": "1.4.19+1.7.3",
+      "desc": "코블몬 기술머신(TM) 추가 모드 — 제작대로 기술머신을 만들어 포켓몬에게 기술을 가르칠 수 있어요",
+      "env": "",
+      "size": 6505565
     },
     {
       "file": "waystones-fabric-1.21.1-21.1.35.jar",
