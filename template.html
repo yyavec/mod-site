@@ -1992,7 +1992,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       <h3 class="trb-sh" id="tbPrizeH">🏆 보상</h3>
       <div class="trb-prize">
         <div class="trb-p gold"><div class="trb-rays" aria-hidden="true"></div><div class="trb-shine" aria-hidden="true"></div><span aria-hidden="true"><i class="trb-spk" style="left:6%;top:14%;animation-delay:0s"></i><i class="trb-spk" style="left:18%;top:62%;animation-delay:-0.7s"></i><i class="trb-spk" style="left:30%;top:8%;animation-delay:-1.3s"></i><i class="trb-spk" style="left:70%;top:10%;animation-delay:-0.4s"></i><i class="trb-spk" style="left:84%;top:56%;animation-delay:-1.6s"></i><i class="trb-spk" style="left:94%;top:18%;animation-delay:-1s"></i><i class="trb-spk" style="left:52%;top:4%;animation-delay:-0.2s"></i><i class="trb-spk" style="left:10%;top:86%;animation-delay:-1.9s"></i><i class="trb-spk" style="left:90%;top:88%;animation-delay:-0.9s"></i></span><div class="trb-cup" aria-hidden="true"></div><div class="trb-rib"><span>CHAMPION</span></div><span class="trb-medal">1위 보상</span><ul class="trb-loot"><li><em aria-hidden="true">🎨</em>희망 색상 / 칭호<span class="trb-ex"><small>예시</small><span class="trb-chat"><span class="trb-rb">[국밥]</span> 주끼삐끼</span></span></li><li><em aria-hidden="true">👑</em>구할 수 없는 치장템</li><li><em aria-hidden="true">🗿</em>마을에 내 동상</li></ul></div>
-        <div class="trb-p last"><span class="trb-medal">꼴찌</span><ul><li>😈 칭호 「오박사의 최대 실수」</li></ul><small>오박사님, 왜 이 사람에게 포켓몬을 주셨나요…</small></div>
+        <div class="trb-p last"><span class="trb-medal">꼴찌</span><ul><li>😈 치욕적인 칭호</li></ul><small>어떤 칭호일지는… 현장에서 정해요!</small></div>
       </div>
     </section>
     <section class="trb-sec" aria-labelledby="trbDeckH">
@@ -3245,7 +3245,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     function decided(id, n){
       say(NAME[id] + ' — ' + n + ' 승리! 🎉');
       if (id === 'f') { say('👑 우승은 ' + n + '! 축하해요!'); st.live = ''; return; }
-      if (id === 'lf') say('😈 꼴찌는 ' + lose('lf') + '! 칭호 「오박사의 최대 실수」 획득… 다음엔 잘할 거예요!');
+      if (id === 'lf') say('😈 꼴찌는 ' + lose('lf') + '… 다음엔 잘할 거예요!');
       if (st.live !== id) return;
       st.live = '';
       for (var i = 0; i < ORDER.length; i++) { var q = ORDER[i], pr = pair(q); if (pr[0] && pr[1] && !win(q)) { st.live = q; say('▶ ' + NAME[q] + ' 시작: ' + pr[0] + ' vs ' + pr[1]); break; } }
@@ -3359,7 +3359,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       var res = $('trbBrkRes'); res.textContent = '';
       var ch = win('f'), lo = lose('lf');
       if (ch) { var a = document.createElement('span'); a.className = 'ch'; a.textContent = '👑 우승 · ' + ch; res.appendChild(a); }
-      if (lo) { var b = document.createElement('span'); b.className = 'lo'; b.textContent = '😈 꼴찌 · ' + lo + ' 「오박사의 최대 실수」'; res.appendChild(b); }
+      if (lo) { var b = document.createElement('span'); b.className = 'lo'; b.textContent = '😈 꼴찌 · ' + lo; res.appendChild(b); }
       $('trbBrkLive').hidden = !st.live;
       board();
     }
