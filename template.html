@@ -1610,7 +1610,7 @@ html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-pl{display:flex; align-items:center; gap:8px; width:100%; min-height:34px; padding:4px 8px; border:0; background:none; color:#fff; font:700 14px var(--font); text-align:left}
 .trb-pl + .trb-pl{border-top:1px dashed rgba(255,255,255,.14)}
 .trb-pl i{flex:none; width:22px; height:22px; border-radius:4px; background:#2A3656 no-repeat 50% 0/44px auto; image-rendering:pixelated}
-.trb-pl.tbd{color:#6F7C98; font-weight:600}
+.trb-pl.tbd{color:#6F7C98; font-weight:600; font-size:.86em}
 .trb-pl.win{background:linear-gradient(90deg, rgba(255,203,5,.32), rgba(255,203,5,.08)); color:#FFE27A}
 .trb-pl.win::after{content:"WIN"; margin-left:auto; font:400 11px var(--pixel-s); color:#FFCB05}
 .trb-pl.lose{opacity:.45; text-decoration:line-through}
@@ -3260,6 +3260,8 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     function lose(id){ var pr = pair(id), w = win(id); return w ? pr[pr[0] === w ? 1 : 0] : ''; }
     function sets(n){ return Math.min(2, (st.sc && st.sc[n]) | 0); }
     function clean(){ var fp = pair('f'); st.sc = st.sc || {}; Object.keys(st.sc).forEach(function(n){ if (fp.indexOf(n) < 0 || !fp[0] || !fp[1]) delete st.sc[n]; }); var ids = ['q0','q1','q2','q3','s0','s1','f','l0','l1','lf']; for (var k = 0; k < 2; k++) ids.forEach(function(id){ if (st.w[id] && !win(id)) delete st.w[id]; }); }
+    // 빈 칸에는 누가 올라오는지 적는다 (예: 8강 1경기 진 사람)
+    function from(id, k){ var f = FROM[id] ? FROM[id][k] : LFROM[id][k]; return NAME[f] + (FROM[id] ? ' 이긴 사람' : ' 진 사람'); }
     function head(n){ var i = document.createElement('i'); if (SKIN[n]) i.style.backgroundImage = 'url(assets/players/' + SKIN[n] + '.png)'; return i; }
     function match(id, lo){
       var m = document.createElement('div'), pr = pair(id), w = win(id);
@@ -3272,7 +3274,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
         var row = document.createElement(edit ? 'button' : 'div');
         if (edit) row.type = 'button';
         row.className = 'trb-pl' + (!n ? ' tbd' : w ? (w === n ? ' win' : ' lose') : '');
-        row.appendChild(head(n)); row.appendChild(document.createTextNode(n || (id[0] !== 'q' ? '?' : edit ? (pick ? '여기에 놓기' : '빈 칸') : '피스톤 장치로 결정')));
+        row.appendChild(head(n)); row.appendChild(document.createTextNode(n || (id[0] !== 'q' ? from(id, k) : edit ? (pick ? '여기에 놓기' : '빈 칸') : '피스톤 장치로 결정')));
         if (edit && id[0] === 'q') {
           var i = +id[1] * 2 + k;
           if (n) {
