@@ -305,6 +305,24 @@
    "desc": "셰이더(그림자·빛 효과)를 쓸 수 있게 해 줘요. Sodium 0.6과 짝이에요 (게임 화면 전용)",
    "env": "",
    "size": 2690177
+  },
+  {
+   "file": "spawnnotification-fabric-1.7.3-2.3.0.jar",
+   "id": "spawn_notification",
+   "name": "Spawn Notification",
+   "version": "1.7.3-fabric-2.3.0",
+   "desc": "이로치·전설 포켓몬이 나타나거나 잡혔을 때 채팅 알림을 보여 줘요",
+   "env": "",
+   "size": 244216
+  },
+  {
+   "file": "timcore-fabric-1.7.3-1.32.0.jar",
+   "id": "tim_core",
+   "name": "TimCore",
+   "version": "1.7.3-fabric-1.32.0",
+   "desc": "Spawn Notification이 쓰는 기본 라이브러리예요",
+   "env": "",
+   "size": 304444
   }
  ],
  "configs": null,
