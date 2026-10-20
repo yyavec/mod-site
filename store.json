@@ -287,6 +287,24 @@
    "desc": "유리 블록·판유리가 테두리 없이 통유리처럼 이어져 보여요",
    "env": "",
    "size": 1014044
+  },
+  {
+   "file": "sodium-fabric-0.8.13+mc1.21.1.jar",
+   "id": "sodium",
+   "name": "Sodium",
+   "version": "0.8.13+mc1.21.1",
+   "desc": "화면 그리는 속도를 크게 올려서 렉을 줄여요 (게임 화면 전용)",
+   "env": "",
+   "size": 1574609
+  },
+  {
+   "file": "entityculling-fabric-1.11.3-mc1.21.1.jar",
+   "id": "entityculling",
+   "name": "Entity Culling",
+   "version": "1.11.3",
+   "desc": "벽 뒤에 가려서 안 보이는 포켓몬·상자 등은 그리지 않아서 렉을 줄여요 (게임 화면 전용)",
+   "env": "",
+   "size": 1519243
   }
  ],
  "configs": null,

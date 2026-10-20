@@ -2085,7 +2085,6 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       <p class="trb-cheer-1">출전을 했다면 당신은 이미 <b>무적급</b>입니다.</p>
       <p class="trb-cheer-2">설령 당신이 꼴등이어도 <b>무너지지 마세요.</b></p>
       <p class="trb-cheer-3">사실 꼴찌도 1등도 모두 비슷한 트레이너입니다.</p>
-      <p class="trb-noangry">😅 화내기 없음!</p>
     </section>
     <div class="trb-foot"><button class="trb-go" type="button" id="tbGo">메인 사이트로 <span aria-hidden="true">→</span></button></div>
   </div>
@@ -2172,7 +2171,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
       <p class="lgd-tag"><span>NEW</span>새로운 업데이트</p>
       <h2 class="lgd-h" id="lgdH">이제 야생에서도<br><em>전설 포켓몬</em>이<br>출현합니다!</h2>
       <p class="lgd-sub">시즌 2를 준비하라는 뜻이겠죠!!!!</p>
-      <ul class="lgd-list"><li>🐉 야생 전설 포켓몬 출현</li><li>💿 기술머신 추가</li><li>🎐 대나무 풍경 · 🔊 동굴 울림 · 🪟 통유리</li><li>✨ 그 밖에도 이것저것</li></ul>
+      <ul class="lgd-list"><li>🐉 야생 전설 포켓몬 출현</li><li>💿 기술머신 추가</li><li>🚀 렉 줄이기 (Sodium · Entity Culling) · 🪟 통유리</li><li>✨ 그 밖에도 이것저것</li></ul>
       <div class="lgd-dl">
         <a class="inst-dl" href="assets/update/UPDATE-PACK.exe" download><svg class="i"><use href="#i-dl"/></svg><span><b>업데이트 팩 받기</b><small>꼭 받아야 접속돼요 · DAP부터 지금까지 모드 7개 한 번에 · Windows</small></span></a>
         <p><b>마인크래프트를 끄고</b> 받은 프로그램을 실행 → <b>업데이트 설치하기</b>만 누르면 끝!<br>파란 창이 뜨면 <b>추가 정보 → 실행</b>.</p>
@@ -2239,7 +2238,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
             <div class="glinks" {{G_SETUP_HIDDEN}}><a class="inst-dl" href="{{G_SETUP_URL}}" download><svg class="i"><use href="#i-dl"/></svg><span><b>노천극장 설치 프로그램 받기</b><small>Windows · NOCHEN-SETUP</small></span></a></div>
             <div class="gnew">
               <p class="gnew-h"><span class="gnew-tag">NEW</span>업데이트 팩</p>
-              <p>노천극장 설치 프로그램을 실행한 다음, 아래 <b>업데이트 팩</b>도 꼭 실행해 주세요. DAP · 기술머신 · 새 포켓몬 · 대나무 풍경 · 동굴 울림 · 통유리 모드 7개가 한 번에 들어가요. 안 하면 서버에 못 들어가요.</p>
+              <p>노천극장 설치 프로그램을 실행한 다음, 아래 <b>업데이트 팩</b>도 꼭 실행해 주세요. DAP · 기술머신 · 새 포켓몬 · 통유리 · 렉 줄이기(Sodium · Entity Culling) 모드 7개가 한 번에 들어가요. 안 하면 서버에 못 들어가요.</p>
               <div class="glinks"><a class="inst-dl" href="assets/update/UPDATE-PACK.exe" download><svg class="i"><use href="#i-dl"/></svg><span><b>업데이트 팩 받기</b><small>Windows · UPDATE-PACK.exe</small></span></a></div>
             </div>
             <ol class="gsub">
@@ -3143,14 +3142,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   }
   for (var j = 0; j < 26; j++) { var st = document.createElementNS(NS, 'rect'), sx = rnd() * 760, sy = rnd() * 70; if (sx > 280 && sx < 480 && sy < 50) continue; st.setAttribute('x', sx.toFixed(0)); st.setAttribute('y', sy.toFixed(0)); st.setAttribute('width', 2); st.setAttribute('height', 2); st.setAttribute('fill', '#fff'); st.setAttribute('opacity', (.3 + rnd() * .6).toFixed(2)); st.style.animationDelay = (-rnd() * 2.4).toFixed(2) + 's'; stars.appendChild(st); }
   [].forEach.call(trb.querySelector('.trb-in').children, function(c, i){ c.style.setProperty('--i', i); });
-  function open(){ trb.classList.add('on'); trb.focus({preventScroll:true}); setTimeout(slam, 1100); }
-  function slam(){  // "화내기 없음" 딱지가 꽝! 떨어진다
-    if (closing) return;
-    var d = document.createElement('div'); d.className = 'trb-slam'; d.setAttribute('aria-hidden', 'true');
-    d.innerHTML = '<i></i><b>😅 화내기 없음!</b>';
-    trb.appendChild(d); trb.classList.add('shake');
-    setTimeout(function(){ d.remove(); trb.classList.remove('shake'); }, 3300);
-  }
+  function open(){ trb.classList.add('on'); trb.focus({preventScroll:true}); }
   if (root.hasAttribute('data-story')) addEventListener('story:closed', open, {once:true}); else open();
   var closing = false;
   function close(){
