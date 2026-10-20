@@ -280,15 +280,6 @@
    "size": 1186038
   },
   {
-   "file": "continuity-3.0.0+1.21.jar",
-   "id": "continuity",
-   "name": "Continuity",
-   "version": "3.0.0",
-   "desc": "유리 블록·판유리가 테두리 없이 통유리처럼 이어져 보여요",
-   "env": "",
-   "size": 1014044
-  },
-  {
    "file": "sodium-fabric-0.8.13+mc1.21.1.jar",
    "id": "sodium",
    "name": "Sodium",
