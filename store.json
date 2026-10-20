@@ -280,13 +280,13 @@
    "size": 1186038
   },
   {
-   "file": "sodium-fabric-0.8.13+mc1.21.1.jar",
+   "file": "sodium-fabric-0.6.13+mc1.21.1.jar",
    "id": "sodium",
    "name": "Sodium",
-   "version": "0.8.13+mc1.21.1",
+   "version": "0.6.13+mc1.21.1",
    "desc": "화면 그리는 속도를 크게 올려서 렉을 줄여요 (게임 화면 전용)",
    "env": "",
-   "size": 1574609
+   "size": 1297761
   },
   {
    "file": "entityculling-fabric-1.11.3-mc1.21.1.jar",
@@ -296,6 +296,15 @@
    "desc": "벽 뒤에 가려서 안 보이는 포켓몬·상자 등은 그리지 않아서 렉을 줄여요 (게임 화면 전용)",
    "env": "",
    "size": 1519243
+  },
+  {
+   "file": "iris-fabric-1.8.8+mc1.21.1.jar",
+   "id": "iris",
+   "name": "Iris",
+   "version": "1.8.8+mc1.21.1",
+   "desc": "셰이더(그림자·빛 효과)를 쓸 수 있게 해 줘요. Sodium 0.6과 짝이에요 (게임 화면 전용)",
+   "env": "",
+   "size": 2690177
   }
  ],
  "configs": null,
