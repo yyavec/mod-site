@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T16:03:32+09:00",
+ "updated": "2026-10-21T16:08:25+09:00",
  "cats": [
   {
    "id": "battle",
@@ -1876,18 +1876,6 @@
    "acover": false
   },
   {
-   "file": "1561098872892162208_0.webp",
-   "thumb": "1561098872892162208_0_s.webp",
-   "who": "삐끼",
-   "date": "2026-10-17",
-   "text": "",
-   "cat": "battle",
-   "sub": "단체 사진",
-   "hero": false,
-   "cover": true,
-   "acover": false
-  },
-  {
    "file": "1561098911135965286_0.webp",
    "thumb": "1561098911135965286_0_s.webp",
    "who": "삐끼",
@@ -2041,6 +2029,18 @@
    "sub": "단체 사진",
    "hero": false,
    "cover": false,
+   "acover": false
+  },
+  {
+   "file": "m20261017_group_me.webp",
+   "thumb": "m20261017_group_me_s.webp",
+   "who": "삐끼",
+   "date": "2026-10-17",
+   "text": "단체사진",
+   "cat": "battle",
+   "sub": "단체 사진",
+   "hero": true,
+   "cover": true,
    "acover": false
   },
   {
