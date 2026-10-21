@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>범인찾기 · 노천극장 진팀 배틀</title>
-<meta name="description" content="진팀 배틀! 이름하야, 범인찾기!!! 2:2 팀 대전 팀표와 내 목표덱 적기.">
-<meta property="og:title" content="진팀 배틀! 이름하야, 범인찾기!!!">
+<title>2:2 팀전 · 노천극장 놀이터</title>
+<meta name="description" content="노천극장 2:2 팀전 — 진팀 배틀! 이름하야, 범인찾기!!! 팀표와 내 목표덱 적기.">
+<meta property="og:title" content="노천극장 2:2 팀전">
 <meta name="theme-color" content="#0d0b14">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -39,7 +39,8 @@ button,input,select,textarea{font:inherit; color:inherit}
 .hero::before{content:"🔍"; position:absolute; right:6%; top:18%; font-size:clamp(80px, 14vw, 160px); opacity:.08; transform:rotate(-14deg)}
 .kicker{margin:0 0 16px; font:600 12px/1 var(--latin); letter-spacing:.3em; text-transform:uppercase; color:var(--text-2)}
 .hero h1{margin:0; font:800 clamp(34px, 7vw, 76px)/1.08 var(--font); letter-spacing:-.03em}
-.hero h1 em{display:block; font-style:normal; color:var(--red); text-shadow:0 0 40px rgba(255,90,79,.35)}
+.subt{margin:14px 0 0; font:700 clamp(20px, 3.6vw, 34px)/1.2 var(--font); letter-spacing:-.02em; color:var(--text-2)}
+.subt b{color:var(--red); text-shadow:0 0 30px rgba(255,90,79,.35)}
 .lead{margin:18px auto 0; max-width:40ch; color:var(--text-2); font:400 clamp(15px, 2vw, 18px)/1.6 var(--font)}
 .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:26px}
 .chip{display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border:1px solid var(--line); border-radius:999px; background:var(--bg-2); font:600 14px/1 var(--font)}
@@ -53,7 +54,9 @@ button,input,select,textarea{font:inherit; color:inherit}
 
 .teams{display:grid; grid-template-columns:repeat(4, 1fr); gap:14px}
 .team{position:relative; padding:18px 16px 16px; border:1px solid var(--line); border-radius:18px; background:linear-gradient(180deg, var(--bg-3), var(--bg-2)); text-align:center}
-.team-n{margin:0; font:700 12px/1 var(--latin); letter-spacing:.24em; color:var(--text-3)}
+.team{border-top:3px solid var(--tc); background:radial-gradient(120% 60% at 50% 0%, color-mix(in srgb, var(--tc) 18%, transparent), transparent 70%), linear-gradient(180deg, var(--bg-3), var(--bg-2))}
+.team-n{margin:0; font:700 11px/1 var(--latin); letter-spacing:.24em; color:var(--tc); opacity:.85}
+.team-t{margin:8px 0 0; font:800 20px/1.2 var(--font); color:var(--tc)}
 .pair{display:flex; justify-content:center; align-items:flex-end; gap:6px; height:150px; margin:14px 0 10px}
 .pair img{height:140px; width:auto; image-rendering:pixelated; filter:drop-shadow(0 10px 14px rgba(0,0,0,.5))}
 .pair .vs{align-self:center; font:800 13px/1 var(--latin); color:var(--text-3)}
@@ -103,17 +106,18 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
 </header>
 
 <section class="hero">
-  <p class="kicker">Nochen Team Battle</p>
-  <h1>진팀 배틀!<em>이름하야, 범인찾기!!!</em></h1>
-  <p class="lead">2:2 팀 대전이에요. 트레이너 배틀 순위로 강한 사람과 아쉬운 사람을 한 팀으로 묶었어요. 과연 진 팀의 범인은 누구?</p>
+  <p class="kicker">Nochen 2 vs 2</p>
+  <h1>2:2 팀전</h1>
+  <p class="subt">진팀 배틀! 이름하야, <b>범인찾기!!!</b></p>
+  <p class="lead">두 명씩 네 팀이 겨뤄요. 팀은 운명의 몬스터볼 머신으로 뽑았어요. 지는 팀에서는 범인을 찾아요!</p>
   <div class="chips"><span class="chip">📅 날짜 <b>미정</b></span><span class="chip">⏰ 시간 <b>미정</b></span><span class="chip">👥 4팀 · 8명</span></div>
 </section>
 
 <main class="wrap">
   <section class="sec">
-    <div class="sec-h"><h2>팀표</h2><span>트레이너 배틀 10/17 순위 기준</span></div>
+    <div class="sec-h"><h2>팀표</h2><span>10/21 몬스터볼 머신 추첨</span></div>
     <div class="teams" id="teams"></div>
-    <p class="how">1등과 8등, 2등과 7등, 3등과 6등, 4등과 5등이 한 팀이에요. 날짜와 시간은 정해지면 바로 알려 드릴게요.</p>
+    <p class="how">10월 21일 밤, 운명의 몬스터볼 머신으로 뽑은 팀이에요. 날짜와 시간은 정해지면 바로 알려 드릴게요.</p>
   </section>
 
   <section class="sec" id="goal">
@@ -142,19 +146,21 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
   </section>
 </main>
 <datalist id="monList"></datalist>
-<footer class="foot">진팀 배틀! 이름하야, 범인찾기!!! · 노천극장 놀이터</footer>
+<footer class="foot">노천극장 2:2 팀전 · 진팀 배틀! 이름하야, 범인찾기!!!</footer>
 
 <script>
 (function(){
   var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
   // [이름, 마크 이름]
-  var TEAMS = [[['연규','DaeJang09'],['혜련','ddalbok']], [['면진','h_uun'],['준현','JahyeonBaLaGi']], [['범철','EnderDimaa'],['기철','handal_']], [['건년','Zizonkookie'],['러시','NAMEISRUSH']]];
+  var TEAMS = [[['기철','handal_'],['건년','Zizonkookie']], [['혜련','ddalbok'],['범철','EnderDimaa']], [['연규','DaeJang09'],['면진','h_uun']], [['러시','NAMEISRUSH'],['준현','JahyeonBaLaGi']]];
+  var COLORS = [['빨강팀','RED','#ff5a4f'], ['파랑팀','BLUE','#4f9dff'], ['노랑팀','YELLOW','#f2c14e'], ['초록팀','GREEN','#4fd18b']];
   var PLAYERS = [].concat.apply([], TEAMS).map(function(p){ return p[0]; });
   var $ = function(id){ return document.getElementById(id); };
   function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 
   $('teams').innerHTML = TEAMS.map(function(t, i){
-    return '<article class="team"><p class="team-n">TEAM ' + (i + 1) + '</p><div class="pair">'
+    var c = COLORS[i];
+    return '<article class="team" style="--tc:' + c[2] + '"><p class="team-n">' + c[1] + ' TEAM</p><h3 class="team-t">' + c[0] + '</h3><div class="pair">'
       + '<img src="assets/players/' + t[0][1] + '.png" alt="' + t[0][0] + '"><span class="vs">&amp;</span><img src="assets/players/' + t[1][1] + '.png" alt="' + t[1][0] + '"></div>'
       + '<p class="names">' + t[0][0] + '<i>+</i>' + t[1][0] + '</p></article>';
   }).join('');
