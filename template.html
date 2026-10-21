@@ -28,6 +28,7 @@
 (function(){var d=document.documentElement,q=location.search;
   if(/[?&]nf\b/.test(q))return;
   if(/[?&]battle\b/.test(q)){d.setAttribute("data-battle","");return;}
+  if(location.hash==="#memories")return; /* 추억 저장소로 바로 오면 배틀 창 없이 */
   d.setAttribute("data-battle","");
 })();
 </script>
@@ -1907,15 +1908,48 @@ html[data-fork], html[data-fork] body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){html[data-fork] .fork{animation:none} .fork-c{transition:none}}
 
 /* ---- 추억 저장소 ---- */
-.mem-g{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin-top:16px}
-.mem-i{margin:0; border-radius:16px; overflow:hidden; background:var(--bg-surface); border:2px solid var(--border-subtle); cursor:zoom-in}
-.mem-i img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover; background:var(--bg-sunken)}
-.mem-i figcaption{padding:10px 12px; font:500 14px/1.45 var(--font); color:var(--text-secondary)}
-.mem-i figcaption b{color:var(--text-primary)}
+.mem-hero{position:relative; margin-bottom:14px; padding:26px 22px; border-radius:22px; overflow:hidden; color:#fff;
+  background:radial-gradient(120% 140% at 0% 0%, #ff9f1c 0%, #e3403a 45%, #6b1b4a 100%); box-shadow:inset 0 -6px 0 rgba(0,0,0,.18)}
+.mem-hero::after{content:"📸"; position:absolute; right:-6px; bottom:-26px; font-size:150px; opacity:.16; transform:rotate(-12deg)}
+.mem-kicker{margin:0 0 4px; font:800 12px/1 var(--font); letter-spacing:.24em; opacity:.85}
+.mem-hero h2{margin:0; font:900 clamp(28px, 6vw, 40px)/1.15 var(--font)}
+.mem-hero p.mem-lead{margin:8px 0 0; font:500 15px/1.5 var(--font); opacity:.95}
+.mem-chips{position:sticky; top:72px; z-index:20; display:flex; gap:8px; overflow-x:auto; padding:8px 2px 10px; margin-bottom:6px; scrollbar-width:none; background:linear-gradient(var(--bg-page, var(--bg)) 70%, transparent)}
+.mem-chips::-webkit-scrollbar{display:none}
+.mem-chip{flex:none; display:inline-flex; align-items:center; gap:6px; height:38px; padding:0 14px; border-radius:999px; border:2px solid var(--border-subtle); background:var(--bg-surface); color:var(--text-primary); font:700 14px/1 var(--font); cursor:pointer}
+.mem-chip small{font-weight:600; color:var(--text-secondary)}
+.mem-chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
+.mem-chip[aria-pressed="true"] small{color:inherit; opacity:.8}
+.mem-cat{margin:22px 0 8px}
+.mem-ch{display:flex; align-items:center; gap:12px; margin:0 0 4px}
+.mem-ic{display:grid; place-items:center; width:46px; height:46px; border-radius:14px; background:var(--bg-surface); border:2px solid var(--border-subtle); font-size:24px}
+.mem-ch h3{margin:0; font:900 22px/1.2 var(--font); color:var(--text-primary)}
+.mem-ch h3 small{margin-left:6px; font:700 14px/1 var(--font); color:var(--text-secondary)}
+.mem-desc{margin:0 0 10px 58px; font:500 14px/1.5 var(--font); color:var(--text-secondary)}
+.mem-sub{margin:16px 0 8px; font:800 15px/1.2 var(--font); color:var(--text-primary)}
+.mem-sub::before{content:""; display:inline-block; width:4px; height:14px; margin-right:8px; border-radius:2px; background:var(--accent); vertical-align:-1px}
+.mem-bt{display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin:6px 0 4px; padding:16px 18px; border-radius:18px; color:#fff;
+  background:linear-gradient(120deg, #1d1440 0%, #3b1c6e 55%, #b8860b 130%); box-shadow:inset 0 -5px 0 rgba(0,0,0,.25)}
+.mem-bt b{font:900 18px/1.2 var(--font)} .mem-bt span{font:600 14px/1.4 var(--font); opacity:.92}
+.mem-bt .gold{color:#ffd54a}
+.mem-g{display:grid; grid-template-columns:repeat(auto-fill, minmax(168px, 1fr)); gap:10px}
+.mem-t{position:relative; display:block; padding:0; border:0; border-radius:14px; overflow:hidden; background:var(--bg-sunken); cursor:zoom-in; aspect-ratio:4/3}
+.mem-t img{display:block; width:100%; height:100%; object-fit:cover; transition:transform .25s}
+.mem-t:hover img,.mem-t:focus-visible img{transform:scale(1.06)}
+.mem-t span{position:absolute; left:0; right:0; bottom:0; padding:18px 8px 6px; text-align:left; color:#fff; font:600 12px/1.3 var(--font);
+  background:linear-gradient(transparent, rgba(0,0,0,.72)); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.mem-t.wide{grid-column:span 2; aspect-ratio:8/3}
 .mem-empty{margin-top:16px; padding:36px 16px; text-align:center; border:2px dashed var(--border-subtle); border-radius:16px; color:var(--text-secondary); font:500 16px/1.6 var(--font)}
-.mem-big{position:fixed; inset:0; z-index:10001; display:grid; place-items:center; padding:16px; background:rgba(0,0,0,.85); cursor:zoom-out}
-.mem-big img{max-width:100%; max-height:86vh; border-radius:12px}
-.mem-big p{margin:10px 0 0; color:#fff; text-align:center; font:500 15px/1.5 var(--font)}
+.mem-note{margin:26px 0 0; text-align:center; font:500 13px/1.6 var(--font); color:var(--text-secondary)}
+.mem-big{position:fixed; inset:0; z-index:10001; display:grid; grid-template-rows:1fr auto; place-items:center; padding:16px 56px; background:rgba(5,6,12,.92)}
+.mem-big img{max-width:100%; max-height:80vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.mem-big p{margin:12px 0 0; max-width:720px; color:#fff; text-align:center; font:500 15px/1.5 var(--font)}
+.mem-big p small{display:block; margin-top:2px; opacity:.7}
+.mem-nav{position:absolute; top:50%; transform:translateY(-50%); width:44px; height:64px; border:0; border-radius:12px; background:rgba(255,255,255,.12); color:#fff; font-size:28px; cursor:pointer}
+.mem-nav:hover{background:rgba(255,255,255,.25)} .mem-prev{left:8px} .mem-next{right:8px}
+.mem-x{position:absolute; top:10px; right:10px; width:44px; height:44px; border:0; border-radius:50%; background:rgba(255,255,255,.14); color:#fff; font-size:22px; cursor:pointer}
+@media (max-width:560px){.mem-g{grid-template-columns:repeat(2, 1fr); gap:8px} .mem-t.wide{grid-column:span 2} .mem-desc{margin-left:0} .mem-big{padding:12px 8px 70px} .mem-nav{top:auto; bottom:12px; transform:none}}
+@media (prefers-reduced-motion:reduce){.mem-t img{transition:none}}
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -2650,11 +2684,16 @@ html[data-fork], html[data-fork] body{overflow:hidden}
     <div class="empty" {{LIST_EMPTY_HIDDEN}}><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg><b>상자가 아직 비어 있어요</b>모드가 준비되면 여기에 차곡차곡 쌓여요.</div>
   </section>
 
-  <section class="section" aria-labelledby="memTitle" id="memories">
-    <div class="sec-head"><h2 id="memTitle">📸 추억 저장소</h2></div>
-    <p class="mem-sub">디스코드 <b>#마크</b> 채널에 올린 사진이 여기에 모여요.</p>
-    <div class="mem-g" id="memGrid" hidden></div>
+  <section class="section mem" aria-labelledby="memTitle" id="memories">
+    <div class="mem-hero">
+      <p class="mem-kicker">NOCHEN MEMORIES</p>
+      <h2 id="memTitle">추억 저장소</h2>
+      <p class="mem-lead">디스코드 <b>#마크</b>에 올린 사진 <b id="memCount">0</b>장을 이벤트별로 모았어요.</p>
+    </div>
+    <div class="mem-chips" id="memChips" role="toolbar" aria-label="이벤트 고르기" hidden></div>
+    <div id="memBody"></div>
     <p class="mem-empty" id="memEmpty">아직 사진을 모으는 중이에요.<br>곧 우리 추억으로 채워질 거예요! 📷</p>
+    <p class="mem-note">#마크 채널에 사진을 올리면 여기에도 차곡차곡 쌓여요.</p>
   </section>
   <footer><span class="bye"><svg class="px " viewBox="0 0 12 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="3" y="0" width="6" height="1" fill="var(--skin-l)"/><rect x="9" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="2" y="1" width="2" height="1" fill="var(--skin-g)"/><rect x="4" y="1" width="2" height="1" fill="var(--skin-l)"/><rect x="6" y="1" width="4" height="1" fill="var(--skin-g)"/><rect x="2" y="2" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="4" y="3" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="2" y="4" width="1" height="1" fill="#111111"/><rect x="3" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="4" y="4" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="9" y="4" width="1" height="1" fill="#111111"/><rect x="2" y="5" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="3" y="6" width="6" height="1" fill="var(--skin-g)"/><rect x="9" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="2" y="7" width="2" height="1" fill="var(--skin-m)"/><rect x="4" y="7" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="7" width="2" height="1" fill="var(--skin-m)"/></svg>오늘도 즐겜해요</span><span>{{UPDATED}} 업데이트</span><span>모드 {{TOTAL}}개</span><a class="xlink" href="{{NOTION_URL}}" target="_blank" rel="noopener" {{NOTION_HIDDEN}}>노션<svg class="i"><use href="#i-ext"/></svg></a><a class="xlink" href="{{DISCORD_URL}}" target="_blank" rel="noopener" {{DISCORD_HIDDEN}}>문의 (디스코드)<svg class="i"><use href="#i-ext"/></svg></a></footer>
   <div class="pc-row" aria-hidden="true"><img src="assets/cobble-blocks/healing_machine.png" alt="" loading="lazy"><img src="assets/cobble-blocks/pc.png" alt="" loading="lazy"><img src="assets/cobble-blocks/display_case.png" alt="" loading="lazy"><img src="assets/cobble-blocks/restoration_tank.png" alt="" loading="lazy"><img src="assets/cobble-blocks/fossil_analyzer.png" alt="" loading="lazy"><img src="assets/cobble-blocks/tm_machine.png" alt="" loading="lazy"><img src="assets/cobble-blocks/pasture.png" alt="" loading="lazy"><img src="assets/cobble-blocks/gilded_chest.png" alt="" loading="lazy"><img src="assets/cobble-blocks/blue_gilded_chest.png" alt="" loading="lazy"></div>
@@ -4430,28 +4469,74 @@ html[data-fork], html[data-fork] body{overflow:hidden}
       scrollTo(0, 0);
     });
   });
-  var grid = document.getElementById('memGrid'), empty = document.getElementById('memEmpty');
-  if (!grid) return;
+  var body = document.getElementById('memBody'), chips = document.getElementById('memChips'), empty = document.getElementById('memEmpty');
+  if (!body) return;
+  var SUBS = ['우승 · 결과', '단체 사진', '무대 · 연출', '경기 장면', '준비 · 응원'];
+  var WIDE = {'단체 사진': 1, '우승 · 결과': 1};
+  var list = [];
   function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  fetch('assets/memories/memories.json?t=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
-    var items = (d && d.items) || [];
-    if (!items.length) return;
-    grid.innerHTML = items.map(function(m){
-      return '<figure class="mem-i" tabindex="0"><img loading="lazy" src="assets/memories/' + esc(m.file) + '" alt="' + esc(m.text || '추억 사진') + '">'
-        + '<figcaption><b>' + esc(m.who) + '</b> · ' + esc(m.date) + (m.text ? '<br>' + esc(m.text) : '') + '</figcaption></figure>';
-    }).join('');
-    grid.hidden = false; empty.hidden = true;
-  }).catch(function(){});
-  function big(f){
-    var img = f.querySelector('img'), cap = f.querySelector('figcaption');
-    var o = document.createElement('div'); o.className = 'mem-big';
-    o.innerHTML = '<div><img src="' + img.src + '" alt=""><p>' + (cap ? cap.innerHTML : '') + '</p></div>';
-    o.addEventListener('click', function(){ o.remove(); });
-    document.body.appendChild(o);
+  function md(d){ var p = (d || '').split('-'); return p.length === 3 ? (+p[1]) + '/' + (+p[2]) : d; }
+  function tiles(arr, wide){
+    return '<div class="mem-g">' + arr.map(function(m, k){
+      var i = list.push(m) - 1;
+      return '<button type="button" class="mem-t' + (wide && k === 0 ? ' wide' : '') + '" data-i="' + i + '" aria-label="' + esc((m.text || '추억 사진') + ' · ' + m.who) + '">'
+        + '<img loading="lazy" src="assets/memories/' + esc(wide && k === 0 ? m.file : m.thumb) + '" alt=""><span>' + esc(m.who) + ' · ' + md(m.date) + (m.text ? ' · ' + esc(m.text) : '') + '</span></button>';
+    }).join('') + '</div>';
   }
-  grid.addEventListener('click', function(e){ var f = e.target.closest('.mem-i'); if (f) big(f); });
-  grid.addEventListener('keydown', function(e){ if (e.key === 'Enter') { var f = e.target.closest('.mem-i'); if (f) big(f); } });
-  addEventListener('keydown', function(e){ if (e.key === 'Escape') { var o = document.querySelector('.mem-big'); if (o) o.remove(); } });
+  fetch('assets/memories/memories.json?t=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+    var items = (d && d.items) || [], cats = (d && d.cats) || [];
+    if (!items.length) return;
+    document.getElementById('memCount').textContent = items.length;
+    var html = '', chip = '<button type="button" class="mem-chip" data-c="" aria-pressed="true">전체 <small>' + items.length + '</small></button>';
+    cats.forEach(function(c){
+      var arr = items.filter(function(m){ return m.cat === c.id; });
+      if (!arr.length) return;
+      chip += '<button type="button" class="mem-chip" data-c="' + c.id + '" aria-pressed="false">' + c.icon + ' ' + esc(c.name) + ' <small>' + arr.length + '</small></button>';
+      html += '<section class="mem-cat" data-cat="' + c.id + '"><div class="mem-ch"><span class="mem-ic" aria-hidden="true">' + c.icon + '</span><h3>' + esc(c.name) + '<small>' + arr.length + '장</small></h3></div><p class="mem-desc">' + esc(c.desc) + '</p>';
+      if (c.id === 'battle') {
+        html += '<div class="mem-bt"><b>🏆 노천 트레이너 배틀</b><span>2026년 10월 17일 · 8강부터 결승까지</span><span class="gold">👑 우승 이연규 (결승 2:0)</span></div>';
+        SUBS.forEach(function(sb){
+          var g = arr.filter(function(m){ return (m.sub || '경기 장면') === sb; }).sort(function(x, y){ return (y.hero ? 1 : 0) - (x.hero ? 1 : 0); });
+          if (g.length) html += '<h4 class="mem-sub">' + esc(sb) + ' <small>' + g.length + '</small></h4>' + tiles(g, WIDE[sb]);
+        });
+      } else {
+        html += tiles(arr.slice().reverse(), false);
+      }
+      html += '</section>';
+    });
+    body.innerHTML = html; chips.innerHTML = chip; chips.hidden = false; empty.hidden = true;
+  }).catch(function(){});
+  chips.addEventListener('click', function(e){
+    var b = e.target.closest('.mem-chip'); if (!b) return;
+    chips.querySelectorAll('.mem-chip').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    body.querySelectorAll('.mem-cat').forEach(function(s){ s.hidden = !!b.dataset.c && s.dataset.cat !== b.dataset.c; });
+    var top = document.getElementById('memories').getBoundingClientRect().top + scrollY - 60;
+    if (scrollY > top) scrollTo({top: top});
+  });
+  var box = null, cur = 0;
+  function vis(){ return [].map.call(body.querySelectorAll('.mem-cat:not([hidden]) .mem-t'), function(t){ return +t.dataset.i; }); }
+  function show(i){
+    cur = i; var m = list[i];
+    box.querySelector('img').src = 'assets/memories/' + m.file;
+    box.querySelector('p').innerHTML = (m.text ? esc(m.text) : '') + '<small>' + esc(m.who) + ' · ' + esc(m.date) + '</small>';
+  }
+  function step(n){ var v = vis(), k = v.indexOf(cur); if (k < 0) return; show(v[(k + n + v.length) % v.length]); }
+  function close(){ if (box) { box.remove(); box = null; } }
+  function open(i){
+    close();
+    box = document.createElement('div'); box.className = 'mem-big'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true');
+    box.innerHTML = '<img alt=""><p></p><button type="button" class="mem-nav mem-prev" aria-label="이전 사진">‹</button><button type="button" class="mem-nav mem-next" aria-label="다음 사진">›</button><button type="button" class="mem-x" aria-label="닫기">✕</button>';
+    box.addEventListener('click', function(e){
+      if (e.target.closest('.mem-prev')) step(-1); else if (e.target.closest('.mem-next')) step(1);
+      else if (e.target.closest('.mem-x') || e.target === box) close();
+    });
+    document.body.appendChild(box); show(i);
+  }
+  body.addEventListener('click', function(e){ var t = e.target.closest('.mem-t'); if (t) open(+t.dataset.i); });
+  addEventListener('keydown', function(e){
+    if (!box) return;
+    if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') step(-1); else if (e.key === 'ArrowRight') step(1);
+  });
 })();
 </script>
 </body>
