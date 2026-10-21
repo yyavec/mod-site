@@ -1263,6 +1263,9 @@ button.ty.lgf{--c:#D98A00}
 .wrap[data-page="board"] > :not(.hero):not(.ptabs):not(#board):not(footer){display:none}
 .wrap[data-page="recipes"] > :not(.hero):not(.ptabs):not(#recipes):not(footer){display:none}
 .ptabs button{white-space:nowrap}
+.ptabs .pt-mem{flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px; height:48px; border-radius:var(--r-md); text-decoration:none; white-space:nowrap; font:600 16px/1 var(--font); color:#fff; background:linear-gradient(135deg, #ff9f1c, #e3403a); box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
+.ptabs .pt-mem:hover{filter:brightness(1.06)}
+@media (max-width:520px){.ptabs .pt-mem{font-size:13px; height:44px; gap:3px}}
 @media (max-width:520px){.ptabs button{font-size:13px; gap:4px; height:44px} .ptabs .pt-new,.ptabs .pt-long{display:none}}
 /* 코블몬 공략 탭 */
 .gd{gap:var(--s5)}
@@ -1555,6 +1558,8 @@ button.ty.lgf{--c:#D98A00}
 .trb{display:none; position:fixed; inset:0; z-index:9998; overflow-y:auto; overscroll-behavior:contain; padding:32px 16px 48px; color:#fff; font-family:var(--font); -webkit-font-smoothing:antialiased; word-break:keep-all; overflow-wrap:anywhere; background:radial-gradient(70% 45% at 50% 0%, rgba(255,203,5,.22), transparent 70%), radial-gradient(60% 40% at 50% 100%, rgba(227,64,58,.35), transparent 70%), linear-gradient(180deg, #14203A 0%, #1B2A4A 55%, #2A1F3D 100%)}
 html[data-battle]:not([data-story]):not([data-fork]) .trb{display:block; animation:tbIn .5s ease-out}
 html[data-battle], html[data-battle] body{overflow:hidden}
+.trb-skip{position:fixed; top:14px; right:14px; z-index:10; display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border:2px solid rgba(255,255,255,.85); border-radius:999px; background:rgba(12,16,32,.72); backdrop-filter:blur(8px); color:#fff; font:700 15px/1 var(--font); cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.trb-skip:hover{background:#fff; color:#111}
 .trb-lines{position:fixed; inset:0; pointer-events:none; overflow:hidden}
 .trb-lines i{position:absolute; left:-40%; height:3px; width:40%; background:linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent); animation:tbLine linear infinite}
 .trb-in{position:relative; z-index:1; width:min(760px, 100%); margin:0 auto; text-align:center}
@@ -1901,9 +1906,14 @@ html[data-fork], html[data-fork] body{overflow:hidden}
 .fork-top{position:absolute; top:18px; left:0; right:0; z-index:3; display:flex; justify-content:center; pointer-events:none}
 .fork-top span{padding:9px 16px; border-radius:999px; background:rgba(16,24,40,.45); backdrop-filter:blur(8px); color:#fff; font:700 13px/1 var(--font); letter-spacing:.06em}
 .fork-q{position:absolute; top:62px; left:0; right:0; z-index:3; margin:0; text-align:center; color:#fff; font:800 clamp(22px, 3.4vw, 40px)/1.2 var(--font); text-shadow:0 2px 0 rgba(20,40,80,.35), 0 6px 24px rgba(20,40,80,.35); pointer-events:none}
-.fork-c{position:absolute; top:0; bottom:0; z-index:2; width:50%; display:flex; flex-direction:column; justify-content:flex-end; padding:0 clamp(18px, 4vw, 56px) clamp(22px, 5vh, 56px); color:#fff; text-decoration:none}
-.fork-c.go-mem{left:0; align-items:flex-start} .fork-c.go-home{right:0; align-items:flex-end; text-align:right}
-.fork-card{max-width:340px; padding:18px 20px; border-radius:18px; background:rgba(12,18,32,.55); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.18);
+.fork-c{position:absolute; top:0; bottom:0; z-index:2; width:50%; display:flex; flex-direction:column; justify-content:flex-end; padding:0 clamp(14px, 3vw, 40px) clamp(22px, 5vh, 56px); color:#fff; text-decoration:none}
+.fork-c::before{content:""; position:absolute; inset:0; z-index:-1; opacity:0; transition:opacity .35s}
+.fork-c.go-mem::before{background:linear-gradient(90deg, rgba(255,190,90,.30), rgba(255,190,90,.06))}
+.fork-c.go-home::before{background:linear-gradient(270deg, rgba(140,230,120,.30), rgba(140,230,120,.06))}
+.fork-c:hover::before,.fork-c:focus-visible::before{opacity:1}
+.fork::after{content:""; position:absolute; top:110px; bottom:0; left:50%; z-index:2; width:2px; transform:translateX(-1px); background:linear-gradient(transparent, rgba(255,255,255,.55) 15%, rgba(255,255,255,.55) 85%, transparent); pointer-events:none}
+.fork-c.go-mem{left:0; align-items:center; text-align:center} .fork-c.go-home{right:0; align-items:center; text-align:center}
+.fork-card{width:min(360px, 100%); padding:20px 22px; border-radius:18px; background:rgba(12,18,32,.55); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.18);
   transform:translateY(0); transition:transform .35s cubic-bezier(.2,.8,.2,1), background .35s}
 .fork-c:hover .fork-card,.fork-c:focus-visible .fork-card{transform:translateY(-6px); background:rgba(12,18,32,.72)}
 .fork-c:focus-visible{outline:none}
@@ -2001,6 +2011,7 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font)}
   <div class="story-light" aria-hidden="true"></div><div class="story-confetti" id="storyConfetti" aria-hidden="true"></div>
 </div>
 <div class="trb" id="trb" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="tbH">
+  <button class="trb-skip" type="button" id="tbSkip">🏠 메인으로 <span aria-hidden="true">→</span></button>
   <div class="trb-lines" id="tbLines" aria-hidden="true"></div>
   <div class="trb-in">
     <span class="trb-tag"><b aria-hidden="true"></b>TRAINER BATTLE · 10.17 SAT</span>
@@ -2270,11 +2281,8 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font)}
     <button type="button" role="tab" data-p="play" aria-selected="false">📘 공략 <span class="pt-new">NEW</span></button>
     <button type="button" role="tab" data-p="board" aria-selected="false">💬 <span class="pt-long">자유</span>게시판</button>
     <button type="button" role="tab" data-p="recipes" aria-selected="false">🛠️ 조합법</button>
+    <a class="pt-mem" href="memories.html">📸 <span class="pt-long">추억 </span>저장소</a>
   </nav>
-  <section class="rp-must" role="note" aria-labelledby="rpMustH">
-    <p class="rp-must-h" id="rpMustH">⚠️ 접속할 때 리소스팩은 <u>무조건 받아야 해요!</u></p>
-    <p>서버에 들어갈 때 <b>"서버 리소스팩"</b> 창이 뜨면 꼭 <b class="rp-yes">예 (Yes)</b>를 눌러 주세요.<br>안 받으면 게임이 제대로 안 될 수 있어요.</p>
-  </section>
   <section class="lgd" aria-labelledby="lgdH">
     <div class="lgd-sky" aria-hidden="true"></div>
     <div class="lgd-mons" aria-hidden="true"><span class="cb m1" style="background-image:url(assets/cobble/384.webp)"></span><span class="cb m2" style="background-image:url(assets/cobble/493.webp)"></span><span class="cb m3" style="background-image:url(assets/cobble/249.webp)"></span></div>
@@ -3271,6 +3279,7 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font)}
     }, 450);
   }
   document.getElementById('tbGo').addEventListener('click', close);
+  document.getElementById('tbSkip').addEventListener('click', close);
   addEventListener('keydown', function(e){ if (e.key === 'Escape' && !root.hasAttribute('data-story') && root.hasAttribute('data-battle')) close(); });
   // ---- 덱 제출: 멤버마다 자기 칸, 내용은 관리자만 (Apps Script "덱" 탭) ----
   var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';

@@ -106,14 +106,41 @@ button{font:inherit; color:inherit}
 
 .foot{padding:40px var(--gut); text-align:center; color:var(--text-3); font:400 13px/1.6 var(--font); border-top:1px solid var(--line)}
 .empty{padding:120px 0; text-align:center; color:var(--text-2)}
+
+/* 앨범별 / 날짜별 */
+.views{display:inline-flex; padding:4px; border:1px solid var(--line); border-radius:999px; background:var(--bg-2)}
+.views a{padding:8px 16px; border-radius:999px; text-decoration:none; font:600 14px/1 var(--font); color:var(--text-2)}
+.views a[aria-current="page"]{background:var(--text); color:var(--bg)}
+.day{display:flex; align-items:baseline; gap:12px; margin:44px 0 14px; padding-top:18px; border-top:1px solid var(--line)}
+.day h2{margin:0; font:700 22px/1.2 var(--font)}
+.day span{font:500 14px/1 var(--font); color:var(--text-3)}
+.tag{display:inline-block; margin-left:6px; padding:2px 7px; border-radius:999px; background:rgba(255,255,255,.14); font-size:11px}
+/* 사진 정리 (관리자) */
+.edit-btn{display:none; align-items:center; gap:6px; padding:8px 14px; border:1px solid rgba(242,193,78,.5); border-radius:999px; background:none; color:var(--gold); font:600 14px/1 var(--font); cursor:pointer}
+.edit-btn.on{display:inline-flex}
+.edit-btn[aria-pressed="true"]{background:var(--gold); color:#2a1d00}
+.editing .ph{cursor:default}
+.mv{display:none; position:absolute; top:8px; left:8px; right:8px; z-index:2; padding:7px 8px; border:0; border-radius:8px; background:rgba(11,12,16,.88); color:#fff; font:600 13px/1.2 var(--font)}
+.editing .mv{display:block}
+.editing .ph figcaption{opacity:1}
+.toast{position:fixed; left:50%; bottom:24px; z-index:60; transform:translateX(-50%); padding:12px 18px; border-radius:999px; background:#fff; color:#0b0c10; font:600 14px/1 var(--font); box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.toast[hidden]{display:none}
+.keybar{display:flex; flex-wrap:wrap; gap:8px; align-items:center; max-width:var(--max); margin:16px auto 0; padding:12px var(--gut); color:var(--text-2); font:500 14px/1.4 var(--font)}
+.keybar[hidden]{display:none}
+.keybar input{flex:1; min-width:180px; padding:9px 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg-2); color:var(--text); font:inherit}
+.keybar button{padding:9px 14px; border:0; border-radius:10px; background:var(--gold); color:#2a1d00; font:700 14px/1 var(--font); cursor:pointer}
 @media (prefers-reduced-motion:reduce){*{transition:none !important}}
 </style>
 </head>
 <body>
 <header class="top">
   <a class="brand" href="./"><i aria-hidden="true">🐸</i>노천극장 놀이터</a>
-  <a class="home" href="./">홈페이지로 <span aria-hidden="true">→</span></a>
+  <span style="display:flex; gap:8px; align-items:center">
+    <button class="edit-btn" id="editBtn" type="button" aria-pressed="false">✏️ 사진 정리</button>
+    <a class="home" href="./">홈페이지로 <span aria-hidden="true">→</span></a>
+  </span>
 </header>
+<div class="keybar" id="keyBar" hidden><span>관리자 키를 넣으면 사진을 다른 앨범으로 옮길 수 있어요.</span><input id="keyIn" type="password" autocomplete="off" placeholder="관리자 키"><button id="keyGo" type="button">확인</button></div>
 <main id="app"><p class="empty">사진을 불러오는 중이에요…</p></main>
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="사진 크게 보기">
   <span class="lb-i" id="lbI"></span>
@@ -123,27 +150,34 @@ button{font:inherit; color:inherit}
   <button class="lb-btn lb-p" type="button" data-lb="p" aria-label="이전 사진">←</button>
   <button class="lb-btn lb-n" type="button" data-lb="n" aria-label="다음 사진">→</button>
 </div>
+<p class="toast" id="toast" hidden></p>
 <footer class="foot">디스코드 #마크 채널에 올린 사진이 여기에 차곡차곡 쌓여요.</footer>
 <script>
 (function(){
-  var app = document.getElementById('app'), D = null;
+  var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
+  var app = document.getElementById('app'), D = null, editing = false, key = '';
   var CH = ['우승 · 결과', '단체 사진', '무대 · 연출', '경기 장면', '준비 · 응원'];
   var EN = {battle:'Trainer Battle', town:'Village & Builds', poke:'Pokémon', adventure:'Adventure', daily:'Everyday', record:'Records'};
+  var WD = ['일', '월', '화', '수', '목', '금', '토'];
   function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function md(d){ var p = (d || '').split('-'); return p.length === 3 ? (+p[1]) + '월 ' + (+p[2]) + '일' : d; }
+  function wd(d){ var t = new Date(d + 'T12:00:00'); return isNaN(t) ? '' : WD[t.getDay()] + '요일'; }
   function span(arr){ var a = arr[0].date, b = arr[arr.length - 1].date; return a === b ? md(a) : md(a) + ' – ' + md(b); }
   function byCat(id){ return D.items.filter(function(m){ return m.cat === id; }); }
   function coverOf(arr){ return arr.filter(function(m){ return m.hero; })[0] || arr[Math.floor(arr.length / 2)]; }
+  function catName(id){ var c = D.cats.filter(function(x){ return x.id === id; })[0]; return c ? c.icon + ' ' + c.name : id; }
+  function views(cur){ return '<nav class="views" aria-label="보기"><a href="#"' + (cur === 'album' ? ' aria-current="page"' : '') + '>앨범별</a><a href="#dates"' + (cur === 'dates' ? ' aria-current="page"' : '') + '>날짜별</a></nav>'; }
 
   function home(){
     var all = D.items, people = {}, days = {};
     all.forEach(function(m){ people[m.who] = 1; days[m.date] = 1; });
     var cats = D.cats.filter(function(c){ return byCat(c.id).length; });
-    var h = '<section class="cover"><div class="cover-img" style="background-image:url(assets/memories/' + esc((all.filter(function(m){ return m.cover; })[0] || coverOf(all)).file) + ')"></div>'
+    var cover = all.filter(function(m){ return m.cover; })[0] || coverOf(all);
+    var h = '<section class="cover"><div class="cover-img" style="background-image:url(assets/memories/' + esc(cover.file) + ')"></div>'
       + '<div class="cover-in"><p class="eyebrow">Nochen Memories</p><h1>추억 저장소</h1>'
       + '<p class="lead">트레이너 배틀부터 우리가 꾸민 마을까지. 노천극장에서 함께 남긴 순간들을 앨범으로 모았어요.</p>'
       + '<div class="stats"><span><b>' + all.length + '</b>장의 사진</span><span><b>' + cats.length + '</b>개의 앨범</span><span><b>' + Object.keys(people).length + '</b>명이 올렸어요</span><span><b>' + Object.keys(days).length + '</b>일의 기록</span></div></div></section>'
-      + '<div class="wrap"><div class="sec-t"><h2>앨범</h2><span>' + span(all) + '</span></div><div class="albums">';
+      + '<div class="wrap"><div class="sec-t"><h2>앨범</h2>' + views('album') + '</div><div class="albums">';
     cats.forEach(function(c, i){
       var arr = byCat(c.id), cv = coverOf(arr);
       h += '<a class="album' + (i === 0 ? ' feature' : '') + '" href="#' + c.id + '"><img loading="lazy" src="assets/memories/' + esc(i === 0 ? cv.file : cv.thumb) + '" alt="">'
@@ -155,41 +189,107 @@ button{font:inherit; color:inherit}
   }
 
   var view = [];
-  function tiles(arr){
+  function moveSel(m){
+    var opts = '';
+    D.cats.forEach(function(c){
+      if (c.id === 'battle') CH.forEach(function(sb){ var v = 'battle|' + sb, on = m.cat === 'battle' && (m.sub || '경기 장면') === sb; opts += '<option value="' + esc(v) + '"' + (on ? ' selected' : '') + '>🏆 배틀 · ' + esc(sb) + '</option>'; });
+      else opts += '<option value="' + c.id + '"' + (m.cat === c.id ? ' selected' : '') + '>' + esc(c.icon + ' ' + c.name) + '</option>';
+    });
+    return '<select class="mv" aria-label="이 사진을 옮길 앨범" data-f="' + esc(m.file) + '">' + opts + '</select>';
+  }
+  function tiles(arr, showCat){
     return '<div class="grid">' + arr.map(function(m){
       var i = view.push(m) - 1;
-      return '<figure class="ph" tabindex="0" data-i="' + i + '"><img loading="lazy" src="assets/memories/' + esc(m.thumb) + '" alt="' + esc(m.text || m.who + '님의 사진') + '">'
-        + '<figcaption>' + esc(m.who) + ' · ' + md(m.date) + (m.text ? '<br>' + esc(m.text) : '') + '</figcaption></figure>';
+      return '<figure class="ph" tabindex="0" data-i="' + i + '">' + moveSel(m) + '<img loading="lazy" src="assets/memories/' + esc(m.thumb) + '" alt="' + esc(m.text || m.who + '님의 사진') + '">'
+        + '<figcaption>' + esc(m.who) + ' · ' + md(m.date) + (showCat ? '<span class="tag">' + esc(catName(m.cat)) + '</span>' : '') + (m.text ? '<br>' + esc(m.text) : '') + '</figcaption></figure>';
     }).join('') + '</div>';
   }
   function album(id){
     var c = D.cats.filter(function(x){ return x.id === id; })[0], arr = byCat(id);
-    if (!c || !arr.length) { home(); return; }
+    if (!c) { home(); return; }
     view = [];
-    var h = '<div class="wrap"><div class="ahead"><button class="back" type="button" data-back>← 모든 앨범</button>'
-      + '<p class="eyebrow">' + (EN[id] || '') + ' · ' + span(arr) + ' · ' + arr.length + '장</p><h1>' + esc(c.name) + '</h1><p>' + esc(c.desc) + '</p>';
+    var h = '<div class="wrap"><div class="ahead"><a class="back" href="#">← 모든 앨범</a>'
+      + '<p class="eyebrow">' + (EN[id] || '') + (arr.length ? ' · ' + span(arr) + ' · ' + arr.length + '장' : '') + '</p><h1>' + esc(c.name) + '</h1><p>' + esc(c.desc) + '</p>';
     if (id === 'battle') h += '<div class="champ"><span>🏆 노천 트레이너 배틀 · 2026년 10월 17일</span><span>👑 우승 <b>이연규</b> · 결승 2 : 0</span></div>';
     h += '</div>';
-    if (id === 'battle') {
+    if (!arr.length) h += '<p class="empty">이 앨범은 비어 있어요.</p>';
+    else if (id === 'battle') {
       CH.forEach(function(ch){
         var g = arr.filter(function(m){ return (m.sub || '경기 장면') === ch; }).sort(function(a, b){ return (b.hero ? 1 : 0) - (a.hero ? 1 : 0); });
         if (g.length) h += '<div class="chap"><h2>' + esc(ch) + '</h2><span>' + g.length + '</span></div>' + tiles(g);
       });
-    } else {
-      h += '<div style="height:28px"></div>' + tiles(arr.slice().reverse());
-    }
+    } else h += '<div style="height:28px"></div>' + tiles(arr.slice().reverse());
     app.innerHTML = h + '</div>';
     document.title = c.name + ' · 추억 저장소';
-    scrollTo(0, 0);
   }
-  function route(){ if (!D) return; var id = location.hash.slice(1); if (id) album(id); else { home(); } }
-  addEventListener('hashchange', route);
+  function dates(){
+    view = [];
+    var g = {}, order = [];
+    D.items.forEach(function(m){ if (!g[m.date]) { g[m.date] = []; order.push(m.date); } g[m.date].push(m); });
+    order.sort().reverse();
+    var h = '<div class="wrap"><div class="ahead"><a class="back" href="#">← 모든 앨범</a><p class="eyebrow">By Date · ' + order.length + '일 · ' + D.items.length + '장</p><h1>날짜별로 보기</h1><p>그날 무슨 일이 있었는지, 날짜 순서대로 넘겨 보세요.</p>'
+      + '<div style="margin-top:22px">' + views('dates') + '</div></div>';
+    order.forEach(function(d){ h += '<div class="day" id="d' + d + '"><h2>' + md(d) + ' <small style="font-weight:500; color:var(--text-2)">' + wd(d) + '</small></h2><span>' + g[d].length + '장</span></div>' + tiles(g[d], true); });
+    app.innerHTML = h + '</div>';
+    document.title = '날짜별 · 추억 저장소';
+  }
+  function route(){
+    if (!D) return;
+    var id = location.hash.slice(1);
+    if (id === 'dates') dates(); else if (id) album(id); else home();
+    app.classList.toggle('editing', editing);
+  }
+  addEventListener('hashchange', function(){ route(); scrollTo(0, 0); });
   app.addEventListener('click', function(e){
-    if (e.target.closest('[data-back]')) { history.pushState(null, '', location.pathname); route(); scrollTo(0, 0); return; }
-    var f = e.target.closest('.ph'); if (f) open(+f.dataset.i);
+    if (e.target.closest('.mv')) return;
+    var f = e.target.closest('.ph'); if (f && !editing) open(+f.dataset.i);
   });
-  app.addEventListener('keydown', function(e){ if (e.key === 'Enter') { var f = e.target.closest('.ph'); if (f) open(+f.dataset.i); } });
+  app.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !editing) { var f = e.target.closest('.ph'); if (f) open(+f.dataset.i); } });
 
+  // ---- 사진 옮기기 (관리자 키: 대진표와 같은 키) ----
+  var toastT = 0;
+  function toast(t){ var el = document.getElementById('toast'); el.textContent = t; el.hidden = false; clearTimeout(toastT); toastT = setTimeout(function(){ el.hidden = true; }, 2600); }
+  function applyMoves(mv){
+    if (!mv) return;
+    D.items.forEach(function(m){ var v = mv[m.file]; if (!v) return; var p = String(v).split('|'); m.cat = p[0]; m.sub = p[1] || null; });
+  }
+  var queue = {}, saving = false;
+  function flush(){
+    if (saving || !Object.keys(queue).length) return;
+    saving = true; var batch = queue; queue = {};
+    fetch(API + '?bracket=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+      var data = (d && d.data) || {};
+      data.mem = Object.assign({}, data.mem || {}, batch);
+      return fetch(API, {method:'POST', body:JSON.stringify({action:'bracket', key:key, data:data})}).then(function(r){ return r.json(); });
+    }).then(function(r){
+      if (r && r.ok) toast('✅ 저장했어요 · 모두에게 보여요');
+      else { toast(r && r.error === 'key' ? '관리자 키가 달라요' : '저장이 안 됐어요'); Object.assign(queue, batch); }
+    }).catch(function(){ toast('저장이 안 됐어요. 다시 해 볼게요'); Object.assign(queue, batch); }).then(function(){ saving = false; if (Object.keys(queue).length) setTimeout(flush, 1500); });
+  }
+  app.addEventListener('change', function(e){
+    var sel = e.target.closest('.mv'); if (!sel) return;
+    var f = sel.dataset.f, v = sel.value, m = D.items.filter(function(x){ return x.file === f; })[0];
+    var p = v.split('|'); m.cat = p[0]; m.sub = p[1] || null;
+    queue[f] = v; toast('옮겼어요 → ' + catName(p[0]) + (p[1] ? ' · ' + p[1] : '') + ' (저장 중…)');
+    var y = scrollY; route(); scrollTo(0, y); flush();
+  });
+  var btn = document.getElementById('editBtn'), bar = document.getElementById('keyBar');
+  try { key = localStorage.getItem('deck-admin-key') || ''; } catch (x) {}
+  if (key) btn.classList.add('on');
+  if (!key && /[?&]edit\b/.test(location.search)) bar.hidden = false;
+  document.getElementById('keyGo').addEventListener('click', function(){
+    var v = document.getElementById('keyIn').value.trim(); if (!v) return;
+    key = v; try { localStorage.setItem('deck-admin-key', v); } catch (x) {}
+    bar.hidden = true; btn.classList.add('on'); editing = true; btn.setAttribute('aria-pressed', 'true'); route();
+  });
+  btn.addEventListener('click', function(){
+    editing = !editing; btn.setAttribute('aria-pressed', editing ? 'true' : 'false');
+    btn.textContent = editing ? '✅ 정리 끝내기' : '✏️ 사진 정리';
+    if (editing) toast('사진 위 칸에서 옮길 앨범을 고르세요');
+    var y = scrollY; route(); scrollTo(0, y);
+  });
+
+  // ---- 크게 보기 ----
   var lb = document.getElementById('lb'), cur = 0, sx = 0;
   function show(i){
     cur = (i + view.length) % view.length; var m = view[cur];
@@ -215,6 +315,10 @@ button{font:inherit; color:inherit}
     D = d; D.items = D.items || []; D.cats = D.cats || [];
     if (!D.items.length) { app.innerHTML = '<p class="empty">아직 사진을 모으는 중이에요.</p>'; return; }
     route();
+    // 사이트에 아직 안 굳은 '옮긴 기록'을 덧입힌다 (느려도 괜찮게 나중에)
+    fetch(API + '?bracket=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(function(b){
+      if (b && b.data && b.data.mem) { applyMoves(b.data.mem); var y = scrollY; route(); scrollTo(0, y); }
+    }).catch(function(){});
   }).catch(function(){ app.innerHTML = '<p class="empty">사진을 못 불러왔어요. 잠시 뒤에 다시 와 주세요.</p>'; });
 })();
 </script>
