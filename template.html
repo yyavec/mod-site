@@ -1884,35 +1884,40 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
 @media (max-width:520px){ .trb-rules, .trb-prize{grid-template-columns:1fr} .trb-ball{width:60px; height:60px} }
 @media (prefers-reduced-motion:reduce){ .trb, .trb-lines i, .trb-ball, .trb-ball svg, .trb-tag b, .trb-in > *, .trb-stage, .trb-stage *, .trb-vs span, .trb-flash, .trb-p.gold, .trb-p.gold *, .trb-sb *, .trb-slot::before{animation:none !important} .trb:not(.on) .trb-in{opacity:1} }
 
-/* ---- 두 갈래 길 (10-21) ---- */
+/* ---- 두 갈래 길 (10-21, 사진 반반) ---- */
 .fork{display:none}
-html[data-fork] .fork{position:fixed; inset:0; z-index:10000; display:grid; place-items:center; padding:24px 16px; overflow:auto;
-  background:radial-gradient(120% 90% at 50% 0%, #2b4a8f 0%, #0f1a38 70%); color:#fff; animation:fkIn .45s ease-out}
+html[data-fork] .fork{position:fixed; inset:0; z-index:10000; display:flex; background:#05060c; color:#fff; animation:fkIn .6s ease-out}
 html[data-fork], html[data-fork] body{overflow:hidden}
-.fork-in{width:min(860px, 100%); text-align:center}
-.fork-t{margin:0 0 6px; font:900 clamp(28px, 6vw, 44px)/1.15 var(--font); letter-spacing:.02em}
-.fork-s{margin:0 0 28px; color:#c9d4f2; font:500 clamp(15px, 3.6vw, 18px)/1.5 var(--font)}
-.fork-g{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-.fork-c{position:relative; display:flex; flex-direction:column; align-items:center; gap:10px; padding:34px 18px 30px; border-radius:22px;
-  border:3px solid rgba(255,255,255,.85); color:#fff; text-decoration:none; cursor:pointer; overflow:hidden;
-  box-shadow:0 10px 0 rgba(0,0,0,.25), 0 18px 40px rgba(0,0,0,.35); transition:transform .15s, box-shadow .15s}
-.fork-c:hover,.fork-c:focus-visible{transform:translateY(-4px); box-shadow:0 14px 0 rgba(0,0,0,.25), 0 24px 50px rgba(0,0,0,.4); outline:none}
-.fork-c:active{transform:translateY(2px); box-shadow:0 4px 0 rgba(0,0,0,.25)}
-.fork-c.mem{background:linear-gradient(160deg, #ff9f1c 0%, #e3403a 100%)}
-.fork-c.home{background:linear-gradient(160deg, #3d7bff 0%, #2457c5 100%)}
-.fork-e{font-size:clamp(54px, 12vw, 80px); line-height:1; filter:drop-shadow(0 4px 0 rgba(0,0,0,.2))}
-.fork-n{font:900 clamp(22px, 5vw, 30px)/1.2 var(--font)}
-.fork-d{font:500 14px/1.5 var(--font); color:rgba(255,255,255,.92)}
+.fork-c{position:relative; flex:1 1 0; display:flex; flex-direction:column; justify-content:flex-end; min-width:0; padding:clamp(24px, 5vw, 64px);
+  color:#fff; text-decoration:none; overflow:hidden; transition:flex-grow .6s cubic-bezier(.2,.8,.2,1)}
+.fork-c::before{content:""; position:absolute; inset:0; background:var(--bg) center/cover no-repeat; transform:scale(1.04); transition:transform 1.2s cubic-bezier(.2,.8,.2,1), filter .6s}
+.fork-c::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,6,12,.15) 0%, rgba(5,6,12,.25) 45%, rgba(5,6,12,.88) 100%)}
+.fork-c.mem::before{--bg:url(assets/memories/1561093599637016637_0.webp)}
+.fork-c.home::before{--bg:url(assets/memories/1557050759948804216_0.webp)}
+.fork-c > *{position:relative; z-index:1}
+.fork:hover .fork-c{flex-grow:.8} .fork .fork-c:hover,.fork .fork-c:focus-visible{flex-grow:1.35; outline:none}
+.fork .fork-c:hover::before,.fork .fork-c:focus-visible::before{transform:scale(1.1)}
+.fork:hover .fork-c:not(:hover)::before{filter:grayscale(.6) brightness(.55)}
+.fork-c + .fork-c{border-left:1px solid rgba(255,255,255,.18)}
+.fork-k{margin:0 0 10px; font:800 12px/1 var(--font); letter-spacing:.32em; opacity:.8}
+html .fork .fork-n{margin:0; font:900 clamp(34px, 6.4vw, 76px)/1.02 var(--font); letter-spacing:-.01em; text-shadow:0 4px 30px rgba(0,0,0,.45)}
+.fork-d{margin:14px 0 0; max-width:34ch; font:500 clamp(14px, 1.5vw, 17px)/1.55 var(--font); opacity:.88}
+.fork-go{display:inline-flex; align-items:center; gap:10px; margin-top:22px; padding:12px 20px; width:max-content; border:1.5px solid rgba(255,255,255,.7); border-radius:999px;
+  font:700 15px/1 var(--font); backdrop-filter:blur(6px); background:rgba(255,255,255,.08); transition:background .3s, color .3s, gap .3s}
+.fork-c:hover .fork-go,.fork-c:focus-visible .fork-go{background:#fff; color:#0b0d18; gap:16px}
+.fork-top{position:absolute; top:22px; left:0; right:0; z-index:2; display:flex; justify-content:center; pointer-events:none}
+.fork-top span{padding:8px 16px; border-radius:999px; background:rgba(5,6,12,.55); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.18);
+  font:800 13px/1 var(--font); letter-spacing:.08em}
 @keyframes fkIn{from{opacity:0}to{opacity:1}}
-@media (max-width:560px){.fork-g{grid-template-columns:1fr} .fork-c{padding:24px 16px}}
-@media (prefers-reduced-motion:reduce){html[data-fork] .fork{animation:none} .fork-c{transition:none}}
+@media (max-width:700px){html[data-fork] .fork{flex-direction:column} .fork-c + .fork-c{border-left:0; border-top:1px solid rgba(255,255,255,.18)} .fork-go{margin-top:14px; padding:10px 16px} .fork-top{top:14px}}
+@media (prefers-reduced-motion:reduce){html[data-fork] .fork{animation:none} .fork-c,.fork-c::before{transition:none}}
 
 /* ---- 추억 저장소 ---- */
 .mem-hero{position:relative; margin-bottom:14px; padding:26px 22px; border-radius:22px; overflow:hidden; color:#fff;
   background:radial-gradient(120% 140% at 0% 0%, #ff9f1c 0%, #e3403a 45%, #6b1b4a 100%); box-shadow:inset 0 -6px 0 rgba(0,0,0,.18)}
 .mem-hero::after{content:"📸"; position:absolute; right:-6px; bottom:-26px; font-size:150px; opacity:.16; transform:rotate(-12deg)}
 .mem-kicker{margin:0 0 4px; font:800 12px/1 var(--font); letter-spacing:.24em; opacity:.85}
-.mem-hero h2{margin:0; font:900 clamp(28px, 6vw, 40px)/1.15 var(--font)}
+html .mem-hero h2{margin:0; font:900 clamp(28px, 6vw, 40px)/1.15 var(--font)}
 .mem-hero p.mem-lead{margin:8px 0 0; font:500 15px/1.5 var(--font); opacity:.95}
 .mem-chips{position:sticky; top:72px; z-index:20; display:flex; gap:8px; overflow-x:auto; padding:8px 2px 10px; margin-bottom:6px; scrollbar-width:none; background:linear-gradient(var(--bg-page, var(--bg)) 70%, transparent)}
 .mem-chips::-webkit-scrollbar{display:none}
@@ -1923,7 +1928,7 @@ html[data-fork], html[data-fork] body{overflow:hidden}
 .mem-cat{margin:22px 0 8px}
 .mem-ch{display:flex; align-items:center; gap:12px; margin:0 0 4px}
 .mem-ic{display:grid; place-items:center; width:46px; height:46px; border-radius:14px; background:var(--bg-surface); border:2px solid var(--border-subtle); font-size:24px}
-.mem-ch h3{margin:0; font:900 22px/1.2 var(--font); color:var(--text-primary)}
+html .mem-ch h3{margin:0; font:900 22px/1.2 var(--font); color:var(--text-primary)}
 .mem-ch h3 small{margin-left:6px; font:700 14px/1 var(--font); color:var(--text-secondary)}
 .mem-desc{margin:0 0 10px 58px; font:500 14px/1.5 var(--font); color:var(--text-secondary)}
 .mem-sub{margin:16px 0 8px; font:800 15px/1.2 var(--font); color:var(--text-primary)}
@@ -2204,15 +2209,20 @@ html[data-fork], html[data-fork] body{overflow:hidden}
 
 </svg></div>
 <div class="topbar" id="topbar" data-until="{{TOPBAR_UNTIL}}" {{TOPBAR_HIDDEN}}><span class="tb-tag">BETA</span><span class="tb-t">{{TOPBAR}}</span></div>
-<div class="fork" role="dialog" aria-modal="true" aria-labelledby="forkT">
-  <div class="fork-in">
-    <h1 class="fork-t" id="forkT">🐸 노천극장 놀이터</h1>
-    <p class="fork-s">어디로 갈까요?</p>
-    <div class="fork-g">
-      <a class="fork-c mem" href="#memories" data-fork-go="memories"><span class="fork-e" aria-hidden="true">📸</span><span class="fork-n">추억 저장소</span><span class="fork-d">우리가 함께 찍은 사진들</span></a>
-      <a class="fork-c home" href="#" data-fork-go="home"><span class="fork-e" aria-hidden="true">🏠</span><span class="fork-n">홈페이지</span><span class="fork-d">모드 받기 · 공략 · 게시판</span></a>
-    </div>
-  </div>
+<div class="fork" role="dialog" aria-modal="true" aria-label="어디로 갈까요?">
+  <div class="fork-top"><span>🐸 노천극장 놀이터</span></div>
+  <a class="fork-c mem" href="#memories" data-fork-go="memories">
+    <p class="fork-k">NOCHEN MEMORIES</p>
+    <h2 class="fork-n">추억<br>저장소</h2>
+    <p class="fork-d">트레이너 배틀부터 우리가 꾸민 마을까지, 함께 남긴 순간들.</p>
+    <span class="fork-go">사진 보러 가기 <span aria-hidden="true">→</span></span>
+  </a>
+  <a class="fork-c home" href="#" data-fork-go="home">
+    <p class="fork-k">NOCHEN PLAYGROUND</p>
+    <h2 class="fork-n">홈페이지</h2>
+    <p class="fork-d">모드 받기, 공략, 게시판, 조합법까지. 서버에 들어가기 전에 여기로.</p>
+    <span class="fork-go">들어가기 <span aria-hidden="true">→</span></span>
+  </a>
 </div>
 <main class="wrap" data-page="home">
   <header class="hero">
