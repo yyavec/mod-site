@@ -16,6 +16,14 @@
 })();
 </script>
 <script>
+// 10-21 주인님: 들어올 때 두 갈래 길 (추억 저장소 / 홈페이지)
+(function(){var d=document.documentElement,q=location.search;
+  if(location.hash||/[?&](nf|battle|story|deckadmin)\b/.test(q))return;
+  try{if(sessionStorage.getItem("fork-done"))return;}catch(e){}
+  d.setAttribute("data-fork","");
+})();
+</script>
+<script>
 // 트레이너 배틀 안내: 들어올 때마다 전체화면으로 (10-18 주인님: 꼭 띄우기). ?battle 로 다시 보기
 (function(){var d=document.documentElement,q=location.search;
   if(/[?&]nf\b/.test(q))return;
@@ -1249,7 +1257,9 @@ button.ty.lgf{--c:#D98A00}
 .ptabs button:hover{color:var(--text-primary); background:var(--bg-sunken)}
 .ptabs button[aria-selected="true"]{background:var(--accent); color:var(--on-accent); box-shadow:inset 0 -4px 0 rgba(0,0,0,.2), inset 0 2px 0 rgba(255,255,255,.25)}
 .ptabs .pt-new{font:700 10px/1 var(--font); padding:3px 6px; border-radius:var(--r-full); background:#E5484D; color:#fff}
-.wrap[data-page="home"] > #board, .wrap[data-page="home"] > #recipes, .wrap[data-page="home"] > #play{display:none}
+.wrap[data-page="home"] > #board, .wrap[data-page="home"] > #recipes, .wrap[data-page="home"] > #play, .wrap[data-page="home"] > #memories{display:none}
+.wrap[data-page="memories"] > :not(.hero):not(.ptabs):not(#memories):not(footer){display:none}
+.wrap:not([data-page="memories"]) > #memories{display:none}
 .wrap[data-page="play"] > :not(.hero):not(.ptabs):not(#play):not(footer){display:none}
 .wrap[data-page="board"] > :not(.hero):not(.ptabs):not(#board):not(footer){display:none}
 .wrap[data-page="recipes"] > :not(.hero):not(.ptabs):not(#recipes):not(footer){display:none}
@@ -1544,7 +1554,7 @@ button.ty.lgf{--c:#D98A00}
 @media (max-width:420px){ .st-grid{grid-template-columns:repeat(2, 1fr)} }
 /* 트레이너 배틀 안내 (전체화면) */
 .trb{display:none; position:fixed; inset:0; z-index:9998; overflow-y:auto; overscroll-behavior:contain; padding:32px 16px 48px; color:#fff; font-family:var(--font); -webkit-font-smoothing:antialiased; word-break:keep-all; overflow-wrap:anywhere; background:radial-gradient(70% 45% at 50% 0%, rgba(255,203,5,.22), transparent 70%), radial-gradient(60% 40% at 50% 100%, rgba(227,64,58,.35), transparent 70%), linear-gradient(180deg, #14203A 0%, #1B2A4A 55%, #2A1F3D 100%)}
-html[data-battle]:not([data-story]) .trb{display:block; animation:tbIn .5s ease-out}
+html[data-battle]:not([data-story]):not([data-fork]) .trb{display:block; animation:tbIn .5s ease-out}
 html[data-battle], html[data-battle] body{overflow:hidden}
 .trb-lines{position:fixed; inset:0; pointer-events:none; overflow:hidden}
 .trb-lines i{position:absolute; left:-40%; height:3px; width:40%; background:linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent); animation:tbLine linear infinite}
@@ -1872,6 +1882,40 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
 @keyframes tbWob{0%,60%,100%{transform:rotate(0)} 68%{transform:rotate(-14deg)} 76%{transform:rotate(12deg)} 84%{transform:rotate(-6deg)}}
 @media (max-width:520px){ .trb-rules, .trb-prize{grid-template-columns:1fr} .trb-ball{width:60px; height:60px} }
 @media (prefers-reduced-motion:reduce){ .trb, .trb-lines i, .trb-ball, .trb-ball svg, .trb-tag b, .trb-in > *, .trb-stage, .trb-stage *, .trb-vs span, .trb-flash, .trb-p.gold, .trb-p.gold *, .trb-sb *, .trb-slot::before{animation:none !important} .trb:not(.on) .trb-in{opacity:1} }
+
+/* ---- 두 갈래 길 (10-21) ---- */
+.fork{display:none}
+html[data-fork] .fork{position:fixed; inset:0; z-index:10000; display:grid; place-items:center; padding:24px 16px; overflow:auto;
+  background:radial-gradient(120% 90% at 50% 0%, #2b4a8f 0%, #0f1a38 70%); color:#fff; animation:fkIn .45s ease-out}
+html[data-fork], html[data-fork] body{overflow:hidden}
+.fork-in{width:min(860px, 100%); text-align:center}
+.fork-t{margin:0 0 6px; font:900 clamp(28px, 6vw, 44px)/1.15 var(--font); letter-spacing:.02em}
+.fork-s{margin:0 0 28px; color:#c9d4f2; font:500 clamp(15px, 3.6vw, 18px)/1.5 var(--font)}
+.fork-g{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+.fork-c{position:relative; display:flex; flex-direction:column; align-items:center; gap:10px; padding:34px 18px 30px; border-radius:22px;
+  border:3px solid rgba(255,255,255,.85); color:#fff; text-decoration:none; cursor:pointer; overflow:hidden;
+  box-shadow:0 10px 0 rgba(0,0,0,.25), 0 18px 40px rgba(0,0,0,.35); transition:transform .15s, box-shadow .15s}
+.fork-c:hover,.fork-c:focus-visible{transform:translateY(-4px); box-shadow:0 14px 0 rgba(0,0,0,.25), 0 24px 50px rgba(0,0,0,.4); outline:none}
+.fork-c:active{transform:translateY(2px); box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.fork-c.mem{background:linear-gradient(160deg, #ff9f1c 0%, #e3403a 100%)}
+.fork-c.home{background:linear-gradient(160deg, #3d7bff 0%, #2457c5 100%)}
+.fork-e{font-size:clamp(54px, 12vw, 80px); line-height:1; filter:drop-shadow(0 4px 0 rgba(0,0,0,.2))}
+.fork-n{font:900 clamp(22px, 5vw, 30px)/1.2 var(--font)}
+.fork-d{font:500 14px/1.5 var(--font); color:rgba(255,255,255,.92)}
+@keyframes fkIn{from{opacity:0}to{opacity:1}}
+@media (max-width:560px){.fork-g{grid-template-columns:1fr} .fork-c{padding:24px 16px}}
+@media (prefers-reduced-motion:reduce){html[data-fork] .fork{animation:none} .fork-c{transition:none}}
+
+/* ---- 추억 저장소 ---- */
+.mem-g{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin-top:16px}
+.mem-i{margin:0; border-radius:16px; overflow:hidden; background:var(--bg-surface); border:2px solid var(--border-subtle); cursor:zoom-in}
+.mem-i img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover; background:var(--bg-sunken)}
+.mem-i figcaption{padding:10px 12px; font:500 14px/1.45 var(--font); color:var(--text-secondary)}
+.mem-i figcaption b{color:var(--text-primary)}
+.mem-empty{margin-top:16px; padding:36px 16px; text-align:center; border:2px dashed var(--border-subtle); border-radius:16px; color:var(--text-secondary); font:500 16px/1.6 var(--font)}
+.mem-big{position:fixed; inset:0; z-index:10001; display:grid; place-items:center; padding:16px; background:rgba(0,0,0,.85); cursor:zoom-out}
+.mem-big img{max-width:100%; max-height:86vh; border-radius:12px}
+.mem-big p{margin:10px 0 0; color:#fff; text-align:center; font:500 15px/1.5 var(--font)}
 </style>
 <script>
 // 화면 모드: 시스템 설정은 따르지 않고, 사용자가 버튼으로 고른 것만 쓴다 (기본 라이트)
@@ -2126,6 +2170,16 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
 
 </svg></div>
 <div class="topbar" id="topbar" data-until="{{TOPBAR_UNTIL}}" {{TOPBAR_HIDDEN}}><span class="tb-tag">BETA</span><span class="tb-t">{{TOPBAR}}</span></div>
+<div class="fork" role="dialog" aria-modal="true" aria-labelledby="forkT">
+  <div class="fork-in">
+    <h1 class="fork-t" id="forkT">🐸 노천극장 놀이터</h1>
+    <p class="fork-s">어디로 갈까요?</p>
+    <div class="fork-g">
+      <a class="fork-c mem" href="#memories" data-fork-go="memories"><span class="fork-e" aria-hidden="true">📸</span><span class="fork-n">추억 저장소</span><span class="fork-d">우리가 함께 찍은 사진들</span></a>
+      <a class="fork-c home" href="#" data-fork-go="home"><span class="fork-e" aria-hidden="true">🏠</span><span class="fork-n">홈페이지</span><span class="fork-d">모드 받기 · 공략 · 게시판</span></a>
+    </div>
+  </div>
+</div>
 <main class="wrap" data-page="home">
   <header class="hero">
     <span class="nametag" {{OWNER_HIDDEN}}><span class="nt-rank">홈주인</span>{{OWNER}}</span>
@@ -2159,6 +2213,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     <button type="button" role="tab" data-p="play" aria-selected="false">📘 공략 <span class="pt-new">NEW</span></button>
     <button type="button" role="tab" data-p="board" aria-selected="false">💬 <span class="pt-long">자유</span>게시판</button>
     <button type="button" role="tab" data-p="recipes" aria-selected="false">🛠️ 조합법</button>
+    <button type="button" role="tab" data-p="memories" aria-selected="false">📸 추억</button>
   </nav>
   <section class="rp-must" role="note" aria-labelledby="rpMustH">
     <p class="rp-must-h" id="rpMustH">⚠️ 접속할 때 리소스팩은 <u>무조건 받아야 해요!</u></p>
@@ -2595,6 +2650,12 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     <div class="empty" {{LIST_EMPTY_HIDDEN}}><svg class="px " viewBox="0 0 8 7" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="0" width="8" height="1" fill="#6E4520"/><rect x="0" y="1" width="1" height="1" fill="#6E4520"/><rect x="1" y="1" width="6" height="1" fill="#B07A3E"/><rect x="7" y="1" width="1" height="1" fill="#6E4520"/><rect x="0" y="2" width="1" height="1" fill="#6E4520"/><rect x="1" y="2" width="6" height="1" fill="#B07A3E"/><rect x="7" y="2" width="1" height="1" fill="#6E4520"/><rect x="0" y="3" width="3" height="1" fill="#6E4520"/><rect x="3" y="3" width="2" height="1" fill="#F2C14E"/><rect x="5" y="3" width="3" height="1" fill="#6E4520"/><rect x="0" y="4" width="1" height="1" fill="#6E4520"/><rect x="1" y="4" width="2" height="1" fill="#B07A3E"/><rect x="3" y="4" width="2" height="1" fill="#F2C14E"/><rect x="5" y="4" width="2" height="1" fill="#B07A3E"/><rect x="7" y="4" width="1" height="1" fill="#6E4520"/><rect x="0" y="5" width="1" height="1" fill="#6E4520"/><rect x="1" y="5" width="6" height="1" fill="#B07A3E"/><rect x="7" y="5" width="1" height="1" fill="#6E4520"/><rect x="0" y="6" width="8" height="1" fill="#6E4520"/></svg><b>상자가 아직 비어 있어요</b>모드가 준비되면 여기에 차곡차곡 쌓여요.</div>
   </section>
 
+  <section class="section" aria-labelledby="memTitle" id="memories">
+    <div class="sec-head"><h2 id="memTitle">📸 추억 저장소</h2></div>
+    <p class="mem-sub">디스코드 <b>#마크</b> 채널에 올린 사진이 여기에 모여요.</p>
+    <div class="mem-g" id="memGrid" hidden></div>
+    <p class="mem-empty" id="memEmpty">아직 사진을 모으는 중이에요.<br>곧 우리 추억으로 채워질 거예요! 📷</p>
+  </section>
   <footer><span class="bye"><svg class="px " viewBox="0 0 12 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="3" y="0" width="6" height="1" fill="var(--skin-l)"/><rect x="9" y="0" width="1" height="1" fill="var(--skin-g)"/><rect x="2" y="1" width="2" height="1" fill="var(--skin-g)"/><rect x="4" y="1" width="2" height="1" fill="var(--skin-l)"/><rect x="6" y="1" width="4" height="1" fill="var(--skin-g)"/><rect x="2" y="2" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="4" y="3" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="3" width="2" height="1" fill="#EEEEEE"/><rect x="2" y="4" width="1" height="1" fill="#111111"/><rect x="3" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="4" y="4" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="4" width="1" height="1" fill="#EEEEEE"/><rect x="9" y="4" width="1" height="1" fill="#111111"/><rect x="2" y="5" width="8" height="1" fill="var(--skin-g)"/><rect x="2" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="3" y="6" width="6" height="1" fill="var(--skin-g)"/><rect x="9" y="6" width="1" height="1" fill="var(--skin-m)"/><rect x="2" y="7" width="2" height="1" fill="var(--skin-m)"/><rect x="4" y="7" width="4" height="1" fill="var(--skin-g)"/><rect x="8" y="7" width="2" height="1" fill="var(--skin-m)"/></svg>오늘도 즐겜해요</span><span>{{UPDATED}} 업데이트</span><span>모드 {{TOTAL}}개</span><a class="xlink" href="{{NOTION_URL}}" target="_blank" rel="noopener" {{NOTION_HIDDEN}}>노션<svg class="i"><use href="#i-ext"/></svg></a><a class="xlink" href="{{DISCORD_URL}}" target="_blank" rel="noopener" {{DISCORD_HIDDEN}}>문의 (디스코드)<svg class="i"><use href="#i-ext"/></svg></a></footer>
   <div class="pc-row" aria-hidden="true"><img src="assets/cobble-blocks/healing_machine.png" alt="" loading="lazy"><img src="assets/cobble-blocks/pc.png" alt="" loading="lazy"><img src="assets/cobble-blocks/display_case.png" alt="" loading="lazy"><img src="assets/cobble-blocks/restoration_tank.png" alt="" loading="lazy"><img src="assets/cobble-blocks/fossil_analyzer.png" alt="" loading="lazy"><img src="assets/cobble-blocks/tm_machine.png" alt="" loading="lazy"><img src="assets/cobble-blocks/pasture.png" alt="" loading="lazy"><img src="assets/cobble-blocks/gilded_chest.png" alt="" loading="lazy"><img src="assets/cobble-blocks/blue_gilded_chest.png" alt="" loading="lazy"></div>
   <p class="cobble-credit">포켓몬 모델·애니메이션: <a href="https://gitlab.com/cable-mc/cobblemon" target="_blank" rel="noopener">Cobblemon</a> (MPL-2.0 / CC BY-NC, 사이트용 그림으로 렌더) · Pokémon © Nintendo / Creatures / GAME FREAK</p>
@@ -4064,7 +4125,7 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
     history.replaceState(null, '', location.pathname + location.search + (b.dataset.p === 'home' ? '' : '#' + b.dataset.p));
     show(b.dataset.p, true);
   });
-  function fromHash(){ var h = location.hash.slice(1); show(h === 'board' || h === 'recipes' || h === 'play' ? h : 'home', false); }
+  function fromHash(){ var h = location.hash.slice(1); show(h === 'board' || h === 'recipes' || h === 'play' || h === 'memories' ? h : 'home', false); }
   addEventListener('hashchange', fromHash); fromHash();
 })();
 </script>
@@ -4353,6 +4414,44 @@ textarea.trb-in-f{height:auto; min-height:66px; margin-top:8px; padding:9px 11px
   function load(force){ if (document.hidden && !force && last) return; fetch(API + '?stat=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(show).catch(function(){ $('srvMsg').textContent = '상태를 불러오지 못했어요'; }); }
   load(); setInterval(load, 30000); setInterval(tick, 5000);
   document.addEventListener('visibilitychange', function(){ if (!document.hidden) load(); });
+})();
+</script>
+<script>
+/* 두 갈래 길 + 추억 저장소 (10-21) */
+(function(){
+  var root = document.documentElement;
+  document.querySelectorAll('[data-fork-go]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      try { sessionStorage.setItem('fork-done', '1'); } catch (x) {}
+      var go = a.dataset.forkGo;
+      if (go === 'memories') { root.removeAttribute('data-battle'); location.hash = 'memories'; }
+      root.removeAttribute('data-fork');
+      scrollTo(0, 0);
+    });
+  });
+  var grid = document.getElementById('memGrid'), empty = document.getElementById('memEmpty');
+  if (!grid) return;
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  fetch('assets/memories/memories.json?t=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+    var items = (d && d.items) || [];
+    if (!items.length) return;
+    grid.innerHTML = items.map(function(m){
+      return '<figure class="mem-i" tabindex="0"><img loading="lazy" src="assets/memories/' + esc(m.file) + '" alt="' + esc(m.text || '추억 사진') + '">'
+        + '<figcaption><b>' + esc(m.who) + '</b> · ' + esc(m.date) + (m.text ? '<br>' + esc(m.text) : '') + '</figcaption></figure>';
+    }).join('');
+    grid.hidden = false; empty.hidden = true;
+  }).catch(function(){});
+  function big(f){
+    var img = f.querySelector('img'), cap = f.querySelector('figcaption');
+    var o = document.createElement('div'); o.className = 'mem-big';
+    o.innerHTML = '<div><img src="' + img.src + '" alt=""><p>' + (cap ? cap.innerHTML : '') + '</p></div>';
+    o.addEventListener('click', function(){ o.remove(); });
+    document.body.appendChild(o);
+  }
+  grid.addEventListener('click', function(e){ var f = e.target.closest('.mem-i'); if (f) big(f); });
+  grid.addEventListener('keydown', function(e){ if (e.key === 'Enter') { var f = e.target.closest('.mem-i'); if (f) big(f); } });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') { var o = document.querySelector('.mem-big'); if (o) o.remove(); } });
 })();
 </script>
 </body>
