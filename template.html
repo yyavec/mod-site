@@ -1926,8 +1926,22 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
 @keyframes lmSway{0%,100%{transform:rotate(0)}50%{transform:rotate(.6deg)}}
 @keyframes lmFly{0%,100%{opacity:.15; transform:translateY(0)}50%{opacity:1; transform:translateY(-10px)}}
 @keyframes lmBreath{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-@media (max-aspect-ratio:4/5){.lm{top:auto; bottom:0; height:auto; aspect-ratio:16/9; width:200%; left:-50%} html[data-fork] .fork{background:linear-gradient(#4f7fcf, #9cc3ea 60%)}
-  .fork-c{top:auto; height:auto} .fork-card{max-width:none; padding:14px} .fork-c.go-mem .fork-card,.fork-c.go-home .fork-card{width:calc(50vw - 24px)} .fork-c{padding:0 8px 16px} .fork-q{top:70px}}
+/* 휴대폰(세로): 위 = 박물관, 아래 = 세계수 로 반반 */
+.lm-m{display:none}
+@media (max-aspect-ratio:4/5){
+  .lm{visibility:hidden; width:1px; height:1px}
+  .lm-m{position:absolute; left:0; width:100%; height:50%; display:block}
+  .lm-m.top{top:0} .lm-m.bot{bottom:0}
+  .fork::after{top:50%; bottom:auto; left:0; right:0; width:auto; height:2px; transform:translateY(-1px); background:linear-gradient(90deg, transparent, rgba(255,255,255,.7) 15%, rgba(255,255,255,.7) 85%, transparent)}
+  .fork-c{width:100%; height:50%; left:0; right:0; padding:0 16px 18px}
+  .fork-c.go-mem{top:0; bottom:auto} .fork-c.go-home{top:auto; bottom:0}
+  .fork-card{width:auto; padding:10px 16px; border-radius:14px} .fork-d,.fork-k{display:none} .fork-go{margin-top:4px; font-size:13px}
+  html .fork .fork-n{font-size:20px}
+  .fork-c.go-mem{align-items:flex-start; text-align:left} .fork-c.go-home{align-items:center}
+  .fork-q{top:58px; font-size:24px}
+  .fork-c.go-mem::before{background:linear-gradient(0deg, rgba(255,190,90,.30), rgba(255,190,90,.06))}
+  .fork-c.go-home::before{background:linear-gradient(180deg, rgba(140,230,120,.30), rgba(140,230,120,.06))}
+}
 @media (prefers-reduced-motion:reduce){.lm-leaf,.lm-fly,.lm-me,html[data-fork] .fork{animation:none} .fork-card{transition:none}}
 
 </style>
@@ -2186,7 +2200,7 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
 </svg></div>
 <div class="topbar" id="topbar" data-until="{{TOPBAR_UNTIL}}" {{TOPBAR_HIDDEN}}><span class="tb-tag">BETA</span><span class="tb-t">{{TOPBAR}}</span></div>
 <div class="fork" role="dialog" aria-modal="true" aria-label="어디로 갈까요?">
-  <svg class="lm" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges" aria-hidden="true">
+  <svg class="lm" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges" aria-hidden="true"><g id="lmAll">
   <defs>
     <linearGradient id="lmSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f7fcf"/><stop offset=".55" stop-color="#9cc3ea"/><stop offset="1" stop-color="#ffe2b8"/></linearGradient>
     <radialGradient id="lmSun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff6d8" stop-opacity=".95"/><stop offset="1" stop-color="#fff6d8" stop-opacity="0"/></radialGradient>
@@ -2242,7 +2256,9 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
 
   <ellipse cx="800" cy="890" rx="120" ry="18" fill="#000" opacity=".22"/>
   <image class="lm-me" href="assets/landing/back.png" x="694" y="530" width="212" height="402" preserveAspectRatio="none"/>
-</svg>
+</g></svg>
+  <svg class="lm-m top" viewBox="150 70 880 900" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges" aria-hidden="true"><use href="#lmAll"/></svg>
+  <svg class="lm-m bot" viewBox="760 0 700 540" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges" aria-hidden="true"><use href="#lmAll"/></svg>
   <div class="fork-top"><span>🐸 노천극장 놀이터</span></div>
   <p class="fork-q">어느 길로 가 볼까요?</p>
   <a class="fork-c go-mem" href="memories.html" data-fork-go="memories"><span class="fork-card"><p class="fork-k">MUSEUM</p><h2 class="fork-n">추억 저장소</h2><p class="fork-d">우리가 함께 남긴 사진이 전시된 박물관</p><span class="fork-go">← 박물관으로</span></span></a>

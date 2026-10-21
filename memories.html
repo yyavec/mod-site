@@ -164,7 +164,7 @@ button{font:inherit; color:inherit}
   function wd(d){ var t = new Date(d + 'T12:00:00'); return isNaN(t) ? '' : WD[t.getDay()] + '요일'; }
   function span(arr){ var a = arr[0].date, b = arr[arr.length - 1].date; return a === b ? md(a) : md(a) + ' – ' + md(b); }
   function byCat(id){ return D.items.filter(function(m){ return m.cat === id; }); }
-  function coverOf(arr){ return arr.filter(function(m){ return m.hero; })[0] || arr[Math.floor(arr.length / 2)]; }
+  function coverOf(arr){ return arr.filter(function(m){ return m.acover; })[0] || arr.filter(function(m){ return m.hero; })[0] || arr[Math.floor(arr.length / 2)]; }
   function catName(id){ var c = D.cats.filter(function(x){ return x.id === id; })[0]; return c ? c.icon + ' ' + c.name : id; }
   function views(cur){ return '<nav class="views" aria-label="보기"><a href="#"' + (cur === 'album' ? ' aria-current="page"' : '') + '>앨범별</a><a href="#dates"' + (cur === 'dates' ? ' aria-current="page"' : '') + '>날짜별</a></nav>'; }
 
@@ -195,7 +195,8 @@ button{font:inherit; color:inherit}
       if (c.id === 'battle') CH.forEach(function(sb){ var v = 'battle|' + sb, on = m.cat === 'battle' && (m.sub || '경기 장면') === sb; opts += '<option value="' + esc(v) + '"' + (on ? ' selected' : '') + '>🏆 배틀 · ' + esc(sb) + '</option>'; });
       else opts += '<option value="' + c.id + '"' + (m.cat === c.id ? ' selected' : '') + '>' + esc(c.icon + ' ' + c.name) + '</option>';
     });
-    return '<select class="mv" aria-label="이 사진을 옮길 앨범" data-f="' + esc(m.file) + '">' + opts + '</select>';
+    opts += '<option disabled>──────────</option><option value="@cover">' + (m.acover ? '⭐ 지금 이 앨범 대표 사진' : '⭐ 이 앨범 대표 사진으로') + '</option><option value="hide">🗑️ 이 사진 지우기</option>';
+    return '<select class="mv" aria-label="이 사진 정리" data-f="' + esc(m.file) + '">' + opts + '</select>';
   }
   function tiles(arr, showCat){
     return '<div class="grid">' + arr.map(function(m){
@@ -251,7 +252,12 @@ button{font:inherit; color:inherit}
   function toast(t){ var el = document.getElementById('toast'); el.textContent = t; el.hidden = false; clearTimeout(toastT); toastT = setTimeout(function(){ el.hidden = true; }, 2600); }
   function applyMoves(mv){
     if (!mv) return;
+    D.items = D.items.filter(function(m){ return mv[m.file] !== 'hide'; });
     D.items.forEach(function(m){ var v = mv[m.file]; if (!v) return; var p = String(v).split('|'); m.cat = p[0]; m.sub = p[1] || null; });
+    Object.keys(mv).forEach(function(k){
+      if (k.indexOf('@cover:') !== 0) return;
+      var cat = k.slice(7); D.items.forEach(function(m){ if (m.cat === cat) m.acover = (m.file === mv[k]); });
+    });
   }
   var queue = {}, saving = false;
   function flush(){
@@ -269,8 +275,17 @@ button{font:inherit; color:inherit}
   app.addEventListener('change', function(e){
     var sel = e.target.closest('.mv'); if (!sel) return;
     var f = sel.dataset.f, v = sel.value, m = D.items.filter(function(x){ return x.file === f; })[0];
-    var p = v.split('|'); m.cat = p[0]; m.sub = p[1] || null;
-    queue[f] = v; toast('옮겼어요 → ' + catName(p[0]) + (p[1] ? ' · ' + p[1] : '') + ' (저장 중…)');
+    if (v === '@cover') {
+      D.items.forEach(function(x){ if (x.cat === m.cat) x.acover = (x === m); });
+      queue['@cover:' + m.cat] = f; toast('⭐ ' + catName(m.cat) + ' 대표 사진으로 정했어요 (저장 중…)');
+    } else if (v === 'hide') {
+      if (!confirm('이 사진을 추억 저장소에서 지울까요?')) { var y0 = scrollY; route(); scrollTo(0, y0); return; }
+      D.items = D.items.filter(function(x){ return x !== m; });
+      queue[f] = 'hide'; toast('🗑️ 지웠어요 (저장 중…)');
+    } else {
+      var p = v.split('|'); m.cat = p[0]; m.sub = p[1] || null;
+      queue[f] = v; toast('옮겼어요 → ' + catName(p[0]) + (p[1] ? ' · ' + p[1] : '') + ' (저장 중…)');
+    }
     var y = scrollY; route(); scrollTo(0, y); flush();
   });
   var btn = document.getElementById('editBtn'), bar = document.getElementById('keyBar');
