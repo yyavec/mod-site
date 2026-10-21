@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <script>
+// 10-21 주인님: 들어오면 Chapter.2 → 2:2 팀전(team.html)이 가장 먼저. 박물관/세계수 갈림길은 그다음
+(function(){var q=location.search;
+  if(location.hash||/[?&](nf|battle|story|deckadmin|home)/.test(q))return;
+  try{if(sessionStorage.getItem("ch2-done"))return;}catch(e){return;}
+  location.replace("team.html");
+})();
+</script>
+<script>
 // 처음 온 사람에게만 시즌 2 종료 → 포켓몬 부활 이야기를 보여 준다 (주소 끝에 ?story 를 붙이면 다시 보기)
 (function(){var d=document.documentElement,q=location.search;
   if(/[?&]nf\b/.test(q)){d.setAttribute("data-frame","");d.setAttribute("data-mood","nightfall");return;}
@@ -24,12 +32,12 @@
 })();
 </script>
 <script>
-// 트레이너 배틀 안내: 들어올 때마다 전체화면으로 (10-18 주인님: 꼭 띄우기). ?battle 로 다시 보기
+// 트레이너 배틀 안내: ?battle 일 때만 전체화면으로 (10-21부터 자동으로 안 뜸, 홈 배너로 열기)
 (function(){var d=document.documentElement,q=location.search;
   if(/[?&]nf\b/.test(q))return;
   if(/[?&]battle\b/.test(q)){d.setAttribute("data-battle","");return;}
   if(location.hash==="#memories"){location.replace("memories.html");return;} /* 추억 저장소는 따로 된 페이지 */
-  d.setAttribute("data-battle","");
+  /* 10-21 주인님: 이제 자동으로 안 띄움. 홈의 배너(.tbb)나 ?battle 로만 열기 */
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -380,6 +388,24 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .gnew-home{margin:0 0 var(--s4, 16px); background:var(--bg-raised, #fff)}
 .lgd{position:relative; overflow:hidden; isolation:isolate; margin:0 0 var(--s4, 16px); padding:22px 22px 20px; border-radius:20px; color:#fff; border:2px solid #FFCB05; background:radial-gradient(110% 90% at 92% 0%, #5B2FA8 0%, rgba(91,47,168,0) 58%), radial-gradient(90% 80% at 0% 100%, #0B5C8C 0%, rgba(11,92,140,0) 62%), linear-gradient(160deg, #141A3C, #070A1C); box-shadow:0 0 0 5px rgba(255,203,5,.14), 0 16px 34px rgba(8,10,36,.35)}
 .wrap:not([data-page="home"]) > .lgd{display:none}
+/* 1차 트레이너 배틀 배너 (10-21) — 누르면 ?battle 로 전체화면 */
+.tbb{position:relative; overflow:hidden; isolation:isolate; display:flex; align-items:center; gap:16px; margin:0 0 var(--s4, 16px); padding:16px 20px; border-radius:18px; color:#fff; text-decoration:none; border:2px solid rgba(255,203,5,.7); background:radial-gradient(70% 120% at 0% 50%, rgba(227,64,58,.45), transparent 70%), radial-gradient(60% 120% at 100% 0%, rgba(255,203,5,.25), transparent 70%), linear-gradient(120deg, #14203A, #1B2A4A 60%, #2A1F3D); box-shadow:0 4px 0 rgba(0,0,0,.25); transition:transform .2s, box-shadow .2s}
+.tbb:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,203,5,.25), 0 4px 0 rgba(0,0,0,.25)}
+.wrap:not([data-page="home"]) > .tbb{display:none}
+.tbb-sky{position:absolute; inset:0; z-index:-1; background-image:radial-gradient(1.5px 1.5px at 18% 30%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 46% 74%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 72% 22%, #FFE27A 50%, transparent 51%), radial-gradient(1px 1px at 88% 68%, #fff 50%, transparent 51%)}
+.tbb-sky::after{content:""; position:absolute; left:-30%; top:0; width:30%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.14), transparent); animation:lgdShine 4.5s ease-in-out infinite}
+.tbb-balls{flex:none; display:flex; align-items:center; gap:4px}
+.tbb-balls i{width:34px; height:34px; border-radius:50%; border:3px solid #111; background:linear-gradient(#E3403A 0 46%, #111 46% 54%, #fff 54%); box-shadow:inset 0 0 0 0 #fff; position:relative}
+.tbb-balls i::after{content:""; position:absolute; left:50%; top:50%; width:9px; height:9px; margin:-6.5px; border-radius:50%; background:#fff; border:2px solid #111}
+.tbb-balls i:first-child{transform:rotate(-14deg)} .tbb-balls i:last-child{transform:rotate(14deg)}
+.tbb-balls b{font:400 15px/1 var(--pixel); color:#FFCB05; text-shadow:0 2px 0 #7a1d18}
+.tbb-in{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px}
+.tbb-tag{font:700 12px/1 var(--font); letter-spacing:.06em; color:#FFE27A}
+.tbb-h{font:900 22px/1.15 var(--font); letter-spacing:-.01em}
+.tbb-d{font-size:13.5px; color:#C9D2E8}
+.tbb-go{flex:none; padding:10px 16px; border-radius:999px; background:#FFCB05; color:#2a1d00; font:800 14px/1 var(--font); white-space:nowrap}
+@media (max-width:520px){.tbb{gap:12px; padding:14px} .tbb-balls i{width:26px; height:26px} .tbb-balls b{font-size:12px} .tbb-h{font-size:19px} .tbb-d{font-size:12.5px} .tbb-go{padding:8px 12px; font-size:13px}}
+@media (max-width:380px){.tbb-go{display:none}}
 .lgd-sky{position:absolute; inset:0; z-index:-1; background-image:radial-gradient(1.5px 1.5px at 12% 22%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 34% 70%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 58% 16%, #FFE27A 50%, transparent 51%), radial-gradient(1px 1px at 76% 58%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 90% 86%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 22% 92%, #FFE27A 50%, transparent 51%), radial-gradient(1px 1px at 46% 40%, #fff 50%, transparent 51%); animation:lgdTw 3s ease-in-out infinite alternate}
 .lgd-sky::after{content:""; position:absolute; left:-30%; top:0; width:30%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.12), transparent); animation:lgdShine 5s ease-in-out infinite}
 @keyframes lgdTw{from{opacity:.45}to{opacity:1}}
@@ -2318,6 +2344,12 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
       <div class="lgd-champ"><img src="assets/players/DaeJang09.png" alt="이연규 마크 스킨" loading="lazy"><div><span>👑 트레이너 배틀 우승</span><b>이연규</b><small>결승 2 : 0 완승! 축하합니다 🎉</small></div></div>
     </div>
   </section>
+  <a class="tbb" href="?battle" aria-label="1차 트레이너 배틀 다시 보기">
+    <span class="tbb-sky" aria-hidden="true"></span>
+    <span class="tbb-balls" aria-hidden="true"><i></i><b>VS</b><i></i></span>
+    <span class="tbb-in"><span class="tbb-tag">1차 · 10.17 SAT</span><b class="tbb-h">트레이너 배틀</b><span class="tbb-d">우승 이연규! 대진표와 경기 결과를 다시 볼 수 있어요</span></span>
+    <span class="tbb-go">다시 보기 <span aria-hidden="true">→</span></span>
+  </a>
   <section class="online" id="online" aria-live="polite" {{ADDRESS_HIDDEN}}>
     <div class="on-head"><span class="on-dot" aria-hidden="true"></span><b class="on-title" id="onTitle">서버 확인 중…</b><span class="on-sub" id="onSub"></span></div>
     <ul class="on-list" id="onList"></ul>
