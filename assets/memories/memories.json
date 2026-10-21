@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T13:59:55+09:00",
+ "updated": "2026-10-21T14:29:49+09:00",
  "cats": [
   {
    "id": "battle",
@@ -1764,6 +1764,17 @@
    "cat": "town",
    "sub": null,
    "hero": false,
+   "cover": false
+  },
+  {
+   "file": "m20261021_1.webp",
+   "thumb": "m20261021_1_s.webp",
+   "who": "삐끼",
+   "date": "2026-10-21",
+   "text": "망나뇽 타고 나는 준현님",
+   "cat": "daily",
+   "sub": null,
+   "hero": true,
    "cover": false
   }
  ]
