@@ -1265,7 +1265,10 @@ button.ty.lgf{--c:#D98A00}
 .ptabs button{white-space:nowrap}
 .ptabs .pt-mem{flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px; height:48px; border-radius:var(--r-md); text-decoration:none; white-space:nowrap; font:600 16px/1 var(--font); color:#fff; background:linear-gradient(135deg, #ff9f1c, #e3403a); box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
 .ptabs .pt-mem:hover{filter:brightness(1.06)}
+.ptabs .pt-mem{padding:0 10px; flex:1 1 0}
+.ptabs .pt-team{background:linear-gradient(135deg, #3b2b5e, #1d1730); box-shadow:inset 0 0 0 1px rgba(255,90,79,.5), inset 0 -4px 0 rgba(0,0,0,.25)}
 @media (max-width:520px){.ptabs .pt-mem{font-size:13px; height:44px; gap:3px}}
+@media (max-width:440px){.ptabs .pt-ico{display:none} .ptabs{gap:4px}}
 @media (max-width:520px){.ptabs button{font-size:13px; gap:4px; height:44px} .ptabs .pt-new,.ptabs .pt-long{display:none}}
 /* 코블몬 공략 탭 */
 .gd{gap:var(--s5)}
@@ -2293,11 +2296,12 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
     </div>
   </header>
   <nav class="ptabs" id="ptabs" role="tablist" aria-label="페이지">
-    <button type="button" role="tab" data-p="home" aria-selected="true">🏠 홈</button>
-    <button type="button" role="tab" data-p="play" aria-selected="false">📘 공략 <span class="pt-new">NEW</span></button>
-    <button type="button" role="tab" data-p="board" aria-selected="false">💬 <span class="pt-long">자유</span>게시판</button>
-    <button type="button" role="tab" data-p="recipes" aria-selected="false">🛠️ 조합법</button>
-    <a class="pt-mem" href="memories.html">📸 <span class="pt-long">추억 </span>저장소</a>
+    <button type="button" role="tab" data-p="home" aria-selected="true"><span class="pt-ico">🏠 </span>홈</button>
+    <button type="button" role="tab" data-p="play" aria-selected="false"><span class="pt-ico">📘 </span>공략 <span class="pt-new">NEW</span></button>
+    <button type="button" role="tab" data-p="board" aria-selected="false"><span class="pt-ico">💬 </span><span class="pt-long">자유</span>게시판</button>
+    <button type="button" role="tab" data-p="recipes" aria-selected="false"><span class="pt-ico">🛠️ </span>조합법</button>
+    <a class="pt-mem pt-team" href="team.html"><span class="pt-ico">🔍 </span>범인찾기</a>
+    <a class="pt-mem" href="memories.html"><span class="pt-ico">📸 </span><span class="pt-long">추억 </span>저장소</a>
   </nav>
   <section class="lgd" aria-labelledby="lgdH">
     <div class="lgd-sky" aria-hidden="true"></div>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>범인찾기 · 노천극장 진팀 배틀</title>
+<meta name="description" content="진팀 배틀! 이름하야, 범인찾기!!! 2:2 팀 대전 팀표와 내 목표덱 적기.">
+<meta property="og:title" content="진팀 배틀! 이름하야, 범인찾기!!!">
+<meta name="theme-color" content="#0d0b14">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#0d0b14; --bg-2:#16131f; --bg-3:#1e1a2a; --line:rgba(255,255,255,.09); --text:#f3f1f7; --text-2:#aaa4b8; --text-3:#716b80;
+  --red:#ff5a4f; --gold:#f2c14e; --green:#4fd18b;
+  --font:"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --latin:"Lexend", var(--font);
+  --gut:clamp(16px, 4vw, 40px); --max:1080px;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0; background:var(--bg); color:var(--text); font:400 16px/1.6 var(--font); -webkit-font-smoothing:antialiased; word-break:keep-all}
+a{color:inherit}
+button,input,select,textarea{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+
+.top{position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px var(--gut);
+  background:rgba(13,11,20,.8); backdrop-filter:saturate(1.4) blur(14px); -webkit-backdrop-filter:saturate(1.4) blur(14px); border-bottom:1px solid var(--line)}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; font:700 15px/1 var(--font)}
+.home{display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border:1px solid var(--line); border-radius:999px; text-decoration:none; font:600 14px/1 var(--font); color:var(--text-2)}
+.home:hover{color:var(--text); border-color:rgba(255,255,255,.3)}
+
+.hero{position:relative; overflow:hidden; padding:clamp(56px, 10vw, 112px) var(--gut) clamp(40px, 7vw, 72px); text-align:center;
+  background:radial-gradient(90% 70% at 50% 0%, rgba(255,90,79,.28), transparent 70%), radial-gradient(60% 50% at 80% 100%, rgba(242,193,78,.14), transparent 70%)}
+.hero::before{content:"🔍"; position:absolute; right:6%; top:18%; font-size:clamp(80px, 14vw, 160px); opacity:.08; transform:rotate(-14deg)}
+.kicker{margin:0 0 16px; font:600 12px/1 var(--latin); letter-spacing:.3em; text-transform:uppercase; color:var(--text-2)}
+.hero h1{margin:0; font:800 clamp(34px, 7vw, 76px)/1.08 var(--font); letter-spacing:-.03em}
+.hero h1 em{display:block; font-style:normal; color:var(--red); text-shadow:0 0 40px rgba(255,90,79,.35)}
+.lead{margin:18px auto 0; max-width:40ch; color:var(--text-2); font:400 clamp(15px, 2vw, 18px)/1.6 var(--font)}
+.chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:26px}
+.chip{display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border:1px solid var(--line); border-radius:999px; background:var(--bg-2); font:600 14px/1 var(--font)}
+.chip b{color:var(--gold); font-weight:700}
+
+.wrap{max-width:var(--max); margin:0 auto; padding:0 var(--gut) 96px}
+.sec{margin-top:56px}
+.sec-h{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:0 0 18px; padding-bottom:14px; border-bottom:1px solid var(--line)}
+.sec-h h2{margin:0; font:700 22px/1.2 var(--font)}
+.sec-h span{color:var(--text-3); font:500 14px/1 var(--font)}
+
+.teams{display:grid; grid-template-columns:repeat(4, 1fr); gap:14px}
+.team{position:relative; padding:18px 16px 16px; border:1px solid var(--line); border-radius:18px; background:linear-gradient(180deg, var(--bg-3), var(--bg-2)); text-align:center}
+.team-n{margin:0; font:700 12px/1 var(--latin); letter-spacing:.24em; color:var(--text-3)}
+.pair{display:flex; justify-content:center; align-items:flex-end; gap:6px; height:150px; margin:14px 0 10px}
+.pair img{height:140px; width:auto; image-rendering:pixelated; filter:drop-shadow(0 10px 14px rgba(0,0,0,.5))}
+.pair .vs{align-self:center; font:800 13px/1 var(--latin); color:var(--text-3)}
+.names{margin:0; font:700 18px/1.3 var(--font)}
+.names i{font-style:normal; color:var(--text-3); margin:0 6px}
+.how{margin:14px 0 0; color:var(--text-2); font:400 14px/1.6 var(--font)}
+@media (max-width:860px){.teams{grid-template-columns:repeat(2, 1fr)}}
+@media (max-width:420px){.pair{height:118px} .pair img{height:110px}}
+
+.goal{display:grid; grid-template-columns:1.2fr .8fr; gap:18px; align-items:start}
+.card{padding:22px; border:1px solid var(--line); border-radius:18px; background:var(--bg-2)}
+.card h3{margin:0 0 6px; font:700 18px/1.3 var(--font)}
+.card p.sub{margin:0 0 18px; color:var(--text-2); font:400 14px/1.6 var(--font)}
+.row{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px}
+label.f{display:block; font:600 13px/1 var(--font); color:var(--text-2); margin-bottom:6px}
+.in, select.in{width:100%; height:44px; padding:0 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--text)}
+.in:focus{border-color:rgba(242,193,78,.6); outline:none}
+.slots{display:grid; gap:8px}
+.slot{display:grid; grid-template-columns:40px 1fr auto; align-items:center; gap:10px; padding:8px; border:1px solid var(--line); border-radius:12px; background:var(--bg)}
+.mon{width:40px; height:40px; border-radius:8px; background:var(--bg-3) no-repeat 0 0; image-rendering:pixelated}
+.slot .in{height:40px; border:0; background:transparent; padding:0 4px}
+.own{display:inline-flex; padding:3px; border-radius:999px; background:var(--bg-3)}
+.own button{border:0; background:none; padding:7px 12px; border-radius:999px; font:600 13px/1 var(--font); color:var(--text-3); cursor:pointer; white-space:nowrap}
+.own button[aria-pressed="true"].y{background:var(--green); color:#062414}
+.own button[aria-pressed="true"].n{background:#3a3447; color:var(--text)}
+textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
+.acts{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px}
+.btn{height:46px; padding:0 20px; border:0; border-radius:12px; font:700 15px/1 var(--font); cursor:pointer}
+.btn.pri{background:var(--gold); color:#2a1d00}
+.btn.alt{background:var(--bg-3); color:var(--text)}
+.msg{min-height:22px; margin:12px 0 0; font:600 14px/1.5 var(--font); color:var(--text-2)}
+.msg.ok{color:var(--green)} .msg.err{color:var(--red)}
+.who{list-style:none; margin:0; padding:0; display:grid; gap:6px}
+.who li{display:flex; justify-content:space-between; padding:10px 12px; border-radius:10px; background:var(--bg); font:600 14px/1.3 var(--font)}
+.who li span{color:var(--text-3); font-weight:500}
+.who li.done span{color:var(--green)}
+.note{margin:14px 0 0; color:var(--text-3); font:400 13px/1.6 var(--font)}
+@media (max-width:820px){.goal{grid-template-columns:1fr} .row{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.own button{padding:7px 9px}}
+.foot{padding:40px var(--gut); text-align:center; color:var(--text-3); font:400 13px/1.6 var(--font); border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./"><span aria-hidden="true">🐸</span>노천극장 놀이터</a>
+  <a class="home" href="./">홈페이지로 <span aria-hidden="true">→</span></a>
+</header>
+
+<section class="hero">
+  <p class="kicker">Nochen Team Battle</p>
+  <h1>진팀 배틀!<em>이름하야, 범인찾기!!!</em></h1>
+  <p class="lead">2:2 팀 대전이에요. 트레이너 배틀 순위로 강한 사람과 아쉬운 사람을 한 팀으로 묶었어요. 과연 진 팀의 범인은 누구?</p>
+  <div class="chips"><span class="chip">📅 날짜 <b>미정</b></span><span class="chip">⏰ 시간 <b>미정</b></span><span class="chip">👥 4팀 · 8명</span></div>
+</section>
+
+<main class="wrap">
+  <section class="sec">
+    <div class="sec-h"><h2>팀표</h2><span>트레이너 배틀 10/17 순위 기준</span></div>
+    <div class="teams" id="teams"></div>
+    <p class="how">1등과 8등, 2등과 7등, 3등과 6등, 4등과 5등이 한 팀이에요. 날짜와 시간은 정해지면 바로 알려 드릴게요.</p>
+  </section>
+
+  <section class="sec" id="goal">
+    <div class="sec-h"><h2>내 목표덱</h2><span>본인만 볼 수 있어요</span></div>
+    <div class="goal">
+      <div class="card">
+        <h3>이번 대전에 쓸 포켓몬 6마리</h3>
+        <p class="sub">이름과 비밀번호를 넣고 포켓몬을 적어요. 이미 가진 포켓몬은 <b>보유</b>, 아직 없는 포켓몬은 <b>미보유</b>로 골라 두면 준비하기 좋아요.</p>
+        <div class="row">
+          <div><label class="f" for="gName">내 이름</label><select class="in" id="gName"><option value="">고르기</option></select></div>
+          <div><label class="f" for="gPin">비밀번호 (숫자 4~8자리)</label><input class="in" id="gPin" type="password" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="예: 1234"></div>
+        </div>
+        <div class="slots" id="slots"></div>
+        <label class="f" for="gMemo" style="margin-top:16px">메모 (작전, 기술, 지닌 도구 등)</label>
+        <textarea class="in" id="gMemo" maxlength="300" placeholder="예: 리자몽은 메가진화, 첫 턴에 칼춤"></textarea>
+        <div class="acts"><button class="btn pri" id="gSave" type="button">저장하기</button><button class="btn alt" id="gLoad" type="button">내 덱 불러오기</button></div>
+        <p class="msg" id="gMsg" role="status"></p>
+        <p class="note">비밀번호는 처음 저장할 때 정해져요. 같은 비밀번호를 넣어야만 다시 보거나 고칠 수 있어요. 잊어버리면 삐끼님께 말해 주세요.</p>
+      </div>
+      <div class="card">
+        <h3>제출 현황</h3>
+        <p class="sub">누가 목표덱을 적었는지만 보여요. 내용은 아무도 못 봐요.</p>
+        <ul class="who" id="who"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+<datalist id="monList"></datalist>
+<footer class="foot">진팀 배틀! 이름하야, 범인찾기!!! · 노천극장 놀이터</footer>
+
+<script>
+(function(){
+  var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
+  // [이름, 마크 이름]
+  var TEAMS = [[['연규','DaeJang09'],['혜련','ddalbok']], [['면진','h_uun'],['준현','JahyeonBaLaGi']], [['범철','EnderDimaa'],['기철','handal_']], [['건년','Zizonkookie'],['러시','NAMEISRUSH']]];
+  var PLAYERS = [].concat.apply([], TEAMS).map(function(p){ return p[0]; });
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  $('teams').innerHTML = TEAMS.map(function(t, i){
+    return '<article class="team"><p class="team-n">TEAM ' + (i + 1) + '</p><div class="pair">'
+      + '<img src="assets/players/' + t[0][1] + '.png" alt="' + t[0][0] + '"><span class="vs">&amp;</span><img src="assets/players/' + t[1][1] + '.png" alt="' + t[1][0] + '"></div>'
+      + '<p class="names">' + t[0][0] + '<i>+</i>' + t[1][0] + '</p></article>';
+  }).join('');
+  $('gName').innerHTML += PLAYERS.map(function(n){ return '<option>' + n + '</option>'; }).join('');
+
+  // 포켓몬 이름 목록 (그림 찾기용)
+  var DEX = {};
+  fetch('assets/cobble/index.json').then(function(r){ return r.json(); }).then(function(d){
+    var size = d.size || 96, frames = d.frames || 12;
+    (d.list || []).forEach(function(m){ if (!DEX[m[4]]) DEX[m[4]] = {dex:m[0], size:size, frames:frames}; });
+    $('monList').innerHTML = Object.keys(DEX).map(function(n){ return '<option value="' + esc(n) + '">'; }).join('');
+    document.querySelectorAll('.slot .in').forEach(icon);
+  }).catch(function(){});
+
+  var slots = $('slots');
+  for (var i = 0; i < 6; i++) {
+    slots.insertAdjacentHTML('beforeend', '<div class="slot"><span class="mon" aria-hidden="true"></span><input class="in" list="monList" maxlength="30" placeholder="포켓몬 ' + (i + 1) + '" aria-label="포켓몬 ' + (i + 1) + '">'
+      + '<span class="own" role="group" aria-label="보유 여부"><button type="button" class="y" aria-pressed="false">보유</button><button type="button" class="n" aria-pressed="true">미보유</button></span></div>');
+  }
+  function icon(inp){
+    var m = DEX[inp.value.trim()], el = inp.parentNode.querySelector('.mon');
+    if (!m) { el.style.backgroundImage = ''; return; }
+    el.style.backgroundImage = 'url(assets/cobble/' + m.dex + '.webp)';
+    el.style.backgroundSize = (40 * m.frames) + 'px 40px';
+  }
+  slots.addEventListener('input', function(e){ if (e.target.classList.contains('in')) icon(e.target); });
+  slots.addEventListener('click', function(e){
+    var b = e.target.closest('.own button'); if (!b) return;
+    b.parentNode.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+  });
+  function read(){
+    return [].map.call(slots.querySelectorAll('.slot'), function(s){
+      return {n: s.querySelector('.in').value.trim(), own: s.querySelector('.y').getAttribute('aria-pressed') === 'true'};
+    });
+  }
+  function fill(d){
+    var mons = (d && d.mons) || [];
+    [].forEach.call(slots.querySelectorAll('.slot'), function(s, i){
+      var m = mons[i] || {n:'', own:false}, inp = s.querySelector('.in');
+      inp.value = m.n || ''; icon(inp);
+      s.querySelector('.y').setAttribute('aria-pressed', m.own ? 'true' : 'false');
+      s.querySelector('.n').setAttribute('aria-pressed', m.own ? 'false' : 'true');
+    });
+    $('gMemo').value = (d && d.memo) || '';
+  }
+  function say(t, cls){ var m = $('gMsg'); m.textContent = t; m.className = 'msg' + (cls ? ' ' + cls : ''); }
+  var ERR = {member:'이름을 골라 주세요.', pin:'비밀번호는 숫자 4~8자리예요.', wrongpin:'비밀번호가 달라요.', none:'아직 저장한 목표덱이 없어요.'};
+  function post(o){ return fetch(API, {method:'POST', body:JSON.stringify(o)}).then(function(r){ return r.json(); }); }
+  function check(){
+    var name = $('gName').value, pin = $('gPin').value.trim();
+    if (!name) { say(ERR.member, 'err'); return null; }
+    if (!/^\d{4,8}$/.test(pin)) { say(ERR.pin, 'err'); return null; }
+    return {name:name, pin:pin};
+  }
+  $('gSave').addEventListener('click', function(){
+    var c = check(); if (!c) return;
+    var mons = read(); if (!mons.some(function(m){ return m.n; })) { say('포켓몬을 한 마리 이상 적어 주세요.', 'err'); return; }
+    say('저장하는 중…');
+    post({action:'goalSave', name:c.name, pin:c.pin, mons:mons, memo:$('gMemo').value}).then(function(d){
+      if (d && d.ok) { say('✅ 저장했어요! 같은 비밀번호로 언제든 다시 볼 수 있어요.', 'ok'); list(); }
+      else say(ERR[d && d.error] || '저장이 안 됐어요. 잠시 뒤에 다시 해 주세요.', 'err');
+    }).catch(function(){ say('저장이 안 됐어요. 잠시 뒤에 다시 해 주세요.', 'err'); });
+  });
+  $('gLoad').addEventListener('click', function(){
+    var c = check(); if (!c) return;
+    say('불러오는 중…');
+    post({action:'goalLoad', name:c.name, pin:c.pin}).then(function(d){
+      if (d && d.ok) { fill(d.data); say('📂 ' + c.name + '님의 목표덱을 불러왔어요.', 'ok'); }
+      else say(ERR[d && d.error] || '불러오지 못했어요.', 'err');
+    }).catch(function(){ say('불러오지 못했어요.', 'err'); });
+  });
+  function list(){
+    fetch(API + '?goal=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+      var done = {}; ((d && d.list) || []).forEach(function(x){ done[x.name] = 1; });
+      $('who').innerHTML = PLAYERS.map(function(n){ return '<li class="' + (done[n] ? 'done' : '') + '">' + n + '<span>' + (done[n] ? '✅ 제출함' : '아직') + '</span></li>'; }).join('');
+    }).catch(function(){ $('who').innerHTML = '<li>목표덱 기능을 준비하고 있어요<span>곧 열려요</span></li>'; });
+  }
+  $('who').innerHTML = PLAYERS.map(function(n){ return '<li>' + n + '<span>…</span></li>'; }).join('');
+  list();
+})();
+</script>
+</body>
+</html>

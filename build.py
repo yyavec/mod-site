@@ -486,7 +486,7 @@ def main():
     if (ROOT / "assets").is_dir():  # 사이트에 쓰는 그림
         shutil.copytree(ROOT / "assets", OUT / "assets", dirs_exist_ok=True)
 
-    for extra_page in ("memories.html",):  # 따로 된 페이지 (추억 저장소)
+    for extra_page in ("memories.html", "team.html"):  # 따로 된 페이지 (추억 저장소)
         if (ROOT / extra_page).exists():
             shutil.copyfile(ROOT / extra_page, OUT / extra_page)
 
