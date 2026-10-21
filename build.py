@@ -486,6 +486,10 @@ def main():
     if (ROOT / "assets").is_dir():  # 사이트에 쓰는 그림
         shutil.copytree(ROOT / "assets", OUT / "assets", dirs_exist_ok=True)
 
+    for extra_page in ("memories.html",):  # 따로 된 페이지 (추억 저장소)
+        if (ROOT / extra_page).exists():
+            shutil.copyfile(ROOT / extra_page, OUT / extra_page)
+
     # 웹 관리자 화면 (로그인은 관리 서버가 확인한다)
     admin_tpl = ROOT / "admin.html"
     if admin_tpl.exists():
