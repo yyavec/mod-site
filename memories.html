@@ -293,6 +293,9 @@ button{font:inherit; color:inherit}
     var y = scrollY; route(); scrollTo(0, y); flush();
   });
   var btn = document.getElementById('editBtn'), bar = document.getElementById('keyBar');
+  // 10-22 주인님: 고정 관리자 링크 memories.html#k=<키> → 키를 이 기기에 기억하고 주소에서는 지운다
+  var hk = /(?:^#|&)k=([^&]+)/.exec(location.hash);
+  if (hk) { try { localStorage.setItem('deck-admin-key', decodeURIComponent(hk[1])); } catch (x) {} history.replaceState(null, '', location.pathname + location.search); }
   try { key = localStorage.getItem('deck-admin-key') || ''; } catch (x) {}
   if (key) btn.classList.add('on');
   if (!key && /[?&]edit\b/.test(location.search)) bar.hidden = false;
