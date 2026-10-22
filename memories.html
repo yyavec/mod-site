@@ -244,7 +244,7 @@ button{font:inherit; color:inherit}
     if (id === 'dates') dates(); else if (id) album(id); else home();
     app.classList.toggle('editing', editing);
   }
-  addEventListener('hashchange', function(){ route(); scrollTo(0, 0); });
+  addEventListener('hashchange', function(){ var k = /^#k=([^&]+)/.exec(location.hash); if (k) { try { localStorage.setItem('deck-admin-key', decodeURIComponent(k[1])); } catch (x) {} location.replace(location.pathname + location.search); return; } route(); scrollTo(0, 0); });
   app.addEventListener('click', function(e){
     if (e.target.closest('.mv')) return;
     var f = e.target.closest('.ph'); if (f && !editing) open(+f.dataset.i);
