@@ -39,9 +39,13 @@ button{font:inherit; color:inherit}
 .home:hover{color:var(--text); border-color:rgba(255,255,255,.3)}
 
 /* 표지 */
-.cover{position:relative; min-height:min(78vh, 760px); display:flex; align-items:flex-end; padding:0 var(--gut) clamp(32px, 6vw, 72px); overflow:hidden}
-.cover-img{position:absolute; inset:0; background:center 40%/cover no-repeat; transform:scale(1.03)}
-.cover::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,12,16,.1) 0%, rgba(11,12,16,.35) 50%, var(--bg) 100%)}
+/* 10-22 주인님: 대표 사진은 잘리지 않게 원래 비율(와이드) 그대로, 글은 사진 아래 */
+.cover{position:relative; overflow:hidden; isolation:isolate}
+.cover::before{content:""; position:absolute; inset:-10%; z-index:-1; background:var(--cv) center/cover no-repeat; filter:blur(48px) saturate(1.2); opacity:.32}
+.cover-pic{position:relative; display:block; margin:0}
+.cover-pic img{display:block; width:100%; height:auto}
+.cover-pic::after{content:""; position:absolute; left:0; right:0; bottom:0; height:12%; background:linear-gradient(180deg, transparent, var(--bg))}
+.cover-txt{padding:clamp(18px, 3vw, 36px) var(--gut) clamp(32px, 5vw, 64px)}
 .cover-in{position:relative; z-index:1; width:100%; max-width:var(--max); margin:0 auto}
 .eyebrow{margin:0 0 14px; font:600 12px/1 var(--latin); letter-spacing:.28em; text-transform:uppercase; color:var(--text-2)}
 .cover h1{margin:0; font:800 clamp(44px, 9vw, 112px)/.98 var(--font); letter-spacing:-.03em}
@@ -173,10 +177,10 @@ button{font:inherit; color:inherit}
     all.forEach(function(m){ people[m.who] = 1; days[m.date] = 1; });
     var cats = D.cats.filter(function(c){ return byCat(c.id).length; });
     var cover = all.filter(function(m){ return m.cover; })[0] || coverOf(all);
-    var h = '<section class="cover"><div class="cover-img" style="background-image:url(assets/memories/' + esc(cover.file) + ')"></div>'
-      + '<div class="cover-in"><p class="eyebrow">Nochen Memories</p><h1>추억 저장소</h1>'
+    var h = '<section class="cover" style="--cv:url(assets/memories/' + esc(cover.thumb) + ')"><figure class="cover-pic"><img src="assets/memories/' + esc(cover.file) + '" alt="' + esc(cover.text || '대표 사진') + '"></figure>'
+      + '<div class="cover-txt"><div class="cover-in"><p class="eyebrow">Nochen Memories</p><h1>추억 저장소</h1>'
       + '<p class="lead">트레이너 배틀부터 우리가 꾸민 마을까지. 노천극장에서 함께 남긴 순간들을 앨범으로 모았어요.</p>'
-      + '<div class="stats"><span><b>' + all.length + '</b>장의 사진</span><span><b>' + cats.length + '</b>개의 앨범</span><span><b>' + Object.keys(people).length + '</b>명이 올렸어요</span><span><b>' + Object.keys(days).length + '</b>일의 기록</span></div></div></section>'
+      + '<div class="stats"><span><b>' + all.length + '</b>장의 사진</span><span><b>' + cats.length + '</b>개의 앨범</span><span><b>' + Object.keys(people).length + '</b>명이 올렸어요</span><span><b>' + Object.keys(days).length + '</b>일의 기록</span></div></div></div></section>'
       + '<div class="wrap"><div class="sec-t"><h2>앨범</h2>' + views('album') + '</div><div class="albums">';
     cats.forEach(function(c, i){
       var arr = byCat(c.id), cv = coverOf(arr);
