@@ -184,14 +184,14 @@ html.landed .stage{animation:land 1.1s cubic-bezier(.2,.8,.2,1) both}
 .tc-form .acts{margin:0}
 @media (max-width:520px){.tc{padding:18px 10px 14px; border-radius:18px} .tc-pair img{height:104px} .tc-pair figcaption{font-size:15px} .tc-form .rw{grid-template-columns:1fr}}
 
-.soon{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+.soon{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px}
 .soon div{position:relative; overflow:hidden; padding:26px 18px; border-radius:20px; text-align:center; background:linear-gradient(180deg, #1f1736, #130d24); border:1px solid var(--line)}
 .soon div::after{content:""; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.08), transparent); animation:sweep 3.5s ease-in-out infinite}
 @keyframes sweep{to{left:130%}}
 .soon i{display:block; font-style:normal; font-size:34px}
 .soon b{display:block; margin-top:8px; font:800 16px/1.3 var(--font)}
 .soon span{display:inline-block; white-space:nowrap; margin-top:10px; padding:5px 12px; border-radius:999px; background:rgba(255,203,5,.14); color:var(--gold); font:400 12px/1 var(--pixel); letter-spacing:.08em; animation:blink 1.4s steps(2) infinite}
-@media (max-width:520px){.soon{grid-template-columns:repeat(3, 1fr); gap:8px} .soon div{padding:18px 8px} .soon i{font-size:26px} .soon b{font-size:14px} .soon span{padding:5px 8px; font-size:10px; letter-spacing:0}}
+@media (max-width:520px){.soon{grid-template-columns:repeat(2, 1fr); gap:8px} .soon div{padding:18px 8px} .soon i{font-size:26px} .soon b{font-size:14px} .soon span{padding:5px 8px; font-size:10px; letter-spacing:0}}
 
 .goal{display:grid; grid-template-columns:1.25fr .75fr; gap:18px; align-items:start}
 .card{position:relative; padding:24px; border-radius:22px; background:linear-gradient(180deg, #1c1531, #130d24); border:1px solid var(--line); box-shadow:0 20px 50px rgba(0,0,0,.35)}
@@ -237,7 +237,23 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
 .adm-deck b{font-size:14px}
 .adm-deck span{color:var(--text-2)}
 .adm-deck em{font-style:normal; color:var(--text-3)}
+.adm-deck .dup{color:#ff8a80; font-weight:800}
+.adm-deck .dup::before{content:"⚠️ "}
 .adm-deck button{justify-self:start; margin-top:2px; padding:5px 10px; border:1px solid rgba(255,203,5,.5); border-radius:999px; background:none; color:var(--gold-2); font:700 12px/1 var(--font); cursor:pointer}
+.due{display:grid; gap:4px; margin:0 0 18px; padding:18px 20px; border-radius:18px; text-decoration:none; color:#2a1700; background:linear-gradient(120deg, #fff1a8, var(--gold) 60%, #f59e0b); box-shadow:0 5px 0 #9a5b00, 0 14px 30px rgba(255,180,0,.25)}
+.due-k{font:800 13px/1 var(--font); opacity:.75}
+.due b{font:900 clamp(22px, 3.6vw, 30px)/1.15 var(--font); letter-spacing:-.02em}
+.due-d{font:600 14px/1.5 var(--font)}
+.rules{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2, 1fr); gap:12px}
+.rules li{display:grid; grid-template-columns:40px 1fr; gap:14px; align-items:start; padding:18px; border-radius:18px; background:linear-gradient(180deg, #1f1736, #130d24); border:1px solid var(--line)}
+.rules li > i{display:grid; place-items:center; width:40px; height:40px; border-radius:12px; font:900 18px/1 var(--latin); font-style:normal; color:#0b0716; background:linear-gradient(180deg, #ffe27a, #ff8a2c); box-shadow:0 4px 0 #9a3d10}
+.rules b{display:block; margin-bottom:4px; font:800 16px/1.35 var(--font)}
+.rules p{margin:0; color:var(--text-2); font:400 14px/1.65 var(--font)}
+.rules p b{display:inline; font:inherit; font-weight:700; color:#fff; margin:0}
+@media (max-width:760px){.rules{grid-template-columns:1fr}}
+.slot .own{grid-column:3; grid-row:1}
+.slot .sp{grid-row:1 / span 2; align-self:start}
+.slot .it{grid-column:2 / -1; grid-row:2; height:34px; padding:0 10px; border:1px solid var(--line); border-radius:9px; background:#120c22; font-size:13px}
 .foot{padding:28px var(--gut) 40px; text-align:center; color:var(--text-3); font:400 13px/1.6 var(--font)}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important}}
@@ -274,7 +290,7 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     <h1 class="title"><span class="w" data-t="2:2 팀전"><span class="vs">2:2</span>팀전</span></h1>
     <p class="subt"><span class="and">그리고....</span> 진팀 배틀! 이름하야 <b>범인찾기!!</b></p>
     <div class="line-up" id="lineup" aria-label="네 팀"></div>
-    <div class="chips"><span class="chip">📅 날짜 <b>미정</b></span><span class="chip">⏰ 시간 <b>미정</b></span><span class="chip">🎰 운명의 몬스터볼 머신 추첨</span></div>
+    <div class="chips"><span class="chip">📅 날짜 <b>미정</b></span><span class="chip">⏰ 시간 <b>미정</b></span><span class="chip">📋 엔트리 마감 <b>10/25(일)</b></span><span class="chip">🎰 운명의 몬스터볼 머신 추첨</span></div>
     <div class="cta"><a class="go" href="./" data-enter>🎪 노천극장 입장하기 <span aria-hidden="true">→</span></a><a class="ghost" href="#teams">⚔️ 팀 보러 가기</a></div>
   </div>
   <div class="tape t2" aria-hidden="true"><div id="tape2"></div></div>
@@ -286,23 +302,29 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     <div class="teams" id="teamCards"></div>
   </section>
 
+  <section class="sec" id="rules">
+    <div class="sec-h"><span class="big" aria-hidden="true">RULES</span><h2>대회 룰</h2><p>2:2 트레이너 배틀 · 8대8 멀티배틀 팀전</p></div>
+    <a class="due" href="#goal"><span class="due-k">📋 1차 엔트리 제출</span><b>일요일(10월 25일)까지</b><span class="due-d">아래 '내 목표덱'에 4마리를 적어 주세요. 포켓몬이 겹치면 따로 불러서 조율해요. →</span></a>
+    <ol class="rules"><li><i>1</i><div><b>8대8 멀티배틀 팀전</b><p>참가자마다 포켓몬 <b>4마리</b>를 써요. 레벨은 <b>50 고정</b>이에요.</p></div></li><li><i>2</i><div><b>엔트리 고정 · 미리 공개</b><p>엔트리 포켓몬은 고정이에요. 대회 도중 <b>도구·기술·폼체인지</b>는 바꿀 수 없고, 대회 시작 전에 모두 공개해요. 팀의 8마리는 <b>모두 다른 도구</b>를 들어야 해요.</p></div></li><li><i>3</i><div><b>전설급은 팀당 최대 3마리</b><p>전설·환상·준전설·패러독스 포켓몬은 <b>팀당 최대 3마리</b>까지 쓸 수 있어요. 사용 우선권은 <b>최초 포획자</b>에게 있어요.</p></div></li><li><i>4</i><div><b>1차 배틀 포켓몬은 최대 1마리</b><p>1차 배틀 때 내가 썼거나 다른 팀 참가자가 썼던 포켓몬 중 <b>최대 한 마리</b>를 쓸 수 있어요. 다른 참가자와 겹치면 <b>1차 때 그 포켓몬을 썼던 사람</b>에게 우선권과 선택권이 있어요.</p></div></li><li><i>5</i><div><b>기믹은 메가진화 · Z기술만</b><p><b>메가진화(원시회귀)</b>와 <b>Z기술</b>만 쓸 수 있고, 각각 <b>최대 한 번</b>이에요.</p></div></li><li><i>6</i><div><b>폼이 다른 포켓몬</b><p>로토무, 버드렉스, 오거폰처럼 폼마다 타입이 다른 포켓몬은 <b>별개의 포켓몬</b>으로 쳐요. 하지만 한 팀에서 같은 포켓몬을 타입별로 <b>여러 마리 쓸 수는 없어요</b>.</p></div></li></ol>
+  </section>
+
   <section class="sec">
     <div class="sec-h"><span class="big" aria-hidden="true">COMING SOON</span><h2>곧 공개돼요</h2></div>
-    <div class="soon"><div><i>📜</i><b>대회 룰</b><span>COMING SOON</span></div><div><i>📅</i><b>날짜 · 시간</b><span>COMING SOON</span></div><div><i>🗺️</i><b>대진표</b><span>COMING SOON</span></div></div>
+    <div class="soon"><div><i>📅</i><b>날짜 · 시간</b><span>COMING SOON</span></div><div><i>🗺️</i><b>대진표</b><span>COMING SOON</span></div></div>
   </section>
 
   <section class="sec" id="goal">
     <div class="sec-h"><span class="big" aria-hidden="true">MY DECK</span><h2>내 목표덱</h2><p>본인만 볼 수 있어요</p></div>
     <div class="goal">
       <div class="card hot">
-        <h3>이번 대전에 쓸 포켓몬 6마리</h3>
-        <p class="sub">이름과 비밀번호를 넣고 포켓몬을 적어요. 이미 가진 포켓몬은 <b>보유</b>, 아직 없는 포켓몬은 <b>미보유</b>로 골라 두면 준비하기 좋아요.</p>
+        <h3>1차 엔트리 · 포켓몬 4마리</h3>
+        <p class="sub">이름과 비밀번호를 넣고 포켓몬 4마리와 <b>지닌 도구</b>를 적어요. 이미 가진 포켓몬은 <b>보유</b>, 아직 없는 포켓몬은 <b>미보유</b>로 골라 두세요. <b>일요일(10/25)까지</b> 적으면 겹치는 포켓몬을 미리 조율할 수 있어요.</p>
         <div class="row">
           <div><label class="f" for="gName">내 이름</label><select class="in" id="gName"><option value="">고르기</option></select></div>
           <div><label class="f" for="gPin">비밀번호 (숫자 4~8자리)</label><input class="in" id="gPin" type="password" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="예: 1234"></div>
         </div>
         <div class="slots" id="slots"></div>
-        <label class="f" for="gMemo" style="margin-top:16px">메모 (작전, 기술, 지닌 도구 등)</label>
+        <label class="f" for="gMemo" style="margin-top:16px">메모 (기술, 메가진화·Z기술 쓸 포켓몬, 작전 등)</label>
         <textarea class="in" id="gMemo" maxlength="300" placeholder="예: 리자몽은 메가진화, 첫 턴에 칼춤"></textarea>
         <div class="acts"><button class="btn pri" id="gSave" type="button">저장하기</button><button class="btn alt" id="gLoad" type="button">내 덱 불러오기</button></div>
         <p class="msg" id="gMsg" role="status"></p>
@@ -342,7 +364,7 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
   // ---- 띠 글자 ----
   function tape(id, words){ var one = words.map(function(w){ return '<span>' + w + '</span>'; }).join(''); $(id).innerHTML = one + one + one + one; }
   tape('tape1', ['★ CHAPTER.2', '2:2 TEAM BATTLE', '노천극장 최대 축제', '진팀 배틀! 이름하야 범인찾기!!']);
-  tape('tape2', ['🔴 RED', '🔵 BLUE', '🟡 YELLOW', '🟢 GREEN', '★ 누가 범인일까?', '★ COMING SOON']);
+  tape('tape2', ['🔴 RED', '🔵 BLUE', '🟡 YELLOW', '🟢 GREEN', '★ 누가 범인일까?', '★ 엔트리 마감 10/25(일)', '★ 8대8 멀티배틀']);
 
   // ---- 무대 위 네 팀 ----
   $('lineup').innerHTML = TEAMS.map(function(t, i){
@@ -391,11 +413,11 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     var frames = d.frames || 12;
     (d.list || []).forEach(function(m){ if (!DEX[m[4]]) DEX[m[4]] = {dex:m[0], frames:frames}; });
     $('monList').innerHTML = Object.keys(DEX).map(function(n){ return '<option value="' + esc(n) + '">'; }).join('');
-    document.querySelectorAll('.slot .in').forEach(icon);
+    document.querySelectorAll('.slot .in:not(.it)').forEach(icon);
   }).catch(function(){});
   var slots = $('slots');
-  for (var i = 0; i < 6; i++) {
-    slots.insertAdjacentHTML('beforeend', '<div class="slot"><span class="sp" aria-hidden="true"></span><input class="in" list="monList" maxlength="30" placeholder="포켓몬 ' + (i + 1) + '" aria-label="포켓몬 ' + (i + 1) + '">'
+  for (var i = 0; i < 4; i++) {  // 룰: 참가자마다 4마리
+    slots.insertAdjacentHTML('beforeend', '<div class="slot"><span class="sp" aria-hidden="true"></span><input class="in" list="monList" maxlength="30" placeholder="포켓몬 ' + (i + 1) + '" aria-label="포켓몬 ' + (i + 1) + '"><input class="in it" maxlength="20" placeholder="지닌 도구 (예: 기합의띠)" aria-label="포켓몬 ' + (i + 1) + ' 도구">'
       + '<span class="own" role="group" aria-label="보유 여부"><button type="button" class="y" aria-pressed="false">보유</button><button type="button" class="n" aria-pressed="true">미보유</button></span></div>');
   }
   function icon(inp){
@@ -404,21 +426,21 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     el.style.backgroundImage = 'url(assets/cobble/' + m.dex + '.webp)';
     el.style.backgroundSize = (44 * m.frames) + 'px 44px';
   }
-  slots.addEventListener('input', function(e){ if (e.target.classList.contains('in')) icon(e.target); });
+  slots.addEventListener('input', function(e){ if (e.target.classList.contains('in') && !e.target.classList.contains('it')) icon(e.target); });
   slots.addEventListener('click', function(e){
     var b = e.target.closest('.own button'); if (!b) return;
     b.parentNode.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
   });
   function read(){
     return [].map.call(slots.querySelectorAll('.slot'), function(s){
-      return {n: s.querySelector('.in').value.trim(), own: s.querySelector('.y').getAttribute('aria-pressed') === 'true'};
+      return {n: s.querySelector('.in').value.trim(), it: s.querySelector('.it').value.trim(), own: s.querySelector('.y').getAttribute('aria-pressed') === 'true'};
     });
   }
   function fill(d){
     var mons = (d && d.mons) || [];
     [].forEach.call(slots.querySelectorAll('.slot'), function(s, i){
       var m = mons[i] || {n:'', own:false}, inp = s.querySelector('.in');
-      inp.value = m.n || ''; icon(inp);
+      inp.value = m.n || ''; icon(inp); s.querySelector('.it').value = m.it || '';
       s.querySelector('.y').setAttribute('aria-pressed', m.own ? 'true' : 'false');
       s.querySelector('.n').setAttribute('aria-pressed', m.own ? 'false' : 'true');
     });
@@ -469,9 +491,10 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     post({action:'goalAll', key:ADMIN}).then(function(d){
       var box = $('admAll'); if (!box || !d || !d.ok) return;
       var rows = (d.list || []).filter(function(x){ return ((x.data && x.data.mons) || []).some(function(m){ return m.n; }); });
+      var DUP = {}; rows.forEach(function(x){ x.data.mons.forEach(function(m){ if (m.n) DUP[m.n] = (DUP[m.n] || 0) + 1; }); });  // 겹치는 포켓몬 표시
       box.innerHTML = rows.length ? rows.map(function(x){
         var mons = x.data.mons.filter(function(m){ return m.n; });
-        return '<div class="adm-deck"><b>' + esc(x.name) + '</b><span>' + mons.map(function(m){ return esc(m.n) + (m.own ? ' ✅' : ' ⬜'); }).join(' · ') + '</span>'
+        return '<div class="adm-deck"><b>' + esc(x.name) + '</b><span>' + mons.map(function(m){ return '<span class="' + (DUP[m.n] > 1 ? 'dup' : '') + '">' + esc(m.n) + (m.it ? ' @' + esc(m.it) : '') + (m.own ? ' ✅' : ' ⬜') + '</span>'; }).join(' · ') + '</span>'
           + (x.data.memo ? '<em>' + esc(x.data.memo) + '</em>' : '') + '<button type="button" data-edit="' + esc(x.name) + '">고치기</button></div>';
       }).join('') : '<p class="note">아직 아무도 목표덱을 적지 않았어요.</p>';
     });
