@@ -2,10 +2,11 @@
 <html lang="ko" data-mood="{{MOOD}}">
 <head>
 <meta charset="utf-8">
+<script src="assets/admin.js"></script>
 <script>
 // 10-21 주인님: 들어오면 Chapter.2 → 2:2 팀전(team.html)이 가장 먼저. 박물관/세계수 갈림길은 그다음
 (function(){var q=location.search;
-  if(location.hash||/[?&](nf|battle|story|deckadmin|home)/.test(q))return;
+  if(location.hash||/[?&](nf|battle|story|deckadmin|home)\b/.test(q))return;
   try{if(sessionStorage.getItem("ch2-done"))return;}catch(e){return;}
   location.replace("team.html");
 })();

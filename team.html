@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<script src="assets/admin.js"></script>
 <script>
 // 10-21 주인님: 사이트에 들어오면 이 화면이 가장 먼저. 여기 한 번 오면 그 창에서는 홈이 다시 여기로 보내지 않는다
 (function(){var d=document.documentElement;
@@ -230,6 +231,13 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
 .end{position:relative; overflow:hidden; margin-top:96px; padding:64px var(--gut) 72px; text-align:center; background:radial-gradient(60% 80% at 50% 100%, rgba(255,203,5,.22), transparent 70%), linear-gradient(180deg, transparent, #1a0f30)}
 .end h2{margin:0 0 8px; font:900 clamp(26px, 5vw, 44px)/1.2 var(--font); letter-spacing:-.02em}
 .end p{margin:0 0 26px; color:var(--text-2)}
+.adm-wrap{margin-top:18px; padding-top:16px; border-top:1px dashed rgba(255,203,5,.35)}
+.adm-wrap h4{margin:0 0 10px; font:800 15px/1.3 var(--font); color:var(--gold-2)}
+.adm-deck{display:grid; gap:4px; padding:10px 12px; margin-bottom:6px; border-radius:12px; background:#0b0716; font:500 13px/1.5 var(--font)}
+.adm-deck b{font-size:14px}
+.adm-deck span{color:var(--text-2)}
+.adm-deck em{font-style:normal; color:var(--text-3)}
+.adm-deck button{justify-self:start; margin-top:2px; padding:5px 10px; border:1px solid rgba(255,203,5,.5); border-radius:999px; background:none; color:var(--gold-2); font:700 12px/1 var(--font); cursor:pointer}
 .foot{padding:28px var(--gut) 40px; text-align:center; color:var(--text-3); font:400 13px/1.6 var(--font)}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important}}
@@ -326,6 +334,7 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
   var PLAYERS = [].concat.apply([], TEAMS).map(function(p){ return p[0]; });
   var TEAM_OF = {}; TEAMS.forEach(function(t, i){ t.forEach(function(p){ TEAM_OF[p[0]] = i; }); });
   var NAMES = {};
+  var ADMIN = window.SITE_ADMIN_KEY || '';  // 10-22: 관리자 링크로 들어온 기기 (assets/admin.js)
   var html = document.documentElement, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function(id){ return document.getElementById(id); };
   function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -351,7 +360,7 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
         + '<div class="tc-pair"><figure><img src="assets/players/' + t[0][1] + '.png" alt="' + t[0][0] + ' 마크 스킨" loading="lazy"><figcaption>' + t[0][0] + '</figcaption></figure><span class="x">×</span>'
         + '<figure><img src="assets/players/' + t[1][1] + '.png" alt="' + t[1][0] + ' 마크 스킨" loading="lazy"><figcaption>' + t[1][0] + '</figcaption></figure></div>'
         + '<button class="tc-edit" type="button">✏️ 팀 이름 ' + (n ? '바꾸기' : '짓기') + '</button>'
-        + '<div class="tc-form" hidden><div class="rw"><select class="in" aria-label="내 이름"><option value="">내 이름</option><option>' + t[0][0] + '</option><option>' + t[1][0] + '</option></select>'
+        + '<div class="tc-form" hidden><div class="rw"' + (ADMIN ? ' hidden' : '') + '><select class="in" aria-label="내 이름"><option value="">내 이름</option><option>' + t[0][0] + '</option><option>' + t[1][0] + '</option></select>'
         + '<input class="in pin" type="password" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="비밀번호" aria-label="목표덱 비밀번호"></div>'
         + '<input class="in tn" maxlength="16" placeholder="팀 이름 (16자까지)" aria-label="팀 이름" value="' + esc(n || '') + '">'
         + '<div class="acts"><button class="btn pri sm" type="button" data-save>저장</button><button class="btn alt sm" type="button" data-cancel>닫기</button></div><p class="msg" role="status"></p></div></article>';
@@ -366,10 +375,10 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     if (e.target.closest('[data-cancel]')) { form.hidden = true; return; }
     if (!e.target.closest('[data-save]')) return;
     var name = form.querySelector('select').value, pin = form.querySelector('.pin').value.trim(), tn = form.querySelector('.tn').value.trim();
-    var bad = !name ? '내 이름을 골라 주세요.' : !/^\d{4,8}$/.test(pin) ? TERR.pin : !tn ? TERR.tname : '';
+    var bad = ADMIN ? (!tn ? TERR.tname : '') : !name ? '내 이름을 골라 주세요.' : !/^\d{4,8}$/.test(pin) ? TERR.pin : !tn ? TERR.tname : '';
     if (bad) { msg.textContent = bad; msg.className = 'msg err'; return; }
     msg.textContent = '저장하는 중…'; msg.className = 'msg';
-    post({action:'teamSave', name:name, pin:pin, team:tn}).then(function(d){
+    post(ADMIN ? {action:'teamSave', t:+card.dataset.t, team:tn, key:ADMIN} : {action:'teamSave', name:name, pin:pin, team:tn}).then(function(d){
       if (d && d.ok) { NAMES = d.teams || NAMES; cards(); boom(card); }
       else { msg.textContent = TERR[d && d.error] || '저장이 안 됐어요. 잠시 뒤에 다시 해 주세요.'; msg.className = 'msg err'; }
     }).catch(function(){ msg.textContent = '아직 준비 중이에요. 조금 뒤에 다시 해 주세요.'; msg.className = 'msg err'; });
@@ -421,22 +430,22 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
   function check(){
     var name = $('gName').value, pin = $('gPin').value.trim();
     if (!name) { say(ERR.member, 'err'); return null; }
-    if (!/^\d{4,8}$/.test(pin)) { say(ERR.pin, 'err'); return null; }
+    if (!ADMIN && !/^\d{4,8}$/.test(pin)) { say(ERR.pin, 'err'); return null; }
     return {name:name, pin:pin};
   }
   $('gSave').addEventListener('click', function(){
     var c = check(); if (!c) return;
     var mons = read(); if (!mons.some(function(m){ return m.n; })) { say('포켓몬을 한 마리 이상 적어 주세요.', 'err'); return; }
     say('저장하는 중…');
-    post({action:'goalSave', name:c.name, pin:c.pin, mons:mons, memo:$('gMemo').value}).then(function(d){
-      if (d && d.ok) { say('✅ 저장했어요! 같은 비밀번호로 언제든 다시 볼 수 있어요.', 'ok'); list(); }
+    post({action:'goalSave', name:c.name, pin:c.pin, mons:mons, memo:$('gMemo').value, key:ADMIN || undefined}).then(function(d){
+      if (d && d.ok) { say(ADMIN ? '✅ ' + c.name + '님 목표덱을 관리자로 저장했어요.' : '✅ 저장했어요! 같은 비밀번호로 언제든 다시 볼 수 있어요.', 'ok'); list(); if (ADMIN) all(); }
       else say(ERR[d && d.error] || '저장이 안 됐어요. 잠시 뒤에 다시 해 주세요.', 'err');
     }).catch(function(){ say('저장이 안 됐어요. 잠시 뒤에 다시 해 주세요.', 'err'); });
   });
   $('gLoad').addEventListener('click', function(){
     var c = check(); if (!c) return;
     say('불러오는 중…');
-    post({action:'goalLoad', name:c.name, pin:c.pin}).then(function(d){
+    post({action:'goalLoad', name:c.name, pin:c.pin, key:ADMIN || undefined}).then(function(d){
       if (d && d.ok) { fill(d.data); say('📂 ' + c.name + '님의 목표덱을 불러왔어요.', 'ok'); }
       else say(ERR[d && d.error] || '불러오지 못했어요.', 'err');
     }).catch(function(){ say('불러오지 못했어요.', 'err'); });
@@ -454,6 +463,29 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     }).catch(function(){ who({}); });
   }
   who(null); list();
+
+  // ---- 관리자: 비밀번호 없이 누구 덱이든 쓰고 보기, 모든 목표덱 보기 ----
+  function all(){
+    post({action:'goalAll', key:ADMIN}).then(function(d){
+      var box = $('admAll'); if (!box || !d || !d.ok) return;
+      var rows = (d.list || []).filter(function(x){ return ((x.data && x.data.mons) || []).some(function(m){ return m.n; }); });
+      box.innerHTML = rows.length ? rows.map(function(x){
+        var mons = x.data.mons.filter(function(m){ return m.n; });
+        return '<div class="adm-deck"><b>' + esc(x.name) + '</b><span>' + mons.map(function(m){ return esc(m.n) + (m.own ? ' ✅' : ' ⬜'); }).join(' · ') + '</span>'
+          + (x.data.memo ? '<em>' + esc(x.data.memo) + '</em>' : '') + '<button type="button" data-edit="' + esc(x.name) + '">고치기</button></div>';
+      }).join('') : '<p class="note">아직 아무도 목표덱을 적지 않았어요.</p>';
+    });
+  }
+  if (ADMIN) {
+    $('gPin').placeholder = '관리자는 비워도 돼요';
+    document.querySelector('#goal .note').textContent = '👑 관리자로 들어와 있어요. 비밀번호 없이 누구의 목표덱이든 쓰고, 불러오고, 고칠 수 있어요. 본인 비밀번호는 그대로 유지돼요.';
+    $('who').insertAdjacentHTML('afterend', '<div class="adm-wrap"><h4>👑 모든 목표덱 (관리자만)</h4><div id="admAll"><p class="note">불러오는 중…</p></div></div>');
+    $('admAll').addEventListener('click', function(e){
+      var b = e.target.closest('[data-edit]'); if (!b) return;
+      $('gName').value = b.dataset.edit; $('gLoad').click(); $('slots').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+    all();
+  }
 
   // ---- 입장: 홈으로 (갈림길이 뜬다) ----
   document.querySelectorAll('[data-enter]').forEach(function(a){ a.addEventListener('click', function(){ try { sessionStorage.setItem('ch2-done', '1'); } catch(e){} }); });
