@@ -15,7 +15,7 @@
   document.documentElement.setAttribute('data-admin', '');
   function ui(){
     var css = document.createElement('style');
-    css.textContent = '.adm-fab{position:fixed;left:14px;bottom:max(14px, env(safe-area-inset-bottom));z-index:9999;font:700 13px/1 "Pretendard Variable",Pretendard,sans-serif}'
+    css.textContent = '.adm-fab{position:fixed;left:14px;bottom:max(14px, env(safe-area-inset-bottom));z-index:2147483000;font:700 13px/1 "Pretendard Variable",Pretendard,sans-serif}'
       + '.adm-fab>button{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border:1px solid rgba(255,203,5,.6);border-radius:999px;background:rgba(20,16,32,.92);color:#ffe27a;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.4);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}'
       + '.adm-menu{position:absolute;left:0;bottom:48px;min-width:230px;padding:6px;border-radius:14px;background:#17122a;border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 40px rgba(0,0,0,.5)}'
       + '.adm-menu[hidden]{display:none}.adm-menu a,.adm-menu button{display:block;width:100%;padding:11px 12px;border:0;border-radius:10px;background:none;color:#f3f1f7;text-align:left;text-decoration:none;font-size:14px;font-weight:600;line-height:1.2;cursor:pointer}'
