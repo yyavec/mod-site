@@ -376,7 +376,7 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
   });
 
   // ---- 목표덱 ----
-  $('gName').innerHTML += PLAYERS.map(function(n){ return '<option>' + n + '</option>'; }).join('');
+  $('gName').innerHTML += PLAYERS.map(function(n){ return '<option>' + n + '</option>'; }).join('') + '<option value="삐끼">삐끼 (테스트)</option>';  // 10-22 주인님: 시험해 보기용 칸 (제출 현황에는 안 나옴)
   var DEX = {};
   fetch('assets/cobble/index.json').then(function(r){ return r.json(); }).then(function(d){
     var frames = d.frames || 12;
