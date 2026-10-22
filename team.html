@@ -112,10 +112,9 @@ html.landed .stage{animation:land 1.1s cubic-bezier(.2,.8,.2,1) both}
 .kick b{padding:5px 10px; border-radius:999px; background:var(--red); color:#fff; letter-spacing:.08em; animation:blink 1.4s ease-in-out infinite}
 @keyframes blink{50%{opacity:.55}}
 .title{position:relative; margin:0; font:900 clamp(76px, 19vw, 210px)/.92 var(--font); letter-spacing:-.04em}
-.title .w{position:relative; display:inline-block; background:linear-gradient(180deg, #fffbe6 0%, #ffe27a 38%, #ffb300 62%, #ff6a2c 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 6px 0 #6b1d0f) drop-shadow(0 12px 0 rgba(0,0,0,.35)) drop-shadow(0 0 40px rgba(255,180,0,.45))}
-.title .w::after{content:attr(data-t); position:absolute; inset:0; background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.95) 50%, transparent 60%); background-size:250% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 3.6s ease-in-out infinite}
-@keyframes shine{0%,40%{background-position:150% 0}100%{background-position:-60% 0}}
-.title .vs{display:inline-block; margin-right:.12em; font-family:var(--latin); letter-spacing:-.06em}
+.title .w{position:relative; display:inline-block; background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.95) 50%, transparent 60%) 150% 0/250% 100% no-repeat, linear-gradient(180deg, #fffbe6 0%, #ffe27a 38%, #ffb300 62%, #ff6a2c 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 6px 0 #6b1d0f) drop-shadow(0 12px 0 rgba(0,0,0,.35)) drop-shadow(0 0 40px rgba(255,180,0,.45)); animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%,40%{background-position:150% 0, 0 0}100%{background-position:-60% 0, 0 0}}
+.title .vs{display:inline-block; margin-right:.16em; font-family:var(--latin); letter-spacing:.06em}
 .subt{margin:22px 0 0; font:800 clamp(16px, 2.8vw, 26px)/1.35 var(--font); letter-spacing:-.02em; color:#fff}
 .subt .and{color:var(--text-3); font-weight:600; margin-right:6px}
 .subt b{display:inline-block; color:var(--red); text-shadow:0 0 22px rgba(255,90,79,.6); animation:wob 1.8s ease-in-out infinite}
