@@ -323,6 +323,15 @@
    "desc": "Spawn Notification이 쓰는 기본 라이브러리예요",
    "env": "",
    "size": 304444
+  },
+  {
+   "file": "pokeblocks-1.4.0-1.21.1.jar",
+   "id": "pokeblocks",
+   "name": "Pokeblocks",
+   "version": "1.4.0-1.21.1",
+   "desc": "포켓몬 인형·블록 (인형 뽑기 기계 Plush-O-Matic 결과물)",
+   "env": "",
+   "size": 1606467
   }
  ],
  "configs": null,
