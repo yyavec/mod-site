@@ -332,6 +332,15 @@
    "desc": "포켓몬 인형·블록 (인형 뽑기 기계 Plush-O-Matic 결과물)",
    "env": "",
    "size": 1606467
+  },
+  {
+   "file": "xercapaint-1.21.1-2.0.1.jar",
+   "id": "xercapaint",
+   "name": "Joy of Painting",
+   "version": "1.21.1-2.0.1",
+   "desc": "이젤과 캔버스로 직접 그림을 그려 벽에 걸 수 있어요",
+   "env": "",
+   "size": 439469
   }
  ],
  "configs": null,
