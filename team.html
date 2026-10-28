@@ -197,6 +197,16 @@ html.landed .stage{animation:land 1.1s cubic-bezier(.2,.8,.2,1) both}
 .who .team li{list-style:none}
 @media (max-width:520px){.tc{padding:18px 10px 14px; border-radius:18px} .tc-pair img{height:104px} .tc-pair figcaption{font-size:15px} .tc-form .rw{grid-template-columns:1fr}}
 
+.prize{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+.prize div{position:relative; overflow:hidden; padding:28px 16px 24px; border-radius:20px; text-align:center; background:linear-gradient(180deg, #2a1f10, #160f07); border:1px solid rgba(242,193,78,.45); box-shadow:0 0 30px -12px #f2c14e}
+.prize div::after{content:""; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,230,160,.14), transparent); animation:sweep 3.5s ease-in-out infinite}
+.prize i{display:block; font-style:normal; font-size:40px; animation:bob 2.4s ease-in-out infinite}
+.prize b{display:block; margin-top:10px; font:900 18px/1.3 var(--font); color:#ffe39a}
+.prize span{display:block; margin-top:6px; color:var(--text-2); font-size:14px}
+.prize .tbd{background:linear-gradient(180deg, #1f1736, #130d24); border:1px dashed rgba(255,255,255,.3); box-shadow:none}
+.prize .tbd b{color:var(--text)}
+.prize-k{text-align:center; margin:0 0 14px; font:800 14px/1 var(--latin); letter-spacing:.14em; color:#f2c14e}
+@media (max-width:520px){.prize{grid-template-columns:1fr}}
 .soon{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px}
 .soon div{position:relative; overflow:hidden; padding:26px 18px; border-radius:20px; text-align:center; background:linear-gradient(180deg, #1f1736, #130d24); border:1px solid var(--line)}
 .soon div::after{content:""; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.08), transparent); animation:sweep 3.5s ease-in-out infinite}
@@ -319,6 +329,11 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     <div class="sec-h"><span class="big" aria-hidden="true">RULES</span><h2>대회 룰</h2><p>2:2 트레이너 배틀 · 8대8 멀티배틀 팀전</p></div>
     <a class="due" href="#goal"><span class="due-k">📋 1차 엔트리 제출</span><b>일요일(10월 25일)까지</b><span class="due-d">아래 '내 목표덱'에 4마리를 적어 주세요. 포켓몬이 겹치면 따로 불러서 조율해요. →</span></a>
     <ol class="rules"><li><i>1</i><div><b>8대8 멀티배틀 팀전</b><p>참가자마다 포켓몬 <b>4마리</b>를 써요. 레벨은 <b>50 고정</b>이에요.</p></div></li><li><i>2</i><div><b>엔트리 고정 · 미리 공개</b><p>엔트리 포켓몬은 고정이에요. 대회 도중 <b>도구·기술·폼체인지</b>는 바꿀 수 없고, 대회 시작 전에 모두 공개해요. 팀의 8마리는 <b>모두 다른 도구</b>를 들어야 해요.</p></div></li><li><i>3</i><div><b>전설급은 팀당 최대 3마리</b><p>전설·환상·준전설·패러독스 포켓몬은 <b>팀당 최대 3마리</b>까지 쓸 수 있어요. 사용 우선권은 <b>최초 포획자</b>에게 있어요.</p></div></li><li><i>4</i><div><b>1차 배틀 포켓몬은 최대 1마리</b><p>1차 배틀 때 내가 썼거나 다른 팀 참가자가 썼던 포켓몬 중 <b>최대 한 마리</b>를 쓸 수 있어요. 다른 참가자와 겹치면 <b>1차 때 그 포켓몬을 썼던 사람</b>에게 우선권과 선택권이 있어요.</p></div></li><li><i>5</i><div><b>기믹은 메가진화 · Z기술만</b><p><b>메가진화(원시회귀)</b>와 <b>Z기술</b>만 쓸 수 있고, 각각 <b>최대 한 번</b>이에요.</p></div></li><li><i>6</i><div><b>폼이 다른 포켓몬</b><p>로토무, 버드렉스, 오거폰처럼 폼마다 타입이 다른 포켓몬은 <b>별개의 포켓몬</b>으로 쳐요. 하지만 한 팀에서 같은 포켓몬을 타입별로 <b>여러 마리 쓸 수는 없어요</b>.</p></div></li></ol>
+  </section>
+
+  <section class="sec" id="prize">
+    <div class="sec-h"><span class="big" aria-hidden="true">REWARD</span><h2>우승 보상</h2><p>지난 대회처럼 칭호와 동상, 그리고 하나 더!</p></div>
+    <div class="prize"><div><i>🎨</i><b>칭호</b><span>원하는 색상 · 이름으로</span></div><div><i>🗿</i><b>마을에 내 동상</b><span>태초마을에 세워 드려요</span></div><div class="tbd"><i>🎁</i><b>+1</b><span>아직 정하는 중이에요</span></div></div>
   </section>
 
   <section class="sec">
