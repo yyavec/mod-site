@@ -182,6 +182,18 @@ html.landed .stage{animation:land 1.1s cubic-bezier(.2,.8,.2,1) both}
 .tc-form[hidden]{display:none}
 .tc-form .rw{display:grid; grid-template-columns:1fr 1fr; gap:8px}
 .tc-form .acts{margin:0}
+.tc-lock{position:absolute; inset:0; z-index:2; border-radius:inherit; overflow:hidden; pointer-events:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:linear-gradient(160deg, rgba(255,255,255,.16), rgba(255,255,255,.04) 45%, color-mix(in srgb, var(--tc) 14%, transparent)); -webkit-backdrop-filter:blur(1px) saturate(1.25); backdrop-filter:blur(1px) saturate(1.25); border:1px solid rgba(255,255,255,.28); box-shadow:inset 0 1px 0 rgba(255,255,255,.35), inset 0 0 30px color-mix(in srgb, var(--tc) 25%, transparent); animation:glassIn .9s cubic-bezier(.2,.9,.25,1.15) both}
+.tc-lock::before{content:""; position:absolute; top:-20%; bottom:-20%; width:38%; left:-60%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.38), transparent); transform:skewX(-18deg); animation:shine 3.6s ease-in-out 1s infinite}
+.tc-lock b{position:relative; padding:8px 16px; border-radius:10px; background:rgba(11,7,22,.62); border:1.5px solid var(--tc); color:#fff; font:900 clamp(18px, 2.4vw, 24px)/1 var(--latin); letter-spacing:.14em; text-shadow:0 0 14px var(--tc); box-shadow:0 0 22px -4px var(--tc); animation:lockPulse 2.4s ease-in-out .9s infinite}
+.tc-lock small{position:relative; padding:4px 10px; border-radius:999px; background:rgba(11,7,22,.55); color:#fff; font:700 12px/1.2 var(--font)}
+.tc.locked .tc-edit{position:relative; z-index:3}
+@keyframes glassIn{from{opacity:0; transform:translateY(-14px) scale(1.04)} to{opacity:1; transform:none}}
+@keyframes shine{0%,55%{left:-60%} 100%{left:130%}}
+@keyframes lockPulse{0%,100%{box-shadow:0 0 18px -6px var(--tc)} 50%{box-shadow:0 0 30px 0 var(--tc)}}
+.who .team{display:grid; gap:6px; position:relative}
+.who .team.lock{padding:8px; border-radius:14px; background:linear-gradient(160deg, rgba(255,255,255,.1), rgba(255,255,255,.02)); border:1px solid color-mix(in srgb, var(--tc) 60%, rgba(255,255,255,.2)); box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 0 18px -8px var(--tc); animation:glassIn .7s ease both}
+.who .team.lock::after{content:"🔒 LOCK ON"; position:absolute; top:-9px; right:12px; padding:3px 9px; border-radius:999px; background:var(--tc); color:#0b0716; font:900 10px/1 var(--latin); letter-spacing:.12em}
+.who .team li{list-style:none}
 @media (max-width:520px){.tc{padding:18px 10px 14px; border-radius:18px} .tc-pair img{height:104px} .tc-pair figcaption{font-size:15px} .tc-form .rw{grid-template-columns:1fr}}
 
 .soon{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px}
@@ -374,10 +386,12 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
   }).join('');
 
   // ---- 팀 카드 + 팀 이름 짓기 ----
+  var DONE = {};  // 목표덱 낸 사람 — 두 명 다 내면 그 팀은 LOCK ON (10-28 주인님)
+  function locked(t){ return DONE[t[0][0]] && DONE[t[1][0]]; }
   function cards(){
     $('teamCards').innerHTML = TEAMS.map(function(t, i){
-      var n = NAMES[i];
-      return '<article class="tc" style="--tc:' + COLORS[i][1] + '" data-t="' + i + '"><span class="tc-tag">' + COLORS[i][0] + ' TEAM</span>'
+      var n = NAMES[i], lk = locked(t);
+      return '<article class="tc' + (lk ? ' locked' : '') + '" style="--tc:' + COLORS[i][1] + '" data-t="' + i + '">' + (lk ? '<div class="tc-lock" aria-label="출전 준비 완료"><b>🔒 LOCK ON</b><small>두 명 모두 출전 준비 완료</small></div>' : '') + '<span class="tc-tag">' + COLORS[i][0] + ' TEAM</span>'
         + '<h3 class="tc-name' + (n ? '' : ' empty') + '">' + (n ? esc(n) : '팀 이름을 지어 주세요') + '</h3>'
         + '<div class="tc-pair"><figure><img src="assets/players/' + t[0][1] + '.png" alt="' + t[0][0] + ' 마크 스킨" loading="lazy"><figcaption>' + t[0][0] + '</figcaption></figure><span class="x">×</span>'
         + '<figure><img src="assets/players/' + t[1][1] + '.png" alt="' + t[1][0] + ' 마크 스킨" loading="lazy"><figcaption>' + t[1][0] + '</figcaption></figure></div>'
@@ -473,15 +487,17 @@ textarea.in{height:80px; padding:10px 12px; resize:vertical; margin-top:6px}
     }).catch(function(){ say('불러오지 못했어요.', 'err'); });
   });
   function who(done){
-    $('who').innerHTML = PLAYERS.map(function(n){
-      return '<li class="' + (done && done[n] ? 'done' : '') + '" style="--tc:' + COLORS[TEAM_OF[n]][1] + '">' + n + '<span>' + (!done ? '…' : done[n] ? '✅ 제출함' : '아직') + '</span></li>';
+    $('who').innerHTML = TEAMS.map(function(t, i){
+      return '<div class="team' + (done && locked(t) ? ' lock' : '') + '" style="--tc:' + COLORS[i][1] + '">' + t.map(function(p){ var n = p[0];
+        return '<li class="' + (done && done[n] ? 'done' : '') + '">' + n + '<span>' + (!done ? '…' : done[n] ? '✅ 제출함' : '아직') + '</span></li>'; }).join('') + '</div>';
     }).join('');
   }
   function list(){
     fetch(API + '?goal=1&_=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
       var done = {}; ((d && d.list) || []).forEach(function(x){ done[x.name] = 1; });
-      who(done);
-      if (d && d.teams) { NAMES = d.teams; cards(); }
+      DONE = done; who(done);
+      if (d && d.teams) NAMES = d.teams;
+      cards();
     }).catch(function(){ who({}); });
   }
   who(null); list();
