@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="assets/admin.js"></script>
 <style>
 :root{
   color-scheme: light;
@@ -887,6 +888,14 @@ select.in{appearance:none; padding-right:28px; background-image:url("data:image/
   async function start(me){
     $("#login").hidden = true; $("#app").hidden = false; $("#who").hidden = false;
     $("#whoEmail").textContent = me.email;
+    // 10-28: 구글 로그인만으로 팀전·추억·배틀 관리자까지 — 이 기기에 관리자 통행증이 없으면 통행증 페이지(Apps Script, 주인님 계정만)에 한 번 다녀온다
+    try {
+      if (!localStorage.getItem("deck-admin-key") && !sessionStorage.getItem("adm-pass-tried")) {
+        sessionStorage.setItem("adm-pass-tried", "1");
+        location.href = "https://script.google.com/macros/s/AKfycbxvgX2nzOL9jyhZh1BS73gF0rbYuEu1FNrmGybEp9820QtEY-z5GiUCfGgqBh4gd_Bz/exec?to=admin.html";
+        return;
+      }
+    } catch {}
     try { if (location.hash === "#site" || localStorage.getItem("admin-tab") === "site") showTab("site"); } catch {}
     await loadLive();
     await Promise.all([refresh(), loadContent()]).catch(err => toast(err.message || "불러오지 못했어요"));
