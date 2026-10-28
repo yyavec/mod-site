@@ -1,5 +1,6 @@
 // 사이트 전체 관리자 (10-22 주인님): 고정 링크 <아무 페이지>#k=<관리자 키> 를 한 번 열면 이 기기가 관리자로 기억된다
 // - 키는 localStorage 'deck-admin-key' (트레이너 배틀·추억 저장소·팀전이 같이 씀), 주소에서는 바로 지운다
+// - 키가 없는 기기는 <아무 페이지>?admin 으로 열어 키를 직접 넣을 수도 있다
 // - 관리자면 왼쪽 아래에 👑 관리자 버튼과 메뉴가 뜬다
 (function(){
   var KEYN = 'deck-admin-key';
@@ -10,6 +11,12 @@
   }
   var key = '';
   try { key = localStorage.getItem(KEYN) || ''; } catch (e) {}
+  // 10-28: 휴대폰처럼 키가 없는 기기는 주소 끝에 ?admin 을 붙여 열면 키를 한 번 물어본다
+  if (!key && /[?&]admin(?:[=&]|$)/.test(location.search)) {
+    key = (prompt('관리자 키를 넣어 주세요 (이 기기에 기억돼요)') || '').trim();
+    if (key) { try { localStorage.setItem(KEYN, key); } catch (e) {} }
+    history.replaceState(null, '', location.pathname + location.search.replace(/[?&]admin(=[^&]*)?/, '').replace(/^&/, '?') + location.hash);
+  }
   window.SITE_ADMIN_KEY = key;
   if (!key) return;
   document.documentElement.setAttribute('data-admin', '');
