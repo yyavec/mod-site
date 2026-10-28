@@ -1,6 +1,6 @@
 // 사이트 전체 관리자 (10-22 주인님): 고정 링크 <아무 페이지>#k=<관리자 키> 를 한 번 열면 이 기기가 관리자로 기억된다
 // - 키는 localStorage 'deck-admin-key' (트레이너 배틀·추억 저장소·팀전이 같이 씀), 주소에서는 바로 지운다
-// - 키가 없는 기기는 <아무 페이지>?admin 으로 열어 키를 직접 넣을 수도 있다
+// - 키가 없는 기기는 <아무 페이지>?admin 으로 열면 구글 로그인으로 관리자가 된다 (?adminkey 는 키 직접 입력)
 // - 관리자면 왼쪽 아래에 👑 관리자 버튼과 메뉴가 뜬다
 (function(){
   var KEYN = 'deck-admin-key';
@@ -11,11 +11,17 @@
   }
   var key = '';
   try { key = localStorage.getItem(KEYN) || ''; } catch (e) {}
-  // 10-28: 휴대폰처럼 키가 없는 기기는 주소 끝에 ?admin 을 붙여 열면 키를 한 번 물어본다
+  // 10-28: 키가 없는 기기(휴대폰 등)는 주소 끝에 ?admin → 구글 로그인 페이지(Apps Script, 액세스 '나만')가 #k=키 로 돌려보낸다
+  //        ?adminkey 는 예전처럼 키를 직접 넣는 창
+  var LOGIN = 'https://script.google.com/macros/s/AKfycbxvgX2nzOL9jyhZh1BS73gF0rbYuEu1FNrmGybEp9820QtEY-z5GiUCfGgqBh4gd_Bz/exec';
   if (!key && /[?&]admin(?:[=&]|$)/.test(location.search)) {
+    location.replace(LOGIN + '?to=' + encodeURIComponent(location.pathname.split('/').pop()));
+    return;
+  }
+  if (!key && /[?&]adminkey(?:[=&]|$)/.test(location.search)) {
     key = (prompt('관리자 키를 넣어 주세요 (이 기기에 기억돼요)') || '').trim();
     if (key) { try { localStorage.setItem(KEYN, key); } catch (e) {} }
-    history.replaceState(null, '', location.pathname + location.search.replace(/[?&]admin(=[^&]*)?/, '').replace(/^&/, '?') + location.hash);
+    history.replaceState(null, '', location.pathname + location.search.replace(/[?&]adminkey(=[^&]*)?/, '').replace(/^&/, '?') + location.hash);
   }
   window.SITE_ADMIN_KEY = key;
   if (!key) return;
