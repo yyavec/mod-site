@@ -348,6 +348,24 @@ button.bk-t:hover{background:rgba(255,255,255,.09)}
 .bk-adm .msg{flex-basis:100%; margin:4px 0 0; text-align:center}
 .bk-help{flex-basis:100%; margin:0; text-align:center; color:var(--text-2); font-size:13px}
 @media (max-width:720px){.bk{grid-template-columns:1fr} .bk-fin{order:2}}
+/* 11-01 대회 결과 */
+.res{display:grid; grid-template-columns:1.4fr 1fr; gap:16px}
+.res-ch{position:relative; overflow:hidden; display:flex; align-items:center; gap:18px; padding:24px 22px; border-radius:24px; color:#2a1700; background:linear-gradient(135deg, #fff1a8, var(--gold) 55%, #ff9f2c); box-shadow:0 0 50px -10px rgba(255,203,5,.7)}
+.res-ch::after{content:""; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent); animation:sweep 3.5s ease-in-out infinite}
+.res-ch .pp{flex:none; display:flex}
+.res-ch img{width:64px; height:auto; image-rendering:pixelated; filter:drop-shadow(0 4px 0 rgba(0,0,0,.2))}
+.res-ch small, .res-x small{display:block; font:800 12px/1 var(--latin); letter-spacing:.2em}
+.res-ch b{display:block; margin-top:8px; font:900 clamp(24px, 4vw, 34px)/1.15 var(--font)}
+.res-ch span{display:block; margin-top:6px; font:700 14px/1.4 var(--font)}
+.res-side{display:grid; gap:16px}
+.res-x{display:flex; align-items:center; gap:14px; padding:18px; border-radius:20px; background:linear-gradient(180deg, #1f1736, #130d24); border:1px solid var(--line)}
+.res-x img{width:44px; height:auto; image-rendering:pixelated}
+.res-x small{color:var(--gold-2)}
+.res-x b{display:block; margin-top:6px; font:900 20px/1.2 var(--font)}
+.res-x span{display:block; margin-top:4px; color:var(--text-2); font:600 13px/1.4 var(--font)}
+.res-x.wait b{color:var(--text-3)}
+.res-x .ic{flex:none; width:44px; text-align:center; font-size:30px}
+@media (max-width:720px){.res{grid-template-columns:1fr} .res-ch{flex-direction:column; text-align:center}}
 </style>
 </head>
 <body>
@@ -388,6 +406,20 @@ button.bk-t:hover{background:rgba(255,255,255,.09)}
 </section>
 
 <main class="wrap">
+  <section class="sec" id="result">
+    <div class="sec-h"><span class="big" aria-hidden="true">RESULT</span><h2>11/1 팀전 결과</h2><p>모두 수고 많았어요! 🎉</p></div>
+    <div class="res">
+      <div class="res-ch">
+        <div class="pp"><img src="assets/players/DaeJang09.png" alt="연규 마크 스킨" loading="lazy"><img src="assets/players/h_uun.png" alt="면진 마크 스킨" loading="lazy"></div>
+        <div><small>👑 CHAMPION · YELLOW</small><b>"으뜸듀오" 우승!</b><span>연규 · 면진 팀장 — 이름 그대로 으뜸이 됐어요</span></div>
+      </div>
+      <div class="res-side">
+        <div class="res-x"><img src="assets/players/Zizonkookie.png" alt="건년 마크 스킨" loading="lazy"><div><small>⭐ MVP</small><b>건년</b><span>MVP 투표 3표 · 서버 칭호 [MVP]</span></div></div>
+        <div class="res-x wait"><span class="ic" aria-hidden="true">🔮</span><div><small>예측왕</small><b>집계 중</b><span>곧 발표할게요</span></div></div>
+      </div>
+    </div>
+  </section>
+
   <section class="sec" id="teams">
     <div class="sec-h"><span class="big" aria-hidden="true">FIGHTERS</span><h2>네 팀을 소개합니다</h2><p>팀 이름은 그 팀 사람이 직접 지어요. 목표덱 비밀번호로 정할 수 있어요.</p></div>
     <div class="tc-wrap" id="tcWrap"><p class="all-chip">🔒 ALL LOCK ON · 네 팀 덱 모두 고정</p><div class="teams" id="teamCards"></div><div class="aim" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="all-lock" aria-hidden="true"><b>ALL LOCK ON</b><small>네 팀 덱이 모두 고정됐어요</small></div></div>
