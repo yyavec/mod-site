@@ -3496,7 +3496,7 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
     var box = $('trbBrk'); if (!box) return;
     var PL = MEMBERS.filter(function(m){ return !m[3]; }), SKIN = {};
     PL.forEach(function(m){ SKIN[m[0]] = m[2]; });
-    var st = {p:['','','','','','','',''], w:{}, sc:{}, live:'', x:[], log:[], now:''}, edit = false, pick = '', last = 0, busy = false;
+    var st = {p:['','','','','','','',''], w:{}, sc:{}, live:'', x:[], log:[], now:''}, edit = false, pick = '', last = 0, busy = false, raw = {};  // raw: 대진표 데이터의 다른 칸(팀전 team, 추억 mem)은 저장할 때 그대로 둔다
     var W = [['8강', ['q0','q1','q2','q3']], ['4강', ['s0','s1']], ['결승', ['f']]];
     var L = [['1라운드', ['l0','l1']], ['꼴찌 결정전', ['lf']]];
     var NAME = {q0:'8강 1경기', q1:'8강 2경기', q2:'8강 3경기', q3:'8강 4경기', s0:'4강 1경기', s1:'4강 2경기', f:'결승 · 3판 2선승', l0:'꼴등전 1경기', l1:'꼴등전 2경기', lf:'꼴찌 결정전'};
@@ -3670,7 +3670,7 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
     function setSt(t){ var any = st.p.some(String); $('trbBrkSt').innerHTML = (any ? '' : '대진은 경기 직전 <b>피스톤 장치</b>로 정해져요. ') + '<b>●</b> 실시간 · 10초마다 저절로 바뀌어요' + (t ? ' · 마지막 변경 ' + stamp(t) : ''); }
     function apply(d){
       if (!d || !d.ok) return;
-      var x = d.data || {};
+      var x = d.data || {}; raw = x;
       var xs = (Array.isArray(x.x) ? x.x : []).filter(function(n){ return typeof n === 'string' && n && !SKIN[n]; }).map(function(n){ return n.slice(0, 12); }).slice(0, 20);
       st = {x:xs, p:(Array.isArray(x.p) ? x.p : []).concat(['','','','','','','','']).slice(0, 8).map(function(n){ return SKIN[n] || xs.indexOf(n) >= 0 ? n : ''; }), w:(x.w && typeof x.w === 'object') ? x.w : {}, sc:(x.sc && typeof x.sc === 'object') ? x.sc : {}, live:typeof x.live === 'string' ? x.live : '',
         log:(Array.isArray(x.log) ? x.log : []).filter(function(e){ return e && typeof e.s === 'string'; }).slice(0, 40), now:typeof x.now === 'string' ? x.now.slice(0, 80) : ''};
@@ -3683,7 +3683,7 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
     function save(){
       paintB(); busy = true;
       var msg = $('trbBrkMsg'); msg.textContent = '저장 중…'; msg.className = 'trb-msg';
-      post({action:'bracket', key:key, data:st}).then(function(d){
+      post({action:'bracket', key:key, data:Object.assign({}, raw, st)}).then(function(d){
         if (d && d.ok) { msg.textContent = '✅ 저장됨 · 모두에게 보여요'; msg.className = 'trb-msg ok'; setSt(new Date()); }
         else { msg.textContent = d && d.error === 'key' ? '관리자 키가 달라요' : '저장이 안 됐어요'; msg.className = 'trb-msg err'; }
       }).catch(function(){ msg.textContent = '저장이 안 됐어요'; msg.className = 'trb-msg err'; }).then(function(){ busy = false; });
