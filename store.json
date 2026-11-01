@@ -341,6 +341,33 @@
    "desc": "이젤과 캔버스로 직접 그림을 그려 벽에 걸 수 있어요",
    "env": "",
    "size": 439469
+  },
+  {
+   "file": "DAP.ur.Homie.-3.0.1.jar",
+   "id": "coopmoves",
+   "name": "DAP ur Homie!",
+   "version": "3.0.1",
+   "desc": "친구랑 주먹인사(DAP) 같은 동작을 함께 할 수 있어요",
+   "env": "",
+   "size": 9108875
+  },
+  {
+   "file": "PlayerAnimationLibFabric-1.1.6+mc.1.21.1.jar",
+   "id": "player_animation_library",
+   "name": "PlayerAnimationLib",
+   "version": "1.1.6+mc.1.21.1",
+   "desc": "DAP 동작을 보여 주는 라이브러리예요",
+   "env": "",
+   "size": 1154772
+  },
+  {
+   "file": "beatlamp-fabric-1.21.1-1.2.2.jar",
+   "id": "beatlamp",
+   "name": "Beat Lamp",
+   "version": "1.2.2",
+   "desc": "공연 무대 조명이 음악에 맞춰 움직여요",
+   "env": "",
+   "size": 560028
   }
  ],
  "configs": null,
