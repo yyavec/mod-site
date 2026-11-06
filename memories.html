@@ -162,7 +162,10 @@ button{font:inherit; color:inherit}
   var API = 'https://script.google.com/macros/s/AKfycbwdpNGUS7CvDEm_zvMIFWFCI4etp1Ejxy0MhSPRAElFxsq--7mAVmBO-y0jNKgrW1uC/exec';
   var app = document.getElementById('app'), D = null, editing = false, key = '';
   var CH = ['우승 · 결과', '단체 사진', '무대 · 연출', '경기 장면', '준비 · 응원'];
-  var EN = {battle:'Trainer Battle', town:'Village & Builds', poke:'Pokémon', adventure:'Adventure', daily:'Everyday', record:'Records'};
+  // 행사 앨범: 앨범 안을 장면별로 나눈다 (sub가 없으면 '경기 장면')
+  var CHS = {team:['단체 사진', '경기 장면', '선수석 · 응원', '무대 · 축제'], battle:CH};
+  var CHAMP = {team:['⚔️ 2:2 팀전 · 2026년 11월 1~2일', '👑 우승 <b>"으뜸듀오"</b> 연규 · 면진'], battle:['🏆 노천 트레이너 배틀 · 2026년 10월 17일', '👑 우승 <b>이연규</b> · 결승 2 : 0']};
+  var EN = {team:'Team Battle', battle:'Trainer Battle', town:'Village & Builds', poke:'Pokémon', adventure:'Adventure', daily:'Everyday', record:'Records'};
   var WD = ['일', '월', '화', '수', '목', '금', '토'];
   function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function md(d){ var p = (d || '').split('-'); return p.length === 3 ? (+p[1]) + '월 ' + (+p[2]) + '일' : d; }
@@ -186,7 +189,7 @@ button{font:inherit; color:inherit}
     cats.forEach(function(c, i){
       var arr = byCat(c.id), cv = coverOf(arr);
       h += '<a class="album' + (i === 0 ? ' feature' : '') + '" href="#' + c.id + '"><img loading="lazy" src="assets/memories/' + esc(i === 0 ? cv.file : cv.thumb) + '" alt="">'
-        + '<div class="album-in"><p class="album-k">' + (EN[c.id] || '') + '</p><h3>' + esc(c.name) + (c.id === 'battle' ? '<span class="badge">EVENT</span>' : '') + '</h3>'
+        + '<div class="album-in"><p class="album-k">' + (EN[c.id] || '') + '</p><h3>' + esc(c.name) + (CHS[c.id] ? '<span class="badge">EVENT</span>' : '') + '</h3>'
         + '<p class="album-m">' + span(arr) + ' · ' + arr.length + '장</p></div></a>';
     });
     app.innerHTML = h + '</div></div>';
@@ -197,7 +200,7 @@ button{font:inherit; color:inherit}
   function moveSel(m){
     var opts = '';
     D.cats.forEach(function(c){
-      if (c.id === 'battle') CH.forEach(function(sb){ var v = 'battle|' + sb, on = m.cat === 'battle' && (m.sub || '경기 장면') === sb; opts += '<option value="' + esc(v) + '"' + (on ? ' selected' : '') + '>🏆 배틀 · ' + esc(sb) + '</option>'; });
+      if (CHS[c.id]) CHS[c.id].forEach(function(sb){ var v = c.id + '|' + sb, on = m.cat === c.id && (m.sub || '경기 장면') === sb; opts += '<option value="' + esc(v) + '"' + (on ? ' selected' : '') + '>' + esc(c.icon + ' ' + c.name + ' · ' + sb) + '</option>'; });
       else opts += '<option value="' + c.id + '"' + (m.cat === c.id ? ' selected' : '') + '>' + esc(c.icon + ' ' + c.name) + '</option>';
     });
     opts += '<option disabled>──────────</option><option value="@cover">' + (m.acover ? '⭐ 지금 이 앨범 대표 사진' : '⭐ 이 앨범 대표 사진으로') + '</option><option value="hide">🗑️ 이 사진 지우기</option>';
@@ -216,11 +219,11 @@ button{font:inherit; color:inherit}
     view = [];
     var h = '<div class="wrap"><div class="ahead"><a class="back" href="#">← 모든 앨범</a>'
       + '<p class="eyebrow">' + (EN[id] || '') + (arr.length ? ' · ' + span(arr) + ' · ' + arr.length + '장' : '') + '</p><h1>' + esc(c.name) + '</h1><p>' + esc(c.desc) + '</p>';
-    if (id === 'battle') h += '<div class="champ"><span>🏆 노천 트레이너 배틀 · 2026년 10월 17일</span><span>👑 우승 <b>이연규</b> · 결승 2 : 0</span></div>';
+    if (CHAMP[id]) h += '<div class="champ"><span>' + CHAMP[id][0] + '</span><span>' + CHAMP[id][1] + '</span></div>';
     h += '</div>';
     if (!arr.length) h += '<p class="empty">이 앨범은 비어 있어요.</p>';
-    else if (id === 'battle') {
-      CH.forEach(function(ch){
+    else if (CHS[id]) {
+      CHS[id].forEach(function(ch){
         var g = arr.filter(function(m){ return (m.sub || '경기 장면') === ch; }).sort(function(a, b){ return (b.hero ? 1 : 0) - (a.hero ? 1 : 0); });
         if (g.length) h += '<div class="chap"><h2>' + esc(ch) + '</h2><span>' + g.length + '</span></div>' + tiles(g);
       });
