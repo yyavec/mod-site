@@ -8,6 +8,7 @@
 (function(){var q=location.search;
   if(location.hash||/[?&](nf|battle|story|deckadmin|home)\b/.test(q))return;
   try{if(sessionStorage.getItem("ch2-done"))return;}catch(e){return;}
+  return; /* 11-12 주인님: 시즌 2도 1처럼 홈 배너(.tbb2)로만. 다시 켜려면 이 줄을 지우기 */
   location.replace("team.html");
 })();
 </script>
@@ -407,6 +408,23 @@ details[open] > summary .chev{transform:rotate(225deg) translate(-2px,-2px)}
 .tbb-go{flex:none; padding:10px 16px; border-radius:999px; background:#FFCB05; color:#2a1d00; font:800 14px/1 var(--font); white-space:nowrap}
 @media (max-width:520px){.tbb{gap:12px; padding:14px} .tbb-balls i{width:26px; height:26px} .tbb-balls b{font-size:12px} .tbb-h{font-size:19px} .tbb-d{font-size:12.5px} .tbb-go{padding:8px 12px; font-size:13px}}
 @media (max-width:380px){.tbb-go{display:none}}
+.tbb[hidden]{display:none}
+/* 11-12 시즌 2 우승 배너: 노랑 팀 "으뜸듀오" */
+.tbb2{padding:18px 22px; border-color:#FFD84A; background:radial-gradient(60% 140% at 0% 60%, rgba(255,203,5,.42), transparent 70%), radial-gradient(50% 120% at 100% 0%, rgba(255,140,40,.28), transparent 70%), linear-gradient(120deg, #2A1D05, #3B2A0A 55%, #2A1F3D)}
+.tbb2:hover{box-shadow:0 8px 28px rgba(255,216,74,.35), 0 4px 0 rgba(0,0,0,.25)}
+.tbb2-pp{flex:none; position:relative; display:flex; align-items:flex-end; gap:2px; padding-top:14px}
+.tbb2-pp img{width:40px; height:auto; image-rendering:pixelated; filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
+.tbb2-pp::before{content:"👑"; position:absolute; left:50%; top:-4px; transform:translateX(-50%) rotate(-8deg); font-size:22px; line-height:1}
+.tbb2 .tbb-tag{color:#FFD84A}
+.tbb2 .tbb-h em{font-style:normal; color:#FFD84A}
+.tbb2 .tbb-d{color:#E9DDBB}
+.tbb2 .tbb-go{background:#FFD84A}
+/* 마지막 파이널 라운드 예고 (준비만 해 둠 — 공개할 때 hidden 지우고 날짜·문구만 바꾸기) */
+.tbb3{border-color:rgba(255,255,255,.55); background:radial-gradient(60% 140% at 100% 50%, rgba(170,90,255,.40), transparent 70%), radial-gradient(50% 120% at 0% 0%, rgba(80,160,255,.28), transparent 70%), linear-gradient(120deg, #0B0F20, #161433 60%, #24113A)}
+.tbb3 .tbb-tag{color:#C9B5FF}
+.tbb3-f{flex:none; width:52px; height:52px; display:grid; place-items:center; border-radius:14px; border:2px solid rgba(255,255,255,.6); font:400 20px/1 var(--pixel); color:#fff; text-shadow:0 0 12px #A970FF}
+.tbb3 .tbb-go{background:#fff; color:#24113A}
+@media (max-width:520px){.tbb2-pp img{width:30px} .tbb2-pp::before{font-size:17px} .tbb3-f{width:42px; height:42px; font-size:16px}}
 .lgd-sky{position:absolute; inset:0; z-index:-1; background-image:radial-gradient(1.5px 1.5px at 12% 22%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 34% 70%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 58% 16%, #FFE27A 50%, transparent 51%), radial-gradient(1px 1px at 76% 58%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 90% 86%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 22% 92%, #FFE27A 50%, transparent 51%), radial-gradient(1px 1px at 46% 40%, #fff 50%, transparent 51%); animation:lgdTw 3s ease-in-out infinite alternate}
 .lgd-sky::after{content:""; position:absolute; left:-30%; top:0; width:30%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.12), transparent); animation:lgdShine 5s ease-in-out infinite}
 @keyframes lgdTw{from{opacity:.45}to{opacity:1}}
@@ -2345,6 +2363,18 @@ html .fork .fork-n{font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--font); text-alig
       <div class="lgd-champ"><img src="assets/players/DaeJang09.png" alt="이연규 마크 스킨" loading="lazy"><div><span>👑 트레이너 배틀 우승</span><b>이연규</b><small>결승 2 : 0 완승! 축하합니다 🎉</small></div></div>
     </div>
   </section>
+  <a class="tbb tbb3" href="final.html" aria-label="파이널 라운드" hidden>
+    <span class="tbb-sky" aria-hidden="true"></span>
+    <span class="tbb3-f" aria-hidden="true">F</span>
+    <span class="tbb-in"><span class="tbb-tag">FINAL ROUND · 날짜 미정</span><b class="tbb-h">마지막 파이널 라운드</b><span class="tbb-d">시즌의 마지막 무대가 곧 열려요</span></span>
+    <span class="tbb-go">보러 가기 <span aria-hidden="true">→</span></span>
+  </a>
+  <a class="tbb tbb2" href="team.html#result" aria-label="2차 2:2 팀전 결과 다시 보기">
+    <span class="tbb-sky" aria-hidden="true"></span>
+    <span class="tbb2-pp" aria-hidden="true"><img src="assets/players/DaeJang09.png" alt="" loading="lazy"><img src="assets/players/h_uun.png" alt="" loading="lazy"></span>
+    <span class="tbb-in"><span class="tbb-tag">2차 · 11.1 – 11.2 · 2:2 팀전</span><b class="tbb-h"><em>"으뜸듀오"</em> 우승!</b><span class="tbb-d">연규 · 면진 — 말 그대로 으뜸이 됐어요 🎉</span></span>
+    <span class="tbb-go">다시 보기 <span aria-hidden="true">→</span></span>
+  </a>
   <a class="tbb" href="?battle" aria-label="1차 트레이너 배틀 다시 보기">
     <span class="tbb-sky" aria-hidden="true"></span>
     <span class="tbb-balls" aria-hidden="true"><i></i><b>VS</b><i></i></span>
